@@ -1,0 +1,30 @@
+{
+  "name": "rocketaiflow-docs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node --require ./scripts/nextra-simple-git-fallback.cjs ./node_modules/next/dist/bin/next dev --webpack",
+    "build": "node --require ./scripts/nextra-simple-git-fallback.cjs ./node_modules/next/dist/bin/next build --webpack",
+    "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
+    "start": "node --require ./scripts/nextra-simple-git-fallback.cjs ./node_modules/next/dist/bin/next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "next": "^16.1.6",
+    "nextra": "^4.0.0-app-router.41",
+    "nextra-theme-docs": "^4.0.0-app-router.41",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "20.19.39",
+    "@types/react": "^19.2.1",
+    "@types/react-dom": "^19.2.2",
+    "eslint": "^9.37.0",
+    "eslint-config-next": "^16.1.6",
+    "pagefind": "^1.5.0",
+    "typescript": "^5.9.3"
+  }
+}

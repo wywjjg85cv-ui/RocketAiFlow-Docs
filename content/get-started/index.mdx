@@ -1,0 +1,225 @@
+---
+title: Get started with RocketAiFlow
+description: Understand the product, the operating model, and the right first docs path for deployment and workflow planning.
+---
+
+import { Callout, Cards } from "nextra/components";
+
+<div className="docs-hero">
+  <div>
+    <p className="docs-eyebrow">Get Started</p>
+    <h1>Get started with RocketAiFlow</h1>
+
+    <p className="docs-hero-intro">
+      RocketAiFlow is a Voice AI automation platform built for real business phone operations. It
+      helps teams automate both <strong>inbound</strong> and <strong>outbound</strong> call
+      workflows, connect voice automation to existing systems, and launch practical phone
+      experiences without adding heavyweight operational complexity.
+    </p>
+  </div>
+
+  <div className="docs-note">
+    <strong>Built for teams that need:</strong>
+    <ul>
+      <li>flexibility across deployment models</li>
+      <li>provider choice across the stack</li>
+      <li>workflow automation that fits real operations</li>
+    </ul>
+  </div>
+</div>
+
+<Callout type="info">
+  RocketAiFlow is designed for teams that need flexibility across <strong>deployment models</strong>
+  , <strong>provider choices</strong>, and <strong>business workflows</strong>. It can support
+  structured voice automation across customer service, lead qualification, scheduling, routing,
+  reminders, follow-ups, and other recurring phone-based processes.
+</Callout>
+
+## What RocketAiFlow is built for
+
+RocketAiFlow is designed for operational environments where phone workflows still matter.
+
+Typical use cases include:
+
+- handling first-line inbound requests
+- routing calls to the right team or workflow
+- qualifying leads before human follow-up
+- booking appointments or demos
+- sending reminders and follow-up calls
+- supporting overflow and after-hours coverage
+- connecting voice workflows to internal systems
+
+The platform is built to help teams reduce repetitive call load, improve responsiveness, and keep
+human operators focused on higher-value conversations.
+
+## How to think about RocketAiFlow
+
+RocketAiFlow is easiest to understand as a practical workflow layer for business phone automation.
+
+Instead of treating Voice AI as a standalone demo feature, RocketAiFlow is designed to fit into
+real operations through four stages:
+
+## Define
+
+Start from the business workflow.
+
+Identify the type of call you want to automate, the expected outcomes, and where human
+intervention is still needed. This may include inbound support, outbound qualification, appointment
+booking, reminders, routing logic, or after-hours coverage.
+
+## Connect
+
+Connect the systems and components behind the workflow.
+
+This includes telephony environments, speech and voice providers, model layers, CRMs, calendars,
+APIs, and internal business systems. RocketAiFlow is designed to support flexible integration
+patterns so teams can adapt the stack to their requirements.
+
+## Launch
+
+Deploy the workflow into a real operating environment.
+
+RocketAiFlow can support different deployment approaches depending on business and infrastructure
+needs. Teams can prepare workflows, validate call behavior, and launch voice automation in a
+controlled way.
+
+## Improve
+
+Monitor performance and refine operations over time.
+
+Track outcomes, review workflow behavior, identify friction points, improve routing and escalation
+logic, and optimize the experience based on operational results.
+
+## Quick links
+
+<Cards num={3}>
+  <Cards.Card title="Quickstart" href="/get-started/quickstart" arrow>
+    Set up your first RocketAiFlow workflow and understand the initial setup path.
+  </Cards.Card>
+  <Cards.Card title="Deployment Overview" href="/deploy/deployment-overview" arrow>
+    Learn how to think about on-premise and cloud deployment options.
+  </Cards.Card>
+  <Cards.Card title="Integrations Overview" href="/integrate" arrow>
+    Explore how RocketAiFlow fits with telephony, AI providers, and business systems.
+  </Cards.Card>
+  <Cards.Card title="Platform-Agnostic Architecture" href="/build/platform-agnostic-architecture" arrow>
+    Understand how RocketAiFlow supports provider flexibility and reduced vendor lock-in.
+  </Cards.Card>
+  <Cards.Card title="Inbound Workflows" href="/build/inbound-workflows" arrow>
+    See how inbound phone automation can be structured for real teams.
+  </Cards.Card>
+  <Cards.Card title="Outbound Workflows" href="/build/outbound-workflows" arrow>
+    Learn how outbound call flows can support qualification, reminders, and follow-ups.
+  </Cards.Card>
+</Cards>
+
+## Platform flexibility
+
+RocketAiFlow is <strong>platform-agnostic by design</strong>.
+
+That means the platform can be structured to work with different speech, voice, model, telephony,
+and business system components depending on the workflow and deployment requirements.
+
+This helps teams:
+
+- reduce vendor lock-in
+- choose a stack that fits their use case
+- adapt deployment to operational needs
+- integrate voice automation into existing environments more easily
+
+Provider-specific configuration and implementation details should live in the relevant integration
+and setup pages.
+
+## Deployment models
+
+RocketAiFlow can support different deployment models depending on operational and infrastructure
+requirements.
+
+### On-premise deployment
+
+On-premise deployment can be suitable for teams that want more infrastructure control, internal
+environment ownership, or deployment flexibility inside existing systems.
+
+### Cloud deployment
+
+Cloud deployment can be suitable for teams that want faster rollout, a managed environment, and a
+simpler adoption path.
+
+Backup, recovery, and operational reliability policies should be defined based on the selected
+deployment model and implementation requirements.
+
+## Integrations
+
+RocketAiFlow is designed to connect into the systems that business teams already use.
+
+Documentation across this site covers integration patterns such as:
+
+- telephony / SIP / PBX environments
+- speech-to-text components
+- text-to-speech components
+- LLM or model-driven workflows
+- CRM and internal systems
+- APIs and webhooks
+
+The goal is not to force one stack, but to help teams build a voice automation layer that fits the
+way they already operate.
+
+## More resources
+
+<Cards num={2}>
+  <Cards.Card title="API Reference" href="/api-reference" arrow>
+    Explore technical endpoints and implementation details.
+  </Cards.Card>
+  <Cards.Card title="Integrations" href="/integrate" arrow>
+    Review integration patterns across providers and systems.
+  </Cards.Card>
+  <Cards.Card title="Changelog" href="/changelog" arrow>
+    See platform updates and product changes.
+  </Cards.Card>
+  <Cards.Card title="Contact" href="/contact" arrow>
+    Talk to the team about deployment, integrations, or your workflow requirements.
+  </Cards.Card>
+</Cards>
+
+## Frequently asked questions
+
+### What can RocketAiFlow automate?
+
+RocketAiFlow is suited to recurring business phone workflows such as qualification, intake,
+routing, reminders, confirmations, follow-up, and structured information capture where the call
+has a clear business objective and handoff logic.
+
+### Does it support inbound and outbound workflows?
+
+Yes. The platform is intended for both inbound and outbound workflow categories, with different
+design considerations for trigger conditions, routing, pacing, escalation, and reporting.
+
+### Can it be deployed on-premise or in the cloud?
+
+Yes. The documentation covers both on-premise and cloud deployment paths, with emphasis on
+tradeoffs around control, rollout speed, infrastructure ownership, and operational overhead.
+
+### Is it platform-agnostic?
+
+RocketAiFlow is documented as platform-agnostic by design. That means the architecture is intended
+to fit different telephony, speech, voice, and model choices depending on implementation needs.
+
+### What happens when the AI cannot resolve the interaction?
+
+The workflow should hand off or route to a defined fallback path. That may be a human operator, a
+queue, a callback workflow, or another deterministic branch, depending on the use case and service
+design.
+
+### Where should provider-specific setup details live?
+
+Provider-specific configuration belongs in the integration and deployment sections, not in the core
+product overview. The product-level docs should explain categories and decision logic first, then
+implementation specifics where they matter.
+
+## Next step
+
+<Cards num={1}>
+  <Cards.Card title="Go to Quickstart" href="/get-started/quickstart" arrow>
+    Follow the Quickstart guide to understand the first setup path for RocketAiFlow.
+  </Cards.Card>
+</Cards>

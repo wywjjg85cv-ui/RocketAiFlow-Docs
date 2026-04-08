@@ -1,0 +1,30 @@
+---
+title: Routing and Handoff
+description: Principles for deterministic routing, escalation, and human handoff in RocketAiFlow workflows.
+---
+
+# Routing and Handoff
+
+Routing and handoff define how the workflow exits the ideal path. In a production system, these
+paths are not edge cases. They are part of the design surface and should be explicit from the
+start.
+
+## Routing should be intentional
+
+Use routing to direct calls based on known context, caller intent, service line, urgency, business
+hours, or unresolved ambiguity. The goal is to shorten time to the right outcome, not simply to
+keep the caller inside automation.
+
+## Handoff should preserve context
+
+When the workflow hands off to a person or another system, the useful context from the interaction
+should move with it where possible. Good handoff design reduces repetition for both the caller and
+the receiving team.
+
+## Define handoff triggers up front
+
+- policy or compliance boundaries
+- missing or conflicting context
+- repeated failure to confirm intent
+- high-value or high-risk interactions
+- caller preference for a human path

@@ -1,0 +1,22 @@
+---
+title: Webhooks / APIs
+description: How RocketAiFlow can participate in broader event and application flows.
+---
+
+# Webhooks / APIs
+
+Webhooks and APIs let RocketAiFlow participate in a broader application landscape. They are often
+the bridge between the voice workflow and the systems that need to react before, during, or after
+the call.
+
+## Typical integration patterns
+
+- trigger a workflow from an external event
+- fetch context on demand during an interaction
+- push outcome events to downstream systems
+- create tasks or notifications after a call is complete
+
+## Design guidance
+
+Keep the contracts stable, document failure behavior, and make retries or deduplication explicit
+where needed. Voice workflows are easier to operate when API and webhook behavior is predictable.

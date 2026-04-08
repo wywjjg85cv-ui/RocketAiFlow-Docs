@@ -1,0 +1,42 @@
+---
+title: API Reference
+description: Placeholder API reference structure for future endpoint, authentication, webhook, and payload documentation.
+---
+
+import { Callout, Cards } from "nextra/components";
+
+# API Reference
+
+This page is a placeholder for the technical API layer of RocketAiFlow. It is here so the
+documentation portal can show the right information architecture even before endpoint-level product
+input is finalized.
+
+<Callout type="info">
+  When the API reference is ready, this section should document authentication, environment setup,
+  object models, request and response patterns, webhook signatures, and implementation examples.
+</Callout>
+
+## Planned structure
+
+<Cards num={2}>
+  <Cards.Card title="Authentication" href="/api-reference">
+    API keys, environment separation, request signing, and access patterns.
+  </Cards.Card>
+  <Cards.Card title="Core resources" href="/api-reference">
+    Workflows, calls, sessions, outcomes, events, and routing objects.
+  </Cards.Card>
+  <Cards.Card title="Webhooks" href="/api-reference">
+    Delivery model, retries, signatures, and event payload examples.
+  </Cards.Card>
+  <Cards.Card title="Operational APIs" href="/api-reference">
+    Logs, monitoring surfaces, and integration control points.
+  </Cards.Card>
+</Cards>
+
+## What still needs real product input
+
+- Actual authentication model
+- Stable resource definitions
+- Example requests and response payloads
+- Webhook event catalog
+- Rate-limit, retry, and error-handling behavior

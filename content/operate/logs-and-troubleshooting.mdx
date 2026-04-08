@@ -1,0 +1,25 @@
+---
+title: Logs and Troubleshooting
+description: How to structure logs and investigate workflow, integration, and escalation issues in RocketAiFlow.
+---
+
+# Logs and Troubleshooting
+
+Troubleshooting Voice AI workflows requires both conversation context and system context. Teams
+need enough evidence to understand what the caller experienced, what the workflow decided, and what
+dependencies were doing at the time.
+
+## Useful troubleshooting inputs
+
+- call and workflow identifiers
+- decision and routing events
+- external lookup or API failures
+- transfer or handoff events
+- timing data that explains delay or interruption
+
+## A practical investigation flow
+
+1. Confirm the workflow path the call took.
+2. Review dependency behavior at each important step.
+3. Identify whether the issue was design, context, or runtime failure.
+4. Decide whether the fix belongs in workflow logic, integration handling, or operations.

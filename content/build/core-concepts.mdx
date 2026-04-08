@@ -1,0 +1,40 @@
+---
+title: Core Concepts
+description: The core concepts behind workflows, context, routing, actions, and escalation in RocketAiFlow.
+---
+
+# Core Concepts
+
+RocketAiFlow should be understood as a workflow system for business phone operations, not just a
+conversation engine. The call matters, but the surrounding logic, data access, routing, and
+operational controls matter just as much.
+
+## The main building blocks
+
+- **Workflow**: the business process being automated, including entry conditions and desired
+  outcomes.
+- **Context**: the data available during the call, such as customer records, task state, or
+  scheduling information.
+- **Decision logic**: the rules that determine whether the workflow continues, changes path, or
+  hands off.
+- **Actions**: the work the system performs, such as lookups, updates, notifications, or callback
+  creation.
+- **Handoff**: the defined path for unresolved, risky, or out-of-scope interactions.
+
+## Why this matters
+
+Good Voice AI outcomes depend on more than prompt quality. A workflow usually fails because the
+system lacks context, makes the wrong routing choice, or has no safe recovery path when the call
+does not match the ideal flow.
+
+## Recommended modeling approach
+
+Start with the business objective and the operational boundary:
+
+1. Define what the workflow is supposed to resolve.
+2. Define what data is needed to resolve it.
+3. Define what conditions require escalation.
+4. Define what system updates or side effects should happen after the call.
+
+This keeps the design grounded in operational reality instead of turning the call into an
+unbounded conversational surface.

@@ -1,0 +1,68 @@
+---
+title: Quickstart
+description: A concise first setup path for defining a workflow, choosing a deployment model, connecting systems, and validating launch readiness.
+---
+
+import { Callout, Steps } from "nextra/components";
+
+# Quickstart
+
+Use this path when you want to understand the first practical setup motion for RocketAiFlow
+without dropping into provider-specific implementation detail too early.
+
+## What you need before you start
+
+- A clear phone workflow to automate, not just a general interest in Voice AI.
+- A caller journey with explicit success, failure, and escalation outcomes.
+- Access to the business systems that provide context or receive results.
+- A view on who will own deployment, monitoring, and workflow iteration after launch.
+
+<Callout type="warning">
+  Quickstart should end with a validated rollout plan, not just a working demo. Real readiness
+  depends on routing logic, business-system fit, and operational ownership.
+</Callout>
+
+## Recommended first path
+
+<Steps>
+### Choose your deployment model
+
+Decide whether you need on-premise control, cloud delivery speed, or a phased approach. This
+choice affects networking, access, rollout speed, and who carries operational responsibility.
+
+### Define your workflow
+
+Write down the call objective, the inputs needed at runtime, the decision points, and the fallback
+path when the workflow should transfer or stop. Keep the first workflow narrow enough to validate
+cleanly.
+
+### Connect systems and providers
+
+Map the required integration layers: telephony, speech recognition, voice output, model logic, and
+the internal systems that provide context or receive outcomes. Treat each category as a design
+decision rather than a fixed vendor dependency.
+
+### Test and validate
+
+Run scenario-based validation against normal calls, ambiguous calls, failed lookups, and handoff
+conditions. The goal is to confirm both conversational behavior and system-level reliability.
+
+### Launch and monitor
+
+Launch with logging, escalation expectations, and a review loop already defined. Early operations
+should focus on containment quality, exception patterns, and system integration reliability.
+</Steps>
+
+## A good first implementation usually includes
+
+- One clearly bounded workflow with measurable outcomes.
+- One telephony path and one business-system integration path.
+- A documented handoff rule for unresolved calls.
+- A small review loop for transcripts, logs, and operational exceptions.
+
+## Next docs to read
+
+- [Core Concepts](/build/core-concepts)
+- [Deployment Overview](/deploy/deployment-overview)
+- [Integrations Overview](/integrate)
+- [Monitoring and Visibility](/operate/monitoring-and-visibility)

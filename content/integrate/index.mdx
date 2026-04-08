@@ -1,0 +1,47 @@
+---
+title: Integrations Overview
+description: A pattern-first overview of the integration layers that typically surround RocketAiFlow.
+---
+
+import { Cards, Callout } from "nextra/components";
+
+# Integrations Overview
+
+RocketAiFlow is integration-first by design. The workflow layer only becomes useful when it can
+read context from surrounding systems, act on the right signals, and return outcomes to the rest
+of the business stack.
+
+<Callout type="info">
+  This section is organized by integration pattern, not by logo catalog. The goal is to explain
+  what each system layer does and how it affects workflow behavior.
+</Callout>
+
+## The main integration layers
+
+<Cards num={3}>
+  <Cards.Card title="Telephony / SIP / PBX" href="/integrate/telephony-sip-pbx" arrow>
+    Connect the call path, routing logic, and transfer behavior into RocketAiFlow.
+  </Cards.Card>
+  <Cards.Card title="Speech Providers" href="/integrate/speech-providers" arrow>
+    Convert caller audio into usable input for workflow decisions.
+  </Cards.Card>
+  <Cards.Card title="Voice / TTS Providers" href="/integrate/voice-tts-providers" arrow>
+    Shape the spoken output layer for clarity, speed, and operational fit.
+  </Cards.Card>
+  <Cards.Card title="LLM / Model Providers" href="/integrate/llm-model-providers" arrow>
+    Support interpretation, reasoning, and response generation where needed.
+  </Cards.Card>
+  <Cards.Card title="CRM and Internal Systems" href="/integrate/crm-and-internal-systems" arrow>
+    Provide context and receive workflow outcomes after the call.
+  </Cards.Card>
+  <Cards.Card title="Webhooks / APIs" href="/integrate/webhooks-apis" arrow>
+    Connect RocketAiFlow with the broader application and event landscape.
+  </Cards.Card>
+</Cards>
+
+## What a strong integration design looks like
+
+- clear ownership for every system boundary
+- explicit failure behavior when dependencies are unavailable
+- stable inputs and outputs between workflow steps
+- logging that supports both technical and operational review

@@ -1,0 +1,22 @@
+---
+title: Telephony / SIP / PBX
+description: How RocketAiFlow fits the telephony edge and the surrounding routing environment.
+---
+
+# Telephony / SIP / PBX
+
+Telephony is the operational edge of the workflow. It determines how calls enter the system, what
+context is available at answer time, and how transfers, queues, or fallback paths behave.
+
+## Integration concerns
+
+- inbound and outbound call entry points
+- call routing and transfer behavior
+- caller or destination metadata passed into the workflow
+- compatibility with existing PBX, SIP, or carrier logic
+
+## Why it matters
+
+Even a strong workflow will feel broken if routing context is incomplete or if handoff behavior is
+inconsistent. Telephony fit should be validated early, especially when existing routing logic is
+already complex.
