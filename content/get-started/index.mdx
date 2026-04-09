@@ -1,23 +1,94 @@
 ---
-title: Get started with RocketAiFlow
-description: Compatibility page for the previous get-started route.
+title: Getting Started
+description: Learn how RocketAiFlow fits together and how to approach a first production-minded evaluation.
 ---
 
-# Get started with RocketAiFlow
+# Getting Started
 
-<Callout type="info">
-  This route has moved. Use the new Getting Started page for the current step-by-step setup guide.
+RocketAiFlow is a platform for building and operating real-time voice workflows across inbound and
+outbound calling scenarios.
+
+The fastest way to understand the product is to think of it as one connected execution path:
+
+1. configure the agent and prompt
+2. attach the functions or API actions the workflow needs
+3. connect the agent to an inbound route or outbound campaign
+4. test the behavior with a controlled call
+5. review call records and operational signals
+
+## What RocketAiFlow is
+
+RocketAiFlow is not just a voice bot surface. It is a workflow and operations platform for teams
+that need to:
+
+- launch inbound and outbound voice workflows quickly
+- connect those workflows to real business actions
+- fit into real SIP and PBX environments through a flexible telephony architecture
+- choose between Dedicated and Self-Hosted based on operational ownership, policy, and support
+  boundaries
+- keep telephony, API actions, and runtime behavior understandable
+- monitor live performance and investigate issues without guesswork
+
+## How to think about the platform
+
+Use this mental model when reading the docs:
+
+- `Agent` defines the conversation role.
+- `Prompt` defines tone, scope, and decision behavior.
+- `Functions` define what the agent can do beyond speaking.
+- `Inbound Routing` connects live entry points to the right agent.
+- `Dialer Flows` organize outbound campaigns and execution.
+- `Contacts` provide the outbound targets and context.
+- `Telephony Architecture` explains how trunk-based connectivity supports real SIP and PBX fit.
+- `Call Records` confirm what actually happened.
+- `Observe` pages show how to monitor, review, and troubleshoot the system in operation.
+
+## How inbound and outbound fit together
+
+Inbound and outbound are not separate products. They reuse the same core building blocks.
+
+- Inbound workflows usually start from a route, queue, or entry point and focus on intent,
+  qualification, or transfer logic.
+- Outbound workflows usually start from a campaign, contact list, and schedule, then reuse the
+  same agent behavior and action model.
+
+That shared model makes it easier to test one workflow first and expand without redesigning the
+whole stack.
+
+## Fast evaluation path
+
+If you are evaluating RocketAiFlow for a real team, use this order:
+
+1. read [Platform Overview](/get-started/platform-overview)
+2. follow [Quickstart](/get-started/quickstart)
+3. review [Functions and API Calls](/build/functions-and-api-calls)
+4. validate [AI Inbound Routing](/run-workflows/ai-inbound-routing) or [AI Dialer Flows](/run-workflows/ai-dialer-flows)
+5. review [Deployment Overview](/deploy/deployment-overview) to compare Dedicated and Self-Hosted
+6. review [Monitoring and Visibility](/observe/monitoring-and-visibility)
+7. confirm the troubleshooting path through [Logs Drilldown](/observe/logs-drilldown) and [Trace Correlation](/observe/trace-correlation)
+
+<Callout type="warning">
+  Keep the first evaluation narrow. One agent, one route or campaign, one test list, and one
+  operational review loop are easier to validate than a broad pilot with too many moving parts.
 </Callout>
 
-## Current entry point
+## Start here
 
-<CardGroup cols={1}>
-  <Card title="Open Getting Started" href="/01-getting-started">
-    Go to the current onboarding guide with the updated RocketAiFlow docs structure.
+<CardGroup cols={2}>
+  <Card title="Quickstart" href="/get-started/quickstart">
+    Move through the shortest practical path from first setup to a validated call flow.
+  </Card>
+  <Card title="Platform Overview" href="/get-started/platform-overview">
+    Understand how agents, routing, campaigns, functions, integrations, and monitoring connect.
+  </Card>
+  <Card title="Build" href="/build/create-your-first-ai-voice-agent">
+    Start the implementation path with agent setup, prompt design, functions, and API actions.
+  </Card>
+  <Card title="Telephony Architecture" href="/deploy/telephony-architecture">
+    Review how RocketAiFlow is built for real SIP and PBX environments before validating live call
+    paths.
+  </Card>
+  <Card title="Observe" href="/observe/monitoring-and-visibility">
+    Review the monitoring and investigation model before you assume the platform is ready to run.
   </Card>
 </CardGroup>
-
-## Why this page exists
-
-This compatibility page keeps older links working while the documentation is transitioning to the
-numbered setup sequence.

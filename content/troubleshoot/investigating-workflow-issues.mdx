@@ -1,0 +1,60 @@
+---
+title: Investigating Workflow Issues
+description: Follow a practical investigation flow that connects call records, dashboards, logs, and traces in RocketAiFlow.
+---
+
+# Investigating Workflow Issues
+
+The fastest investigation path is to move from symptom to layer, not from guess to guess.
+
+RocketAiFlow can give teams a stronger starting point because the platform can include
+pre-provisioned Grafana dashboards for infrastructure, Asterisk, containers, and database
+visibility from day one.
+
+## A practical investigation sequence
+
+1. Confirm the symptom in call records or workflow behavior.
+2. Review the broad operational state in Monitoring and Visibility.
+3. Move into the most relevant pre-provisioned dashboard category.
+4. Use logs to confirm the event context.
+5. Use traces where available if the issue crosses multiple services.
+
+## Which dashboard to use first
+
+- Start with `Node Exporter Full` when the problem may be host or system related.
+- Start with `Asterisk Overview` when telephony behavior looks unstable at a higher level.
+- Move to `Asterisk Log` when you need telephony log detail.
+- Use `cAdvisor` when runtime or container pressure may be involved.
+- Use `MySQL 8` when the persistence layer may be contributing to the problem.
+
+## Typical examples
+
+### Live workflows degrade across multiple routes
+
+Check infrastructure and container dashboards first before changing prompt or routing logic.
+
+### Telephony behavior changes suddenly
+
+Start with Asterisk Overview, then move into Asterisk Log if you need event-level detail.
+
+### Application behavior feels slow or inconsistent
+
+Check container and database dashboards to confirm whether the issue belongs below the workflow
+layer.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Pre-Provisioned Dashboards" href="/observe/pre-provisioned-dashboards">
+    Review the full Grafana dashboard foundation included with RocketAiFlow.
+  </Card>
+  <Card title="Logs Overview" href="/observe/logs-overview">
+    See how logs support the investigation flow after dashboards narrow the issue.
+  </Card>
+  <Card title="Traces Overview" href="/observe/traces-overview">
+    Use traces where path-level visibility is needed across services.
+  </Card>
+  <Card title="Troubleshooting" href="/troubleshoot/troubleshooting">
+    Return to the setup-oriented troubleshooting checklist when you are validating configuration.
+  </Card>
+</CardGroup>

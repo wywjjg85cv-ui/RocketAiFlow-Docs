@@ -1,0 +1,128 @@
+---
+title: Dialer Pacing and Limits
+description: Control calls per second, maximum active calls per campaign, and outbound concurrency with a practical rollout approach.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Dialer Pacing and Limits
+
+Outbound execution needs control, not just volume.
+
+Use pacing and campaign limits to decide how quickly a campaign dials, how much live load it can
+create, and how much operational pressure the system should absorb at one time.
+
+## What these controls do
+
+In practical terms, teams usually care about two settings first:
+
+- `Calls per second` controls how quickly the dialer starts new calls.
+- `Maximum active calls per campaign` controls how many live calls one campaign can have at the
+  same time.
+
+Together, these settings help teams:
+
+- control dialer pressure
+- protect infrastructure and campaign quality
+- adapt pacing to operational needs
+- avoid pushing telephony, agent behavior, or support teams too hard too early
+
+## Limit calls per second
+
+Calls per second controls campaign launch pressure.
+
+This setting matters because dialing too aggressively can:
+
+- overload the telephony path
+- make campaign behavior harder to interpret
+- increase congestion, failed calls, or unstable outcomes
+- hide whether the issue belongs to list quality, trunk setup, or workflow behavior
+
+Start conservatively for the first rollout. A low calls-per-second value makes it easier to see how
+the system behaves before you push more volume through it.
+
+<ImagePlaceholder
+  title="Dialer pacing settings"
+  description="Add product screenshot here: the dialer pacing settings showing how teams limit calls per second for a campaign."
+/>
+
+## Set a maximum number of active calls per campaign
+
+Maximum active calls per campaign controls live concurrency.
+
+This setting matters because it protects the system from building more live call load than the
+environment is ready to support. It should be aligned with:
+
+- telephony readiness
+- infrastructure capacity
+- the support team's ability to monitor live behavior
+- how quickly the team can investigate problems if outcomes drift
+
+Use this setting to avoid treating one campaign like an unlimited execution source.
+
+<ImagePlaceholder
+  title="Campaign call limit settings"
+  description="Add product screenshot here: the campaign settings showing the maximum active calls limit for a live outbound campaign."
+/>
+
+## Campaign execution control in practice
+
+Pacing and concurrency settings directly affect campaign behavior.
+
+When calls per second is too high or the active-call ceiling is too loose, teams may see:
+
+- active calls rising faster than expected
+- failed or congestion outcomes increasing
+- endpoint or trunk pressure appearing during launch windows
+- talk time and ring time trends becoming harder to interpret
+
+When pacing is too low, campaigns may look healthy but move too slowly for the business objective.
+
+The goal is not to maximize throughput immediately. The goal is to reach a controlled operating
+point where campaign quality, infrastructure readiness, and operational visibility stay aligned.
+
+## High-concurrency execution
+
+RocketAiFlow has been tested with approximately 300 concurrent calls on an 8 GB machine.
+
+Treat that as a useful internal benchmark example, not as an automatic guarantee for every
+environment. Real capacity depends on deployment model, telephony path, codecs, recording and
+transcription settings, external actions, and the behavior of the surrounding infrastructure.
+
+Use benchmark examples to frame testing, not to skip validation.
+
+## What to review after launch
+
+After changing pacing or call limits, review:
+
+- active calls versus configured limits
+- calls per second or dialing pace
+- answered, no answer, busy, failed, and congestion outcomes
+- endpoint and trunk state during live dialing
+- talk time and ring time trends after the run completes
+- call history for individual calls that look unusual
+
+## Best practices
+
+- start with conservative pacing limits
+- align campaign limits with infrastructure and telephony readiness
+- increase one setting at a time instead of changing pace and concurrency together
+- review call history and timing data after each controlled test run
+- treat concurrency benchmarks as reference points, not promises
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="AI Dialer Flows" href="/run-workflows/ai-dialer-flows">
+    Return to the outbound campaign setup flow once pacing and limits are understood.
+  </Card>
+  <Card title="Campaign Analytics" href="/observe/campaign-analytics">
+    Review pacing, active calls, and outcomes together while the campaign is live.
+  </Card>
+  <Card title="Real-Time Performance Metrics" href="/observe/real-time-performance-metrics">
+    See the live metrics categories that help teams judge outbound execution pressure.
+  </Card>
+  <Card title="Call History and Review" href="/run-workflows/call-history-and-review">
+    Review completed calls in detail after changing pacing or concurrency settings.
+  </Card>
+</CardGroup>

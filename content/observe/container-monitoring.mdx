@@ -1,0 +1,54 @@
+---
+title: Container Monitoring
+description: Use cAdvisor to review container runtime and resource visibility in RocketAiFlow deployments.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Container Monitoring
+
+Where RocketAiFlow runs in containers, container monitoring is part of the core operational view.
+
+RocketAiFlow can include the `cAdvisor` Grafana dashboard as part of its pre-provisioned dashboard
+foundation, so teams have immediate runtime visibility.
+
+## What cAdvisor helps you see
+
+`cAdvisor` is used for container-level runtime and resource visibility.
+
+It helps teams review:
+
+- container runtime state
+- resource usage pressure
+- whether runtime conditions line up with platform issues
+
+## When to use it
+
+Use container monitoring when:
+
+- the platform is deployed in containers
+- runtime pressure may be affecting workflows
+- performance changes do not look purely telephony-related
+- you need to separate application logic issues from runtime capacity issues
+
+## What it helps investigate
+
+- container instability
+- resource contention
+- whether runtime health changed at the same time as live workflow degradation
+
+<ImagePlaceholder
+  title="cAdvisor dashboard"
+  description="Replace with a real Grafana capture of the cAdvisor dashboard used for container runtime and resource visibility."
+/>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Infrastructure Monitoring" href="/observe/infrastructure-monitoring">
+    Compare container-level signals with the wider host and system view.
+  </Card>
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues">
+    See how runtime monitoring fits into a full investigation path.
+  </Card>
+</CardGroup>

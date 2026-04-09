@@ -1,0 +1,54 @@
+---
+title: Trace Correlation
+description: Use trace correlation to connect workflow symptoms, API paths, and supporting services during deeper RocketAiFlow investigations.
+---
+
+# Trace Correlation
+
+Use trace correlation when the investigation crosses more than one layer and logs alone do not show
+the full sequence.
+
+This matters most when the workflow depends on API actions, downstream services, or supporting
+runtime components that interact during the same call path.
+
+## What trace correlation adds
+
+Traces help you connect:
+
+- the workflow event
+- the API action or integration step
+- the supporting service path
+- the timing around failures or latency
+
+## When to use it
+
+Use traces when:
+
+- logs show isolated events but not the full path
+- the issue spans multiple services
+- a workflow action appears correct at the prompt layer but fails downstream
+- timing and latency need to be explained across service boundaries
+
+## What to check first
+
+- the incident window is already narrowed
+- the relevant workflow or call identifier is known
+- logs and monitoring already point to a likely path
+- tracing is enabled for the services involved
+
+## Practical correlation path
+
+1. confirm the symptom in call records or monitoring
+2. use logs to narrow the affected event window
+3. follow the trace path across workflow execution and API actions
+4. confirm where latency, failure, or unexpected behavior starts
+5. return to the owning layer with evidence
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Traces Overview" href="/observe/traces-overview" />
+  <Card title="Logs Drilldown" href="/observe/logs-drilldown" />
+  <Card title="Functions and API Calls" href="/build/functions-and-api-calls" />
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues" />
+</CardGroup>

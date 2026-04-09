@@ -1,0 +1,195 @@
+---
+title: Platform Overview
+description: Understand how RocketAiFlow connects agents, routing, campaigns, API actions, and observability into one production-aware voice workflow model.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Platform Overview
+
+RocketAiFlow is easiest to understand as a workflow platform for real-time voice operations.
+
+It combines agent behavior, routing, campaigns, telephony fit, API extensibility, and operational
+visibility into one model that teams can evaluate step by step.
+
+RocketAiFlow is designed for provider flexibility and built for real SIP and PBX environments.
+That does not mean every provider works automatically. It means the platform uses a flexible
+telephony architecture where provider choice depends on deployment and configuration.
+
+## What RocketAiFlow is
+
+RocketAiFlow helps teams design and run inbound and outbound voice workflows that are meant to do
+real work, not just demonstrate a conversation.
+
+In practical terms, teams use it to:
+
+- answer inbound calls with a structured agent
+- run outbound campaigns against controlled contact lists
+- connect the call flow to business actions through functions and APIs
+- review the resulting call records and operational signals
+
+## How the platform fits together
+
+The core flow looks like this:
+
+1. create the agent and prompt
+2. attach functions and API actions
+3. connect the workflow to inbound routing or outbound campaigns
+4. pass business context into the workflow when needed
+5. validate the result in call records
+6. monitor and troubleshoot the live system
+
+### Agent layer
+
+The agent defines the voice workflow role. This is where teams anchor the conversation to one clear
+business job such as qualification, booking, routing, or follow-up.
+
+### Action layer
+
+Functions and API-backed actions let the workflow do something useful after information is
+collected. This is where runtime context, dynamic parameters, and external systems become
+important.
+
+### Execution layer
+
+Inbound routing and outbound campaigns determine how calls are actually delivered into the
+workflow. For outbound, this also includes execution controls such as calls per second and maximum
+active calls per campaign.
+
+### Telephony layer
+
+The telephony architecture is built on Asterisk-based foundations. RocketAiFlow uses an
+Asterisk-based telephony layer to support practical SIP / PBX integration, trunk-based
+connectivity, and provider flexibility.
+
+In practical terms, this matters because:
+
+- inbound and outbound workflows both depend on the telephony path being correct
+- provider compatibility depends on deployment and configuration
+- telephony interoperability should be validated during setup, not assumed
+- trunk configuration connects the workflow model to the real calling environment
+
+### Review layer
+
+Call records, call history, monitoring, logs, and traces show what happened and whether the system
+is behaving reliably in operation. When available, transcripts, recordings, talk time, and ring
+time make that review more actionable.
+
+<ImagePlaceholder
+  title="Platform workflow overview"
+  description="Add product screenshot or diagram here: the main RocketAiFlow workflow path from agent setup to operational review."
+/>
+
+## How inbound and outbound workflows fit together
+
+Inbound and outbound workflows share the same core building blocks.
+
+- Inbound uses routes, entry points, and handoff logic.
+- Outbound uses campaigns, contacts, pacing, and scheduling rules.
+- Both rely on the same agent, prompt, action model, and observability path.
+
+That shared structure makes RocketAiFlow easier to evaluate in a narrow proof path before you
+expand to more routes, more campaigns, or more business actions.
+
+## Platform-agnostic architecture
+
+RocketAiFlow is designed to fit different technical environments rather than forcing one rigid
+stack assumption.
+
+Teams should think about flexibility in these practical terms:
+
+- deployment flexibility through Dedicated and Self-Hosted models depending on operational
+  ownership, policy, and support boundaries
+- speech provider flexibility when one provider is better aligned with the deployment or language mix
+- voice provider flexibility when output voice requirements change across use cases
+- LLM or model flexibility when business goals require a different reasoning or response profile
+- telephony fit when the deployment has to align with the SIP or PBX environment already in use
+- API-based actions when the workflow has to connect to existing CRM, scheduling, or internal tools
+
+The documentation focuses on how to reason about these choices, not on overwhelming buyers with raw
+provider lists.
+
+## Deployment models in practical terms
+
+RocketAiFlow can be evaluated through two main deployment models:
+
+- `Dedicated` is the fully managed, single-tenant model with complete isolation, compliance
+  alignment, and region-specific deployment.
+- `Self-Hosted` is the customer-controlled model running on your own infrastructure, cloud account,
+  or data center when internal policy or sovereignty requirements matter more than managed
+  operations.
+
+## Telephony architecture in practical terms
+
+RocketAiFlow is built for real SIP and PBX environments, not only abstract AI workflow demos.
+
+Use the telephony layer as the bridge between:
+
+- the workflow you configure in RocketAiFlow
+- the trunk-based connectivity used for inbound and outbound calls
+- the provider or PBX environment used in the deployment
+
+Safe evaluation guidance:
+
+- RocketAiFlow is designed to fit different SIP / PBX environments
+- provider compatibility depends on deployment and configuration
+- practical telephony interoperability should be validated during setup
+
+## Workflow context and dynamic parameters
+
+One of the most important platform concepts is that actions do not have to stay static.
+
+RocketAiFlow can pass:
+
+- contact fields
+- workflow variables
+- route identifiers
+- campaign identifiers
+- runtime values collected during the call
+
+into function inputs when the workflow needs contextual behavior.
+
+That makes the platform more adaptable to real business processes such as:
+
+- lead qualification
+- appointment booking
+- routing decisions
+- CRM updates
+- external lookup actions
+
+## Production-oriented operating model
+
+The documentation treats observability as a first-class area because live voice systems need more
+than configuration screens.
+
+RocketAiFlow can support a production-aware review loop with:
+
+- monitoring and visibility for live state
+- campaign analytics for trend review
+- endpoint and trunk monitoring for telephony health
+- pre-provisioned dashboards for faster day-one observability
+- logs and traces for deeper issue investigation
+
+## Where to go next
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" href="/get-started/quickstart">
+    Build the first end-to-end proof path.
+  </Card>
+  <Card title="Functions and API Calls" href="/build/functions-and-api-calls">
+    Review how workflow actions extend beyond the conversation layer.
+  </Card>
+  <Card title="Dialer Pacing and Limits" href="/run-workflows/dialer-pacing-and-limits">
+    Review how outbound execution pace and campaign concurrency are controlled.
+  </Card>
+  <Card title="Deployment Overview" href="/deploy/deployment-overview">
+    Understand how the platform fits Dedicated and Self-Hosted runtime models.
+  </Card>
+  <Card title="Telephony Architecture" href="/deploy/telephony-architecture">
+    Review how the Asterisk-based telephony layer supports provider flexibility and trunk-based
+    deployment patterns.
+  </Card>
+  <Card title="Monitoring and Visibility" href="/observe/monitoring-and-visibility">
+    Review the operational model for live voice workflows.
+  </Card>
+</CardGroup>

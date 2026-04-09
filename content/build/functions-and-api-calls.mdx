@@ -1,0 +1,129 @@
+---
+title: Functions and API Calls
+description: Use RocketAiFlow functions to trigger external actions, pass workflow context, and support real business workflows.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Functions and API Calls
+
+RocketAiFlow functions let agents do more than speak. They let the workflow trigger structured
+actions that connect the conversation to the rest of the business process.
+
+That can include built-in call actions such as transfer and hangup, or custom actions backed by
+external APIs.
+
+## What functions are used for
+
+Use functions when the agent needs to:
+
+- perform a call control action
+- request or update data in another system
+- trigger a business action outside the conversation
+- send structured values gathered during the call
+
+## Practical use cases
+
+Common function-based workflow actions include:
+
+- lead qualification updates in a CRM
+- appointment availability checks
+- routing decisions based on external rules
+- follow-up task creation after a call
+- external lookups for account, location, or service information
+
+## A practical setup path
+
+1. identify the real business action
+2. define the smallest useful function for that action
+3. list the parameters the action actually needs
+4. tell the prompt when the function should be used
+5. test the function with one controlled workflow
+
+<ImagePlaceholder
+  title="Function setup screen"
+  description="Placeholder for the function setup screen showing a function name, description, and input parameters."
+/>
+
+## How API-backed functions fit the workflow
+
+An API-backed function usually follows a simple path:
+
+1. the agent collects the needed information during the call
+2. the agent calls a function with structured inputs
+3. the function triggers an external API endpoint
+4. the API returns a result the workflow can use
+5. the agent continues the conversation based on that result
+
+## Example: CRM update after lead qualification
+
+The agent may collect:
+
+- caller name
+- company
+- interest level
+- preferred follow-up
+
+Then the function sends those values to an external CRM endpoint so the lead is recorded without
+manual re-entry.
+
+## Example: appointment booking
+
+The agent may collect:
+
+- service type
+- requested date
+- requested time range
+- contact phone
+
+Then the function can call an availability or booking API and return the next step to the caller.
+
+<ImagePlaceholder
+  title="API action example"
+  description="Placeholder for an example showing a function call mapped to an external API request and response."
+/>
+
+## Dynamic values matter
+
+Function inputs can be built from:
+
+- dynamic fields
+- workflow variables
+- contact fields
+- runtime values collected during the call
+- contextual parameters such as route or campaign identifiers
+
+This is how one function can stay reusable while still adapting to different business cases.
+
+## Function design best practices
+
+- design functions around real business actions, not generic technical verbs
+- pass only the parameters required for the action
+- keep function names and descriptions easy to understand
+- align prompt instructions with the available function set
+- keep API actions small enough to test and maintain
+
+## Common mistakes
+
+- exposing too many functions to one agent
+- mixing unrelated actions in one function
+- sending more parameters than the action needs
+- hiding business meaning behind unclear function names
+- calling external APIs before the required information has been collected
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Dynamic Parameters" href="/build/dynamic-parameters">
+    Learn how to pass context-specific values into function inputs.
+  </Card>
+  <Card title="Building Custom API Actions" href="/build/building-custom-api-actions">
+    Design a simple endpoint and payload shape for a custom action.
+  </Card>
+  <Card title="Add Functions" href="/build/add-functions">
+    Return to the base function setup path for the first RocketAiFlow implementation.
+  </Card>
+  <Card title="AI Dialer Flows" href="/run-workflows/ai-dialer-flows">
+    See how outbound workflows can use custom actions for follow-up and campaign automation.
+  </Card>
+</CardGroup>

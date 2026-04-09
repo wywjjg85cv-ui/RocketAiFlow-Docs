@@ -1,0 +1,174 @@
+---
+title: Troubleshooting
+description: Diagnose common setup issues across agents, prompts, routing, campaigns, contacts, trunks, and call review.
+---
+
+# Troubleshooting
+
+Use this page when the workflow does not behave the way you expect during setup or early testing.
+
+The fastest approach is to isolate one layer at a time instead of changing multiple settings at
+once.
+
+RocketAiFlow uses an Asterisk-based telephony layer, so troubleshooting should treat the telephony
+path as a first-class part of the investigation. In real SIP and PBX environments, provider choice
+depends on the chosen Dedicated or Self-Hosted deployment and configuration, and interoperability
+should be validated with evidence.
+
+## Start With The Simplest Question
+
+Ask:
+
+1. did the call start
+2. did it reach the right agent
+3. did the agent behave correctly
+4. did the intended action happen
+5. did the result appear in call records
+
+This usually tells you where to look next.
+
+## The Agent Answers But The Conversation Is Wrong
+
+Check:
+
+- whether the prompt still matches the intended call objective
+- whether the agent has the right functions available
+- whether the latest prompt change was tested in isolation
+
+## Live Monitoring Looks Wrong
+
+Check:
+
+- whether campaign status, active calls, or pacing changed at the same time as the issue
+- whether calls per second or maximum active-call settings changed before the issue appeared
+- whether endpoint or trunk state changed before the workflow behavior degraded
+- whether answered, no answer, busy, failed, or congestion outcomes shifted suddenly
+- whether the selected time range is hiding the moment the problem started
+
+## Use the dashboard foundation before changing config
+
+RocketAiFlow can include pre-provisioned Grafana dashboards, which gives teams a stronger starting
+point when troubleshooting:
+
+- use `Node Exporter Full` to confirm host and system health
+- use `Asterisk Overview` to review telephony behavior at a higher level
+- use `Asterisk Log` when you need telephony-related log review
+- use `cAdvisor` when container runtime pressure may be involved
+- use `MySQL 8` when the database may be contributing to the incident
+
+This helps teams avoid making workflow changes when the issue is actually in infrastructure,
+telephony, runtime, or database state.
+
+## Transfer Does Not Work
+
+Check:
+
+- whether `transfer_call` is configured
+- whether the transfer parameter uses the correct `exten` value
+- whether the telephony path supports the transfer destination
+
+## The Agent Calls The Wrong Action Or Sends The Wrong Data
+
+Check:
+
+- whether the function name clearly matches the intended business action
+- whether the prompt still tells the agent when that function should be used
+- whether dynamic parameters are passing the expected contact, workflow, or runtime values
+- whether the external API expects the same field names and formats you are sending
+- whether the action should be split into smaller functions instead of one broad custom action
+
+## The Inbound Route Does Not Reach The Agent
+
+Check:
+
+- whether the right agent is assigned to the route
+- whether the inbound path is mapped to the intended route
+- whether the trunk configuration supports the inbound test path
+- whether the SIP / PBX environment is aligned with the Dedicated or Self-Hosted model being tested
+
+## Outbound Calls Do Not Start
+
+Check:
+
+- whether the campaign is configured correctly
+- whether contacts were imported successfully
+- whether the outbound path is supported by the current trunk setup
+- whether the telephony provider fit has been validated for the chosen deployment and configuration
+- whether pacing is too restrictive for the campaign to launch as expected
+
+## Contact Import Results Look Wrong
+
+Check:
+
+- whether the `Phone` field was mapped correctly
+- whether CSV values are clean and complete
+- whether failed or skipped rows explain the missing contacts
+
+## Call Records Do Not Match Expectations
+
+Check:
+
+- whether you are reviewing the correct test call
+- whether the timestamps line up with the change you just made
+- whether the issue is routing, prompt behavior, trunk setup, or campaign input
+- whether transcripts or recordings show a conversation problem when they are available
+- whether talk time and ring time suggest pacing, telephony, or workflow issues
+
+<Callout type="warning">
+  Make one change at a time. If you update prompt, routing, campaign settings, and trunk
+  configuration together, the resulting behavior becomes much harder to explain.
+</Callout>
+
+## A Practical Recovery Pattern
+
+When something is unclear:
+
+1. return to one known agent
+2. use one controlled route or one small campaign
+3. place one manual test call
+4. review one call record
+
+Then review the related operational signals:
+
+- active calls versus configured limits
+- calls per second and maximum active-call settings
+- campaign status and dialing activity
+- endpoint and trunk state
+- recent talk time and ring time trends
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Call Records" href="/run-workflows/call-records">
+    Return to the call record for the exact test you are diagnosing.
+  </Card>
+  <Card title="Dialer Pacing and Limits" href="/run-workflows/dialer-pacing-and-limits">
+    Review campaign execution settings when pace or concurrency may be driving the issue.
+  </Card>
+  <Card title="Call History and Review" href="/run-workflows/call-history-and-review">
+    Review transcripts, recordings when enabled, and timing metrics for the calls that look wrong.
+  </Card>
+  <Card title="Monitoring and Visibility" href="/observe/monitoring-and-visibility">
+    Review the live operational checks that belong alongside call-level troubleshooting.
+  </Card>
+  <Card title="Pre-Provisioned Dashboards" href="/observe/pre-provisioned-dashboards">
+    See the ready Grafana dashboard categories available for daily operations and incident review.
+  </Card>
+  <Card title="Telephony Architecture" href="/deploy/telephony-architecture">
+    Review the telephony model when issues may belong to trunk setup, PBX fit, or provider
+    configuration.
+  </Card>
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues">
+    Follow the broader operational investigation path once the issue extends beyond one setup step.
+  </Card>
+  <Card title="FAQ" href="/troubleshoot/faq">
+    Review quick answers to recurring setup questions.
+  </Card>
+  <Card title="Logs and Troubleshooting" href="/observe/logs-drilldown">
+    Use the operations-oriented troubleshooting flow when the issue spans campaigns or endpoints.
+  </Card>
+  <Card title="Functions and API Calls" href="/build/functions-and-api-calls">
+    Review the function model when the issue is tied to external actions or API-backed workflow
+    steps.
+  </Card>
+</CardGroup>

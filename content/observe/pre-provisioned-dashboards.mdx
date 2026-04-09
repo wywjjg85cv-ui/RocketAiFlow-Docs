@@ -1,0 +1,151 @@
+---
+title: Pre-Provisioned Dashboards
+description: Understand the Grafana dashboards RocketAiFlow can include as part of its observability foundation.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Pre-Provisioned Dashboards
+
+RocketAiFlow includes pre-provisioned Grafana dashboards as part of its observability and
+monitoring setup.
+
+This is a practical operational advantage: teams can start from a ready dashboard foundation
+instead of building the core monitoring layer from scratch before they can diagnose live behavior.
+
+## What pre-provisioned dashboards mean
+
+In practice, pre-provisioned dashboards mean that the first operational views are already prepared
+for the deployment. Teams do not need to design the initial Grafana structure just to get baseline
+visibility into infrastructure, telephony, containers, and database state.
+
+## Why they matter
+
+They help teams:
+
+- gain operational visibility faster after deployment
+- start troubleshooting from a known dashboard baseline
+- reduce the time spent assembling first-pass monitoring panels
+- align operations, infrastructure, and telephony teams around shared views
+
+## Included dashboard categories
+
+RocketAiFlow can come with pre-provisioned dashboard categories such as:
+
+- `Node Exporter Full`
+- `Asterisk Log`
+- `Asterisk Overview`
+- `cAdvisor`
+- `MySQL 8`
+
+These views help teams get faster visibility into:
+
+- host and system health
+- telephony activity
+- Asterisk behavior and logs
+- container runtime monitoring
+- database visibility
+
+## What each dashboard helps monitor
+
+### Node Exporter Full
+
+Use this dashboard for infrastructure and host-level visibility. It helps teams review system load,
+resource pressure, and the general health of the server running the platform.
+
+<ImagePlaceholder
+  title="Infrastructure dashboard"
+  description="Replace with a real Grafana capture of the Node Exporter Full dashboard used for host and system health visibility."
+/>
+
+### Asterisk Log
+
+Use this dashboard when reviewing telephony-related log activity. It helps teams investigate
+call-path issues, warnings, errors, and operational events that are easier to spot in a log-focused
+view.
+
+<ImagePlaceholder
+  title="Asterisk log dashboard"
+  description="Replace with a real Grafana capture of the Asterisk Log dashboard used for telephony log review."
+/>
+
+### Asterisk Overview
+
+Use this dashboard for higher-level Asterisk operational monitoring. It helps teams understand
+telephony behavior without starting from raw logs.
+
+<ImagePlaceholder
+  title="Asterisk overview dashboard"
+  description="Replace with a real Grafana capture of the Asterisk Overview dashboard used for service-level telephony monitoring."
+/>
+
+### cAdvisor
+
+Use this dashboard for container-level runtime and resource visibility. It helps teams understand
+container pressure, runtime health, and whether application behavior is being affected by resource
+constraints.
+
+<ImagePlaceholder
+  title="cAdvisor dashboard"
+  description="Replace with a real Grafana capture of the cAdvisor dashboard used for container runtime monitoring."
+/>
+
+### MySQL 8
+
+Use this dashboard for database-level monitoring and operational checks. It helps teams confirm
+whether database behavior is contributing to slowdowns, instability, or workflow investigation.
+
+<ImagePlaceholder
+  title="MySQL 8 dashboard"
+  description="Replace with a real Grafana capture of the MySQL 8 dashboard used for database visibility and operational checks."
+/>
+
+## When to use each one
+
+- Use `Node Exporter Full` when a workflow issue may come from the host or system layer.
+- Use `Asterisk Log` when you need detailed telephony-related log review.
+- Use `Asterisk Overview` when you need a higher-level picture of Asterisk behavior.
+- Use `cAdvisor` when the deployment runs in containers and runtime pressure may be involved.
+- Use `MySQL 8` when persistence, data access, or backend response behavior needs investigation.
+
+## How they fit into daily operations
+
+In daily operations, these dashboards give teams a stronger monitoring starting point out of the
+box. They are useful for both routine health checks and incident investigation.
+
+They are also a practical support layer for a flexible telephony architecture. Because RocketAiFlow
+uses an Asterisk-based telephony layer, teams need visibility that helps them validate trunk
+behavior, telephony health, and provider-specific deployment behavior in real environments.
+
+A practical operating pattern is:
+
+1. review high-level live signals in Monitoring and Visibility
+2. move into the most relevant pre-provisioned dashboard category
+3. confirm whether the issue is infrastructure, telephony, runtime, or database related
+4. use logs, traces, and call records to narrow the investigation further
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Monitoring and Visibility" href="/observe/monitoring-and-visibility">
+    See how the pre-provisioned dashboards fit into the wider observability model.
+  </Card>
+  <Card title="Infrastructure Monitoring" href="/observe/infrastructure-monitoring">
+    Review the host and system-level operational use of Node Exporter Full.
+  </Card>
+  <Card title="Asterisk Monitoring" href="/observe/asterisk-monitoring">
+    Understand when to use Asterisk Log and Asterisk Overview during telephony investigations.
+  </Card>
+  <Card title="Telephony Architecture" href="/deploy/telephony-architecture">
+    Review how the Asterisk-based telephony layer fits provider flexibility and SIP / PBX setup.
+  </Card>
+  <Card title="Container Monitoring" href="/observe/container-monitoring">
+    See how cAdvisor helps with container runtime investigation.
+  </Card>
+  <Card title="Database Monitoring" href="/observe/database-monitoring">
+    Review when MySQL 8 visibility belongs in the troubleshooting path.
+  </Card>
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues">
+    Follow the full operational investigation flow from symptoms to root cause.
+  </Card>
+</CardGroup>

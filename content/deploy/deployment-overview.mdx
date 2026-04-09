@@ -1,0 +1,108 @@
+---
+title: Deployment Overview
+description: Evaluate how RocketAiFlow fits Dedicated and Self-Hosted deployment models, telephony environments, and operational review requirements.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Deployment Overview
+
+Deployment planning matters because voice workflows stop looking simple as soon as they reach live
+telephony, external actions, and monitoring requirements.
+
+Use this page to frame how RocketAiFlow fits the environment you already operate and what has to be
+clear before you consider a production rollout.
+
+## What deployment planning should answer
+
+Before rollout, teams usually need to answer:
+
+- where the platform will run
+- how telephony connectivity will be handled
+- how API actions will reach internal or external systems
+- how monitoring, logs, and traces will be reviewed
+- which team owns day-two operations
+
+## Common deployment models
+
+RocketAiFlow can be evaluated across different operating models, including:
+
+- a Dedicated deployment for teams that want a fully managed, single-tenant runtime with complete
+  isolation, compliance alignment, region-specific deployment, and lower operational burden
+- a Self-Hosted deployment for teams that need stricter infrastructure control, sovereignty
+  alignment, or their own AWS, GCP, or customer data-center footprint
+- hybrid patterns where telephony, APIs, or observability systems remain split across environments
+
+The right choice depends more on network boundaries, telephony fit, data flow, and support model
+than on one generic hosting preference.
+
+## Flexible telephony architecture
+
+RocketAiFlow uses an Asterisk-based telephony layer and is designed for provider flexibility.
+
+That is important because real deployments often need to fit existing SIP or PBX environments
+rather than force one telephony assumption. In practice:
+
+- RocketAiFlow is built for real SIP and PBX environments
+- provider choice depends on deployment and configuration
+- practical telephony interoperability should be validated during setup
+- trunk-based connectivity is the main bridge between the workflow layer and the calling
+  environment
+
+## What to validate early
+
+Treat these as early deployment checkpoints:
+
+- the telephony path is understood for inbound, outbound, and transfer behavior
+- Dedicated versus Self-Hosted ownership is clear before rollout
+- provider fit has been reviewed against the real SIP / PBX environment
+- API actions can reach the systems they depend on
+- observability is ready before live launch, not after
+- the support team knows where to look when campaigns or routes drift
+
+<ImagePlaceholder
+  title="Deployment architecture overview"
+  description="Add product screenshot or diagram here: a deployment overview showing telephony, workflow execution, API actions, and observability."
+/>
+
+## Why deployment flexibility matters
+
+Buyers and implementers usually want to know whether the platform can fit the environment they
+already operate.
+
+Deployment flexibility is not only about where the software runs. It also affects:
+
+- telephony integration choices
+- API security boundaries
+- monitoring stack design
+- operational ownership
+- how quickly incidents can be diagnosed
+
+## What to check if something goes wrong
+
+If a deployment path feels unclear, review:
+
+- whether the telephony assumptions are explicit
+- whether the API action path crosses sensitive boundaries
+- whether monitoring and logs are reachable by the operators who need them
+- whether the first rollout is too broad for the support model available
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Trunk Configuration" href="/deploy/trunk-configuration">
+    Validate the telephony path first.
+  </Card>
+  <Card title="Telephony Architecture" href="/deploy/telephony-architecture">
+    Review how the Asterisk-based foundations support provider flexibility and SIP / PBX fit.
+  </Card>
+  <Card title="Dedicated" href="/deploy/dedicated">
+    Review the fully managed, single-tenant deployment model.
+  </Card>
+  <Card title="Self-Hosted" href="/deploy/self-hosted">
+    Review the customer-controlled deployment model.
+  </Card>
+  <Card title="Monitoring and Visibility" href="/observe/monitoring-and-visibility">
+    Confirm the live operating view before launch.
+  </Card>
+</CardGroup>

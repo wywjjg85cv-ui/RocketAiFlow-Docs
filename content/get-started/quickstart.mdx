@@ -1,0 +1,211 @@
+---
+title: Quickstart
+description: Move from first setup to a working RocketAiFlow voice workflow in a practical, production-minded sequence.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Quickstart
+
+Use this page when you want the shortest practical path through RocketAiFlow.
+
+The goal is not to configure every possible option. The goal is to prove one real workflow path,
+review the outcome, and confirm that the platform behaves clearly enough for broader evaluation.
+
+## What you will complete
+
+By the end of this quickstart, you should have:
+
+- one agent
+- one prompt
+- one function set
+- one inbound route or one outbound campaign
+- one contact import
+- one test call
+- one call record review
+- one operational monitoring pass
+
+## Before you start
+
+Confirm these basics first:
+
+- platform access is available
+- telephony or trunk setup is ready for the test path
+- you can create agents and campaigns
+- you have a small contact list if outbound is part of the evaluation
+
+If outbound is not part of the first test, you can still complete most of the flow with one agent,
+one inbound route, and one controlled test call.
+
+## Recommended quickstart path
+
+### 1. Create the first agent
+
+Create one focused agent with a narrow business goal such as:
+
+- lead qualification
+- appointment intake
+- routing to a human team
+
+Use a simple example such as `Rocket Demo Assistant` and keep the scope limited to one workflow.
+
+<ImagePlaceholder
+  title="Agent creation"
+  description="Add product screenshot here: the first agent creation form used for a narrow business workflow."
+/>
+
+### 2. Configure the prompt
+
+Write a short prompt that defines:
+
+- the agent role
+- how it should speak
+- what it should collect
+- when it should transfer or end the call
+
+Do not overfit the first version. Use the prompt to make the workflow understandable, not
+theoretical.
+
+<ImagePlaceholder
+  title="Prompt configuration"
+  description="Add product screenshot here: the prompt editor with the first production-minded prompt."
+/>
+
+### 3. Add the initial functions
+
+Add the smallest useful function set first. A practical starting point is:
+
+- `transfer_call`
+- `hangup_call`
+- one custom API action only if the workflow actually needs it
+
+This is where RocketAiFlow starts to support real business actions instead of only scripted
+conversation.
+
+<ImagePlaceholder
+  title="Function setup"
+  description="Add product screenshot here: the function setup screen with transfer, hangup, and one business action."
+/>
+
+### 4. Connect inbound routing
+
+If your first use case is inbound, assign the agent to one route and validate that the right calls
+reach the right workflow.
+
+If the inbound route carries business context, confirm that the workflow passes the right values
+into the call and function layer.
+
+<ImagePlaceholder
+  title="Inbound route connection"
+  description="Add product screenshot here: the inbound routing screen with the agent assigned to a live route."
+/>
+
+### 5. Launch a first outbound campaign
+
+If your evaluation includes outbound, create one narrow campaign with:
+
+- one clear call objective
+- one small test list
+- one timezone
+- one agent
+- conservative calls-per-second settings
+- a conservative maximum active-calls limit
+
+Keep the first campaign controlled enough that call outcomes are easy to interpret.
+
+<ImagePlaceholder
+  title="Outbound campaign setup"
+  description="Add product screenshot here: the outbound campaign setup for a small controlled test."
+/>
+
+### 6. Import contacts
+
+Upload a small CSV and map only the fields the workflow actually needs.
+
+For most first runs, that means `Phone` plus a few support fields such as `name`, `company`, or
+campaign context.
+
+<ImagePlaceholder
+  title="Contact import"
+  description="Add product screenshot here: the contact import and field mapping flow."
+/>
+
+### 7. Run a controlled test
+
+Place one inbound or outbound test call. Then confirm:
+
+- the agent answered correctly
+- the prompt stayed on task
+- the right function fired when needed
+- the workflow reached the intended outcome
+
+Use the Phone area if you want a tighter manual validation loop before broader rollout.
+
+<ImagePlaceholder
+  title="Controlled test call"
+  description="Add product screenshot here: the phone testing or live test area used for the first validation call."
+/>
+
+### 8. Review call records and monitoring
+
+After the test, review:
+
+- call status and outcome
+- transfer or hangup behavior
+- timestamps
+- campaign or route context
+- transcripts or recordings when available
+- talk time and ring time
+- the live operational view in Monitoring and Visibility
+
+This is the point where a setup becomes an operational evaluation rather than a configuration
+exercise.
+
+<ImagePlaceholder
+  title="Call review and live monitoring"
+  description="Add product screenshot here: call records and the live monitoring view used after the first call."
+/>
+
+## What to check if something goes wrong
+
+If the first run does not behave correctly, check in this order:
+
+1. does the call start
+2. does it reach the correct agent
+3. does the prompt match the workflow goal
+4. does the function set match the intended action path
+5. does the result appear in call records
+6. do monitoring, logs, or traces show a broader operational issue
+
+## Quickstart success checklist
+
+You can treat the quickstart as complete when:
+
+- one workflow path is working end to end
+- one agent is clearly configured for one business outcome
+- one route or campaign is validated
+- one test call is visible in call records
+- one operational review has been completed in Observe
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Platform Overview" href="/get-started/platform-overview">
+    Step back and review the platform model after the first working path is clear.
+  </Card>
+  <Card title="Functions and API Calls" href="/build/functions-and-api-calls">
+    Expand from simple call control into business actions and API-backed workflow steps.
+  </Card>
+  <Card title="Monitoring and Visibility" href="/observe/monitoring-and-visibility">
+    Review how the first workflow should be monitored once it is live.
+  </Card>
+  <Card title="Dialer Pacing and Limits" href="/run-workflows/dialer-pacing-and-limits">
+    Review how to control calls per second and maximum active calls before scaling an outbound campaign.
+  </Card>
+  <Card title="Call History and Review" href="/run-workflows/call-history-and-review">
+    Review completed calls through transcripts, recordings when enabled, and timing metrics.
+  </Card>
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues">
+    Follow the investigation path if the first workflow shows unexpected behavior.
+  </Card>
+</CardGroup>

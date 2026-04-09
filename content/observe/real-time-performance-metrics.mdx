@@ -1,0 +1,79 @@
+---
+title: Real-Time Performance Metrics
+description: Understand the live metrics categories RocketAiFlow teams use to review voice workflow performance.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Real-Time Performance Metrics
+
+The goal of real-time metrics is not to expose raw infrastructure internals to every stakeholder.
+It is to give operations teams clear live signals they can use to manage campaigns, capacity, and
+workflow health.
+
+## Recommended dashboard labels
+
+Use buyer-friendly labels in the dashboard layer whenever possible.
+
+| Technical category | Recommended dashboard label | Why it matters |
+| --- | --- | --- |
+| answer outcomes | Answered calls | Shows successful live connections |
+| no answer outcomes | No answer | Helps identify list quality or timing issues |
+| busy outcomes | Busy calls | Helps spot contact timing or destination behavior |
+| failed outcomes | Failed calls | Highlights execution issues that need investigation |
+| congestion outcomes | Congestion events | Indicates telephony or path pressure |
+| total calls | Call volume | Shows overall throughput |
+| active calls | Active calls | Helps track live load |
+| call limits | Configured call limits | Helps compare load against maximum active calls per campaign and overall capacity |
+| dialing pace | Call pacing | Shows whether campaigns are moving as expected |
+| campaign active state | Campaign status | Tells teams what is running now |
+| endpoint state | Endpoint health | Shows telephony-side readiness |
+| average talk time | Talk time trends | Helps interpret conversation behavior |
+| average ring time | Ring time trends | Helps spot delay and contactability changes |
+
+## Metrics categories that matter most
+
+### Call outcomes
+
+Track answered calls, no answer activity, busy calls, failed calls, and congestion events in real
+time so teams can understand whether the campaign is behaving normally.
+
+### Capacity and pacing
+
+Track active calls, configured limits, and dialing pace together. Looking at one without the other
+can hide whether the system is underused, constrained, or running too aggressively.
+
+For outbound work, this is the main way to understand whether:
+
+- calls per second is too aggressive
+- the maximum active-calls limit is too high or too low
+- campaign execution is aligned with infrastructure and telephony readiness
+
+### State and health
+
+Track campaign status, dialer status, endpoint health, and trunk readiness so teams can see
+whether the system is ready to handle the intended load.
+
+### Duration signals
+
+Track average talk time and average ring time to understand how calls are evolving and whether the
+workflow design still matches the real interaction pattern.
+
+<ImagePlaceholder
+  title="Calls volume dashboard"
+  description="Placeholder for a dashboard showing total calls, active calls, configured limits, and call pacing in real time."
+/>
+
+<ImagePlaceholder
+  title="Talk time and ring time analytics"
+  description="Placeholder for a dashboard showing average talk time, average ring time, and trend lines across selected time windows."
+/>
+
+## Implementation guidance
+
+Prometheus metric names can stay in the collection layer. Grafana dashboards and operational views
+should translate those series into labels that operators, BPO managers, and customer service teams
+can read quickly.
+
+For deeper review after a run, combine these dashboards with call history, transcripts, recordings
+when enabled, and talk time and ring time from the call detail layer.

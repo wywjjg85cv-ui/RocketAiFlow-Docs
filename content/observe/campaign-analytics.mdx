@@ -1,0 +1,88 @@
+---
+title: Campaign Analytics
+description: Understand campaign outcomes, pacing, status, and usage patterns in RocketAiFlow.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Campaign Analytics
+
+Campaign analytics should help teams answer a simple question: is the workflow behaving the way we
+intended while it is live?
+
+## Core campaign views
+
+For outbound workflows, campaign analytics often centers on:
+
+- campaign active state
+- dialer status
+- total calls
+- active calls
+- maximum active calls versus current active load
+- calls per second or dialing pace
+- outcome distribution across campaigns
+- average talk time
+- average ring time
+
+## Questions teams should be able to answer
+
+- Which campaigns are active right now?
+- Are campaigns pacing within the intended operating limits?
+- Are active calls staying within the intended campaign limit?
+- Are answered, no answer, busy, failed, or congestion outcomes shifting?
+- Is one campaign behaving differently from the rest?
+- Did performance change after a prompt, data, or routing change?
+
+## Campaign execution control
+
+Campaign analytics is also where teams confirm whether execution settings are doing the right job.
+
+Review:
+
+- calls per second as the live pacing signal
+- maximum active calls per campaign as the live concurrency guardrail
+- outcome shifts after pacing or concurrency changes
+- talk time and ring time after the campaign completes
+
+This helps teams control dialer pressure and protect both campaign quality and infrastructure
+readiness.
+
+## How to read outcome distribution
+
+Outcome distribution is more useful than raw volume alone. It helps teams see whether a campaign is
+productive, stalled, or being affected by telephony, data quality, or timing issues.
+
+Look for:
+
+- unusually high no answer activity
+- spikes in busy calls
+- failed or congestion events that suggest infrastructure or provider issues
+- talk time patterns that look too short or too long for the intended workflow
+
+<ImagePlaceholder
+  title="Campaign performance over time"
+  description="Placeholder for a dashboard showing multiple campaigns, outcome distribution, call volume, and pacing across a selected time range."
+/>
+
+## Practical review loop
+
+1. Check campaign active state and dialing pace.
+2. Compare active calls with the configured campaign limit.
+3. Review total outcomes and active call load.
+4. Compare current behavior with a recent baseline.
+5. Investigate whether the issue belongs to workflow logic, data quality, telephony state, or
+   execution settings.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Real-Time Performance Metrics" href="/observe/real-time-performance-metrics">
+    See the individual metrics categories that often feed campaign dashboards.
+  </Card>
+  <Card title="Dialer Pacing and Limits" href="/run-workflows/dialer-pacing-and-limits">
+    Review the execution controls that shape campaign pace and concurrency.
+  </Card>
+  <Card title="Time-Range Reporting" href="/observe/time-range-reporting">
+    Compare campaign behavior across selected windows to understand trends.
+  </Card>
+</CardGroup>

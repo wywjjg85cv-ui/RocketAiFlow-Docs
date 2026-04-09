@@ -1,0 +1,54 @@
+---
+title: Self-Hosted
+description: Review how to evaluate RocketAiFlow for environments that require infrastructure control, sovereignty alignment, and tighter operational ownership.
+---
+
+# Self-Hosted
+
+Self-Hosted deploys on your own infrastructure or cloud instance to meet strict internal policies
+or sovereignty requirements. It is built for teams with existing DevOps resources and can fit AWS,
+GCP, or customer data-center environments.
+
+## Why teams choose this model
+
+Common reasons include:
+
+- existing telephony systems already live inside the same environment
+- API actions must stay close to internal systems
+- operational teams need direct control over runtime, network, and observability layers
+- internal policies require the platform to run inside infrastructure the customer manages
+- the team already has DevOps resources for deployment, incident review, and day-two operations
+
+## What to validate
+
+Before rollout, confirm:
+
+- telephony and trunk access are aligned with the environment
+- provider choice has been validated against the real SIP / PBX environment
+- API actions can reach the internal systems they depend on
+- logs, traces, and dashboards are accessible to the support team
+- host, container, and database monitoring are ready before live launch
+- the team is prepared to own runtime operations and upgrade planning
+
+## What to watch during evaluation
+
+The most common risk is assuming that customer control alone guarantees operational clarity.
+
+It does not. Teams still need:
+
+- a narrow first workflow
+- clear ownership for incident review
+- ready observability
+- a controlled rollout path
+- enough DevOps capacity for the chosen support model
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Trunk Configuration" href="/deploy/trunk-configuration" />
+  <Card title="Telephony Architecture" href="/deploy/telephony-architecture" />
+  <Card title="Dedicated" href="/deploy/dedicated" />
+  <Card title="Pre-Provisioned Dashboards" href="/observe/pre-provisioned-dashboards" />
+  <Card title="Logs Drilldown" href="/observe/logs-drilldown" />
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues" />
+</CardGroup>

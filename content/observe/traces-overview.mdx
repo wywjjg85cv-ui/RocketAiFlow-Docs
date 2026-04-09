@@ -1,0 +1,44 @@
+---
+title: Traces Overview
+description: Understand how traces complement dashboards and logs during RocketAiFlow investigations.
+---
+
+# Traces Overview
+
+Where tracing is enabled in the deployment, traces complement dashboards and logs by showing how a
+request or workflow path moved across services and integrations.
+
+## Why traces matter
+
+Dashboards are strong at showing aggregate behavior. Logs are strong at showing events. Traces are
+useful when teams need path-level visibility across a distributed workflow.
+
+## When to use traces
+
+Use traces when:
+
+- a dashboard confirms the symptom but not the path
+- logs show an event but not the full sequence around it
+- the investigation crosses application, API, webhook, or supporting service boundaries
+
+## Practical role in RocketAiFlow
+
+For RocketAiFlow, traces are best treated as a complement to:
+
+- call records
+- pre-provisioned Grafana dashboards
+- logs and telephony review
+
+They are not a replacement for the core monitoring foundation. They help when teams need more
+precise path-level investigation.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Monitoring and Visibility" href="/observe/monitoring-and-visibility">
+    Return to the main observability model for live operations.
+  </Card>
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues">
+    See how traces fit into a full investigation path.
+  </Card>
+</CardGroup>

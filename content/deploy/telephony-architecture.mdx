@@ -1,0 +1,139 @@
+---
+title: Telephony Architecture
+description: Understand how RocketAiFlow uses an Asterisk-based telephony layer to support SIP / PBX environments, trunk-based connectivity, and provider flexibility.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Telephony Architecture
+
+RocketAiFlow is designed for provider flexibility and built for real SIP and PBX environments.
+
+This is not a claim of universal compatibility or zero-configuration interoperability. It is a
+practical telephony architecture built to fit different calling environments through deployment
+planning, trunk-based setup, and validation during implementation.
+
+## What the telephony layer does
+
+The telephony layer connects RocketAiFlow workflows to the real calling environment used for:
+
+- inbound call handling
+- outbound campaign execution
+- transfer behavior
+- endpoint and trunk state visibility
+
+Without a clear telephony layer, agents, prompts, and campaigns can look correct while the live
+calling path still fails.
+
+## Why Asterisk is used
+
+RocketAiFlow uses an Asterisk-based telephony layer. The telephony architecture is built on
+Asterisk-based foundations because that supports practical telephony control, trunk-based
+connectivity, and fit with real SIP / PBX environments.
+
+In practical terms, Asterisk contributes:
+
+- call control for inbound and outbound flow execution
+- support for SIP / PBX environment fit
+- provider flexibility through trunk-based configuration
+- a telephony control plane that can be monitored and troubleshot in real deployments
+
+## How this supports provider flexibility
+
+RocketAiFlow is designed to fit different SIP / PBX environments rather than one rigid provider
+assumption.
+
+Safe guidance for buyers and implementers:
+
+- provider choice depends on deployment and configuration
+- telephony interoperability should be validated during setup
+- provider compatibility should be tested against the real environment in use
+
+This gives teams flexibility without making misleading claims about automatic compatibility with
+every vendor or provider.
+
+## SIP / PBX environment fit
+
+RocketAiFlow is built for real SIP and PBX environments, which matters when the platform has to
+fit into existing business communication infrastructure.
+
+Teams typically evaluate:
+
+- what SIP or PBX environment is already in place
+- how inbound and outbound paths should enter that environment
+- how transfer destinations should be represented
+- how operational teams will monitor endpoint and trunk behavior
+
+<ImagePlaceholder
+  title="Telephony architecture diagram"
+  description="Add product screenshot or diagram here: the telephony architecture showing RocketAiFlow, Asterisk-based foundations, trunk-based connectivity, and SIP / PBX integration."
+/>
+
+## Trunk-based connectivity
+
+Trunk configuration is where the flexible telephony architecture becomes concrete.
+
+This is the layer that ties:
+
+- the workflow model in RocketAiFlow
+- the provider or PBX environment
+- the inbound and outbound call path
+
+That is why trunk setup appears early in the implementation and troubleshooting path.
+
+<ImagePlaceholder
+  title="SIP or provider setup example"
+  description="Add product screenshot here: a real SIP or provider setup example showing trunk-based connectivity in a deployment."
+/>
+
+## Deployment considerations
+
+Telephony fit should be reviewed as part of deployment planning, not after launch.
+
+Dedicated is the managed, isolated single-tenant model. Self-Hosted is the customer-controlled
+model for AWS, GCP, or customer data centers.
+
+Validate:
+
+- whether Dedicated or Self-Hosted is the right fit for the support and policy model
+- whether the SIP / PBX environment matches the chosen deployment model
+- whether provider choice is appropriate for the environment
+- whether inbound, outbound, and transfer paths are all covered
+- whether monitoring and troubleshooting access exists for the operators who will support the system
+
+## Monitoring and troubleshooting connections
+
+Telephony architecture is tightly connected to operations.
+
+Teams should expect to review:
+
+- endpoint and trunk monitoring
+- Asterisk dashboards and logs
+- call records during workflow validation
+- traces where workflow actions cross multiple services
+
+The pre-provisioned dashboards are especially useful here because they provide day-one visibility
+into the telephony layer without forcing teams to build the initial views from scratch.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Trunk Configuration" href="/deploy/trunk-configuration">
+    Review the trunk-based setup that connects the workflow to the telephony environment.
+  </Card>
+  <Card title="Deployment Overview" href="/deploy/deployment-overview">
+    See how telephony fit belongs inside the wider deployment plan.
+  </Card>
+  <Card title="Endpoint and Trunk Monitoring" href="/observe/endpoint-and-trunk-monitoring">
+    Review the live monitoring view for telephony-side health.
+  </Card>
+  <Card title="Monitoring and Visibility" href="/observe/monitoring-and-visibility">
+    Return to the broader operational monitoring model.
+  </Card>
+  <Card title="Pre-Provisioned Dashboards" href="/observe/pre-provisioned-dashboards">
+    See the Asterisk and system dashboards that support telephony investigations.
+  </Card>
+  <Card title="Troubleshooting" href="/troubleshoot/troubleshooting">
+    Use the troubleshooting path when the telephony layer is the likely source of workflow issues.
+  </Card>
+</CardGroup>

@@ -1,0 +1,89 @@
+---
+title: Call Records
+description: Review call outcomes, timestamps, transcripts, recordings when enabled, and timing data in RocketAiFlow.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Call Records
+
+Call Records is the main validation surface after testing or running real calls.
+
+Use it to confirm whether the workflow behaved the way you expected.
+
+## What To Check First
+
+After a test call, review:
+
+- call status
+- timestamps
+- outcome
+- transcript or recording data if available
+- talk time and ring time
+
+These are the fastest indicators of whether the agent, route, campaign, and trunk were aligned
+correctly.
+
+<ImagePlaceholder
+  title="Call records table or detail view"
+  description="Add product screenshot here: the call records table or detail view showing status, timestamps, outcome, and available call data."
+/>
+
+## How To Use Call Records Operationally
+
+Call Records helps you answer practical questions such as:
+
+- did the call start and end as expected
+- did the correct route or campaign appear to run
+- did the conversation lead to transfer, hangup, or another intended outcome
+- do you need to adjust prompt, routing, contacts, or trunk configuration
+
+## Review recordings and transcripts when available
+
+When transcripts are available, use them to confirm whether the agent stayed on task and reached
+the intended business outcome.
+
+When recordings are enabled, use them for deeper review only where that is operationally and
+legally appropriate.
+
+## Use timing metrics, not just outcomes
+
+Call outcomes alone do not explain how the interaction behaved.
+
+Review talk time and ring time to understand whether:
+
+- calls are ending too early
+- contacts are taking longer to answer
+- pacing changes are affecting conversation quality
+- one campaign behaves differently from another
+
+## A Good First Review Habit
+
+For the first implementation, review call records after every controlled test. This makes it much
+easier to see which setup change caused which result.
+
+## Common Signals To Watch
+
+- repeated failed calls
+- missing expected outcomes
+- transfer attempts that do not complete
+- unexpected timing or abrupt call endings
+- transcripts that show the agent drifting off the intended workflow
+- recordings that confirm audio or execution problems when enabled
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Call History and Review" href="/run-workflows/call-history-and-review">
+    Review completed calls in more detail through call history, transcripts, recordings, and timing metrics.
+  </Card>
+  <Card title="Dialer Pacing and Limits" href="/run-workflows/dialer-pacing-and-limits">
+    Review campaign pace and concurrency when call outcomes or timing start to drift.
+  </Card>
+  <Card title="Troubleshooting" href="/troubleshoot/troubleshooting">
+    Use the troubleshooting checklist when call records show an unexpected result.
+  </Card>
+  <Card title="Phone" href="/run-workflows/phone">
+    Run another controlled test from the Phone area after adjusting the configuration.
+  </Card>
+</CardGroup>

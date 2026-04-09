@@ -1,0 +1,54 @@
+---
+title: Database Monitoring
+description: Use the MySQL 8 dashboard to review database health and operational checks in RocketAiFlow.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Database Monitoring
+
+Database monitoring matters whenever persistence, state changes, or backend response behavior may
+be affecting the platform.
+
+RocketAiFlow can include a pre-provisioned `MySQL 8` Grafana dashboard so teams have a ready
+database view without having to build the first dashboard layer themselves.
+
+## What the MySQL 8 dashboard helps you see
+
+Use the `MySQL 8` dashboard for database-level monitoring and operational checks.
+
+It helps teams review:
+
+- database health
+- operational visibility into the persistence layer
+- whether database behavior may be contributing to workflow investigation
+
+## When to use it
+
+Use database monitoring when:
+
+- response behavior looks slower than expected
+- investigations point beyond the telephony and application layers
+- you need to confirm whether the database is healthy during an incident window
+
+## What it helps investigate
+
+- backend slowness
+- persistence-layer instability
+- whether database behavior lines up with a workflow incident
+
+<ImagePlaceholder
+  title="MySQL 8 dashboard"
+  description="Replace with a real Grafana capture of the MySQL 8 dashboard used for database monitoring and operational checks."
+/>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Pre-Provisioned Dashboards" href="/observe/pre-provisioned-dashboards">
+    Return to the overview of the included dashboard foundation.
+  </Card>
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues">
+    See when database visibility belongs in the troubleshooting path.
+  </Card>
+</CardGroup>

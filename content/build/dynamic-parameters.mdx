@@ -1,0 +1,148 @@
+---
+title: Dynamic Parameters
+description: Pass workflow context, contact fields, and runtime values into RocketAiFlow function inputs.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Dynamic Parameters
+
+Dynamic parameters let RocketAiFlow functions receive values that depend on the current workflow,
+contact, call, or business case.
+
+This makes function calls more reusable and more realistic than hardcoded inputs.
+
+## What dynamic parameters mean
+
+Instead of sending the same fixed input every time, a function can receive values such as:
+
+- contact fields
+- workflow variables
+- route or campaign context
+- runtime values collected during the conversation
+- call-specific identifiers or metadata
+
+## Why they matter
+
+Dynamic parameters help the same function support multiple real workflows without rewriting the
+logic for every case.
+
+Examples:
+
+- a lead qualification function can receive the current contact phone and the qualification result
+- a booking function can receive the date collected during the call plus the campaign or route context
+- a CRM update can receive the caller details and the runtime outcome of the conversation
+
+<ImagePlaceholder
+  title="Dynamic parameter setup"
+  description="Placeholder for a configuration view showing function inputs mapped to contact fields, workflow variables, and runtime values."
+/>
+
+## Practical parameter sources
+
+### Contact fields
+
+Use contact fields when the action depends on imported or known customer data, such as:
+
+- phone
+- name
+- company
+- account reference
+
+### Workflow variables
+
+Use workflow variables when the action depends on configuration tied to the route, campaign, or
+business process.
+
+Examples:
+
+- campaign name
+- route identifier
+- assigned queue
+- target business unit
+
+### Runtime values
+
+Use runtime values when the agent learns something during the call that should shape the next
+action.
+
+Examples:
+
+- interest level
+- requested appointment time
+- escalation reason
+- follow-up outcome
+
+## Real workflow examples
+
+### Lead qualification
+
+Pass:
+
+- contact phone
+- caller name
+- qualification result
+- requested follow-up type
+
+### Appointment booking
+
+Pass:
+
+- service type
+- preferred date
+- preferred time window
+- caller phone
+
+### Routing decision
+
+Pass:
+
+- detected intent
+- queue or destination identifier
+- route context
+
+### CRM update
+
+Pass:
+
+- contact id or phone
+- call outcome
+- notes collected during the call
+
+## Keep dynamic parameters practical
+
+Dynamic values are useful when they make the workflow more accurate. They are not useful when they
+make the function hard to read or hard to debug.
+
+Use them when:
+
+- the same action is reused across multiple workflows
+- the action depends on contact or runtime context
+- the workflow would otherwise need many nearly identical functions
+
+Avoid overcomplicating the input model with values that the external action does not actually need.
+
+## Best practices
+
+- pass only the parameters required for the action
+- use clear names that show the business meaning of each input
+- document where each value comes from
+- keep prompt, function schema, and workflow context aligned
+- test one workflow path at a time when validating dynamic mappings
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Functions and API Calls" href="/build/functions-and-api-calls">
+    Review how dynamic inputs fit into API-backed actions.
+  </Card>
+  <Card title="Building Custom API Actions" href="/build/building-custom-api-actions">
+    See how those values can be accepted by a simple external endpoint.
+  </Card>
+  <Card title="AI Inbound Routing" href="/run-workflows/ai-inbound-routing">
+    Revisit inbound workflows where route or call context changes function behavior.
+  </Card>
+  <Card title="AI Dialer Flows" href="/run-workflows/ai-dialer-flows">
+    Revisit outbound workflows where contact fields and campaign data are part of the action path.
+  </Card>
+</CardGroup>

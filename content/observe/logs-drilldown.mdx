@@ -1,0 +1,66 @@
+---
+title: Logs Drilldown
+description: Move from live symptoms to actionable evidence with a practical log investigation path for RocketAiFlow operations.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Logs Drilldown
+
+Use logs drilldown when dashboards tell you that something changed, but not why it changed.
+
+This is the page for operators who already see the symptom and need the event detail behind it.
+
+## What logs drilldown is
+
+Logs drilldown is the step where you narrow from:
+
+- campaign or route symptoms
+- endpoint and trunk state changes
+- call outcome shifts
+- API or runtime anomalies
+
+to the specific events that explain the problem.
+
+## Why it matters
+
+Without a log path, teams often overreact and change prompts, routing, or campaigns before they
+know whether the issue is actually conversational, telephony-related, or infrastructural.
+
+## When to use it
+
+Use logs drilldown when:
+
+- monitoring shows a shift in failure, busy, or congestion behavior
+- telephony behavior looks unstable
+- a function or API action appears to misfire
+- a workflow fails only under certain operating conditions
+
+<ImagePlaceholder
+  title="Logs drilldown view"
+  description="Add product screenshot here: a log review view correlated with campaign activity, call timing, and telephony events."
+/>
+
+## Practical drilldown sequence
+
+1. confirm the symptom in call records or monitoring
+2. isolate the affected route, campaign, or endpoint
+3. match the time window precisely
+4. review the most relevant log source first
+5. confirm whether the issue belongs to workflow logic, telephony, runtime, or downstream actions
+
+## What to check first
+
+- timestamps line up with the incident
+- the affected workflow path is confirmed
+- the relevant endpoint or trunk state is known
+- the function or API action path is identified if external actions are involved
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Logs Overview" href="/observe/logs-overview" />
+  <Card title="Trace Correlation" href="/observe/trace-correlation" />
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues" />
+  <Card title="Troubleshooting" href="/troubleshoot/troubleshooting" />
+</CardGroup>

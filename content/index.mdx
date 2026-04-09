@@ -1,161 +1,140 @@
 ---
 title: RocketAiFlow Documentation
-description: Guided documentation for setting up AI voice agents, routing, campaigns, deployment, monitoring, and troubleshooting in RocketAiFlow.
+description: Production-aware documentation for evaluating, implementing, and operating RocketAiFlow in real-time voice environments.
 ---
 
 <div className="docs-hero">
   <div>
     <p className="docs-eyebrow">RocketAiFlow Docs</p>
-    <h1>RocketAiFlow Documentation</h1>
+    <h1>Evaluate, implement, and operate RocketAiFlow with confidence.</h1>
 
     <div className="docs-hero-intro">
-      {"Use this documentation to move from first setup to a working AI voice workflow with clear steps for agents, routing, campaigns, contacts, testing, trunks, call review, deployment, and live operational visibility."}
+      {"RocketAiFlow documentation is structured for teams assessing a serious real-time voice AI platform. Start with the platform model, move through an implementation path, then use deployment, observability, and troubleshooting guidance to validate production readiness."}
     </div>
   </div>
 
   <div className="docs-note">
-    <strong>This documentation helps you:</strong>
+    <strong>What this documentation is built to answer:</strong>
     <ul>
-      <li>create your first AI voice agent</li>
-      <li>connect inbound and outbound calling flows</li>
-      <li>import contacts and validate campaign readiness</li>
-      <li>test calls, review the result in call records, and monitor live performance</li>
+      <li>what RocketAiFlow is and how inbound and outbound workflows fit together</li>
+      <li>how to move from a first agent to a working route, campaign, and test call</li>
+      <li>how functions, APIs, dynamic parameters, and workflow context support real business actions</li>
+      <li>how teams monitor, troubleshoot, and review live voice operations</li>
     </ul>
   </div>
 </div>
 
 <Callout type="info">
-  Start with Getting Started for the shortest practical path through the product. The rest of the
-  pages then break each area into focused setup and operational guidance.
+  Start with <a href="/get-started">Get Started</a> for the onboarding path, then move into Build,
+  Run Workflows, Deploy, Observe, and Troubleshoot as your evaluation becomes more hands-on.
 </Callout>
 
-## Start here
+## Why teams use these docs
+
+RocketAiFlow documentation is not meant to read like a static feature list. It is designed to help
+technical leads, solutions engineers, operators, and buyers understand whether the platform is
+clear to implement and credible to run.
+
+The docs emphasize:
+
+- fast onboarding without skipping operational detail
+- platform-agnostic architecture and provider flexibility
+- flexible telephony architecture for real SIP and PBX environments
+- practical setup paths for inbound and outbound workflows
+- API extensibility and custom business actions
+- Dedicated and Self-Hosted deployment flexibility with telephony fit
+- observability, logs, traces, and troubleshooting readiness
+
+## Start with the evaluation path
 
 <CardGroup cols={2}>
-  <Card title="Getting Started" href="/01-getting-started">
-    Create a first working setup with one agent, one inbound route, one outbound campaign, one
-    contact import, and one call review.
+  <Card title="Get Started" href="/get-started">
+    Understand the platform model, the quickest onboarding path, and how the main product areas
+    connect.
   </Card>
-  <Card title="Platform Overview" href="/02-platform-overview">
-    Understand how AI Voice Agents, AI Inbound Routing, AI Dialer Flows, Import Contacts, Call
-    Records, Trunk, and Phone work together.
+  <Card title="Quickstart" href="/get-started/quickstart">
+    Create your first agent, prompt, route, campaign, contact import, and validation call in a
+    practical sequence.
+  </Card>
+  <Card title="Platform Overview" href="/get-started/platform-overview">
+    See how agents, routing, campaigns, functions, integrations, call records, and monitoring work
+    together.
+  </Card>
+  <Card title="Deployment Overview" href="/deploy/deployment-overview">
+    Review how RocketAiFlow fits real environments before you scale routing or campaign rollout.
+  </Card>
+  <Card title="Telephony Architecture" href="/deploy/telephony-architecture">
+    Review how the Asterisk-based telephony layer supports SIP and PBX environments, trunk-based
+    connectivity, and provider flexibility.
   </Card>
 </CardGroup>
 
-## Main setup path
+## Build the workflow foundation
 
 <CardGroup cols={3}>
-  <Card title="Create Your First AI Voice Agent" href="/03-create-your-first-ai-voice-agent" />
-  <Card title="Configure Agent Prompt" href="/04-configure-agent-prompt" />
-  <Card title="Add Functions" href="/05-add-functions" />
-  <Card title="AI Inbound Routing" href="/06-ai-inbound-routing" />
-  <Card title="AI Dialer Flows" href="/07-ai-dialer-flows" />
-  <Card title="Import Contacts" href="/08-import-contacts" />
-  <Card title="Call Records" href="/10-call-records" />
-  <Card title="Trunk Configuration" href="/11-trunk-configuration" />
-  <Card title="Phone" href="/12-phone" />
+  <Card title="Create Your First AI Voice Agent" href="/build/create-your-first-ai-voice-agent" />
+  <Card title="Agent Configuration" href="/build/agent-configuration" />
+  <Card title="Configure Agent Prompt" href="/build/configure-agent-prompt" />
+  <Card title="Add Functions" href="/build/add-functions" />
+  <Card title="Functions and API Calls" href="/build/functions-and-api-calls" />
+  <Card title="Dynamic Parameters" href="/build/dynamic-parameters" />
+  <Card title="Building Custom API Actions" href="/build/building-custom-api-actions" />
 </CardGroup>
 
-## Agent extensions
+## Run real workflows
+
+<CardGroup cols={3}>
+  <Card title="AI Inbound Routing" href="/run-workflows/ai-inbound-routing" />
+  <Card title="AI Dialer Flows" href="/run-workflows/ai-dialer-flows" />
+  <Card title="Dialer Pacing and Limits" href="/run-workflows/dialer-pacing-and-limits" />
+  <Card title="Import Contacts" href="/run-workflows/import-contacts" />
+  <Card title="Contact Inbounds" href="/run-workflows/contact-inbounds" />
+  <Card title="Call Records" href="/run-workflows/call-records" />
+  <Card title="Call History and Review" href="/run-workflows/call-history-and-review" />
+  <Card title="Phone" href="/run-workflows/phone" />
+</CardGroup>
+
+## Deploy and operate with confidence
 
 <CardGroup cols={2}>
-  <Card title="Agent Configuration" href="/24-agent-configuration">
-    See how teams can configure agents quickly for lead qualification, appointment booking,
-    routing, and follow-up workflows.
+  <Card title="Trunk Configuration" href="/deploy/trunk-configuration">
+    Align telephony connectivity with inbound, outbound, and transfer behavior.
   </Card>
-  <Card title="Functions and API Calls" href="/25-functions-and-api-calls">
-    Understand how agent functions can trigger external actions and API-backed workflow steps.
+  <Card title="Dedicated" href="/deploy/dedicated">
+    Review the fully managed, single-tenant deployment model with isolated runtime and region-specific rollout.
   </Card>
-  <Card title="Dynamic Parameters" href="/26-dynamic-parameters">
-    Learn how function inputs can receive workflow variables, contact fields, and runtime values.
+  <Card title="Self-Hosted" href="/deploy/self-hosted">
+    Review the customer-controlled deployment model for AWS, GCP, or existing data-center environments.
   </Card>
-  <Card title="Building Custom API Actions" href="/27-building-custom-api-actions">
-    Review a practical pattern for designing external actions that RocketAiFlow functions can call.
+  <Card title="Monitoring and Visibility" href="/observe/monitoring-and-visibility">
+    Start from the main operational view for live campaigns, telephony state, and workflow health.
   </Card>
-</CardGroup>
-
-## Monitoring and operations
-
-<CardGroup cols={2}>
-  <Card title="Pre-Provisioned Dashboards" href="/23-pre-provisioned-dashboards">
-    See how RocketAiFlow ships with a ready Grafana dashboard foundation so teams do not have to
-    build core observability views from scratch.
+  <Card title="Pre-Provisioned Dashboards" href="/observe/pre-provisioned-dashboards">
+    Review the ready dashboard foundation that helps teams get to live visibility faster.
   </Card>
-  <Card title="Monitoring and Visibility" href="/operate/monitoring-and-visibility">
-    Understand what operations teams should watch after launch, from live outcomes and active call
-    load to campaign activity and endpoint health.
-  </Card>
-  <Card title="Infrastructure Monitoring" href="/operate/infrastructure-monitoring">
-    Review the host and system health views used to confirm resource pressure, saturation, and
-    runtime stability.
-  </Card>
-  <Card title="Asterisk Monitoring" href="/operate/asterisk-monitoring">
-    Use Asterisk-focused dashboards to review telephony activity, service behavior, and operational
-    log signals.
-  </Card>
-  <Card title="Container Monitoring" href="/operate/container-monitoring">
-    Track runtime health, CPU, memory, and container-level pressure through cAdvisor-backed views.
-  </Card>
-  <Card title="Database Monitoring" href="/operate/database-monitoring">
-    Use MySQL 8 dashboard views to confirm database health during troubleshooting and daily
-    operations.
-  </Card>
-  <Card title="Campaign Analytics" href="/operate/campaign-analytics">
-    Review outcome distribution, call pacing, campaign activity, and performance patterns that
-    support optimization decisions.
-  </Card>
-  <Card title="Endpoint and Trunk Monitoring" href="/operate/endpoint-and-trunk-monitoring">
-    Track endpoint state, trunk readiness, and telephony path changes that can affect live voice
-    workflows.
-  </Card>
-  <Card title="Real-Time Performance Metrics" href="/operate/real-time-performance-metrics">
-    See which buyer-friendly metrics matter most in live operations and how to interpret them.
-  </Card>
-  <Card title="Time-Range Reporting" href="/operate/time-range-reporting">
-    Compare campaigns and workflows across selected time windows instead of relying on one-off
-    snapshots.
-  </Card>
-  <Card title="Logs and Troubleshooting" href="/operate/logs-and-troubleshooting">
-    Investigate campaign, endpoint, routing, and workflow issues with a practical operational
-    checklist.
-  </Card>
-  <Card title="Logs Overview" href="/operate/logs-overview">
-    Understand where log review fits beside dashboards and call records during daily operations.
-  </Card>
-  <Card title="Traces Overview" href="/operate/traces-overview">
-    See how traces complement dashboards and logs when teams need request-path visibility.
-  </Card>
-  <Card title="Investigating Workflow Issues" href="/operate/investigating-workflow-issues">
-    Follow a practical investigation path that connects call records, Grafana dashboards, logs, and
-    supporting traces.
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues">
+    Follow the full path from symptom to evidence using call records, dashboards, logs, and
+    traces.
   </Card>
 </CardGroup>
 
-## Supporting pages
+## Suggested next steps by role
 
-<CardGroup cols={2}>
-  <Card title="Contact Inbounds" href="/09-contact-inbounds">
-    Learn how inbound callers relate to contact data and how to review those records for follow-up
-    workflows.
-  </Card>
-  <Card title="Troubleshooting" href="/13-troubleshooting">
-    Use a practical checklist when routing, prompt behavior, imports, campaigns, or trunks do not
-    behave as expected.
-  </Card>
-  <Card title="FAQ" href="/14-faq">
-    Review concise answers to common setup questions across inbound, outbound, trunk, and testing
-    flows.
-  </Card>
-  <Card title="API Reference" href="/api-reference">
-    Keep a placeholder entry point ready for future endpoint and webhook documentation.
-  </Card>
-</CardGroup>
+- Technical lead: start with [Platform Overview](/get-started/platform-overview), then review
+  [Deployment Overview](/deploy/deployment-overview) and [Monitoring and Visibility](/observe/monitoring-and-visibility).
+- Solutions engineer: start with [Quickstart](/get-started/quickstart), then move into
+  [Functions and API Calls](/build/functions-and-api-calls) and
+  [Dynamic Parameters](/build/dynamic-parameters).
+- Operations manager: start with [Monitoring and Visibility](/observe/monitoring-and-visibility),
+  [Campaign Analytics](/observe/campaign-analytics), and
+  [Logs Drilldown](/observe/logs-drilldown).
 
-## Release notes
+## Evaluation checklist
 
-<CardGroup cols={1}>
-  <Card title="Changelog" href="/changelog">
-    Track future product updates, documentation changes, and operational rollout notes in one
-    place.
-  </Card>
-</CardGroup>
+Use the docs to confirm these questions early:
+
+- Can one agent support a real inbound or outbound workflow without rigid setup?
+- Can functions and API actions map to actual business steps?
+- Can workflow context and dynamic parameters be passed cleanly?
+- Can the platform fit the Dedicated or Self-Hosted model and the telephony environment you operate?
+- Can operators monitor campaign state, endpoint health, logs, and traces without guessing?

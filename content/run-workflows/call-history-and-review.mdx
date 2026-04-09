@@ -1,0 +1,125 @@
+---
+title: Call History and Review
+description: Review completed calls, recordings when enabled, transcripts, and timing metrics to understand outbound and inbound workflow behavior in detail.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Call History and Review
+
+Call history is where teams verify what actually happened after the call is over.
+
+Use it to review completed calls in detail, investigate outcomes, and improve workflow quality over
+time.
+
+## What call history helps you see
+
+Call history should help teams answer practical questions such as:
+
+- which calls completed successfully
+- which calls failed, were busy, or never connected
+- whether the right route or campaign context was applied
+- how long the call rang
+- how long the conversation actually lasted
+- what the conversation contained when transcripts are available
+- whether the call recording supports deeper review when recordings are enabled
+
+<ImagePlaceholder
+  title="Call history table"
+  description="Add product screenshot here: the call history table showing completed calls, outcomes, route or campaign context, and timestamps."
+/>
+
+## Review the call detail view
+
+After spotting a call worth reviewing, open the call detail view and confirm:
+
+- status and outcome
+- timestamps
+- campaign or route context
+- transfer or hangup behavior
+- talk time and ring time
+
+This is the fastest way to validate whether the workflow result matches the intended business path.
+
+<ImagePlaceholder
+  title="Call detail view"
+  description="Add product screenshot here: the call detail view with outcome, timestamps, campaign or route context, and timing metrics."
+/>
+
+## Recordings and transcripts
+
+When enabled, recordings and transcripts turn a basic call log into a usable review surface.
+
+Use transcripts to:
+
+- confirm whether the agent stayed on task
+- inspect whether the correct function path was triggered
+- check whether the conversation reached the intended outcome
+
+Use recordings when deeper audio review is needed and when recordings are operationally and legally
+appropriate for the environment.
+
+<ImagePlaceholder
+  title="Transcript view"
+  description="Add product screenshot here: the transcript view used to review the conversation after the call completes."
+/>
+
+<ImagePlaceholder
+  title="Recording player if enabled"
+  description="Add product screenshot here: the recording player used for post-call review when recordings are enabled."
+/>
+
+## Call timing metrics
+
+Talk time and ring time help teams interpret how the call behaved, even before they read the full
+conversation.
+
+- `Ring time` helps show whether the contactability pattern changed or whether the telephony path
+  introduced delay.
+- `Talk time` helps show whether the conversation ended too early, ran too long, or matched the
+  intended workflow shape.
+
+These metrics are especially useful after test runs because they help teams compare one run against
+the next without reading every call from scratch.
+
+<ImagePlaceholder
+  title="Talk time and ring time display"
+  description="Add product screenshot here: the talk time and ring time display used in post-call review."
+/>
+
+## A practical post-call review loop
+
+After a controlled run:
+
+1. review the call history table for outcomes and timing
+2. open one or two call details that represent the main result pattern
+3. read the transcript if available
+4. use the recording only where deeper review is needed and permitted
+5. compare talk time, ring time, and outcome patterns with the workflow goal
+
+This is how teams validate workflow quality before scaling up.
+
+## Best practices
+
+- review transcripts and timing data after test runs
+- use call history to validate workflow quality before scaling up
+- compare outcome patterns across several calls instead of one outlier
+- enable recordings only where operationally and legally appropriate
+- use call detail review together with campaign analytics when the issue may be pacing-related
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Call Records" href="/run-workflows/call-records">
+    Return to the main call records surface for everyday operational validation.
+  </Card>
+  <Card title="Dialer Pacing and Limits" href="/run-workflows/dialer-pacing-and-limits">
+    Review pacing and concurrency controls when call history suggests campaign pressure problems.
+  </Card>
+  <Card title="Campaign Analytics" href="/observe/campaign-analytics">
+    Compare detailed call review with live campaign behavior and outcome distribution.
+  </Card>
+  <Card title="Troubleshooting" href="/troubleshoot/troubleshooting">
+    Use the troubleshooting flow when call history shows outcomes that do not match expectations.
+  </Card>
+</CardGroup>

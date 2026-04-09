@@ -1,0 +1,133 @@
+---
+title: Building Custom API Actions
+description: Design simple external API actions that RocketAiFlow functions can call for real workflow automation.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Building Custom API Actions
+
+When built-in call controls are not enough, RocketAiFlow functions can trigger custom API actions.
+This lets teams connect voice workflows to the systems they already operate.
+
+## When to build a custom API action
+
+Use a custom action when the workflow needs to:
+
+- update a CRM or internal tool
+- create a follow-up task
+- check external availability or inventory
+- perform a lookup tied to a caller or account
+- trigger a business process outside RocketAiFlow
+
+## Design the action around one business step
+
+Keep the action simple. Each endpoint should represent one understandable business action.
+
+Good examples:
+
+- `POST /lead-qualification`
+- `POST /appointments/check-availability`
+- `POST /appointments/book`
+- `POST /crm/follow-up`
+
+Avoid building one endpoint that tries to handle every possible post-call workflow.
+
+## Decide the input shape
+
+The request body should accept only the values the action actually needs.
+
+Example request:
+
+```json
+{
+  "contactPhone": "+393331234567",
+  "callerName": "Mario Rossi",
+  "interestLevel": "high",
+  "requestedFollowUp": "demo",
+  "campaignId": "q2-demo-outreach"
+}
+```
+
+Example response:
+
+```json
+{
+  "status": "accepted",
+  "leadId": "lead_4821",
+  "nextStep": "schedule_sales_follow_up"
+}
+```
+
+## Workflow context should be intentional
+
+Function inputs can include workflow context such as:
+
+- dynamic fields
+- workflow variables
+- contact fields
+- runtime values
+- contextual parameters from the route, campaign, or call
+
+Pass them intentionally. If the external action does not need a value, do not send it.
+
+<ImagePlaceholder
+  title="Custom function workflow example"
+  description="Placeholder for a workflow example showing the agent, function call, external API action, and returned result."
+/>
+
+## Practical examples
+
+### CRM update after qualification
+
+The agent collects lead data, then the custom action writes the result to the CRM and returns a
+lead identifier or next-step flag.
+
+### Appointment booking support
+
+The agent collects the booking inputs, calls the API, and then speaks back the confirmed next step
+or fallback path.
+
+### External lookup
+
+The agent requests a lookup based on customer or workflow context and uses the returned result to
+continue the call.
+
+<ImagePlaceholder
+  title="API action payload example"
+  description="Placeholder for a custom API action example showing the request fields and the returned business response."
+/>
+
+## Function design best practices
+
+- make the action name easy to understand
+- keep the request schema small and focused
+- use consistent naming between prompt, function, and API fields
+- return only the values the workflow needs to continue
+- make the endpoint behavior predictable and easy to debug
+
+## A practical build sequence
+
+1. define the business action
+2. list the minimum input fields
+3. create the endpoint
+4. map the function inputs to real workflow values
+5. test the call with one controlled scenario
+6. review call records and action results before expanding
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Functions and API Calls" href="/build/functions-and-api-calls">
+    Return to the broader function model for API-backed workflow actions.
+  </Card>
+  <Card title="Dynamic Parameters" href="/build/dynamic-parameters">
+    Review how contextual values should be passed into the action.
+  </Card>
+  <Card title="Add Functions" href="/build/add-functions">
+    Return to the initial RocketAiFlow function setup path.
+  </Card>
+  <Card title="Troubleshooting" href="/troubleshoot/troubleshooting">
+    Use the troubleshooting checklist when the wrong action fires or the wrong data is sent.
+  </Card>
+</CardGroup>
