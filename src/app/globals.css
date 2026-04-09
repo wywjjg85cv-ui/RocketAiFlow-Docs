@@ -23,21 +23,28 @@ body {
 
 .docs-logo-lockup {
   display: inline-flex;
-  flex-direction: column;
-  line-height: 1.05;
+  align-items: center;
+  gap: 0.7rem;
 }
 
-.docs-logo-eyebrow {
-  color: rgba(125, 211, 252, 0.85);
-  font-size: 0.72rem;
+.docs-brand-logo {
+  display: block;
+  flex: 0 0 auto;
+  height: auto;
+  width: 9.6rem;
+}
+
+.docs-logo-badge {
+  border: 1px solid rgba(125, 211, 252, 0.2);
+  border-radius: 999px;
+  color: rgba(226, 232, 240, 0.9);
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  padding: 0.48rem 0.72rem;
   text-transform: uppercase;
-}
-
-.docs-logo {
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .docs-topnav {

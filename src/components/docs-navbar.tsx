@@ -17,8 +17,48 @@ export function DocsNavbar() {
     <Navbar
       logo={
         <span className="docs-logo-lockup">
-          <span className="docs-logo-eyebrow">RocketAiFlow</span>
-          <span className="docs-logo">Documentation</span>
+          <svg
+            viewBox="0 0 276 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="docs-brand-logo"
+            aria-label="RocketAiFlow"
+            role="img"
+          >
+            <image
+              href="/logo-rocket.svg"
+              x="0"
+              y="0"
+              width="46"
+              height="60"
+              preserveAspectRatio="xMidYMid meet"
+            />
+            <text
+              x="60"
+              y="24"
+              fill="white"
+              fontSize="18"
+              fontWeight="600"
+              fontFamily="Urbanist, sans-serif"
+              letterSpacing="0.2"
+            >
+              Rocket
+            </text>
+            <text
+              x="60"
+              y="46"
+              fill="#7DD3FC"
+              fontSize="24"
+              fontWeight="700"
+              fontFamily="Urbanist, sans-serif"
+              letterSpacing="0.1"
+            >
+              AiFlow
+            </text>
+          </svg>
+          <span className="docs-logo-badge">
+            Documentation
+          </span>
         </span>
       }
       logoLink="/"

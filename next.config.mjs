@@ -11,7 +11,6 @@ export default withNextra({
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   async redirects() {
     return [
-      { source: "/favicon.ico", destination: "/favicon.svg", permanent: false },
       { source: "/trunk", destination: "/11-trunk-configuration", permanent: false },
       { source: "/trunk/:path*", destination: "/11-trunk-configuration", permanent: false },
       {

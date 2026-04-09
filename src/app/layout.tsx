@@ -12,8 +12,9 @@ export const metadata: Metadata = {
     template: "%s | RocketAiFlow Docs"
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg"
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/logo192.png"
   },
   description:
     "RocketAiFlow documentation for workflow design, deployment planning, integrations, real-time monitoring, and operational rollout.",
