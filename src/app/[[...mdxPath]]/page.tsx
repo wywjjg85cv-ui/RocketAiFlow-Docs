@@ -21,28 +21,28 @@ const Wrapper = getMDXComponents().wrapper as ComponentType<{
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { mdxPath = [] } = await params;
+  const result = await importPage(mdxPath).catch(() => null);
 
-  try {
-    const { metadata } = await importPage(mdxPath);
-    return metadata as Metadata;
-  } catch {
+  if (!result) {
     return {};
   }
+
+  return result.metadata as Metadata;
 }
 
 export default async function DocsPage(props: PageProps) {
   const { mdxPath = [] } = await props.params;
+  const result = await importPage(mdxPath).catch(() => null);
 
-  try {
-    const result = await importPage(mdxPath);
-    const { default: MDXContent, toc, metadata } = result;
-
-    return (
-      <Wrapper toc={toc} metadata={metadata}>
-        <MDXContent {...props} params={{ mdxPath }} />
-      </Wrapper>
-    );
-  } catch {
+  if (!result) {
     notFound();
   }
+
+  const { default: MDXContent, toc, metadata } = result;
+
+  return (
+    <Wrapper toc={toc} metadata={metadata}>
+      <MDXContent {...props} params={{ mdxPath }} />
+    </Wrapper>
+  );
 }

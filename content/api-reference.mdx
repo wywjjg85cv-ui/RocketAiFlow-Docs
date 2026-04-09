@@ -1,42 +1,36 @@
 ---
 title: API Reference
-description: Placeholder API reference structure for future endpoint, authentication, webhook, and payload documentation.
+description: Placeholder reference page for future RocketAiFlow APIs, webhooks, and technical payload documentation.
 ---
-
-import { Callout, Cards } from "nextra/components";
 
 # API Reference
 
-This page is a placeholder for the technical API layer of RocketAiFlow. It is here so the
-documentation portal can show the right information architecture even before endpoint-level product
-input is finalized.
+This page is intentionally lightweight for now. Use it as the future entry point for request-level
+technical reference material once the API surface is ready to be published.
 
 <Callout type="info">
-  When the API reference is ready, this section should document authentication, environment setup,
-  object models, request and response patterns, webhook signatures, and implementation examples.
+  When this section is completed, it should cover authentication, versioning, webhook payloads,
+  endpoint behavior, and example requests and responses.
 </Callout>
 
-## Planned structure
+## Planned coverage
 
-<Cards num={2}>
-  <Cards.Card title="Authentication" href="/api-reference">
-    API keys, environment separation, request signing, and access patterns.
-  </Cards.Card>
-  <Cards.Card title="Core resources" href="/api-reference">
-    Workflows, calls, sessions, outcomes, events, and routing objects.
-  </Cards.Card>
-  <Cards.Card title="Webhooks" href="/api-reference">
-    Delivery model, retries, signatures, and event payload examples.
-  </Cards.Card>
-  <Cards.Card title="Operational APIs" href="/api-reference">
-    Logs, monitoring surfaces, and integration control points.
-  </Cards.Card>
-</Cards>
+- Authentication and environment requirements
+- Base URLs and versioning rules
+- Webhook event payloads
+- Agent, campaign, contact, and call record endpoints
+- Request and response examples
+- Error-handling notes
 
-## What still needs real product input
+## Use the main docs in the meantime
 
-- Actual authentication model
-- Stable resource definitions
-- Example requests and response payloads
-- Webhook event catalog
-- Rate-limit, retry, and error-handling behavior
+- [Getting Started](/01-getting-started)
+- [Platform Overview](/02-platform-overview)
+- [Add Functions](/05-add-functions)
+- [AI Inbound Routing](/06-ai-inbound-routing)
+- [Call Records](/10-call-records)
+
+## Next step
+
+Return here when you are ready to publish technical API details alongside the main product setup
+documentation.

@@ -1,0 +1,82 @@
+---
+title: FAQ
+description: Practical answers to common RocketAiFlow setup and workflow questions.
+---
+
+# FAQ
+
+## What is the fastest way to validate a first setup?
+
+Create one agent, configure one prompt, add one transfer or hangup function, connect one inbound
+route or one small outbound campaign, place one controlled test call, and review the result in
+Call Records.
+
+## Should I create multiple agents right away?
+
+Usually no. Start with one clear agent, validate the behavior, and only then split into more
+specialized agents if the workflow requires it.
+
+## What should my first prompt include?
+
+At minimum, define the agent role, the business objective, the tone of voice, and the condition
+for transfer or clean call completion.
+
+## What functions should I add first?
+
+Start with `hangup_call` and `transfer_call`. Add custom API functions only when the workflow
+really needs them.
+
+## Do I need inbound routing before I test the agent?
+
+Not always. You can use the `Phone` area for manual testing first, then connect the validated agent
+to inbound routing.
+
+## When should I import contacts?
+
+Import contacts when you are preparing an outbound campaign. Keep the first CSV small so errors are
+easy to spot.
+
+## What should I check after the first test call?
+
+Review Call Records for status, timestamps, outcome, and any available transcript or recording
+data. This is the fastest way to confirm whether the workflow is behaving correctly.
+
+## What should teams monitor after launch?
+
+Start with the operational signals that affect live decisions:
+
+- answered calls, no answer activity, busy calls, failed calls, and congestion events
+- total call volume and active calls versus configured limits
+- campaign active state and dialing pace
+- endpoint and trunk state
+- average talk time and average ring time
+- outcome distribution across selected time ranges
+
+For deeper guidance, read [Monitoring and Visibility](/operate/monitoring-and-visibility) and
+[Real-Time Performance Metrics](/operate/real-time-performance-metrics).
+
+## Why is trunk configuration important so early?
+
+Because routing and campaign issues can actually be telephony issues. If the trunk path is wrong,
+the rest of the setup may look broken even when the agent is correct.
+
+## What is the safest way to troubleshoot?
+
+Change one thing at a time, run one controlled test, and review one call record. This keeps cause
+and effect clear.
+
+## Can the monitoring stack use Prometheus or Grafana?
+
+It can be documented that way when the deployment includes Prometheus-based metrics collection or
+dashboard-driven monitoring. Keep the exact implementation aligned with the real environment, and
+avoid assuming monitoring features that are not actually configured.
+
+## What should I read after Getting Started?
+
+The best next pages are:
+
+- [Platform Overview](/02-platform-overview)
+- [Create Your First AI Voice Agent](/03-create-your-first-ai-voice-agent)
+- [Add Functions](/05-add-functions)
+- [AI Inbound Routing](/06-ai-inbound-routing)
+- [AI Dialer Flows](/07-ai-dialer-flows)

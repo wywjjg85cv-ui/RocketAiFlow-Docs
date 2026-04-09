@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 180" width="110" height="140" role="img" aria-label="AI Rocket">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#cfd8ff"/>
+    </linearGradient>
+
+    <linearGradient id="nose" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff5a5f"/>
+      <stop offset="1" stop-color="#ff2d55"/>
+    </linearGradient>
+
+    <linearGradient id="flame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd166"/>
+      <stop offset="0.55" stop-color="#ff7a18"/>
+      <stop offset="1" stop-color="#ff2d55"/>
+    </linearGradient>
+
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Rocket -->
+  <g filter="url(#shadow)">
+
+    <!-- Flame (static) -->
+    <g transform="translate(70 130)">
+      <path d="M0 38
+               C-14 26, -18 8, -8 -12
+               C-4 -22, -3 -34, 0 -48
+               C3 -34, 4 -22, 8 -12
+               C18 8, 14 26, 0 38 Z"
+            fill="url(#flame)"/>
+      <path d="M0 26
+               C-8 20, -10 8, -5 -2
+               C-3 -8, -2 -16, 0 -24
+               C2 -16, 3 -8, 5 -2
+               C10 8, 8 20, 0 26 Z"
+            fill="#ffffff" opacity="0.18"/>
+    </g>
+
+    <!-- Fins -->
+    <path d="M38 100 C26 104, 18 114, 18 128 C32 124, 44 114, 48 100 Z"
+          fill="#ff2d55"/>
+    <path d="M102 100 C114 104, 122 114, 122 128 C108 124, 96 114, 92 100 Z"
+          fill="#ff2d55"/>
+
+    <!-- Body -->
+    <path d="M70 14
+             C48 30, 38 56, 38 90
+             C38 118, 52 138, 70 146
+             C88 138, 102 118, 102 90
+             C102 56, 92 30, 70 14 Z"
+          fill="url(#body)"/>
+
+    <!-- Nose -->
+    <path d="M70 6
+             C56 14, 48 28, 44 44
+             C56 36, 62 34, 70 34
+             C78 34, 84 36, 96 44
+             C92 28, 84 14, 70 6 Z"
+          fill="url(#nose)"/>
+
+    <!-- Window -->
+    <circle cx="70" cy="72" r="20" fill="#e6f9ff"/>
+    <circle cx="70" cy="72" r="20"
+            fill="none"
+            stroke="#0b1220"
+            stroke-opacity="0.2"
+            stroke-width="5"/>
+
+    <!-- AI Face inside window -->
+    <g transform="translate(70 72)">
+      <ellipse cx="0" cy="2" rx="11" ry="13" fill="#eaf6ff"/>
+      <ellipse cx="-4" cy="-2" rx="2" ry="3" fill="#0b1220"/>
+      <ellipse cx="4" cy="-2" rx="2" ry="3" fill="#0b1220"/>
+      <path d="M-5 5 C-2 8, 2 8, 5 5"
+            fill="none"
+            stroke="#0b1220"
+            stroke-width="1.6"
+            stroke-linecap="round"/>
+      <circle cx="-12" cy="2" r="3" fill="#4cc9f0"/>
+      <circle cx="12" cy="2" r="3" fill="#4cc9f0"/>
+      <path d="M-12 2 L-9 2 M12 2 L9 2"
+            stroke="#4cc9f0"
+            stroke-width="2"
+            stroke-linecap="round"/>
+    </g>
+
+  </g>
+</svg>

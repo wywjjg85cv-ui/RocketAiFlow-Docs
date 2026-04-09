@@ -1,0 +1,107 @@
+---
+title: Create Your First AI Voice Agent
+description: Set up a first AI voice agent that can be reused across inbound and outbound workflows.
+---
+
+import { ImagePlaceholder } from "../mdx-components";
+
+# Create Your First AI Voice Agent
+
+Your first agent should be simple enough to test quickly and clear enough to support a real call
+goal.
+
+Use one agent first, validate it, and only then branch into role-specific variants if needed.
+
+## Before You Create The Agent
+
+Clarify three points:
+
+- what type of calls the agent should handle
+- what information the agent should collect
+- when the call should transfer to a person or end
+
+For a first setup, a practical goal is:
+
+`Answer inbound calls, handle simple product questions, collect contact details, and transfer sales requests to a human team.`
+
+## Suggested First Agent
+
+Use sample values like these:
+
+- `Name`: `Rocket Demo Assistant`
+- `Language`: `English`
+- `Purpose`: answer calls, qualify the caller, and transfer when needed
+
+Keep the scope narrow. The first agent does not need to solve every possible call type.
+
+## What To Configure First
+
+Start with the fields that directly affect the call experience:
+
+- agent name
+- language
+- high-level goal
+- prompt
+- function access
+
+You can refine voice choice and advanced settings after the first calls are working.
+
+## Agent configuration should stay business-first
+
+The easiest way to keep agent setup practical is to anchor it to one real business workflow.
+
+Examples:
+
+- a lead qualification agent that collects contact details and decides whether to transfer
+- an appointment booking agent that gathers the required scheduling inputs before a booking action
+- a routing assistant that identifies intent and sends the caller to the right destination
+
+This keeps the configuration clear, and it makes prompt and function design much easier to review.
+
+<ImagePlaceholder
+  title="Agent creation form"
+  description="AI Voice Agents page with the fields used to create Rocket Demo Assistant."
+/>
+
+## First Validation Pass
+
+After saving the agent, confirm:
+
+- the agent name is easy to identify in other parts of the product
+- the language matches the intended callers
+- the goal is specific enough to guide prompt writing
+- the agent is ready for prompt and function configuration
+
+## Common First-Agent Mistakes
+
+- making the goal too broad
+- trying to support every department in one prompt
+- delaying transfer logic until after live tests
+- creating multiple agents before the first one is validated
+
+## Recommended Sequence
+
+Once the agent exists:
+
+1. configure the prompt
+2. add the required functions
+3. connect the agent to a route or campaign
+4. place a test call
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Configure Agent Prompt" href="/04-configure-agent-prompt">
+    Add the first prompt so the agent has a clear role and conversation style.
+  </Card>
+  <Card title="Add Functions" href="/05-add-functions">
+    Give the agent the operational tools needed for transfer and clean call completion.
+  </Card>
+  <Card title="Agent Configuration" href="/24-agent-configuration">
+    Expand the setup pattern for real workflows, clearer configuration boundaries, and reusable
+    agent design.
+  </Card>
+  <Card title="Dynamic Parameters" href="/26-dynamic-parameters">
+    Learn how workflow context can later populate function inputs for business-specific actions.
+  </Card>
+</CardGroup>

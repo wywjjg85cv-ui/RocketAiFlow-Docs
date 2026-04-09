@@ -1,0 +1,80 @@
+---
+title: AI Inbound Routing
+description: Connect inbound calls to the right AI voice agent and validate the first route.
+---
+
+import { ImagePlaceholder } from "../mdx-components";
+
+# AI Inbound Routing
+
+AI Inbound Routing connects an inbound call path to the agent that should answer it.
+
+This is the point where your configured agent becomes reachable from a real inbound route.
+
+## What You Need Before Routing
+
+Before configuring the route, make sure:
+
+- the agent already exists
+- the prompt has been configured
+- transfer or hangup behavior is available if needed
+- the supporting trunk or inbound path is ready
+
+## Basic Routing Setup
+
+Create or edit a route and assign it to `Rocket Demo Assistant`.
+
+For a first test, keep the route simple:
+
+- one route
+- one agent
+- one expected call objective
+- one fallback transfer path if a human handoff is required
+
+<ImagePlaceholder
+  title="Inbound routing screen"
+  description="Inbound routing configuration screen with Rocket Demo Assistant assigned to the target route."
+/>
+
+## What To Verify
+
+After saving the route, place a test inbound call and confirm:
+
+- the call reaches the expected agent
+- the greeting starts as expected
+- the prompt behavior matches the intended use case
+- transfer logic works when requested
+
+If the inbound workflow uses functions with dynamic values, also confirm that the route provides the
+right business context. For example, a service line, queue, or campaign-specific path may affect
+which function inputs should be passed when the call reaches the agent.
+
+## Routing Review Questions
+
+If the route is not behaving correctly, check:
+
+- whether the correct agent is assigned
+- whether the inbound path is linked to the intended route
+- whether the agent has the functions required for transfer
+- whether the call is entering through the expected trunk or entry point
+
+## Keep The First Route Narrow
+
+Avoid combining too many scenarios in the first inbound configuration. It is easier to validate one
+clear route than to debug multiple branching behaviors at once.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="AI Dialer Flows" href="/07-ai-dialer-flows">
+    Create the matching outbound campaign once the inbound path is working.
+  </Card>
+  <Card title="Phone" href="/12-phone">
+    Use the Phone area for focused manual testing if you want to isolate behavior before live
+    routing.
+  </Card>
+  <Card title="Dynamic Parameters" href="/26-dynamic-parameters">
+    See how route, call, and workflow context can populate function inputs in real inbound
+    scenarios.
+  </Card>
+</CardGroup>

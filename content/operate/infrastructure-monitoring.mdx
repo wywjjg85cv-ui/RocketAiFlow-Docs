@@ -1,0 +1,56 @@
+---
+title: Infrastructure Monitoring
+description: Use Node Exporter Full to review host and system health in RocketAiFlow deployments.
+---
+
+import { ImagePlaceholder } from "../../mdx-components";
+
+# Infrastructure Monitoring
+
+Infrastructure monitoring is the first place to look when workflow problems may actually be host or
+system problems.
+
+RocketAiFlow can include the `Node Exporter Full` Grafana dashboard as part of its pre-provisioned
+observability starting point, so teams do not have to build the first host-level view themselves.
+
+## What this dashboard helps you see
+
+`Node Exporter Full` is used for infrastructure and host-level visibility. It helps teams review:
+
+- general system health
+- resource pressure
+- host stability
+- operating conditions that may affect the rest of the platform
+
+## When to use it
+
+Use the infrastructure dashboard when:
+
+- calls start failing unexpectedly across multiple workflows
+- the platform feels slow or unstable
+- container or telephony behavior may actually be caused by host pressure
+- you need to rule out a system-level problem before changing workflow logic
+
+## What it helps investigate
+
+This dashboard is useful for questions such as:
+
+- is the host healthy enough to support the current load
+- did system conditions change around the same time as the incident
+- is the problem broader than one campaign or one route
+
+<ImagePlaceholder
+  title="Infrastructure dashboard"
+  description="Replace with a real Grafana capture of the Node Exporter Full dashboard used for infrastructure and host-level visibility."
+/>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Pre-Provisioned Dashboards" href="/23-pre-provisioned-dashboards">
+    Return to the full dashboard foundation overview.
+  </Card>
+  <Card title="Investigating Workflow Issues" href="/operate/investigating-workflow-issues">
+    See where infrastructure monitoring fits in a real investigation flow.
+  </Card>
+</CardGroup>

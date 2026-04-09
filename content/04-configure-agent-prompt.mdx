@@ -1,0 +1,100 @@
+---
+title: Configure Agent Prompt
+description: Write a practical first prompt that gives your RocketAiFlow voice agent a clear role and escalation path.
+---
+
+import { ImagePlaceholder } from "../mdx-components";
+
+# Configure Agent Prompt
+
+The prompt defines how the agent should behave during the call. A clear prompt is usually more
+useful than a long prompt.
+
+For the first version, focus on role, tone, allowed actions, and escalation behavior.
+
+## What A Good First Prompt Should Cover
+
+Your prompt should tell the model:
+
+- who it is
+- why it is on the call
+- how it should speak
+- what information it should collect
+- when it should transfer or end the conversation
+
+## Starter Prompt Example
+
+```text
+You are Rocket Demo Assistant, the AI voice assistant for RocketAiFlow.
+Speak clearly, briefly, and professionally.
+Help users understand our product, answer simple questions, and collect contact details when useful.
+If the caller asks to speak with a human sales representative, transfer the call.
+```
+
+This is enough for a first controlled test.
+
+<ImagePlaceholder
+  title="Prompt editor"
+  description="Prompt configuration area showing the first operational prompt for Rocket Demo Assistant."
+/>
+
+## Keep The Prompt Operational
+
+A practical prompt usually works better when it includes:
+
+- a short role definition
+- one or two conversational style rules
+- a clear business objective
+- a clear human handoff condition
+
+Avoid turning the first prompt into a policy document. Add detail only when a real test shows a
+gap.
+
+## What To Improve After The First Calls
+
+Once you have test data, refine the prompt to improve:
+
+- response brevity
+- data collection order
+- transfer timing
+- how the agent handles unsupported questions
+
+## Prompt and functions should reinforce each other
+
+In RocketAiFlow, the prompt is not isolated from the function layer. The prompt should make it
+clear:
+
+- what actions the agent is allowed to trigger
+- when external lookups or API actions should be used
+- which details should be collected before a function call
+- when runtime context should shape the next step
+
+For example, an appointment flow may collect the caller name, preferred date, and service type
+before calling a booking function. A lead qualification flow may collect company size or interest
+level before sending a CRM update.
+
+## Prompt Review Checklist
+
+Before moving on, confirm:
+
+- the role is clear
+- the language is aligned with the intended caller
+- the business goal is explicit
+- the transfer condition is stated
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Add Functions" href="/05-add-functions">
+    Give the agent the tools required to act on the prompt.
+  </Card>
+  <Card title="AI Inbound Routing" href="/06-ai-inbound-routing">
+    Connect the configured agent to the first inbound route.
+  </Card>
+  <Card title="Functions and API Calls" href="/25-functions-and-api-calls">
+    See how prompts and functions work together when the agent needs to trigger real actions.
+  </Card>
+  <Card title="Dynamic Parameters" href="/26-dynamic-parameters">
+    Review how prompt-driven workflows can pass contextual values into function inputs.
+  </Card>
+</CardGroup>

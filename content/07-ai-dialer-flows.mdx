@@ -1,0 +1,86 @@
+---
+title: AI Dialer Flows
+description: Create a first outbound campaign in RocketAiFlow and prepare it for controlled testing.
+---
+
+import { ImagePlaceholder } from "../mdx-components";
+
+# AI Dialer Flows
+
+AI Dialer Flows is where outbound calling campaigns are created and managed.
+
+For a first implementation, the goal is not scale. The goal is to confirm that one campaign, one
+contact set, and one agent work together correctly.
+
+## Before You Create A Campaign
+
+Confirm these inputs first:
+
+- the agent is already configured
+- the prompt and functions support the outbound use case
+- contacts are available or ready for import
+- the trunk configuration supports outbound calling
+
+## Example First Campaign
+
+Use values like:
+
+- `Campaign name`: `Q2 Demo Outreach`
+- `Timezone`: `Europe/Rome`
+- `Purpose`: call leads who requested a product demo
+
+This is a realistic first scenario because the call objective is narrow and easy to verify.
+
+<ImagePlaceholder
+  title="Outbound campaign setup"
+  description="AI Dialer Flows screen with a first outbound campaign such as Q2 Demo Outreach."
+/>
+
+## Keep The First Campaign Controlled
+
+A safer first rollout usually means:
+
+- a small test list
+- a clear call purpose
+- one primary agent
+- a limited test window
+
+This makes it easier to identify whether an issue comes from campaign setup, contacts, prompt
+behavior, or telephony configuration.
+
+## What To Verify Before Launch
+
+Before starting the first outbound test, confirm:
+
+- the campaign uses the correct agent
+- the timezone is correct
+- the contact source is ready
+- the outbound path is supported by the configured trunk
+
+## After The First Calls
+
+Review call records to confirm:
+
+- calls actually started
+- the agent handled the call objective
+- outcomes match the campaign purpose
+- transfer or hangup behavior was correct
+
+When the outbound workflow uses custom actions, also confirm that campaign-specific values, contact
+fields, and runtime data are being passed correctly into those functions. This matters for use cases
+such as CRM updates, follow-up tasks, and external lead qualification checks.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Import Contacts" href="/08-import-contacts">
+    Prepare and upload the contact list used by the campaign.
+  </Card>
+  <Card title="Call Records" href="/10-call-records">
+    Review the outcome of each test call once the campaign runs.
+  </Card>
+  <Card title="Functions and API Calls" href="/25-functions-and-api-calls">
+    Review how outbound flows can trigger custom actions such as follow-up steps and external
+    lookups.
+  </Card>
+</CardGroup>

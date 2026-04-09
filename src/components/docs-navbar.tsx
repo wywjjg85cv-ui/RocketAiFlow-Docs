@@ -7,7 +7,6 @@ import { Navbar } from "nextra-theme-docs";
 const navItems = [
   { href: "/", label: "Documentation" },
   { href: "/api-reference", label: "API Reference" },
-  { href: "/integrate", label: "Integrations" },
   { href: "/changelog", label: "Changelog" }
 ];
 
@@ -26,15 +25,9 @@ export function DocsNavbar() {
     >
       <nav key="docs-primary-nav" aria-label="Primary" className="docs-topnav">
         {navItems.map((item) => {
-          const isDocsPath =
-            ![
-              "/api-reference",
-              "/changelog",
-              "/contact-sales",
-              "/website"
-            ].some(
-              (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
-            );
+          const isDocsPath = !["/api-reference", "/changelog"].some(
+            (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
+          );
           const isActive =
             item.href === "/"
               ? isDocsPath

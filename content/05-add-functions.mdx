@@ -1,0 +1,120 @@
+---
+title: Add Functions
+description: Add the first operational functions to your RocketAiFlow agent for transfers, hangups, and controlled testing.
+---
+
+import { ImagePlaceholder } from "../mdx-components";
+
+# Add Functions
+
+Functions give the agent controlled ways to act during the call.
+
+For a first implementation, keep the function set small and directly tied to the workflow you are
+testing.
+
+## Recommended First Functions
+
+Start with:
+
+- `hangup_call`
+  Use this when the call is complete and should end cleanly.
+
+- `transfer_call`
+  Use this when the caller should move to a human extension or destination.
+
+- optional: `get_weather`
+  Use a simple custom API function only if you want to test function-calling behavior without
+  adding business-critical dependencies.
+
+## Transfer Setup Note
+
+For transfer flows, use `exten` as the main parameter when you need to pass the destination
+extension.
+
+This keeps the handoff logic explicit and easy to review during tests.
+
+<ImagePlaceholder
+  title="Function setup"
+  description="Functions configuration screen showing hangup_call, transfer_call, and a sample custom API function."
+/>
+
+## How To Decide What Belongs In A Function
+
+Use a function when the agent needs to:
+
+- transfer the call
+- end the call
+- request structured information from another system
+
+Functions are the practical bridge between the conversation and the rest of the business workflow.
+This is where RocketAiFlow becomes more than a static voice script.
+
+Do not add functions for behavior that can be handled by prompt instructions alone.
+
+## Functions can trigger API-backed actions
+
+Functions can support external actions such as:
+
+- updating a CRM after lead qualification
+- checking availability before appointment booking
+- looking up account or contact details
+- sending a follow-up action after a call outcome is confirmed
+- routing the call based on an external rule or decision service
+
+The goal is not to add APIs everywhere. The goal is to add functions only where the workflow needs
+structured interaction with another system.
+
+## Dynamic values belong in function inputs
+
+Function inputs do not have to stay static. They can receive context-specific values such as:
+
+- contact fields
+- workflow variables
+- campaign identifiers
+- route or call metadata
+- runtime values collected during the conversation
+
+This is useful when one function should behave differently depending on who is calling, which
+campaign is running, or what the agent has already learned during the call.
+
+## Function design best practices
+
+- keep the function scope tied to one business action
+- pass only the parameters required for that action
+- use names that make sense to operators and implementers
+- keep descriptions specific enough that prompt writers know when to use the function
+- avoid combining unrelated actions into one endpoint or one function schema
+
+## First Validation Pass
+
+After saving the functions, confirm:
+
+- the function names are clear
+- required parameters are present
+- transfer destinations are valid
+- the prompt tells the agent when to call each function
+
+## Common Function Mistakes
+
+- adding too many functions before the first test
+- using unclear parameter names
+- forgetting to align the prompt with the available functions
+- testing transfers without a valid destination
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="AI Inbound Routing" href="/06-ai-inbound-routing">
+    Assign the agent to an inbound path once the prompt and functions are in place.
+  </Card>
+  <Card title="AI Dialer Flows" href="/07-ai-dialer-flows">
+    Reuse the same agent in an outbound campaign after the first inbound behavior is stable.
+  </Card>
+  <Card title="Functions and API Calls" href="/25-functions-and-api-calls">
+    Review a practical model for external actions, API-backed functions, and realistic business
+    use cases.
+  </Card>
+  <Card title="Building Custom API Actions" href="/27-building-custom-api-actions">
+    See how to design a simple external action endpoint that an agent function can call.
+  </Card>
+</CardGroup>

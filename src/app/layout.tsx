@@ -16,14 +16,16 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg"
   },
   description:
-    "RocketAiFlow documentation for workflow design, deployment planning, integrations, and operational rollout.",
+    "RocketAiFlow documentation for workflow design, deployment planning, integrations, real-time monitoring, and operational rollout.",
   keywords: [
     "RocketAiFlow documentation",
     "voice workflow automation docs",
     "platform-agnostic voice AI",
     "deployment planning docs",
     "voice ai integrations",
-    "operational workflow documentation"
+    "operational workflow documentation",
+    "voice workflow monitoring",
+    "campaign analytics documentation"
   ]
 };
 
@@ -46,7 +48,7 @@ export default async function RootLayout({
               <div className="docs-footer">
                 <span>
                   RocketAiFlow docs for product education, integration planning, deployment
-                  review, and operational rollout.
+                  review, monitoring setup, and operational rollout.
                 </span>
                 <span>{new Date().getFullYear()} © RocketAiFlow</span>
               </div>

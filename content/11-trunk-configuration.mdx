@@ -1,0 +1,80 @@
+---
+title: Trunk Configuration
+description: Prepare SIP trunk connectivity for inbound and outbound calling in RocketAiFlow.
+---
+
+import { ImagePlaceholder } from "../mdx-components";
+
+# Trunk Configuration
+
+Trunk configuration supports the calling path used by both inbound routing and outbound campaigns.
+
+If the trunk is not aligned with the rest of the setup, routing and campaign behavior can look
+incorrect even when the agent itself is configured properly.
+
+## When To Review Trunk Setup
+
+Review trunk configuration before:
+
+- connecting a live inbound route
+- launching an outbound campaign
+- diagnosing calls that never start or never reach the intended destination
+
+## What The Trunk Needs To Support
+
+At a minimum, confirm that the trunk setup matches the workflow you are testing:
+
+- inbound calling if the agent should answer inbound routes
+- outbound calling if the agent should run campaigns
+- the expected destination or source context for the first test
+
+<ImagePlaceholder
+  title="Trunk configuration screen"
+  description="Trunk configuration screen showing the SIP or telephony settings used by the first inbound and outbound tests."
+/>
+
+## Recommended First Validation
+
+Before scaling up, check:
+
+- the trunk is active and reachable
+- inbound and outbound paths match the intended use case
+- the route or campaign depends on the correct trunk context
+
+## Common Trunk-Related Symptoms
+
+- inbound calls never reach the agent
+- outbound calls do not start
+- transfers fail even though the agent asked for them
+- call records show repeated failures without clear prompt issues
+
+## Operational visibility for trunk issues
+
+RocketAiFlow can include a ready Grafana monitoring foundation so teams do not have to assemble the
+first telephony-related dashboards from scratch.
+
+For trunk and telephony investigations, the most useful starting points are usually:
+
+- `Asterisk Overview` for higher-level telephony behavior
+- `Asterisk Log` for telephony-related log activity
+- `Node Exporter Full` when host conditions may be affecting call handling
+
+This helps teams confirm whether the problem belongs to the telephony path before they change
+agent, routing, or campaign configuration.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="AI Inbound Routing" href="/06-ai-inbound-routing">
+    Return to routing after confirming the trunk supports the inbound path.
+  </Card>
+  <Card title="AI Dialer Flows" href="/07-ai-dialer-flows">
+    Return to the campaign once the outbound path is confirmed.
+  </Card>
+  <Card title="Asterisk Monitoring" href="/operate/asterisk-monitoring">
+    Review the dashboards that help investigate telephony behavior and logs.
+  </Card>
+  <Card title="Pre-Provisioned Dashboards" href="/23-pre-provisioned-dashboards">
+    See the broader dashboard foundation available for daily operations and troubleshooting.
+  </Card>
+</CardGroup>

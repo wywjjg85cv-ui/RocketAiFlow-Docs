@@ -1,5 +1,5 @@
 import type { MDXComponents } from "mdx/types";
-import { Cards } from "nextra/components";
+import { Callout, Cards } from "nextra/components";
 import { useMDXComponents as getThemeComponents } from "nextra-theme-docs";
 import type { ComponentProps } from "react";
 
@@ -7,19 +7,43 @@ type CardGroupProps = Omit<ComponentProps<typeof Cards>, "num"> & {
   cols?: number;
 };
 
-function CardGroup({ cols, ...props }: CardGroupProps) {
+type ImagePlaceholderProps = {
+  title: string;
+  description: string;
+};
+
+export function CardGroup({ cols, ...props }: CardGroupProps) {
   return <Cards num={cols} {...props} />;
 }
 
-function Card(props: ComponentProps<typeof Cards.Card>) {
+export function Card(props: ComponentProps<typeof Cards.Card>) {
   return <Cards.Card {...props} />;
+}
+
+export function ImagePlaceholder({ title, description }: ImagePlaceholderProps) {
+  return (
+    <div className="docs-image-placeholder">
+      <Callout type="info">
+        <strong>{title}.</strong> Add product screenshot here: {description}
+      </Callout>
+
+      <div className="docs-image-placeholder-box" aria-label={`Image placeholder: ${title}`}>
+        <p className="docs-image-placeholder-label">Image Placeholder</p>
+        <p className="docs-image-placeholder-title">{title}</p>
+        <p className="docs-image-placeholder-description">{description}</p>
+        <p className="docs-image-placeholder-replace">Replace with real UI capture</p>
+      </div>
+    </div>
+  );
 }
 
 export function useMDXComponents(components: MDXComponents = {}): MDXComponents {
   return {
+    ...getThemeComponents(),
+    ...components,
     Card,
     CardGroup,
-    ...getThemeComponents(),
-    ...components
+    Callout,
+    ImagePlaceholder
   };
 }
