@@ -57,6 +57,9 @@ Before scaling a campaign, set:
 - a `calls per second` value that controls launch pressure
 - a `maximum active calls per campaign` value that limits live concurrency
 
+By default, calls per second starts at `100`, so it is often worth lowering that value for the
+first controlled test if you want a tighter rollout.
+
 These controls matter because they affect more than raw throughput. They also shape:
 
 - telephony pressure

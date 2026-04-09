@@ -31,6 +31,8 @@ Together, these settings help teams:
 
 Calls per second controls campaign launch pressure.
 
+By default, calls per second is set to `100`.
+
 This setting matters because dialing too aggressively can:
 
 - overload the telephony path
@@ -38,8 +40,9 @@ This setting matters because dialing too aggressively can:
 - increase congestion, failed calls, or unstable outcomes
 - hide whether the issue belongs to list quality, trunk setup, or workflow behavior
 
-Start conservatively for the first rollout. A low calls-per-second value makes it easier to see how
-the system behaves before you push more volume through it.
+Treat the default as a starting configuration value, not as the right operating value for every
+campaign. Start conservatively for the first rollout. A lower calls-per-second value makes it
+easier to see how the system behaves before you push more volume through it.
 
 <ImagePlaceholder
   title="Dialer pacing settings"
