@@ -3,8 +3,6 @@ title: Dialer Pacing and Limits
 description: Control calls per second, maximum active calls per campaign, and outbound concurrency with a practical rollout approach.
 ---
 
-import { ImagePlaceholder } from "../../mdx-components";
-
 # Dialer Pacing and Limits
 
 Outbound execution needs control, not just volume.
@@ -44,10 +42,18 @@ Treat the default as a starting configuration value, not as the right operating 
 campaign. Start conservatively for the first rollout. A lower calls-per-second value makes it
 easier to see how the system behaves before you push more volume through it.
 
-<ImagePlaceholder
-  title="Dialer pacing settings"
-  description="Add product screenshot here: the dialer pacing settings showing how teams limit calls per second for a campaign."
-/>
+<div className="docs-panel-grid docs-panel-grid-two">
+  <ProductScreenshot
+    src="/screenshots/docs/ops-dialing-rate-all.png"
+    alt="Grafana panel showing dialing rate in calls per second."
+    caption="Calls per second is the live pacing signal operators watch first when testing outbound execution pressure."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/ops-calls-volume-all.png"
+    alt="Grafana panel showing calls volume and active calls versus limit."
+    caption="Volume confirms whether the dialer is translating pacing into the expected live load."
+  />
+</div>
 
 ## Set a maximum number of active calls per campaign
 
@@ -63,10 +69,18 @@ environment is ready to support. It should be aligned with:
 
 Use this setting to avoid treating one campaign like an unlimited execution source.
 
-<ImagePlaceholder
-  title="Campaign call limit settings"
-  description="Add product screenshot here: the campaign settings showing the maximum active calls limit for a live outbound campaign."
-/>
+<div className="docs-panel-grid docs-panel-grid-two">
+  <ProductScreenshot
+    src="/screenshots/docs/ops-active-vs-limit-all.png"
+    alt="Grafana gauge showing active calls versus limit."
+    caption="The active-calls gauge tells teams whether campaign concurrency is safely inside the configured ceiling."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/ops-dialer-table-all.png"
+    alt="Grafana table showing dialer status, campaign active state, active calls, and call limits."
+    caption="The dialer table shows which campaigns are live, which are idle, and which ones are already consuming their active-call allowance."
+  />
+</div>
 
 ## Campaign execution control in practice
 

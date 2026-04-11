@@ -11,16 +11,41 @@ description: Production-aware documentation for evaluating, implementing, and op
     <div className="docs-hero-intro">
       {"RocketAiFlow documentation is structured for teams assessing a serious real-time voice AI platform. Start with the platform model, move through an implementation path, then use deployment, observability, and troubleshooting guidance to validate production readiness."}
     </div>
+
+    <div className="docs-note">
+      <strong>What this documentation is built to answer:</strong>
+      <ul>
+        <li>what RocketAiFlow is and how inbound and outbound workflows fit together</li>
+        <li>how to move from a first agent to a working route, campaign, and test call</li>
+        <li>how functions, APIs, dynamic parameters, and workflow context support real business actions</li>
+        <li>how teams monitor, troubleshoot, and review live voice operations</li>
+      </ul>
+    </div>
   </div>
 
-  <div className="docs-note">
-    <strong>What this documentation is built to answer:</strong>
-    <ul>
-      <li>what RocketAiFlow is and how inbound and outbound workflows fit together</li>
-      <li>how to move from a first agent to a working route, campaign, and test call</li>
-      <li>how functions, APIs, dynamic parameters, and workflow context support real business actions</li>
-      <li>how teams monitor, troubleshoot, and review live voice operations</li>
-    </ul>
+  <div className="docs-hero-shots">
+    <div className="docs-hero-shots-grid">
+      <ProductScreenshot
+        src="/screenshots/docs/ops-total-outcomes-all.png"
+        alt="Grafana panel showing total outcomes across all campaigns."
+      />
+      <ProductScreenshot
+        src="/screenshots/docs/ops-call-outcomes-all.png"
+        alt="Grafana panel showing call outcome distribution across all campaigns."
+      />
+      <ProductScreenshot
+        src="/screenshots/docs/ops-calls-volume-all.png"
+        alt="Grafana panel showing calls volume and active calls versus limit across all campaigns."
+      />
+      <ProductScreenshot
+        src="/screenshots/docs/ops-active-vs-limit-all.png"
+        alt="Grafana gauge showing active calls versus configured limit across all campaigns."
+      />
+      <ProductScreenshot
+        src="/screenshots/docs/ops-dialer-table-all.png"
+        alt="Grafana table showing dialer status, active state, active calls, and call limit per campaign."
+      />
+    </div>
   </div>
 </div>
 

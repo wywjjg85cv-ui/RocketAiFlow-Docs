@@ -3,8 +3,6 @@ title: Real-Time Performance Metrics
 description: Understand the live metrics categories RocketAiFlow teams use to review voice workflow performance.
 ---
 
-import { ImagePlaceholder } from "../../mdx-components";
-
 # Real-Time Performance Metrics
 
 The goal of real-time metrics is not to expose raw infrastructure internals to every stakeholder.
@@ -59,15 +57,31 @@ whether the system is ready to handle the intended load.
 Track average talk time and average ring time to understand how calls are evolving and whether the
 workflow design still matches the real interaction pattern.
 
-<ImagePlaceholder
-  title="Calls volume dashboard"
-  description="Placeholder for a dashboard showing total calls, active calls, configured limits, and call pacing in real time."
-/>
+<div className="docs-panel-grid docs-panel-grid-two">
+  <ProductScreenshot
+    src="/screenshots/docs/ops-calls-volume-all.png"
+    alt="Grafana calls volume panel showing active calls and configured limit."
+    caption="Calls volume, active calls, and limit should be read together so teams can see whether load is healthy or pushing too close to the ceiling."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/ops-dialing-rate-all.png"
+    alt="Grafana dialing rate panel showing calls per second."
+    caption="Dialing pace is the live control signal for outbound pressure and should be checked before operators blame downstream systems."
+  />
+</div>
 
-<ImagePlaceholder
-  title="Talk time and ring time analytics"
-  description="Placeholder for a dashboard showing average talk time, average ring time, and trend lines across selected time windows."
-/>
+<div className="docs-panel-grid docs-panel-grid-two">
+  <ProductScreenshot
+    src="/screenshots/docs/analytics-talk-time-over-time-all.png"
+    alt="Grafana average talk time over time panel."
+    caption="Talk time trends help confirm whether the conversation layer is behaving the way the workflow design expects."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/analytics-ring-time-over-time-all.png"
+    alt="Grafana average ring time over time panel."
+    caption="Ring time trends help teams spot changing contactability or telephony delay over the selected window."
+  />
+</div>
 
 ## Implementation guidance
 

@@ -3,8 +3,6 @@ title: Endpoint and Trunk Monitoring
 description: Review the telephony-side state signals that can affect RocketAiFlow workflows.
 ---
 
-import { ImagePlaceholder } from "../../mdx-components";
-
 # Endpoint and Trunk Monitoring
 
 Workflow monitoring is incomplete if it ignores the telephony path. Endpoint and trunk state can
@@ -43,10 +41,24 @@ Teams should be able to ask:
 3. Confirm whether the issue is local to one endpoint, one trunk, or the wider calling path.
 4. Escalate based on the layer that actually failed.
 
-<ImagePlaceholder
-  title="Endpoint and trunk monitoring screen"
-  description="Add product screenshot here: the endpoint and trunk monitoring screen showing state transitions, trunk readiness, and related call outcome shifts."
+<ProductScreenshot
+  src="/screenshots/docs/telephony-dashboard-overview.png"
+  alt="Grafana dashboard showing endpoints by state, endpoint state timeline, and the endpoints table."
+  caption="This telephony monitoring view shows the endpoint state summary, the state timeline, and the detailed endpoint list in one place."
 />
+
+<div className="docs-panel-grid docs-panel-grid-two">
+  <ProductScreenshot
+    src="/screenshots/docs/telephony-endpoints-by-state.png"
+    alt="Grafana panel showing endpoints by state."
+    caption="Endpoints by state gives operators a fast count of unavailable, idle, and in-use telephony resources."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/telephony-endpoint-state-timeline.png"
+    alt="Grafana panel showing the endpoint state timeline."
+    caption="The state timeline helps teams correlate endpoint readiness changes with campaign or call outcome shifts."
+  />
+</div>
 
 ## Implementation note
 

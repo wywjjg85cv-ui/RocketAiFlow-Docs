@@ -3,8 +3,6 @@ title: Campaign Analytics
 description: Understand campaign outcomes, pacing, status, and usage patterns in RocketAiFlow.
 ---
 
-import { ImagePlaceholder } from "../../mdx-components";
-
 # Campaign Analytics
 
 Campaign analytics should help teams answer a simple question: is the workflow behaving the way we
@@ -59,9 +57,55 @@ Look for:
 - failed or congestion events that suggest infrastructure or provider issues
 - talk time patterns that look too short or too long for the intended workflow
 
-<ImagePlaceholder
-  title="Campaign performance over time"
-  description="Placeholder for a dashboard showing multiple campaigns, outcome distribution, call volume, and pacing across a selected time range."
+<div className="docs-panel-grid docs-panel-grid-two">
+  <ProductScreenshot
+    src="/screenshots/docs/analytics-calls-range-all.png"
+    alt="Grafana panel showing calls in the selected time range across all campaigns."
+    caption="Selected-range totals help teams compare recent execution with the expected volume mix."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/analytics-distribution-all.png"
+    alt="Grafana panel showing call outcomes distribution across all campaigns."
+    caption="Outcome distribution makes it easier to see whether one result category is starting to dominate."
+  />
+</div>
+
+<div className="docs-panel-grid docs-panel-grid-two">
+  <ProductScreenshot
+    src="/screenshots/docs/analytics-talk-time-over-time-all.png"
+    alt="Grafana panel showing average talk time over time across all campaigns."
+    caption="Talk time trends help teams validate whether live conversations are too short, too long, or stable."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/analytics-ring-time-over-time-all.png"
+    alt="Grafana panel showing average ring time over time across all campaigns."
+    caption="Ring time trends help teams detect contactability changes or telephony delay that would not show in outcome counts alone."
+  />
+</div>
+
+## Single campaign drill-down
+
+Teams should be able to move from the aggregate view into one campaign without losing the operating
+context. That drill-down is how operators decide whether one campaign is healthy, stalled, or
+creating telephony pressure on its own.
+
+<div className="docs-panel-grid docs-panel-grid-two">
+  <ProductScreenshot
+    src="/screenshots/docs/analytics-outcomes-over-time-campaign.png"
+    alt="Grafana panel showing call outcomes over time for a single campaign."
+    caption="Campaign-specific outcome trends show whether one schedule is drifting away from the broader baseline."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/analytics-calls-range-campaign.png"
+    alt="Grafana panel showing selected time range totals for a single campaign."
+    caption="Use the selected-range totals to confirm how one campaign contributed to the live volume mix."
+  />
+</div>
+
+<ProductScreenshot
+  src="/screenshots/docs/analytics-distribution-campaign.png"
+  alt="Grafana panel showing call outcomes distribution for a single campaign."
+  caption="A single-campaign distribution view helps teams decide whether a workflow problem belongs to one campaign or to the wider operation."
 />
 
 ## Practical review loop

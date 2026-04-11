@@ -3,8 +3,6 @@ title: Monitoring and Visibility
 description: Review the live operational signals RocketAiFlow teams should monitor after launch.
 ---
 
-import { ImagePlaceholder } from "../../mdx-components";
-
 # Monitoring and Visibility
 
 RocketAiFlow is not just a workflow builder. It is an operational product. Teams running inbound
@@ -87,15 +85,36 @@ on deployment and configuration and should be validated with operational evidenc
   platform responsibly.
 </Callout>
 
-<ImagePlaceholder
-  title="Real-time campaign overview"
-  description="Placeholder for a live operations dashboard showing campaign state, active calls, configured limits, and outcome counters."
-/>
+<div className="docs-panel-grid docs-panel-grid-two">
+  <ProductScreenshot
+    src="/screenshots/docs/ops-total-outcomes-all.png"
+    alt="Grafana total outcomes panel across all campaigns."
+    caption="Outcome totals give operators a quick read on answer, no answer, busy, congestion, failed, and total call volume."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/ops-call-outcomes-all.png"
+    alt="Grafana call outcomes distribution panel across all campaigns."
+    caption="Distribution helps teams see whether the current outcome mix still matches the expected workflow pattern."
+  />
+</div>
 
-<ImagePlaceholder
-  title="Total outcomes dashboard"
-  description="Placeholder for a dashboard showing answered calls, no answer, busy calls, failed calls, and congestion events."
-/>
+<div className="docs-panel-grid docs-panel-grid-three">
+  <ProductScreenshot
+    src="/screenshots/docs/ops-dialing-rate-all.png"
+    alt="Grafana dialing rate panel across all campaigns."
+    caption="Dialing pace shows how fast outbound load is being created."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/ops-calls-volume-all.png"
+    alt="Grafana calls volume panel across all campaigns."
+    caption="Call volume shows live throughput alongside the configured ceiling."
+  />
+  <ProductScreenshot
+    src="/screenshots/docs/ops-active-vs-limit-all.png"
+    alt="Grafana active calls versus limit gauge across all campaigns."
+    caption="The active-versus-limit gauge makes campaign pressure visible before the platform hits its ceiling."
+  />
+</div>
 
 ## Related pages
 

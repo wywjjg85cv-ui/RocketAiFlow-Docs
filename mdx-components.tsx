@@ -12,6 +12,13 @@ type ImagePlaceholderProps = {
   description: string;
 };
 
+type ProductScreenshotProps = {
+  src: string;
+  alt: string;
+  caption?: string;
+  className?: string;
+};
+
 export function CardGroup({ cols, ...props }: CardGroupProps) {
   return <Cards num={cols} {...props} />;
 }
@@ -37,6 +44,21 @@ export function ImagePlaceholder({ title, description }: ImagePlaceholderProps) 
   );
 }
 
+export function ProductScreenshot({ src, alt, caption, className }: ProductScreenshotProps) {
+  const screenshotClassName = ["docs-screenshot", className].filter(Boolean).join(" ");
+
+  return (
+    <figure className={screenshotClassName}>
+      <div className="docs-screenshot-frame">
+        {/* Screenshots are served from public and rendered responsively inside MDX layouts. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="docs-screenshot-img" src={src} alt={alt} loading="lazy" />
+      </div>
+      {caption ? <figcaption className="docs-screenshot-caption">{caption}</figcaption> : null}
+    </figure>
+  );
+}
+
 export function useMDXComponents(components: MDXComponents = {}): MDXComponents {
   return {
     ...getThemeComponents(),
@@ -44,6 +66,7 @@ export function useMDXComponents(components: MDXComponents = {}): MDXComponents 
     Card,
     CardGroup,
     Callout,
-    ImagePlaceholder
+    ImagePlaceholder,
+    ProductScreenshot
   };
 }

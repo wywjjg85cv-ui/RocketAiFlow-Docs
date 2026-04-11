@@ -3,8 +3,6 @@ title: Call History and Review
 description: Review completed calls, recordings when enabled, transcripts, and timing metrics to understand outbound and inbound workflow behavior in detail.
 ---
 
-import { ImagePlaceholder } from "../../mdx-components";
-
 # Call History and Review
 
 Call history is where teams verify what actually happened after the call is over.
@@ -24,10 +22,11 @@ Call history should help teams answer practical questions such as:
 - what the conversation contained when transcripts are available
 - whether the call recording supports deeper review when recordings are enabled
 
-<ImagePlaceholder
-  title="Call history table"
-  description="Add product screenshot here: the call history table showing completed calls, outcomes, route or campaign context, and timestamps."
-/>
+<Callout type="info">
+  The list view helps operators find the right interaction quickly. The detailed evidence usually
+  comes from the selected call review screen, where timing, status, cause, recording, and
+  transcript are reviewed together.
+</Callout>
 
 ## Review the call detail view
 
@@ -41,9 +40,10 @@ After spotting a call worth reviewing, open the call detail view and confirm:
 
 This is the fastest way to validate whether the workflow result matches the intended business path.
 
-<ImagePlaceholder
-  title="Call detail view"
-  description="Add product screenshot here: the call detail view with outcome, timestamps, campaign or route context, and timing metrics."
+<ProductScreenshot
+  src="/screenshots/docs/call-review-timing-status.png"
+  alt="RocketAiFlow call review screen showing ring time, talk time, status, cause, and event timeline."
+  caption="This review surface shows the practical evidence teams use first: ring time, talk time, timestamps, final status, and the cause recorded for the call."
 />
 
 ## Recordings and transcripts
@@ -59,14 +59,10 @@ Use transcripts to:
 Use recordings when deeper audio review is needed and when recordings are operationally and legally
 appropriate for the environment.
 
-<ImagePlaceholder
-  title="Transcript view"
-  description="Add product screenshot here: the transcript view used to review the conversation after the call completes."
-/>
-
-<ImagePlaceholder
-  title="Recording player if enabled"
-  description="Add product screenshot here: the recording player used for post-call review when recordings are enabled."
+<ProductScreenshot
+  src="/screenshots/docs/call-review-recording-transcript.png"
+  alt="RocketAiFlow call review screen showing the recording player and the call transcript."
+  caption="When recordings are enabled, operators can review the audio player and transcript together instead of guessing why a call produced a given outcome."
 />
 
 ## Call timing metrics
@@ -82,10 +78,8 @@ conversation.
 These metrics are especially useful after test runs because they help teams compare one run against
 the next without reading every call from scratch.
 
-<ImagePlaceholder
-  title="Talk time and ring time display"
-  description="Add product screenshot here: the talk time and ring time display used in post-call review."
-/>
+The timing view above is also the main place to confirm whether ring time and talk time match the
+intended workflow behavior.
 
 ## A practical post-call review loop
 
