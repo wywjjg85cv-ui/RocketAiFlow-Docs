@@ -3,14 +3,22 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Navbar } from "nextra-theme-docs";
+import { LocaleSwitcher } from "./i18n/LocaleSwitcher";
+import type { Locale } from "../i18n/routing";
+
+const docsHomeHref = "/get-started/introduction";
 
 const navItems = [
-  { href: "/", label: "Documentation" },
+  { href: docsHomeHref, label: "Documentation" },
   { href: "/reference/api-reference", label: "API Reference" },
   { href: "/reference/changelog", label: "Changelog" }
 ];
 
-export function DocsNavbar() {
+type DocsNavbarProps = {
+  initialLocale?: Locale;
+};
+
+export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
   const pathname = usePathname();
 
   return (
@@ -56,34 +64,35 @@ export function DocsNavbar() {
               AiFlow
             </text>
           </svg>
-          <span className="docs-logo-badge">
-            Documentation
-          </span>
+          <span className="docs-logo-badge">Documentation</span>
         </span>
       }
-      logoLink="/"
+      logoLink={docsHomeHref}
     >
-      <nav key="docs-primary-nav" aria-label="Primary" className="docs-topnav">
-        {navItems.map((item) => {
-          const isDocsPath = !["/reference/api-reference", "/reference/changelog"].some(
-            (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
-          );
-          const isActive =
-            item.href === "/"
-              ? isDocsPath
-              : pathname === item.href || pathname.startsWith(`${item.href}/`);
+      <div key="docs-navbar-actions" className="docs-navbar-actions">
+        <nav aria-label="Primary" className="docs-topnav">
+          {navItems.map((item) => {
+            const isDocsPath = !["/reference/api-reference", "/reference/changelog"].some(
+              (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
+            );
+            const isActive =
+              item.href === docsHomeHref
+                ? isDocsPath
+                : pathname === item.href || pathname.startsWith(`${item.href}/`);
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`docs-topnav-link${isActive ? " is-active" : ""}`}
-            >
-              {item.label}
-            </Link>
-          );
-        })}
-      </nav>
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`docs-topnav-link${isActive ? " is-active" : ""}`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+        <LocaleSwitcher initialLocale={initialLocale} />
+      </div>
     </Navbar>
   );
 }

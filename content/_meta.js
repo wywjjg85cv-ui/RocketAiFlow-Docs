@@ -1,11 +1,4 @@
 const pageMeta = {
-  index: {
-    title: "Documentation Home",
-    display: "hidden",
-    theme: {
-      pagination: false
-    }
-  },
   "get-started": "Get Started",
   build: "Build",
   "run-workflows": "Run Workflows",

@@ -1,7 +1,6 @@
 const getStartedMeta = {
-  index: "Getting Started",
-  quickstart: "Quickstart",
-  "platform-overview": "Platform Overview"
+  introduction: "Introduction",
+  quickstart: "Quickstart"
 };
 
 export default getStartedMeta;

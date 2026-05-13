@@ -11,7 +11,9 @@ export default withNextra({
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   async redirects() {
     return [
-      { source: "/01-getting-started", destination: "/get-started/quickstart", permanent: false },
+      { source: "/", destination: "/get-started/introduction", permanent: false },
+      { source: "/get-started", destination: "/get-started/introduction", permanent: false },
+      { source: "/01-getting-started", destination: "/get-started/introduction", permanent: false },
       { source: "/02-platform-overview", destination: "/get-started/platform-overview", permanent: false },
       {
         source: "/03-create-your-first-ai-voice-agent",

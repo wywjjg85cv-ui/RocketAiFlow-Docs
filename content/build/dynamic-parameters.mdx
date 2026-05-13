@@ -40,6 +40,65 @@ Examples:
 
 ## Practical parameter sources
 
+## Contact template variables [#contact-template-variables]
+
+Contact templates make agent text and workflow context dynamic. Instead of writing fixed values in
+the greeting, prompt, or function context, you reference variables that are replaced with data from
+the current contact.
+
+The default template includes the contact parameters that belong to a contact created in
+RocketAiFlow:
+
+- `{t.CampaignId}`
+- `{t.ContactId}`
+- `{t.id}`
+- `{t.name}`
+- `{t.phone}`
+- `{t.priority}`
+- `{t.surname}`
+- `{t.totalGlobal}`
+
+You can edit the default template and add more keys. Custom keys are rendered from `data`.
+For example, if you add a key named `cf` in the template, the variable is rendered as
+`{t.data.cf}`.
+
+<figure className="docs-screenshot">
+  <div className="docs-screenshot-frame">
+    <img
+      className="docs-screenshot-img"
+      src="/screenshots/docs/contact-template-custom-cf.png"
+      alt="Contact template editor showing the custom cf key added to the template."
+      loading="lazy"
+    />
+  </div>
+</figure>
+
+This prevents typing mistakes when the customer chooses variables to render dynamically, because
+the UI can suggest the variables defined by the selected template.
+
+The `data` field is the flexible container for custom customer fields. Use it when the outbound
+contact list includes business-specific key-value pairs such as city, plan, CRM notes, lead type,
+product interest, preferred branch, fiscal code, or any other context the agent should know during
+the call.
+
+In agent fields that support template variables, type `@` to open variable suggestions, or click the
+variables shown below the field. Use the suggested variables instead of typing field names manually
+when possible, so the prompt and greeting stay aligned with the selected template.
+
+For outbound calls, these values come from the contact loaded into the campaign. For inbound calls,
+these values are rendered only when the agent settings allow contact lookup from `Contact Inbound`
+and `Contact Inbound` contains a loaded contact list with a contact matching the caller number.
+
+Variables are replaced only when the key exists on the contact being used for that call. If a value
+does not exist on the outbound contact, or on the inbound contact matched by `Contact Inbound`, that
+variable is not rendered.
+
+Before using custom template variables in outbound calls, make sure the campaign contacts include
+the expected key-value pairs inside the `data` object.
+
+See [Import Contacts](/run-workflows/import-contacts#associate-contacts-with-a-campaign-or-agent)
+for how to upload a CSV and associate contacts with a campaign or an agent.
+
 ### Contact fields
 
 Use contact fields when the action depends on imported or known customer data, such as:
@@ -133,11 +192,8 @@ Avoid overcomplicating the input model with values that the external action does
 ## Next Steps
 
 <CardGroup cols={2}>
-  <Card title="Functions and API Calls" href="/build/functions-and-api-calls">
-    Review how dynamic inputs fit into API-backed actions.
-  </Card>
-  <Card title="Building Custom API Actions" href="/build/building-custom-api-actions">
-    See how those values can be accepted by a simple external endpoint.
+  <Card title="Configure Agent Functions" href="/build/add-functions">
+    Review how dynamic values can be used in function descriptions and API URL templates.
   </Card>
   <Card title="AI Inbound Routing" href="/run-workflows/ai-inbound-routing">
     Revisit inbound workflows where route or call context changes function behavior.

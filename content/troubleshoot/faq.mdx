@@ -72,17 +72,18 @@ No. RocketAiFlow is designed to fit different SIP / PBX environments, but provid
 depends on deployment and configuration. Telephony interoperability should be validated during
 setup.
 
-## What deployment models does RocketAiFlow support?
+## What pilot setup models does RocketAiFlow support?
 
-RocketAiFlow documentation uses two deployment models:
+During early access, RocketAiFlow is evaluated through guided pilot setups with a clearly defined
+technical and operational perimeter.
 
-- `Dedicated` for the fully managed, single-tenant runtime with complete isolation, compliance
-  alignment, and region-specific deployment
-- `Self-Hosted` for customer-controlled deployment on AWS, GCP, or customer data centers when
-  internal policy or sovereignty requirements are stricter
+Common setup models are:
 
-The right choice depends on operational ownership, network boundaries, and the support model you
-need.
+- `Guided pilot setup` for a workflow validated with the RocketAiFlow team on an agreed technical environment
+- `Customer environment pilot` when telephony, APIs, data boundaries, access, monitoring, recordings, or transcripts must align with the customer's environment
+
+The right setup depends on workflow scope, telephony, API access, data policy, operational ownership,
+and support model.
 
 ## What is the safest way to troubleshoot?
 
@@ -91,10 +92,7 @@ and effect clear.
 
 ## Can the monitoring stack use Prometheus or Grafana?
 
-It can be documented that way when the Dedicated or Self-Hosted environment includes
-Prometheus-based metrics collection or dashboard-driven monitoring. Keep the exact implementation
-aligned with the real environment, and avoid assuming monitoring features that are not actually
-configured.
+It can be documented that way when the agreed pilot setup includes Prometheus-based metrics collection or dashboard-driven monitoring. Keep the exact implementation aligned with the real environment, and avoid assuming monitoring features that are not actually configured.
 
 ## Where should I review telephony fit during evaluation?
 
@@ -102,12 +100,12 @@ Start with [Telephony Architecture](/deploy/telephony-architecture) and
 [Trunk Configuration](/deploy/trunk-configuration), then confirm the live operating view through
 [Endpoint and Trunk Monitoring](/observe/endpoint-and-trunk-monitoring).
 
-## What should I read after Getting Started?
+## What should I read after Introduction?
 
 The best next pages are:
 
-- [Platform Overview](/get-started/platform-overview)
+- [Quickstart](/get-started/quickstart)
 - [Create Your First AI Voice Agent](/build/create-your-first-ai-voice-agent)
-- [Add Functions](/build/add-functions)
+- [Configure Agent Functions](/build/add-functions)
 - [AI Inbound Routing](/run-workflows/ai-inbound-routing)
 - [AI Dialer Flows](/run-workflows/ai-dialer-flows)

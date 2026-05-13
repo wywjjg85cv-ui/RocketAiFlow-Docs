@@ -3,6 +3,7 @@ import { Footer, Layout } from "nextra-theme-docs";
 import { Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import { DocsNavbar } from "../components/docs-navbar";
+import { LocalizedBackToTop, LocalizedTocTitle } from "../components/i18n/LocalizedToc";
 import "nextra-theme-docs/style.css";
 import "./globals.css";
 
@@ -64,8 +65,8 @@ export default async function RootLayout({
             storageKey: "rocketaiflow-docs-theme"
           }}
           toc={{
-            title: "On This Page",
-            backToTop: "Back to top"
+            title: <LocalizedTocTitle />,
+            backToTop: <LocalizedBackToTop />
           }}
         >
           {children}

@@ -1,9 +1,9 @@
 const deployMeta = {
-  "deployment-overview": "Deployment Overview",
+  "deployment-overview": "Pilot Setup Overview",
   "telephony-architecture": "Telephony Architecture",
   "trunk-configuration": "Trunk Configuration",
-  "dedicated": "Dedicated",
-  "self-hosted": "Self-Hosted"
+  "dedicated": "Guided Pilot Setup",
+  "self-hosted": "Customer Environment"
 };
 
 export default deployMeta;

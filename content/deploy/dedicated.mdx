@@ -1,50 +1,59 @@
 ---
-title: Dedicated
-description: Review how to evaluate RocketAiFlow for the fully managed, single-tenant deployment model with isolation and region-specific rollout.
+title: Guided Pilot Setup
+description: Review how to scope a guided RocketAiFlow pilot across workflow, telephony, API, data, monitoring, and operational ownership.
 ---
 
-# Dedicated
+# Guided Pilot Setup
 
-Dedicated delivers a fully managed, single-tenant runtime with complete isolation, compliance
-alignment, and region-specific deployment. It gives teams the control of self-hosting without the
-DevOps burden.
+Guided Pilot Setup is the recommended early-access model for teams validating RocketAiFlow on a
+real phone workflow.
+
+The goal is not to start from a generic installation. The goal is to define one measurable pilot:
+one campaign or inbound path, one agent, one telephony route, one contact/data model, one set of API
+actions, and one operational review loop.
 
 ## Why teams choose this model
 
 Common reasons include:
 
-- faster initial rollout without building and operating the runtime internally
-- isolation requirements that still need a managed operating model
-- compliance alignment and region-specific deployment requirements
-- a cleaner path to observability, support, and day-two operations with lower internal overhead
+- validating AI outbound campaigns before scaling list size or dialer pressure
+- testing controlled inbound AI for repetitive calls or overflow
+- proving callback, scheduling, priority, and pacing behavior on real contacts
+- reviewing transcripts, recordings when enabled, call timing, and outcomes after each interaction
+- aligning monitoring, logs, traces, and call history before broader rollout
+- reducing setup ambiguity while the product is in early access
 
-## What to validate
+## What to define before launch
 
-Before launch, confirm:
+Before the pilot starts, confirm:
 
-- telephony connectivity is clearly understood
-- provider choice has been validated against the deployment and configuration model
-- external API actions can be secured and monitored
-- operators have one reliable path into dashboards, logs, and traces
-- support ownership is clear between the RocketAiFlow team and the customer team
-- the first launch scope is small enough for the support team to manage
+- the workflow objective and success metrics
+- the contact list, priority model, callback rules, and scheduled contact behavior
+- the agent prompt and function/API action set
+- telephony path, trunk setup, provider assumptions, and transfer behavior
+- whether transcripts and recordings are enabled
+- data saved after each call and who can access it
+- calls-per-second and maximum active-call limits for the first run
+- where operators review live dashboards, logs, traces, and call records
 
 ## Where teams usually get into trouble
 
-Dedicated deployments often fail operationally when:
+Guided pilots often fail operationally when:
 
-- the managed runtime is assumed to remove the need for telephony validation
-- monitoring is added too late
+- the first workflow is too broad
+- the team tests volume before validating call quality and call review
+- callback and scheduling behavior are not defined clearly
+- recording or transcription expectations are not agreed before launch
+- monitoring is treated as a later step instead of part of the pilot
 - API dependencies are treated as background details
-- campaign scale increases before call review and observability are trusted
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Deployment Overview" href="/deploy/deployment-overview" />
+  <Card title="Pilot Setup Overview" href="/deploy/deployment-overview" />
   <Card title="Telephony Architecture" href="/deploy/telephony-architecture" />
-  <Card title="Self-Hosted" href="/deploy/self-hosted" />
+  <Card title="Customer Environment" href="/deploy/self-hosted" />
+  <Card title="Dialer Pacing and Limits" href="/run-workflows/dialer-pacing-and-limits" />
   <Card title="Monitoring and Visibility" href="/observe/monitoring-and-visibility" />
-  <Card title="Trace Correlation" href="/observe/trace-correlation" />
-  <Card title="Troubleshooting" href="/troubleshoot/troubleshooting" />
+  <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues" />
 </CardGroup>

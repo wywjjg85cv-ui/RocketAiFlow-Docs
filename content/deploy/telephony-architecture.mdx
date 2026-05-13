@@ -86,20 +86,21 @@ That is why trunk setup appears early in the implementation and troubleshooting 
   description="Add product screenshot here: a real SIP or provider setup example showing trunk-based connectivity in a deployment."
 />
 
-## Deployment considerations
+## Pilot setup considerations
 
-Telephony fit should be reviewed as part of deployment planning, not after launch.
+Telephony fit should be reviewed as part of pilot planning, not after launch.
 
-Dedicated is the managed, isolated single-tenant model. Self-Hosted is the customer-controlled
-model for AWS, GCP, or customer data centers.
+During early access, the important question is not a generic deployment label. The important question
+is whether the guided pilot setup or customer environment can support the SIP / PBX path, trunk
+configuration, provider assumptions, callbacks, transfers, monitoring, and review process.
 
 Validate:
 
-- whether Dedicated or Self-Hosted is the right fit for the support and policy model
-- whether the SIP / PBX environment matches the chosen deployment model
+- whether the guided pilot setup or customer environment is clear enough for the support model
+- whether the SIP / PBX environment matches the agreed pilot perimeter
 - whether provider choice is appropriate for the environment
-- whether inbound, outbound, and transfer paths are all covered
-- whether monitoring and troubleshooting access exists for the operators who will support the system
+- whether inbound, outbound, callback, and transfer paths are all covered
+- whether monitoring and troubleshooting access exists for the operators who will support the pilot
 
 ## Monitoring and troubleshooting connections
 

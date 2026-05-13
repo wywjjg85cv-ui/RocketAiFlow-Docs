@@ -3,6 +3,12 @@ title: Troubleshooting
 description: Diagnose common setup issues across agents, prompts, routing, campaigns, contacts, trunks, and call review.
 ---
 
+import {
+  LocalizedQuickstartTroubleshootingInbound,
+  LocalizedQuickstartTroubleshootingOutbound
+} from "../../src/components/i18n/LocalizedQuickstart";
+import { LocalizedQuickstartTocLabel } from "../../src/components/i18n/LocalizedToc";
+
 # Troubleshooting
 
 Use this page when the workflow does not behave the way you expect during setup or early testing.
@@ -12,8 +18,8 @@ once.
 
 RocketAiFlow uses an Asterisk-based telephony layer, so troubleshooting should treat the telephony
 path as a first-class part of the investigation. In real SIP and PBX environments, provider choice
-depends on the chosen Dedicated or Self-Hosted deployment and configuration, and interoperability
-should be validated with evidence.
+depends on the agreed pilot setup and configuration, and interoperability should be validated with
+evidence before campaign volume increases.
 
 ## Start With The Simplest Question
 
@@ -26,6 +32,16 @@ Ask:
 5. did the result appear in call records
 
 This usually tells you where to look next.
+
+## <LocalizedQuickstartTocLabel labelKey="whatToCheck" /> [#quickstart-checks]
+
+### <LocalizedQuickstartTocLabel labelKey="troubleshootingInbound" /> [#quickstart-troubleshooting-inbound]
+
+<LocalizedQuickstartTroubleshootingInbound />
+
+### <LocalizedQuickstartTocLabel labelKey="troubleshootingOutbound" /> [#quickstart-troubleshooting-outbound]
+
+<LocalizedQuickstartTroubleshootingOutbound />
 
 ## The Agent Answers But The Conversation Is Wrong
 
@@ -84,7 +100,7 @@ Check:
 - whether the right agent is assigned to the route
 - whether the inbound path is mapped to the intended route
 - whether the trunk configuration supports the inbound test path
-- whether the SIP / PBX environment is aligned with the Dedicated or Self-Hosted model being tested
+- whether the SIP / PBX environment is aligned with the guided pilot setup or customer environment being tested
 
 ## Outbound Calls Do Not Start
 
@@ -93,7 +109,7 @@ Check:
 - whether the campaign is configured correctly
 - whether contacts were imported successfully
 - whether the outbound path is supported by the current trunk setup
-- whether the telephony provider fit has been validated for the chosen deployment and configuration
+- whether the telephony provider fit has been validated for the agreed pilot setup and configuration
 - whether pacing is too restrictive for the campaign to launch as expected
 
 ## Contact Import Results Look Wrong
@@ -166,9 +182,5 @@ Then review the related operational signals:
   </Card>
   <Card title="Logs and Troubleshooting" href="/observe/logs-drilldown">
     Use the operations-oriented troubleshooting flow when the issue spans campaigns or endpoints.
-  </Card>
-  <Card title="Functions and API Calls" href="/build/functions-and-api-calls">
-    Review the function model when the issue is tied to external actions or API-backed workflow
-    steps.
   </Card>
 </CardGroup>

@@ -1,13 +1,11 @@
 ---
 title: Monitoring and Visibility
-description: Review the live operational signals RocketAiFlow teams should monitor after launch.
+description: Review the live operational signals RocketAiFlow teams should monitor during early-access pilots and live campaign validation.
 ---
 
 # Monitoring and Visibility
 
-RocketAiFlow is not just a workflow builder. It is an operational product. Teams running inbound
-and outbound voice workflows at scale need real-time visibility into what is happening now, what
-changed recently, and where performance is drifting.
+RocketAiFlow is not just a workflow builder. It is an operational product. Teams validating AI outbound campaigns and controlled inbound workflows need real-time visibility into what is happening now, what changed recently, and where performance is drifting.
 
 That includes the telephony path. RocketAiFlow uses an Asterisk-based telephony layer, so
 observability needs to cover not only workflow behavior but also the practical SIP / PBX
@@ -25,8 +23,7 @@ Monitoring helps teams:
 
 ## What teams usually monitor
 
-The exact implementation depends on whether RocketAiFlow runs in a Dedicated or Self-Hosted model
-and on the monitoring stack, but practical coverage often includes:
+The exact implementation depends on the agreed pilot setup, customer environment, telephony path, and monitoring stack, but practical coverage often includes:
 
 - answered calls
 - no answer activity
@@ -76,8 +73,7 @@ Together, these give teams faster visibility into:
 - container runtime monitoring
 - database visibility
 
-This is especially important for a flexible telephony architecture, where provider choice depends
-on deployment and configuration and should be validated with operational evidence.
+This is especially important for a flexible telephony architecture, where provider choice depends on pilot setup and configuration and should be validated with operational evidence.
 
 <Callout type="info">
   Treat the pre-provisioned Grafana set as the first operational baseline. Teams can extend it
