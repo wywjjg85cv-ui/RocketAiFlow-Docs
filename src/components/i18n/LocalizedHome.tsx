@@ -233,7 +233,7 @@ const homeCopy: Record<Locale, HomeCopy> = {
       title: "Prossimi passi per ruolo",
       items: [
         "Technical lead: parti da Introduzione, poi rivedi Panoramica deployment e Monitoring e visibilità.",
-        "Solutions engineer: parti dal Quickstart, poi passa a Funzioni e chiamate API e Parametri dinamici.",
+        "Solutions engineer: parti dal Quickstart, poi passa a Configura le functions e Parametri dinamici.",
         "Operations manager: parti da Monitoring e visibilità, Campaign Analytics e Logs Drilldown."
       ]
     },

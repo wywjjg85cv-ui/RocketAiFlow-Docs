@@ -175,6 +175,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
     },
     llmProviders: ["OpenAI (open_ai)", "Anthropic (anthropic)", "Google (google)", "Groq (groq)", "NVIDIA (nvidia)", "Custom"],
     llmNotes: [
+      "Use the selected provider guidance to structure role, goals, instructions, examples, and function-calling rules.",
       <>With <UiPill>Custom</UiPill>, provide the endpoint URL and an authorization header, for example <code>Authorization</code> with a bearer token.</>,
       "Use a custom provider only when the model endpoint, authentication, and response behavior are already known."
     ],
@@ -331,6 +332,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
     },
     llmProviders: ["OpenAI (open_ai)", "Anthropic (anthropic)", "Google (google)", "Groq (groq)", "NVIDIA (nvidia)", "Custom"],
     llmNotes: [
+      "Usa la guida del provider scelto per strutturare ruolo, obiettivi, istruzioni, esempi e regole di function calling.",
       <>Con <UiPill>Custom</UiPill>, inserisci endpoint URL e header di authorization, ad esempio <code>Authorization</code> con bearer token.</>,
       "Usa un provider custom solo quando endpoint del modello, autenticazione e comportamento della risposta sono già chiari."
     ],

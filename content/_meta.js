@@ -1,11 +1,17 @@
+import { createElement } from "react";
+import { LocalizedNavLabel } from "../src/components/i18n/LocalizedNavLabels";
+
+const label = (labelKey) => createElement(LocalizedNavLabel, { labelKey });
+
 const pageMeta = {
-  "get-started": "Get Started",
-  build: "Build",
-  "run-workflows": "Run Workflows",
-  deploy: "Deploy",
-  observe: "Observe",
-  troubleshoot: "Troubleshoot",
-  reference: "Reference"
+  "get-started": label("getStarted"),
+  build: label("build"),
+  "run-workflows": label("runWorkflows"),
+  integrations: label("integrations"),
+  deploy: label("deploy"),
+  observe: label("observe"),
+  troubleshoot: label("troubleshoot"),
+  reference: label("reference")
 };
 
 export default pageMeta;

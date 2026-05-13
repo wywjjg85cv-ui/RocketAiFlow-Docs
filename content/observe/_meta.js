@@ -1,34 +1,39 @@
+import { createElement } from "react";
+import { LocalizedNavLabel } from "../../src/components/i18n/LocalizedNavLabels";
+
+const label = (labelKey) => createElement(LocalizedNavLabel, { labelKey });
+
 const observeMeta = {
-  "monitoring-and-visibility": "Monitoring and Visibility",
-  "campaign-analytics": "Campaign Analytics",
-  "endpoint-and-trunk-monitoring": "Endpoint and Trunk Monitoring",
-  "pre-provisioned-dashboards": "Pre-Provisioned Dashboards",
-  "logs-overview": "Logs Overview",
-  "traces-overview": "Traces Overview",
-  "logs-drilldown": "Logs Drilldown",
-  "trace-correlation": "Trace Correlation",
+  "monitoring-and-visibility": label("monitoringAndVisibility"),
+  "campaign-analytics": label("campaignAnalytics"),
+  "endpoint-and-trunk-monitoring": label("endpointAndTrunkMonitoring"),
+  "pre-provisioned-dashboards": label("preProvisionedDashboards"),
+  "logs-overview": label("logsOverview"),
+  "traces-overview": label("tracesOverview"),
+  "logs-drilldown": label("logsDrilldown"),
+  "trace-correlation": label("traceCorrelation"),
   "infrastructure-monitoring": {
-    title: "Infrastructure Monitoring",
+    title: label("infrastructureMonitoring"),
     display: "hidden"
   },
   "asterisk-monitoring": {
-    title: "Asterisk Monitoring",
+    title: label("asteriskMonitoring"),
     display: "hidden"
   },
   "container-monitoring": {
-    title: "Container Monitoring",
+    title: label("containerMonitoring"),
     display: "hidden"
   },
   "database-monitoring": {
-    title: "Database Monitoring",
+    title: label("databaseMonitoring"),
     display: "hidden"
   },
   "real-time-performance-metrics": {
-    title: "Real-Time Performance Metrics",
+    title: label("realTimePerformanceMetrics"),
     display: "hidden"
   },
   "time-range-reporting": {
-    title: "Time-Range Reporting",
+    title: label("timeRangeReporting"),
     display: "hidden"
   }
 };

@@ -10,6 +10,7 @@ type SectionCopy = {
   paragraphs: ReactNode[];
   items?: ReactNode[];
   callout?: ReactNode;
+  callouts?: ReactNode[];
   screenshots?: {
     src: string;
     alt: string;
@@ -160,7 +161,6 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         {
           src: "/screenshots/docs/function-rescheduled-contact.png",
           alt: "rescheduled_contact preconfigured function showing data parameter, callback date and time description, campaign selection, and JSON preview.",
-          caption: "rescheduled_contact"
         }
       ],
       callout: "Pay attention: in an inbound workflow, if you want to save the callback into a campaign, the campaign must be selected explicitly. Otherwise the rescheduled call is not saved in the campaign."
@@ -189,7 +189,6 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         {
           src: "/screenshots/docs/function-save-lead-qualification.png",
           alt: "save_lead_qualification preconfigured function showing editable lead qualification parameters such as lead_name, phone, email, company_name, role, interested, and qualification_status.",
-          caption: "save_lead_qualification"
         }
       ]
     },
@@ -253,14 +252,19 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         <><code>hangup_call</code>: call it only after the conversation has reached a clear closing point, such as completed booking, goodbye, abandoned call, or silence timeout.</>,
         "For every function, include a negative rule: do not call the function if the required information is missing or the user has not expressed the relevant intent."
       ],
-      callout: (
-        <div className="docs-prompt-schema">
+      callouts: [
+        <div className="docs-prompt-schema" key="generic">
+          <strong>How to mention functions in the prompt</strong>
+          <span>Reference the function by its exact name, then describe the action or condition that should trigger it.</span>
+          <span>Example: “When the user asks to complete [goal], call <span className="docs-callout-token">function_name</span> to perform [action]. Before calling it, collect [required fields]. If a required field is missing, ask one short question first.”</span>
+        </div>,
+        <div className="docs-prompt-schema" key="example">
           <strong>Prompt example</strong>
           <span>Use <span className="docs-callout-token">save_lead_qualification</span> only after you have collected the required qualification fields.</span>
           <span>If a required field is missing, ask one short follow-up question before calling the function.</span>
           <span>Do not call the function if the customer has not provided enough information to evaluate the lead.</span>
         </div>
-      )
+      ]
     },
     bestPractices: {
       title: "Function design best practices",
@@ -412,7 +416,6 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         {
           src: "/screenshots/docs/function-rescheduled-contact.png",
           alt: "Funzione preconfigurata rescheduled_contact con parametro data, descrizione data e ora callback, selezione campagna e JSON preview.",
-          caption: "rescheduled_contact"
         }
       ],
       callout: "Fai attenzione: in un workflow inbound, se vuoi salvare il callback dentro una campagna, la campagna deve essere selezionata obbligatoriamente. Altrimenti la chiamata da rischedulare non viene salvata nella campagna."
@@ -441,7 +444,6 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         {
           src: "/screenshots/docs/function-save-lead-qualification.png",
           alt: "Funzione preconfigurata save_lead_qualification con parametri modificabili come lead_name, phone, email, company_name, role, interested e qualification_status.",
-          caption: "save_lead_qualification"
         }
       ]
     },
@@ -505,14 +507,19 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         <><code>hangup_call</code>: chiamala solo quando la conversazione ha raggiunto un punto di chiusura chiaro, per esempio prenotazione completata, saluto finale, chiamata abbandonata o silence timeout.</>,
         "Per ogni function, aggiungi anche una regola negativa: non chiamarla se mancano le informazioni richieste o se l'utente non ha espresso l'intenzione corretta."
       ],
-      callout: (
-        <div className="docs-prompt-schema">
+      callouts: [
+        <div className="docs-prompt-schema" key="generic">
+          <strong>Come citare le functions nel prompt</strong>
+          <span>Richiama la function con il suo nome esatto, poi descrivi l'azione o la condizione in cui deve essere chiamata.</span>
+          <span>Esempio: “Quando l'utente chiede di completare [obiettivo], chiama <span className="docs-callout-token">function_name</span> per eseguire [azione]. Prima di chiamarla, raccogli [campi richiesti]. Se manca un campo required, fai prima una domanda breve.”</span>
+        </div>,
+        <div className="docs-prompt-schema" key="example">
           <strong>Esempio prompt</strong>
           <span>Usa <span className="docs-callout-token">save_lead_qualification</span> solo dopo aver raccolto i campi richiesti per qualificare il lead.</span>
           <span>Se manca un campo obbligatorio, fai prima una breve domanda di follow-up.</span>
           <span>Non chiamare la function se il cliente non ha dato abbastanza informazioni per valutare il lead.</span>
         </div>
-      )
+      ]
     },
     bestPractices: {
       title: "Best practice per il design delle functions",
@@ -593,11 +600,11 @@ function Section({ section }: { section: SectionCopy }) {
           {screenshot.caption ? <figcaption className="docs-screenshot-caption">{screenshot.caption}</figcaption> : null}
         </figure>
       ))}
-      {section.callout ? (
-        <div className="docs-feature-callout">
-          <div className="docs-feature-callout-body">{section.callout}</div>
+      {[...(section.callout ? [section.callout] : []), ...(section.callouts ?? [])].map((callout, index) => (
+        <div className="docs-feature-callout" key={index}>
+          <div className="docs-feature-callout-body">{callout}</div>
         </div>
-      ) : null}
+      ))}
     </section>
   );
 }

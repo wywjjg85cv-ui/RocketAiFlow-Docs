@@ -3,9 +3,9 @@ import { LocalizedNavLabel } from "../../src/components/i18n/LocalizedNavLabels"
 
 const label = (labelKey) => createElement(LocalizedNavLabel, { labelKey });
 
-const getStartedMeta = {
-  introduction: label("introduction"),
-  quickstart: label("quickstart")
+const integrationsMeta = {
+  index: label("integrations"),
+  telephony: label("telephony")
 };
 
-export default getStartedMeta;
+export default integrationsMeta;

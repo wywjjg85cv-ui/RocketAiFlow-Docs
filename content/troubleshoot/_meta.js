@@ -1,7 +1,12 @@
+import { createElement } from "react";
+import { LocalizedNavLabel } from "../../src/components/i18n/LocalizedNavLabels";
+
+const label = (labelKey) => createElement(LocalizedNavLabel, { labelKey });
+
 const troubleshootMeta = {
-  "investigating-workflow-issues": "Investigating Workflow Issues",
-  troubleshooting: "Troubleshooting",
-  faq: "FAQ"
+  "investigating-workflow-issues": label("investigatingWorkflowIssues"),
+  troubleshooting: label("troubleshoot"),
+  faq: label("faq")
 };
 
 export default troubleshootMeta;

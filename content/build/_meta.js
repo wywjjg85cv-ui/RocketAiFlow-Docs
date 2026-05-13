@@ -1,8 +1,13 @@
+import { createElement } from "react";
+import { LocalizedNavLabel } from "../../src/components/i18n/LocalizedNavLabels";
+
+const label = (labelKey) => createElement(LocalizedNavLabel, { labelKey });
+
 const buildMeta = {
-  "create-your-first-ai-voice-agent": "Create Your First AI Voice Agent",
-  "configure-agent-prompt": "Configure Agent Prompt",
-  "add-functions": "Configure Agent Functions",
-  "dynamic-parameters": "Dynamic Parameters"
+  "create-your-first-ai-voice-agent": label("createFirstAgent"),
+  "configure-agent-prompt": label("configureAgentPrompt"),
+  "add-functions": label("configureAgentFunctions"),
+  "dynamic-parameters": label("dynamicParameters")
 };
 
 export default buildMeta;

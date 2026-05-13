@@ -4,15 +4,34 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Navbar } from "nextra-theme-docs";
 import { LocaleSwitcher } from "./i18n/LocaleSwitcher";
-import type { Locale } from "../i18n/routing";
+import { useCurrentLocale } from "../i18n/client-locale";
+import { defaultLocale, type Locale } from "../i18n/routing";
 
 const docsHomeHref = "/get-started/introduction";
 
 const navItems = [
-  { href: docsHomeHref, label: "Documentation" },
-  { href: "/reference/api-reference", label: "API Reference" },
-  { href: "/reference/changelog", label: "Changelog" }
-];
+  { href: docsHomeHref, labelKey: "documentation" },
+  { href: "/reference/api-reference", labelKey: "apiReference" },
+  { href: "/integrations", labelKey: "integrations" },
+  { href: "/reference/changelog", labelKey: "changelog" }
+] as const;
+
+const navbarCopy = {
+  en: {
+    documentation: "Documentation",
+    apiReference: "API Reference",
+    integrations: "Integrations",
+    changelog: "Changelog",
+    primary: "Primary"
+  },
+  it: {
+    documentation: "Documentazione",
+    apiReference: "Riferimento API",
+    integrations: "Integrazioni",
+    changelog: "Changelog",
+    primary: "Navigazione principale"
+  }
+} as const satisfies Record<Locale, Record<"documentation" | "apiReference" | "integrations" | "changelog" | "primary", string>>;
 
 type DocsNavbarProps = {
   initialLocale?: Locale;
@@ -20,6 +39,8 @@ type DocsNavbarProps = {
 
 export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
   const pathname = usePathname();
+  const locale = useCurrentLocale(initialLocale ?? defaultLocale);
+  const copy = navbarCopy[locale];
 
   return (
     <Navbar
@@ -64,15 +85,18 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
               AiFlow
             </text>
           </svg>
-          <span className="docs-logo-badge">Documentation</span>
+          <span className="docs-logo-badge">{copy.documentation}</span>
         </span>
       }
       logoLink={docsHomeHref}
     >
       <div key="docs-navbar-actions" className="docs-navbar-actions">
-        <nav aria-label="Primary" className="docs-topnav">
+        <nav aria-label={copy.primary} className="docs-topnav">
           {navItems.map((item) => {
-            const isDocsPath = !["/reference/api-reference", "/reference/changelog"].some(
+            const nonDocsPrefixes = navItems
+              .filter((navItem) => navItem.href !== docsHomeHref)
+              .map((navItem) => navItem.href);
+            const isDocsPath = !nonDocsPrefixes.some(
               (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
             );
             const isActive =
@@ -86,7 +110,7 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
                 href={item.href}
                 className={`docs-topnav-link${isActive ? " is-active" : ""}`}
               >
-                {item.label}
+                {copy[item.labelKey]}
               </Link>
             );
           })}
