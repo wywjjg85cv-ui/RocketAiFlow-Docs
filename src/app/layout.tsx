@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Footer, Layout } from "nextra-theme-docs";
 import { Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
@@ -78,6 +79,9 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <Script id="docs-html-lang" strategy="beforeInteractive">
+          {`document.documentElement.lang=location.pathname.startsWith('/it/')||location.pathname==='/it'?'it':'en';`}
+        </Script>
         <Layout
           pageMap={pageMap}
           navbar={<DocsNavbar key="docs-navbar" />}

@@ -611,16 +611,6 @@ export function LocalizedCreateAgentGreeting() {
   );
 }
 
-function PlaceholderSection({ step }: { step: StepCopy }) {
-  return (
-    <section className="docs-home-section">
-      {step.paragraphs.map((paragraph, index) => (
-        <p key={index}>{paragraph}</p>
-      ))}
-    </section>
-  );
-}
-
 export function LocalizedCreateAgentLlm() {
   const copy = useCreateAgentCopy();
 

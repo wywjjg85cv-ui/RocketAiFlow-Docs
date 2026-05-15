@@ -323,6 +323,7 @@ function Section({ section }: { section: SectionCopy }) {
       {section.screenshot ? (
         <figure className="docs-screenshot">
           <div className="docs-screenshot-frame">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="docs-screenshot-img" src={section.screenshot.src} alt={section.screenshot.alt} loading="lazy" />
           </div>
           {section.screenshot.caption ? <figcaption className="docs-screenshot-caption">{section.screenshot.caption}</figcaption> : null}
@@ -331,6 +332,7 @@ function Section({ section }: { section: SectionCopy }) {
       {section.screenshots?.map((screenshot) => (
         <figure className="docs-screenshot" key={screenshot.src}>
           <div className="docs-screenshot-frame">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="docs-screenshot-img" src={screenshot.src} alt={screenshot.alt} loading="lazy" />
           </div>
           {screenshot.caption ? <figcaption className="docs-screenshot-caption">{screenshot.caption}</figcaption> : null}

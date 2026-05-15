@@ -5,6 +5,7 @@ import { useMDXComponents as getMDXComponents } from "../../../mdx-components";
 import type { ComponentType, ReactNode } from "react";
 import { DocsBreadcrumbs } from "../../components/docs-breadcrumbs";
 import { absoluteUrl, siteDescription, siteName } from "../../config/site";
+import { getLocalizedDocsMetadata } from "../../i18n/docs-metadata";
 import {
   docsRoutes,
   getAlternatePaths,
@@ -68,15 +69,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const pageMetadata = result.metadata as Metadata;
-  const title = metadataTitleToString(pageMetadata.title);
-  const description =
-    typeof pageMetadata.description === "string" ? pageMetadata.description : siteDescription;
+  const fallbackMetadata = {
+    title: metadataTitleToString(pageMetadata.title),
+    description:
+      typeof pageMetadata.description === "string" ? pageMetadata.description : siteDescription
+  };
+  const localizedMetadata = getLocalizedDocsMetadata(
+    resolvedPath.canonicalPath,
+    resolvedPath.locale,
+    fallbackMetadata
+  );
+  const { title, description } = localizedMetadata;
   const canonical = absoluteUrl(getLocalizedPath(resolvedPath.canonicalPath, resolvedPath.locale));
   const alternates = getAlternatePaths(resolvedPath.canonicalPath);
   const image = absoluteUrl("/logo512.png");
 
   return {
     ...pageMetadata,
+    title,
+    description,
     alternates: {
       canonical,
       languages: {

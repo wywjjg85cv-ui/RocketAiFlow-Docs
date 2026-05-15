@@ -5,6 +5,11 @@ const eslintConfig = [
   ...nextCoreWebVitals,
   ...nextTypeScript,
   {
+    rules: {
+      "react/no-unescaped-entities": "off"
+    }
+  },
+  {
     files: ["**/*.cjs"],
     rules: {
       "@typescript-eslint/no-require-imports": "off"
