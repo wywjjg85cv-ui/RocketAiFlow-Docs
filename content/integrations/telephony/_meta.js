@@ -4,6 +4,7 @@ import { LocalizedNavLabel } from "../../../src/components/i18n/LocalizedNavLabe
 const label = (labelKey) => createElement(LocalizedNavLabel, { labelKey });
 
 const telephonyMeta = {
+  index: label("telephonyOverview"),
   "asterisk-based-pbx-systems": label("asteriskBasedPbxSystems")
 };
 

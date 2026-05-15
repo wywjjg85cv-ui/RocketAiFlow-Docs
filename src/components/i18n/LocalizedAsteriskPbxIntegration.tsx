@@ -8,6 +8,16 @@ import { useCurrentLocale } from "../../i18n/client-locale";
 type SectionCopy = {
   title: string;
   paragraphs: ReactNode[];
+  screenshot?: {
+    src: string;
+    alt: string;
+    caption?: string;
+  };
+  screenshots?: {
+    src: string;
+    alt: string;
+    caption?: string;
+  }[];
   codeBlocks?: {
     title: string;
     code: string;
@@ -35,82 +45,52 @@ type AsteriskPbxCopy = {
 
 type HeadingKey = "howItWorks" | "trunkConfig" | "rocketAiFlowSetup" | "test" | "nextSteps";
 
-const integratedPbxPjsipConfig = `;=============== TRANSPORT SECTION
+const providerPjsipServerUriScreenshot = "/screenshots/docs/providerpjsip-server-uri.png";
+const aiInboundRoutingProviderPjsipScreenshot = "/screenshots/docs/ai-inbound-routing-providerpjsip.png";
+const transferFunctionContextScreenshot = "/screenshots/docs/transfer-function-raf-providerpjsip-context.png";
+
+const asteriskPbxServerPjsipConfig = `;=============== TRANSPORT SECTION
 [transport-udp]
 type=transport
 protocol=udp
 bind=0.0.0.0:5060
-local_net=172.22.0.0/24
-;=============== REGISTRATION (Register to Provider at raf-provider-asterisk:5060)
-[providerPjsip_reg]
-type=registration
-transport=transport-udp
-outbound_auth=providerPjsip_auth
-server_uri=sip:raf-provider-asterisk:5060
-client_uri=sip:providerPjsip@raf-provider-asterisk:5060
-contact_user=providerPjsip
-retry_interval=60
-forbidden_retry_interval=600
-expiration=3600
-line=yes
-endpoint=providerPjsip_end
+local_net=172.22.0.0/24      ; <--- Replace with your PBX local network
 
-;=============== ENDPOINT DEFINITION
-[providerPjsip_end]
-type=endpoint
-transport=transport-udp
-context=from-voip-provider
-disallow=all
-allow=ulaw
-outbound_auth=providerPjsip_auth
-aors=providerPjsip_aor
-force_rport=no
-direct_media=no
-;from_user=providerPjsip
-from_domain=raf-provider-asterisk
-rewrite_contact=no
-rtp_symmetric=no
-
-;=============== AOR SECTION
+; --- AOR used by RocketAiFlow REGISTER requests ---
 [providerPjsip_aor]
 type=aor
-max_contacts=1
-remove_existing=yes
-contact=sip:raf-provider-asterisk:5060
-qualify_frequency=3`;
+contact=sip:10.0.0.10:5060      ; <--- Replace with the RocketAiFlow server IP address
+qualify_frequency=3
 
-const rocketAiFlowServerPjsipConfig = `;=============== TRANSPORT SECTION
-[transport-udp]
-type=transport
-protocol=udp
-bind=0.0.0.0:5060
-local_net=172.22.0.0/24
+; --- AUTH: same credentials used by RocketAiFlow ---
+[providerPjsip_auth]
+type=auth
+auth_type=userpass
+username=providerPjsip
+password=CHANGE_ME_PROVIDER_PJSIP_PASSWORD      ; <--- Replace with the RocketAiFlow trunk password
 
-; --- AOR used by the client's REGISTER requests ---
+; --- ENDPOINT that receives calls from RocketAiFlow ---
 [providerPjsip]
-type=aor
-max_contacts=10
-
-; --- AUTH: same credentials used by the client ---
-#tryinclude "pjsip_auth.local.conf"
-
-; --- ENDPOINT that receives calls from the client ---
-[providerPjsip_end]
 type=endpoint
-context=from-sip      ; <--- Dialplan enters here
+transport=transport-udp
+context=from-rocketaiflow      ; <--- Dialplan context where calls from RocketAiFlow enter
 disallow=all
 allow=ulaw
-aors=providerPjsip
+aors=providerPjsip_aor
+outbound_auth=providerPjsip_auth
 auth=providerPjsip_auth
+force_rport=no
 direct_media=no
+from_user=providerPjsip
+from_domain=10.0.0.10      ; <--- Replace with the RocketAiFlow server IP address
 rewrite_contact=no
 rtp_symmetric=no
 
-; --- IDENTIFY: links the client IP to this endpoint ---
+; --- IDENTIFY: links the RocketAiFlow IP or host to this endpoint ---
 [providerPjsip_identify]
 type=identify
-endpoint=providerPjsip_end
-match=raf-avr-asterisk          ; <--- Client IP (the one you see in Contact)
+endpoint=providerPjsip
+match=10.0.0.10          ; <--- Replace with the RocketAiFlow server IP address
 
 ;=============== End of configuration file`;
 
@@ -140,6 +120,7 @@ const asteriskPbxCopy: Record<Locale, AsteriskPbxCopy> = {
     intro: [
       <><UiPill>Telephony</UiPill></>,
       "Transfer calls between RocketAiFlow and Asterisk-based PBX systems through a PJSIP trunk.",
+      "This integration was built using a static PJSIP trunk between Asterisk and the remote provider/PBX.",
       "Use this integration when your environment uses Asterisk, FreePBX, or another Asterisk-based PBX and you want RocketAiFlow agents to receive calls, place campaign calls, or hand calls off to human destinations."
     ],
     howItWorks: {
@@ -157,41 +138,44 @@ const asteriskPbxCopy: Record<Locale, AsteriskPbxCopy> = {
       ]
     },
     trunkConfig: {
-      title: "PJSIP configuration on both servers",
+      title: "PJSIP configuration and RocketAiFlow trunk",
       paragraphs: [
-        "This integration uses two complementary PJSIP configurations.",
-        <>Place these blocks in the Asterisk PJSIP configuration, usually <code>/etc/asterisk/pjsip.conf</code>, or in a file included by <code>pjsip.conf</code>. On FreePBX-based systems, use the custom PJSIP include file required by your installation instead of editing generated files directly.</>,
-        "Install the first configuration on the Asterisk-based PBX you want to integrate. It registers that PBX toward the RocketAiFlow SIP endpoint.",
-        "Install the second configuration on the RocketAiFlow/Asterisk server. It accepts registration and calls from the integrated PBX and binds them to the correct endpoint."
+        "Install this configuration on the Asterisk PBX server you want to integrate.",
+        <>Place the block in the Asterisk PJSIP configuration, usually <code>/etc/asterisk/pjsip.conf</code>, or in a file included by <code>pjsip.conf</code>. On FreePBX-based systems, use the custom PJSIP include file required by your installation instead of editing generated files directly.</>,
+        <>On the RocketAiFlow side, a default trunk named <code>providerPjsip</code> is already prepared. Before enabling it, set the correct IP address of your Asterisk/PBX server, then replace the default password with the password used in this PBX configuration.</>,
+        "The PBX configuration defines transport, AOR, auth, endpoint, and identify rules for RocketAiFlow, which registers or sends calls to that PBX."
       ],
+      screenshot: {
+        src: providerPjsipServerUriScreenshot,
+        alt: "RocketAiFlow providerPjsip trunk configuration showing the Server URI field where the Asterisk PBX server IP is configured.",
+        caption: "In the providerPjsip trunk, set your Asterisk/PBX server IP in Server URI before enabling the trunk."
+      },
       codeBlocks: [
         {
-          title: "Server PBX to integrate",
-          code: integratedPbxPjsipConfig
-        },
-        {
-          title: "RocketAiFlow server",
-          code: rocketAiFlowServerPjsipConfig
+          title: "Asterisk PBX server",
+          code: asteriskPbxServerPjsipConfig
         }
-      ],
-      callout: (
-        <>
-          Both sides must use matching credentials for <code>providerPjsip_auth</code>. The IP or host in
-          <code>match</code> must identify the PBX that registers or sends calls to RocketAiFlow.
-        </>
-      )
+      ]
     },
     rocketAiFlowSetup: {
       title: "Set up the integration in RocketAiFlow",
       paragraphs: [
-        "Once the Asterisk trunk is registered, connect it to the RocketAiFlow workflow you want to test."
+        <>After enabling the default <code>providerPjsip</code> trunk, configure the RocketAiFlow workflow based on the direction you want to test.</>,
+        <>For inbound, go to <UiPill>Inbound Ai</UiPill>, open <UiPill>AI Inbound Routing</UiPill>, select the <code>providerPjsip</code> trunk and choose the agent. Every call that arrives on extension <code>providerPjsip</code> and context <code>raf-from-voip-provider</code> is handled by the selected agent.</>,
+        <>For outbound, go to <UiPill>AI Dialer Flows</UiPill>, open <UiPill>Dialer Campaigns</UiPill> and choose the trunk based on where calls should go. Select <code>providerPjsip</code> if outbound calls must reach your PBX; every number dialed by that campaign lands on the PBX side in the <code>from-rocketaiflow</code> context. Otherwise, select another trunk registered in RocketAiFlow to place calls through the RocketAiFlow system.</>,
+        <>When creating transfer functions, select the <code>raf-providerPjsip</code> context. This makes RocketAiFlow dial through the configured trunk, so transferred numbers also land on the PBX side in the <code>from-rocketaiflow</code> context.</>
       ],
-      items: [
-        <>Create or update the trunk and keep registration enabled when the trunk must receive inbound calls.</>,
-        <>Create the AI voice agent in <UiPill>AI Voice Agent</UiPill> and configure Voice, LLM, prompt, transcription, and Agent settings.</>,
-        <>Attach the transfer function you need. Use <code>transfer_call</code> for a known extension or number, or <code>transfer_to_service</code> when the caller asks for a supported department.</>,
-        <>For inbound, go to <UiPill>Inbound Ai</UiPill>, select <UiPill>AI Inbound Routing</UiPill>, press <UiPill>Add Inbound</UiPill>, then select the Asterisk trunk, the agent, and the concurrent call limit.</>,
-        <>For outbound, go to <UiPill>AI Dialer Flows</UiPill>, select <UiPill>Dialer Campaigns</UiPill>, press <UiPill>Add Campaigns</UiPill>, then select the Asterisk trunk, the agent, and a first contact for testing.</>
+      screenshot: {
+        src: aiInboundRoutingProviderPjsipScreenshot,
+        alt: "AI Inbound Routing configuration selecting the providerPjsip trunk and the agent that handles inbound calls.",
+        caption: "In AI Inbound Routing, select providerPjsip and the agent that must handle calls arriving from the PBX."
+      },
+      screenshots: [
+        {
+          src: transferFunctionContextScreenshot,
+          alt: "Transfer function configuration showing the raf-providerPjsip context selection.",
+          caption: "In transfer functions, select raf-providerPjsip as the context so transfers dial through the providerPjsip trunk."
+        }
       ]
     },
     test: {
@@ -211,9 +195,9 @@ const asteriskPbxCopy: Record<Locale, AsteriskPbxCopy> = {
     nextStepsTitle: "Next Steps",
     nextSteps: [
       {
-        title: "Trunk Configuration",
-        href: "/deploy/trunk-configuration",
-        description: "Review the RocketAiFlow trunk setup that must be ready before routing or campaigns."
+        title: "Deployment Overview",
+        href: "/deploy/deployment-overview",
+        description: "Review how trunk setup fits the selected inbound or outbound deploy path."
       },
       {
         title: "Configure Agent Functions",
@@ -228,62 +212,66 @@ const asteriskPbxCopy: Record<Locale, AsteriskPbxCopy> = {
     ]
   },
   it: {
-    title: "Asterisk-based PBX Systems",
+    title: "Sistemi PBX basati su Asterisk",
     intro: [
-      <><UiPill>Telephony</UiPill></>,
+      <><UiPill>Telefonia</UiPill></>,
       "Trasferisci chiamate tra RocketAiFlow e sistemi PBX basati su Asterisk tramite trunk PJSIP.",
+      "L'integrazione è stata realizzata usando un trunk PJSIP statico tra Asterisk e il provider/PBX remoto.",
       "Usa questa integrazione quando il tuo ambiente usa Asterisk, FreePBX o un PBX basato su Asterisk e vuoi far ricevere chiamate agli agenti RocketAiFlow, avviare campagne outbound o trasferire chiamate verso destinazioni umane."
     ],
     howItWorks: {
-      title: "Come funziona l'handoff della chiamata",
+      title: "Come funziona il trasferimento della chiamata",
       paragraphs: [
         "RocketAiFlow usa il trunk configurato come percorso telefonico tra agente AI e PBX.",
         "Durante la chiamata, l'agente può continuare la conversazione, terminare la chiamata o chiamare una function di transfer quando il cliente deve parlare con una destinazione umana."
       ],
       items: [
         "La chiamata entra o esce da RocketAiFlow attraverso il trunk Asterisk/PJSIP configurato.",
-        "L'AI voice agent gestisce la conversazione e decide se serve un handoff in base al prompt e alle functions abilitate.",
+        "L'AI voice agent gestisce la conversazione e decide se serve un trasferimento in base al prompt e alle functions abilitate.",
         <><code>transfer</code>, <code>transfer_call</code> o <code>transfer_to_service</code> invia la destinazione, l'interno o il servizio scelto dal workflow.</>,
         <>Asterisk instrada la destinazione usando il contesto configurato. Se nella function non selezioni un contesto custom, RocketAiFlow usa il contesto di default <code>raf-internal</code>.</>,
         "Dopo il test, valida la chiamata nei Call Records e controlla lo stato del trunk nel monitoring."
       ]
     },
     trunkConfig: {
-      title: "Configurazione PJSIP sui due server",
+      title: "Configurazione PJSIP e trunk RocketAiFlow",
       paragraphs: [
-        "Questa integrazione usa due configurazioni PJSIP complementari.",
-        <>Inserisci questi blocchi nella configurazione PJSIP di Asterisk, di solito <code>/etc/asterisk/pjsip.conf</code>, oppure in un file incluso da <code>pjsip.conf</code>. Su sistemi basati su FreePBX, usa il file custom PJSIP previsto dalla tua installazione invece di modificare direttamente i file generati.</>,
-        "La prima configurazione va installata sul PBX basato su Asterisk che vuoi integrare. Registra quel PBX verso l'endpoint SIP RocketAiFlow.",
-        "La seconda configurazione va installata sul server RocketAiFlow/Asterisk. Accetta registration e chiamate dal PBX integrato e le collega all'endpoint corretto."
+        "Installa questa configurazione sul server PBX Asterisk che vuoi integrare.",
+        <>Inserisci il blocco nella configurazione PJSIP di Asterisk, di solito <code>/etc/asterisk/pjsip.conf</code>, oppure in un file incluso da <code>pjsip.conf</code>. Su sistemi basati su FreePBX, usa il file custom PJSIP previsto dalla tua installazione invece di modificare direttamente i file generati.</>,
+        <>Sul lato RocketAiFlow abbiamo già predisposto un trunk di default chiamato <code>providerPjsip</code>. Prima di abilitarlo, inserisci l'IP corretto del tuo server Asterisk/PBX, poi cambia la password con quella usata in questa configurazione PBX.</>,
+        "La configurazione PBX definisce transport, AOR, auth, endpoint e identify per RocketAiFlow, che si registra o invia chiamate a quel PBX."
       ],
+      screenshot: {
+        src: providerPjsipServerUriScreenshot,
+        alt: "Configurazione trunk providerPjsip in RocketAiFlow con il campo Server URI dove inserire l'IP del server Asterisk PBX.",
+        caption: "Nel trunk providerPjsip, inserisci l'IP del tuo server Asterisk/PBX nel campo Server URI prima di abilitare il trunk."
+      },
       codeBlocks: [
         {
-          title: "Server PBX da integrare",
-          code: integratedPbxPjsipConfig
-        },
-        {
-          title: "Server RocketAiFlow",
-          code: rocketAiFlowServerPjsipConfig
+          title: "Server PBX Asterisk",
+          code: asteriskPbxServerPjsipConfig
         }
-      ],
-      callout: (
-        <>
-          Le credenziali di <code>providerPjsip_auth</code> devono combaciare sui due lati. Il valore
-          <code>match</code> deve identificare IP o host del PBX che si registra o invia chiamate a RocketAiFlow.
-        </>
-      )
+      ]
     },
     rocketAiFlowSetup: {
       title: "Configura l'integrazione in RocketAiFlow",
       paragraphs: [
-        "Quando il trunk Asterisk risulta registrato, collegalo al workflow RocketAiFlow che vuoi testare."
+        <>Dopo aver abilitato il trunk di default <code>providerPjsip</code>, configura il workflow RocketAiFlow in base alla direzione che vuoi testare.</>,
+        <>Per l'inbound, vai in <UiPill>Inbound Ai</UiPill>, apri <UiPill>AI Inbound Routing</UiPill>, seleziona il trunk <code>providerPjsip</code> e scegli l'agente. Tutte le chiamate che arrivano verso l'exten <code>providerPjsip</code> e il contesto <code>raf-from-voip-provider</code> vengono gestite dall'agente selezionato.</>,
+        <>Per l'outbound, vai in <UiPill>AI Dialer Flows</UiPill>, apri <UiPill>Dialer Campaigns</UiPill> e scegli il trunk in base a dove devono arrivare le chiamate. Se vuoi farle arrivare nel tuo PBX, seleziona <code>providerPjsip</code>: tutti i numeri chiamati da quella campagna finiscono lato PBX nel contesto <code>from-rocketaiflow</code>. Altrimenti puoi selezionare un altro trunk registrato in RocketAiFlow per far uscire le chiamate dal sistema RocketAiFlow.</>,
+        <>Quando crei le funzioni di transfer, scegli il contesto <code>raf-providerPjsip</code>. In questo modo RocketAiFlow fa la dial usando il trunk configurato e anche i numeri trasferiti finiscono lato PBX nel contesto <code>from-rocketaiflow</code>.</>
       ],
-      items: [
-        <>Crea o aggiorna il trunk e lascia la registration abilitata quando il trunk deve ricevere chiamate inbound.</>,
-        <>Crea l'AI voice agent in <UiPill>AI Voice Agent</UiPill> e configura Voice, LLM, prompt, transcription e Agent settings.</>,
-        <>Collega la function di transfer che ti serve. Usa <code>transfer_call</code> per un interno o numero noto, oppure <code>transfer_to_service</code> quando il chiamante chiede un reparto supportato.</>,
-        <>Per l'inbound, vai in <UiPill>Inbound Ai</UiPill>, seleziona <UiPill>AI Inbound Routing</UiPill>, premi <UiPill>Add Inbound</UiPill>, poi seleziona trunk Asterisk, agente e limite di chiamate concorrenti.</>,
-        <>Per l'outbound, vai in <UiPill>AI Dialer Flows</UiPill>, seleziona <UiPill>Dialer Campaigns</UiPill>, premi <UiPill>Add Campaigns</UiPill>, poi seleziona trunk Asterisk, agente e un primo contatto di test.</>
+      screenshot: {
+        src: aiInboundRoutingProviderPjsipScreenshot,
+        alt: "Configurazione AI Inbound Routing con selezione del trunk providerPjsip e dell'agente che gestisce le chiamate inbound.",
+        caption: "In AI Inbound Routing, seleziona providerPjsip e l'agente che deve gestire le chiamate in arrivo dal PBX."
+      },
+      screenshots: [
+        {
+          src: transferFunctionContextScreenshot,
+          alt: "Configurazione function di transfer con selezione del contesto raf-providerPjsip.",
+          caption: "Nelle funzioni di transfer, seleziona raf-providerPjsip come contesto per far usare il trunk providerPjsip alle trasferte."
+        }
       ]
     },
     test: {
@@ -303,9 +291,9 @@ const asteriskPbxCopy: Record<Locale, AsteriskPbxCopy> = {
     nextStepsTitle: "Passaggi successivi",
     nextSteps: [
       {
-        title: "Configurazione trunk",
-        href: "/deploy/trunk-configuration",
-        description: "Rivedi il setup trunk RocketAiFlow che deve essere pronto prima di routing o campagne."
+        title: "Panoramica deploy",
+        href: "/deploy/deployment-overview",
+        description: "Rivedi come il setup trunk entra nel percorso deploy inbound o outbound scelto."
       },
       {
         title: "Configura le functions",
@@ -331,6 +319,22 @@ function Section({ section }: { section: SectionCopy }) {
     <section className="docs-home-section">
       {section.paragraphs.map((paragraph, index) => (
         <p key={index}>{paragraph}</p>
+      ))}
+      {section.screenshot ? (
+        <figure className="docs-screenshot">
+          <div className="docs-screenshot-frame">
+            <img className="docs-screenshot-img" src={section.screenshot.src} alt={section.screenshot.alt} loading="lazy" />
+          </div>
+          {section.screenshot.caption ? <figcaption className="docs-screenshot-caption">{section.screenshot.caption}</figcaption> : null}
+        </figure>
+      ) : null}
+      {section.screenshots?.map((screenshot) => (
+        <figure className="docs-screenshot" key={screenshot.src}>
+          <div className="docs-screenshot-frame">
+            <img className="docs-screenshot-img" src={screenshot.src} alt={screenshot.alt} loading="lazy" />
+          </div>
+          {screenshot.caption ? <figcaption className="docs-screenshot-caption">{screenshot.caption}</figcaption> : null}
+        </figure>
       ))}
       {section.codeBlocks
         ? section.codeBlocks.map((codeBlock) => (
@@ -389,7 +393,9 @@ export function LocalizedAsteriskPbxIntro() {
   return (
     <section className="docs-home-section">
       {copy.intro.map((paragraph, index) => (
-        <p key={index}>{paragraph}</p>
+        <p key={index} className={index === 0 ? "docs-intro-badge-row" : undefined}>
+          {paragraph}
+        </p>
       ))}
     </section>
   );

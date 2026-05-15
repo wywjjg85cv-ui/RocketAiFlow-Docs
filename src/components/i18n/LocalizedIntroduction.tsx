@@ -87,9 +87,9 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "3. Connect",
-        href: "/deploy/trunk-configuration",
+        href: "/deploy/deployment-overview",
         description:
-          "Configure the trunk and connect inbound routing or outbound campaign setup."
+          "Choose the deploy path and connect trunk, inbound routing, or outbound campaign setup."
       },
       {
         title: "4. Run",
@@ -135,10 +135,10 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         ]
       },
       {
-        title: "Telephony and pilot setup",
+        title: "Telephony and deploy path",
         paragraphs: [
           "RocketAiFlow is built for real SIP and PBX environments. The platform uses an Asterisk-based telephony layer to support practical trunk-based connectivity and provider flexibility.",
-          "Provider choice depends on the pilot setup and configuration. Do not assume universal compatibility or zero-configuration interoperability; validate the trunk, codecs, registration, routing, and provider behavior during setup."
+          "Provider choice depends on the deploy path and configuration. Do not assume universal compatibility or zero-configuration interoperability; validate the trunk, codecs, registration, routing, and provider behavior during setup."
         ]
       },
       {
@@ -150,8 +150,8 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       }
     ],
     deploymentModels: [
-      "Guided pilot setup on a customer or agreed technical environment.",
-      "Operational pilot with a defined scope for telephony, workflow, API, data, access, recordings, transcripts, limits, and monitoring."
+      "Clean Linux server with the RocketAiFlow setup script for the first installation.",
+      "Customer PBX, SIP trunk, API, and monitoring integration when the workflow must fit an existing environment."
     ],
     screenshotCaption:
       "Use live operational views to validate campaign state, active calls, limits, and execution readiness before scaling.",
@@ -296,9 +296,9 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "3. Connetti",
-        href: "/deploy/trunk-configuration",
+        href: "/deploy/deployment-overview",
         description:
-          "Configura il trunk e collega routing inbound o setup campagna outbound."
+          "Scegli il percorso deploy e collega trunk, routing inbound o setup campagna outbound."
       },
       {
         title: "4. Esegui",
@@ -344,10 +344,10 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         ]
       },
       {
-        title: "Telefonia e setup pilot",
+        title: "Telefonia e percorso deploy",
         paragraphs: [
           "RocketAiFlow è costruito per ambienti SIP e PBX reali. La piattaforma usa un layer di telefonia basato su Asterisk per supportare connettività trunk-based pratica e flessibilità sui provider.",
-          "La scelta del provider dipende dal setup pilot e dalla configurazione. Non dare per scontata compatibilità universale o interoperabilità zero-config: valida trunk, codec, registrazione, routing e comportamento provider durante il setup."
+          "La scelta del provider dipende dal percorso deploy e dalla configurazione. Non dare per scontata compatibilità universale o interoperabilità zero-config: valida trunk, codec, registrazione, routing e comportamento provider durante il setup."
         ]
       },
       {
@@ -359,8 +359,8 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       }
     ],
     deploymentModels: [
-      "Setup pilot guidato su ambiente cliente o ambiente tecnico concordato.",
-      "Pilot operativo con perimetro definito su telefonia, workflow, API, dati, accessi, registrazioni, trascrizioni, limiti e monitoring."
+      "Server Linux pulito con script di setup RocketAiFlow per la prima installazione.",
+      "Integrazione con PBX cliente, trunk SIP, API e monitoring quando il workflow deve adattarsi a un ambiente esistente."
     ],
     screenshotCaption:
       "Usa le viste operative live per validare stato campagna, chiamate attive, limiti e readiness di esecuzione prima di scalare.",
@@ -515,7 +515,7 @@ function useIntroductionCopy() {
 }
 
 function shouldShowDeploymentModels(title: string) {
-  return title.includes("Telephony") || title.includes("pilot setup") || title.includes("setup pilot");
+  return title.includes("Telephony") || title.includes("telephony") || title.includes("Telefonia");
 }
 
 export function LocalizedIntroductionTitle() {

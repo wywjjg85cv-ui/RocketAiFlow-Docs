@@ -22,6 +22,7 @@ const navbarCopy = {
     apiReference: "API Reference",
     integrations: "Integrations",
     changelog: "Changelog",
+    contactSales: "Contact Sales",
     primary: "Primary"
   },
   it: {
@@ -29,9 +30,10 @@ const navbarCopy = {
     apiReference: "Riferimento API",
     integrations: "Integrazioni",
     changelog: "Changelog",
+    contactSales: "Contatta sales",
     primary: "Navigazione principale"
   }
-} as const satisfies Record<Locale, Record<"documentation" | "apiReference" | "integrations" | "changelog" | "primary", string>>;
+} as const satisfies Record<Locale, Record<"documentation" | "apiReference" | "integrations" | "changelog" | "contactSales" | "primary", string>>;
 
 type DocsNavbarProps = {
   initialLocale?: Locale;
@@ -65,7 +67,7 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
             <text
               x="60"
               y="24"
-              fill="white"
+              fill="currentColor"
               fontSize="18"
               fontWeight="600"
               fontFamily="Urbanist, sans-serif"
@@ -76,7 +78,7 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
             <text
               x="60"
               y="46"
-              fill="#7DD3FC"
+              fill="var(--docs-logo-accent)"
               fontSize="24"
               fontWeight="700"
               fontFamily="Urbanist, sans-serif"
@@ -115,6 +117,14 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
             );
           })}
         </nav>
+        <a
+          className="docs-contact-sales-button"
+          href="https://rocketaiflow.com/it/contatti"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {copy.contactSales}
+        </a>
         <LocaleSwitcher initialLocale={initialLocale} />
       </div>
     </Navbar>

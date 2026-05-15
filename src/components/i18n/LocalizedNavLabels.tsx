@@ -19,6 +19,7 @@ type NavLabelKey =
   | "configureAgentFunctions"
   | "dynamicParameters"
   | "telephony"
+  | "telephonyOverview"
   | "asteriskBasedPbxSystems"
   | "aiInboundRouting"
   | "aiDialerFlows"
@@ -29,10 +30,6 @@ type NavLabelKey =
   | "callHistoryAndReview"
   | "phone"
   | "pilotSetupOverview"
-  | "telephonyArchitecture"
-  | "trunkConfiguration"
-  | "guidedPilotSetup"
-  | "customerEnvironment"
   | "monitoringAndVisibility"
   | "campaignAnalytics"
   | "endpointAndTrunkMonitoring"
@@ -69,6 +66,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     configureAgentFunctions: "Configure Agent Functions",
     dynamicParameters: "Dynamic Parameters",
     telephony: "Telephony",
+    telephonyOverview: "Overview",
     asteriskBasedPbxSystems: "Asterisk-based PBX Systems",
     aiInboundRouting: "AI Inbound Routing",
     aiDialerFlows: "AI Dialer Flows",
@@ -78,11 +76,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     callRecords: "Call Records",
     callHistoryAndReview: "Call History and Review",
     phone: "Phone",
-    pilotSetupOverview: "Pilot Setup Overview",
-    telephonyArchitecture: "Telephony Architecture",
-    trunkConfiguration: "Trunk Configuration",
-    guidedPilotSetup: "Guided Pilot Setup",
-    customerEnvironment: "Customer Environment",
+    pilotSetupOverview: "Deployment Overview",
     monitoringAndVisibility: "Monitoring and Visibility",
     campaignAnalytics: "Campaign Analytics",
     endpointAndTrunkMonitoring: "Endpoint and Trunk Monitoring",
@@ -117,8 +111,9 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     configureAgentPrompt: "Configura il prompt",
     configureAgentFunctions: "Configura le functions",
     dynamicParameters: "Parametri dinamici",
-    telephony: "Telephony",
-    asteriskBasedPbxSystems: "Asterisk-based PBX Systems",
+    telephony: "Telefonia",
+    telephonyOverview: "Panoramica",
+    asteriskBasedPbxSystems: "Sistemi PBX basati su Asterisk",
     aiInboundRouting: "AI Inbound Routing",
     aiDialerFlows: "AI Dialer Flows",
     dialerPacingAndLimits: "Pacing e limiti dialer",
@@ -127,11 +122,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     callRecords: "Call Records",
     callHistoryAndReview: "Storico e revisione chiamate",
     phone: "Phone",
-    pilotSetupOverview: "Panoramica setup pilot",
-    telephonyArchitecture: "Architettura telephony",
-    trunkConfiguration: "Configurazione trunk",
-    guidedPilotSetup: "Setup pilot guidato",
-    customerEnvironment: "Ambiente cliente",
+    pilotSetupOverview: "Panoramica deploy",
     monitoringAndVisibility: "Monitoring e visibilità",
     campaignAnalytics: "Analytics campagna",
     endpointAndTrunkMonitoring: "Monitoraggio endpoint e trunk",

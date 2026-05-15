@@ -87,7 +87,7 @@ const homeCopy: Record<Locale, HomeCopy> = {
         "flexible telephony architecture for real SIP and PBX environments",
         "practical setup paths for outbound campaigns, controlled inbound calls, callbacks, scheduling, and contact priority",
         "API extensibility and custom business actions",
-        "guided pilot setup, customer-environment fit, and telephony readiness",
+        "deployment paths for inbound, outbound, SIP/PBX integration, API actions, and monitoring",
         "live monitoring, call history, transcripts, recordings when enabled, logs, traces, and troubleshooting readiness"
       ]
     },
@@ -96,8 +96,7 @@ const homeCopy: Record<Locale, HomeCopy> = {
       cards: [
         { href: "/get-started", title: "Get Started", description: "Understand the pilot-oriented platform model and how outbound, inbound, API actions, call data, and monitoring connect." },
         { href: "/get-started/quickstart", title: "Quickstart", description: "Create one agent, prompt, trunk path, contact import, controlled campaign or inbound route, and validation call." },
-        { href: "/deploy/deployment-overview", title: "Pilot Setup", description: "Review how a guided pilot defines workflow scope, telephony, API, data, recordings, transcripts, monitoring, and limits." },
-        { href: "/deploy/telephony-architecture", title: "Telephony Architecture", description: "Review how the Asterisk-based telephony layer supports SIP and PBX environments, trunk-based connectivity, and provider flexibility." }
+        { href: "/deploy/deployment-overview", title: "Deployment Overview", description: "Choose the first live path: inbound routing, outbound campaign, SIP/PBX integration, API actions, and monitoring." }
       ]
     },
     build: {
@@ -125,8 +124,7 @@ const homeCopy: Record<Locale, HomeCopy> = {
     operate: {
       title: "Pilot, monitor, and operate with control",
       cards: [
-        { href: "/deploy/trunk-configuration", title: "Trunk Configuration", description: "Align telephony connectivity with inbound, outbound, and transfer behavior." },
-        { href: "/deploy/deployment-overview", title: "Guided Pilot Setup", description: "Define the pilot perimeter before launch: workflow, telephony, API, data, access, recordings, transcripts, and monitoring." },
+        { href: "/deploy/deployment-overview", title: "Deployment Overview", description: "Connect the selected live path with trunk, agent, route or campaign, integrations, and monitoring." },
         { href: "/run-workflows/dialer-pacing-and-limits", title: "Campaign Control", description: "Control calls per second, active-call limits, callbacks, scheduled contacts, priority, and execution pressure." },
         { href: "/observe/monitoring-and-visibility", title: "Monitoring and Visibility", description: "Start from the main operational view for live campaigns, telephony state, and workflow health." },
         { href: "/observe/pre-provisioned-dashboards", title: "Pre-Provisioned Dashboards", description: "Review the ready dashboard foundation that helps teams get to live visibility faster." },
@@ -192,8 +190,7 @@ const homeCopy: Record<Locale, HomeCopy> = {
       cards: [
         { href: "/get-started", title: "Per iniziare", description: "Comprendi il modello orientato al pilot e come outbound, inbound, azioni API, dati chiamata e monitoring si collegano." },
         { href: "/get-started/quickstart", title: "Quickstart", description: "Crea un agente, prompt, trunk path, import contatti, campagna o route inbound controllata e chiamata di validazione." },
-        { href: "/deploy/deployment-overview", title: "Setup pilot", description: "Rivedi come un pilot guidato definisce workflow, telephony, API, dati, registrazioni, trascrizioni, monitoring e limiti." },
-        { href: "/deploy/telephony-architecture", title: "Architettura telephony", description: "Rivedi come il layer basato su Asterisk supporta ambienti SIP e PBX, trunk connectivity e provider flexibility." }
+        { href: "/deploy/deployment-overview", title: "Panoramica deploy", description: "Scegli il primo percorso live: routing inbound, campagna outbound, integrazione SIP/PBX, azioni API e monitoring." }
       ]
     },
     build: {
@@ -221,8 +218,7 @@ const homeCopy: Record<Locale, HomeCopy> = {
     operate: {
       title: "Pilot, monitoring e operations con controllo",
       cards: [
-        { href: "/deploy/trunk-configuration", title: "Configurazione trunk", description: "Allinea la connettività telephony con inbound, outbound e comportamento di transfer." },
-        { href: "/deploy/deployment-overview", title: "Setup pilot guidato", description: "Definisci prima del lancio workflow, telefonia, API, dati, accessi, registrazioni, trascrizioni e monitoring." },
+        { href: "/deploy/deployment-overview", title: "Panoramica deploy", description: "Collega il percorso live scelto con trunk, agente, route o campagna, integrazioni e monitoring." },
         { href: "/run-workflows/dialer-pacing-and-limits", title: "Controllo campagna", description: "Controlla calls per second, limiti chiamate attive, richiami automatici, contatti programmati, priorità e pressione dialer." },
         { href: "/observe/monitoring-and-visibility", title: "Monitoring e visibilità", description: "Parti dalla vista operativa principale per campagne live, stato telephony e salute dei workflow." },
         { href: "/observe/pre-provisioned-dashboards", title: "Dashboard pre-provisionate", description: "Rivedi la base dashboard pronta che accelera la visibilità operativa." },

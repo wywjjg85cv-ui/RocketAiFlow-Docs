@@ -53,7 +53,6 @@ type QuickstartCopy = {
   nextSteps: LinkCard[];
 };
 
-const openAiPromptGuidanceUrl = "https://developers.openai.com/api/docs/guides/prompt-guidance";
 const deepgramUrl = "https://deepgram.com/";
 
 const screenshotPaths = {
@@ -65,7 +64,7 @@ const screenshotPaths = {
   inboundCallRecord: "/screenshots/docs/inbound-call-record-review.png",
   contacts: "/screenshots/docs/contact-import.png",
   campaign: "/screenshots/docs/outbound-campaign-setup.png",
-  phone: "/screenshots/docs/phone-test-call.png",
+  phone: "/screenshots/docs/phone-webrtc-client.png",
   records: "/screenshots/docs/call-records-review.png",
   recordingTranscript: "/screenshots/docs/call-review-recording-transcript.png",
   dashboard: "/screenshots/docs/campaign-dashboard-monitoring.png",
@@ -92,6 +91,14 @@ function ExternalInlineLink({ href, children }: { href: string; children: ReactN
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
       </svg>
     </a>
+  );
+}
+
+function InternalInlineLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <Link className="docs-inline-link" href={href}>
+      <span>{children}</span>
+    </Link>
   );
 }
 
@@ -177,7 +184,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       items: ["role", "tone", "information to collect", "when to transfer or end the call"],
       paragraphs: [
         "Write short, clear instructions for the agent.",
-        <>If you choose OpenAI as the LLM, use the <ExternalInlineLink href={openAiPromptGuidanceUrl}>OpenAI prompt guidance</ExternalInlineLink> as a reference.</>,
+        <>Use the RocketAiFlow <InternalInlineLink href="/build/configure-agent-prompt">Configure Agent Prompt</InternalInlineLink> guide as a reference.</>,
         "For now, define only:"
       ],
       image: {
@@ -212,18 +219,19 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     agentPhoneTest: {
       preListParagraphCount: 2,
       paragraphs: [
-        "After configuring the agent, test it directly from the Phone section.",
-        "This is not an inbound or outbound workflow test. It simulates an inbound-style call over WebRTC directly to the agent, without using the trunk."
+        "After configuring the agent, test it from the Phone section.",
+        "Phone is a WebRTC client that can register SIP users, place and receive calls, and run a direct AI voice agent test. For this quickstart, use Voice agent test mode to simulate an inbound-style call to the agent without depending on trunk routing."
       ],
       items: [
         <>open <strong>Phone</strong></>,
         <>enter the password for the default <code>2000</code> agent</>,
         "select the agent you created in Voice agent test mode",
-        "start the call and check only that the agent responds as expected"
+        "start the call and check that the agent responds as expected",
+        "enable auto-answer only if you want the browser client to answer incoming test calls automatically"
       ],
       image: {
         src: screenshotPaths.phone,
-        alt: "Phone section showing WebRTC voice agent test mode and keypad for calling an agent directly."
+        alt: "Phone section showing SIP configuration, voice agent test mode, keypad, status badges, volume, and auto-answer."
       }
     },
     inboundIntro: {
@@ -402,7 +410,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       ]
     },
     nextSteps: [
-      { title: "Trunk Configuration", href: "/deploy/trunk-configuration", description: "Review the trunk setup that must be ready before routing or campaign execution." },
+      { title: "Deployment Overview", href: "/deploy/deployment-overview", description: "Review the deploy path that connects trunk, agent, routing, campaign, and monitoring." },
       { title: "AI Inbound Routing", href: "/run-workflows/ai-inbound-routing", description: "Go deeper on inbound setup after the inbound trunk and agent are ready." },
       { title: "AI Dialer Flows", href: "/run-workflows/ai-dialer-flows", description: "Go deeper on outbound campaign setup after the outbound trunk and agent are ready." },
       { title: "Configure Agent Functions", href: "/build/add-functions", description: "Review call control, transfer, rescheduling, lead qualification, and custom API functions." },
@@ -472,7 +480,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     prompt: {
       paragraphs: [
         "Scrivi istruzioni brevi e chiare per l'agente.",
-        <>Se scegli OpenAI come LLM, usa la <ExternalInlineLink href={openAiPromptGuidanceUrl}>prompt guidance di OpenAI</ExternalInlineLink> come riferimento.</>,
+        <>Usa la guida RocketAiFlow <InternalInlineLink href="/build/configure-agent-prompt">Configura il prompt</InternalInlineLink> come riferimento.</>,
         "Per ora definisci solo:"
       ],
       items: ["ruolo", "tono", "informazioni da raccogliere", "quando trasferire o terminare la chiamata"],
@@ -508,18 +516,19 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     agentPhoneTest: {
       preListParagraphCount: 2,
       paragraphs: [
-        "Dopo aver configurato l'agente, provalo direttamente dalla sezione Phone.",
-        "Questo non è un test del flusso inbound o outbound. Simula una chiamata simile all'inbound via WebRTC direttamente verso l'agente, senza passare dal trunk."
+        "Dopo aver configurato l'agente, provalo dalla sezione Phone.",
+        "Phone è un client WebRTC che può registrare utenti SIP, fare e ricevere chiamate e avviare un test diretto dell'AI voice agent. Per questo quickstart usa Voice agent test mode per simulare una chiamata simile all'inbound verso l'agente, senza dipendere dal routing del trunk."
       ],
       items: [
         <>vai nella sezione <strong>Phone</strong></>,
         <>inserisci la password dell'agente <code>2000</code>, creato di default</>,
         "seleziona l'agente che hai creato in Voice agent test mode",
-        "avvia la chiamata e controlla solo che l'agente risponda come previsto"
+        "avvia la chiamata e controlla che l'agente risponda come previsto",
+        "abilita auto-answer solo se vuoi che il client browser risponda automaticamente alle chiamate di test in ingresso"
       ],
       image: {
         src: screenshotPaths.phone,
-        alt: "Sezione Phone con modalità di test WebRTC voice agent e keypad per chiamare direttamente un agente."
+        alt: "Sezione Phone con configurazione SIP, voice agent test mode, keypad, badge di stato, volume e auto-answer."
       }
     },
     inboundIntro: {
@@ -698,7 +707,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       ]
     },
     nextSteps: [
-      { title: "Configurazione trunk", href: "/deploy/trunk-configuration", description: "Rivedi il setup trunk che deve essere pronto prima di routing o campagne." },
+      { title: "Panoramica deploy", href: "/deploy/deployment-overview", description: "Rivedi il percorso deploy che collega trunk, agente, routing, campagna e monitoring." },
       { title: "AI Inbound Routing", href: "/run-workflows/ai-inbound-routing", description: "Approfondisci il setup inbound dopo che trunk inbound e agente sono pronti." },
       { title: "AI Dialer Flows", href: "/run-workflows/ai-dialer-flows", description: "Approfondisci il setup outbound dopo che trunk outbound e agente sono pronti." },
       { title: "Configura le functions", href: "/build/add-functions", description: "Rivedi call control, transfer, rescheduling, lead qualification e funzioni API custom." },

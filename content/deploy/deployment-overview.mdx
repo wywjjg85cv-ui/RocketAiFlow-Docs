@@ -1,123 +1,29 @@
 ---
-title: Pilot Setup Overview
-description: Plan a RocketAiFlow early-access pilot across workflow scope, telephony, APIs, data, recordings, transcripts, limits, and monitoring.
+title: Deployment Overview
+description: "Deploy RocketAiFlow by choosing the installation setup and integration path for telephony, SIP/PBX systems, and business APIs."
 ---
 
-# Pilot Setup Overview
+import {
+  LocalizedDeploymentOverviewTitle,
+  LocalizedDeploymentOverviewHeading,
+  LocalizedDeploymentOverviewIntro,
+  LocalizedDeploymentOverviewPaths,
+  LocalizedDeploymentOverviewSetup,
+  LocalizedDeploymentOverviewNextSteps
+} from "../../src/components/i18n/LocalizedDeploymentOverview";
 
-Pilot planning matters because AI phone workflows stop looking simple as soon as they reach live
-telephony, real contacts, external API actions, transcripts, recordings, and monitoring
-requirements.
+# <LocalizedDeploymentOverviewTitle />
 
-Use this page to define how RocketAiFlow should be validated in a real operating environment before
-expanding campaign volume or inbound coverage.
+<LocalizedDeploymentOverviewIntro />
 
-## What pilot planning should answer
+## <LocalizedDeploymentOverviewHeading labelKey="paths" /> [#deployment-paths]
 
-Before launch, teams should answer:
+<LocalizedDeploymentOverviewPaths />
 
-- which workflow is being validated first
-- whether the pilot is outbound, inbound, or both
-- how contacts, priority, callback rules, scheduled calls, and custom fields will be handled
-- how telephony connectivity, SIP / PBX fit, and trunk behavior will be validated
-- which API actions must reach CRM, calendar, helpdesk, database, or internal systems
-- whether transcripts and recordings are enabled
-- what data is saved after each call
-- which calls-per-second and maximum active-call limits are safe for the first run
-- how monitoring, logs, traces, and call history will be reviewed
-- which team owns day-to-day pilot review
+## <LocalizedDeploymentOverviewHeading labelKey="setup" /> [#recommended-setup]
 
-## Early-access setup models
+<LocalizedDeploymentOverviewSetup />
 
-RocketAiFlow is currently best evaluated through a defined pilot perimeter, not a generic
-self-serve deployment assumption.
+## <LocalizedDeploymentOverviewHeading labelKey="nextSteps" /> [#next-steps]
 
-Common early-access setup models are:
-
-- `Guided pilot setup` where RocketAiFlow is configured with the customer team on an agreed technical environment and workflow scope.
-- `Customer environment pilot` where telephony, APIs, data rules, access, monitoring, and operational constraints are aligned with the customer's environment.
-
-The right setup depends more on workflow scope, data boundaries, telephony fit, API access,
-recording/transcription requirements, and support ownership than on one generic hosting preference.
-
-## Flexible telephony architecture
-
-RocketAiFlow uses an Asterisk-based telephony layer and is designed for provider flexibility.
-
-That matters because real pilots often need to fit existing SIP or PBX environments rather than
-force one telephony assumption. In practice:
-
-- RocketAiFlow is built for real SIP and PBX environments
-- provider choice depends on deployment and configuration
-- practical telephony interoperability should be validated during setup
-- trunk-based connectivity is the main bridge between the workflow layer and the calling environment
-
-## What to validate early
-
-Treat these as early pilot checkpoints:
-
-- the telephony path is understood for inbound, outbound, callbacks, and transfer behavior
-- provider fit has been reviewed against the real SIP / PBX environment
-- contact list fields, priority, and scheduled call behavior are understood
-- API actions can reach the systems they depend on
-- recordings and transcripts are enabled only if they are part of the pilot scope
-- observability is ready before live launch, not after
-- operators know where to review call records, dashboards, logs, and traces
-
-<ProductScreenshot
-  src="/screenshots/docs/ops-dialer-table-all.png"
-  alt="RocketAiFlow dialer table showing live campaign state, active calls, and call limits."
-  caption="A pilot should include live visibility into campaign state, active calls, call limits, and operator review paths."
-/>
-
-## Why pilot scope matters
-
-Early pilot scope is not bureaucracy. It protects the validation.
-
-A clear scope prevents teams from mixing too many variables at once:
-
-- telephony provider behavior
-- list quality
-- contact priority and scheduled calling
-- callback policy
-- prompt behavior
-- API action reliability
-- recording or transcription settings
-- monitoring and troubleshooting readiness
-
-The goal is to measure one useful workflow before expanding to more campaigns, larger lists, or
-more complex inbound coverage.
-
-## What to check if something goes wrong
-
-If a pilot path feels unclear, review:
-
-- whether the call objective is too broad
-- whether the telephony assumptions are explicit
-- whether callback, scheduling, and priority rules are understood
-- whether the API action path crosses sensitive boundaries
-- whether monitoring and logs are reachable by the operators who need them
-- whether the first run uses too much volume for the support model available
-
-## Related pages
-
-<CardGroup cols={2}>
-  <Card title="Trunk Configuration" href="/deploy/trunk-configuration">
-    Validate the telephony path first.
-  </Card>
-  <Card title="Telephony Architecture" href="/deploy/telephony-architecture">
-    Review how the Asterisk-based foundations support provider flexibility and SIP / PBX fit.
-  </Card>
-  <Card title="Guided Pilot Setup" href="/deploy/dedicated">
-    Review how to scope a guided pilot before launch.
-  </Card>
-  <Card title="Customer Environment" href="/deploy/self-hosted">
-    Review how to align the pilot with customer-owned systems, data boundaries, and access.
-  </Card>
-  <Card title="Dialer Pacing and Limits" href="/run-workflows/dialer-pacing-and-limits">
-    Control calls per second, active-call limits, callbacks, and campaign pressure.
-  </Card>
-  <Card title="Monitoring and Visibility" href="/observe/monitoring-and-visibility">
-    Confirm the live operating view before launch.
-  </Card>
-</CardGroup>
+<LocalizedDeploymentOverviewNextSteps />
