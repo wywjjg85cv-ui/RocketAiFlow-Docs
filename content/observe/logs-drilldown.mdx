@@ -3,8 +3,6 @@ title: Logs Drilldown
 description: Move from live symptoms to actionable evidence with a practical log investigation path for RocketAiFlow operations.
 ---
 
-import { ImagePlaceholder } from "../../mdx-components";
-
 # Logs Drilldown
 
 Use logs drilldown when dashboards tell you that something changed, but not why it changed.
@@ -36,9 +34,10 @@ Use logs drilldown when:
 - a function or API action appears to misfire
 - a workflow fails only under certain operating conditions
 
-<ImagePlaceholder
-  title="Logs drilldown view"
-  description="Add product screenshot here: a log review view correlated with campaign activity, call timing, and telephony events."
+<ProductScreenshot
+  src="/screenshots/docs/grafana-drilldown-logs-trace-link.png"
+  alt="Grafana Drilldown logs view showing log volume, searchable events, structured fields, and a linked trace."
+  caption="Use Grafana Drilldown to filter logs, search structured fields, inspect a selected event, and follow the trace link when the issue crosses services."
 />
 
 ## Practical drilldown sequence
@@ -59,7 +58,7 @@ Use logs drilldown when:
 ## Related pages
 
 <CardGroup cols={2}>
-  <Card title="Logs Overview" href="/observe/logs-overview" />
+  <Card title="Logs and Traces" href="/observe/logs-and-traces" />
   <Card title="Trace Correlation" href="/observe/trace-correlation" />
   <Card title="Investigating Workflow Issues" href="/troubleshoot/investigating-workflow-issues" />
   <Card title="Troubleshooting" href="/troubleshoot/troubleshooting" />

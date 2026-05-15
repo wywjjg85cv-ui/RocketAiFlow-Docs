@@ -11,6 +11,7 @@ type NavLabelKey =
   | "deploy"
   | "observe"
   | "troubleshoot"
+  | "legal"
   | "reference"
   | "introduction"
   | "quickstart"
@@ -34,8 +35,8 @@ type NavLabelKey =
   | "campaignAnalytics"
   | "endpointAndTrunkMonitoring"
   | "preProvisionedDashboards"
-  | "logsOverview"
-  | "tracesOverview"
+  | "dialerDashboardPanels"
+  | "logsAndTraces"
   | "logsDrilldown"
   | "traceCorrelation"
   | "infrastructureMonitoring"
@@ -46,6 +47,12 @@ type NavLabelKey =
   | "timeRangeReporting"
   | "investigatingWorkflowIssues"
   | "faq"
+  | "legalOverview"
+  | "termsAndCommercialModel"
+  | "privacyAndDataProtection"
+  | "aiTransparency"
+  | "securityAndTrust"
+  | "imprint"
   | "apiReference"
   | "changelog";
 
@@ -58,6 +65,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     deploy: "Deploy",
     observe: "Observe",
     troubleshoot: "Troubleshoot",
+    legal: "Legal",
     reference: "Reference",
     introduction: "Introduction",
     quickstart: "Quickstart",
@@ -81,8 +89,8 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     campaignAnalytics: "Campaign Analytics",
     endpointAndTrunkMonitoring: "Endpoint and Trunk Monitoring",
     preProvisionedDashboards: "Pre-Provisioned Dashboards",
-    logsOverview: "Logs Overview",
-    tracesOverview: "Traces Overview",
+    dialerDashboardPanels: "Dialer Dashboard Panels",
+    logsAndTraces: "Logs and Traces",
     logsDrilldown: "Logs Drilldown",
     traceCorrelation: "Trace Correlation",
     infrastructureMonitoring: "Infrastructure Monitoring",
@@ -93,6 +101,12 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     timeRangeReporting: "Time-Range Reporting",
     investigatingWorkflowIssues: "Investigating Workflow Issues",
     faq: "FAQ",
+    legalOverview: "Legal Status",
+    termsAndCommercialModel: "Pilot Terms",
+    privacyAndDataProtection: "Data Protection",
+    aiTransparency: "AI Transparency",
+    securityAndTrust: "Security",
+    imprint: "Company Notice",
     apiReference: "API Reference",
     changelog: "Changelog"
   },
@@ -104,6 +118,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     deploy: "Deploy",
     observe: "Osserva",
     troubleshoot: "Troubleshooting",
+    legal: "Legal",
     reference: "Riferimenti",
     introduction: "Introduzione",
     quickstart: "Quickstart",
@@ -127,8 +142,8 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     campaignAnalytics: "Analytics campagna",
     endpointAndTrunkMonitoring: "Monitoraggio endpoint e trunk",
     preProvisionedDashboards: "Dashboard preconfigurate",
-    logsOverview: "Panoramica log",
-    tracesOverview: "Panoramica trace",
+    dialerDashboardPanels: "Pannelli Dashboard Dialer",
+    logsAndTraces: "Log e trace",
     logsDrilldown: "Analisi log",
     traceCorrelation: "Correlazione trace",
     infrastructureMonitoring: "Monitoraggio infrastruttura",
@@ -139,6 +154,12 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     timeRangeReporting: "Report per intervallo",
     investigatingWorkflowIssues: "Analisi problemi workflow",
     faq: "FAQ",
+    legalOverview: "Stato legal",
+    termsAndCommercialModel: "Termini pilot",
+    privacyAndDataProtection: "Data protection",
+    aiTransparency: "Trasparenza AI",
+    securityAndTrust: "Security",
+    imprint: "Legal notice",
     apiReference: "Riferimento API",
     changelog: "Changelog"
   }

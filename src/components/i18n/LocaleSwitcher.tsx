@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import {
   defaultLocale,
   localeLabels,
@@ -10,6 +11,7 @@ import {
 } from "../../i18n/routing";
 import { getLocaleSwitcherMessages } from "../../i18n/messages";
 import { setClientLocale, useCurrentLocale } from "../../i18n/client-locale";
+import { docsHomePath, getCanonicalPathForPathname, getLocalizedPath } from "../../i18n/docs-routes";
 
 function FlagUK({ className = "" }: { className?: string }) {
   return (
@@ -58,6 +60,8 @@ type LocaleSwitcherProps = {
 export function LocaleSwitcher({ initialLocale = defaultLocale }: LocaleSwitcherProps) {
   const locale = useCurrentLocale(initialLocale);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -79,6 +83,12 @@ export function LocaleSwitcher({ initialLocale = defaultLocale }: LocaleSwitcher
     }
 
     setClientLocale(nextLocale);
+    const canonicalPath = getCanonicalPathForPathname(pathname) ?? docsHomePath;
+    const nextPath = getLocalizedPath(canonicalPath, nextLocale);
+    const suffix =
+      typeof window === "undefined" ? "" : `${window.location.search}${window.location.hash}`;
+
+    router.push(`${nextPath}${suffix}`);
   };
 
   const CurrentFlag = flags[locale];

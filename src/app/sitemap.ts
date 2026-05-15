@@ -1,38 +1,26 @@
 import type { MetadataRoute } from "next";
-import { readdirSync, statSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { absoluteUrl } from "../config/site";
+import {
+  docsRoutes,
+  getAlternatePaths,
+  getLocalizedPath,
+  pathToSegments
+} from "../i18n/docs-routes";
+import { defaultLocale, locales } from "../i18n/routing";
 
 const contentDir = path.join(process.cwd(), "content");
 
-function collectMdxFiles(dir: string): string[] {
-  const entries = readdirSync(dir, { withFileTypes: true });
-  const files: string[] = [];
+function canonicalPathToFilePath(canonicalPath: string) {
+  const segments = pathToSegments(canonicalPath);
+  const filePath = path.join(contentDir, ...segments) + ".mdx";
 
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-
-    if (entry.isDirectory()) {
-      files.push(...collectMdxFiles(fullPath));
-      continue;
-    }
-
-    if (entry.isFile() && entry.name.endsWith(".mdx")) {
-      files.push(fullPath);
-    }
+  if (existsSync(filePath)) {
+    return filePath;
   }
 
-  return files;
-}
-
-function filePathToRoute(filePath: string) {
-  const relativePath = path.relative(contentDir, filePath).replace(/\\/g, "/");
-  const withoutExtension = relativePath.replace(/\.mdx$/, "");
-  const route = withoutExtension.endsWith("/index")
-    ? withoutExtension.slice(0, -"/index".length)
-    : withoutExtension;
-
-  return route ? `/${route}` : "/";
+  return path.join(contentDir, ...segments, "index.mdx");
 }
 
 function routePriority(route: string) {
@@ -43,17 +31,25 @@ function routePriority(route: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return collectMdxFiles(contentDir)
-    .map((filePath) => {
-      const route = filePathToRoute(filePath);
-      const stats = statSync(filePath);
-
-      return {
-        url: absoluteUrl(route),
-        lastModified: stats.mtime,
-        changeFrequency: "weekly" as const,
-        priority: routePriority(route)
+  return docsRoutes
+    .flatMap((route) => {
+      const filePath = canonicalPathToFilePath(route.canonicalPath);
+      const stats = existsSync(filePath) ? statSync(filePath) : undefined;
+      const alternatePaths = getAlternatePaths(route.canonicalPath);
+      const languages = {
+        ...Object.fromEntries(locales.map((locale) => [locale, absoluteUrl(alternatePaths[locale])])),
+        "x-default": absoluteUrl(getLocalizedPath(route.canonicalPath, defaultLocale))
       };
+
+      return locales.map((locale) => ({
+        url: absoluteUrl(getLocalizedPath(route.canonicalPath, locale)),
+        lastModified: stats?.mtime ?? new Date(),
+        changeFrequency: "weekly" as const,
+        priority: routePriority(route.canonicalPath),
+        alternates: {
+          languages
+        }
+      }));
     })
     .sort((a, b) => a.url.localeCompare(b.url));
 }

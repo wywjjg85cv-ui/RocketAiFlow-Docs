@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { Navbar } from "nextra-theme-docs";
 import { LocaleSwitcher } from "./i18n/LocaleSwitcher";
 import { useCurrentLocale } from "../i18n/client-locale";
-import { defaultLocale, type Locale } from "../i18n/routing";
+import { getCanonicalPathForPathname, localizeHref } from "../i18n/docs-routes";
+import { defaultLocale, isLocale, type Locale } from "../i18n/routing";
 
 const docsHomeHref = "/get-started/introduction";
 
@@ -13,6 +14,7 @@ const navItems = [
   { href: docsHomeHref, labelKey: "documentation" },
   { href: "/reference/api-reference", labelKey: "apiReference" },
   { href: "/integrations", labelKey: "integrations" },
+  { href: "/legal", labelKey: "legal" },
   { href: "/reference/changelog", labelKey: "changelog" }
 ] as const;
 
@@ -21,6 +23,7 @@ const navbarCopy = {
     documentation: "Documentation",
     apiReference: "API Reference",
     integrations: "Integrations",
+    legal: "Legal",
     changelog: "Changelog",
     contactSales: "Contact Sales",
     primary: "Primary"
@@ -29,20 +32,28 @@ const navbarCopy = {
     documentation: "Documentazione",
     apiReference: "Riferimento API",
     integrations: "Integrazioni",
+    legal: "Legal",
     changelog: "Changelog",
     contactSales: "Contatta sales",
     primary: "Navigazione principale"
   }
-} as const satisfies Record<Locale, Record<"documentation" | "apiReference" | "integrations" | "changelog" | "contactSales" | "primary", string>>;
+} as const satisfies Record<Locale, Record<"documentation" | "apiReference" | "integrations" | "legal" | "changelog" | "contactSales" | "primary", string>>;
 
 type DocsNavbarProps = {
   initialLocale?: Locale;
 };
 
+function getLocaleFromPathname(pathname: string): Locale {
+  const firstSegment = pathname.split("/").filter(Boolean)[0];
+  return isLocale(firstSegment) ? firstSegment : defaultLocale;
+}
+
 export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
   const pathname = usePathname();
-  const locale = useCurrentLocale(initialLocale ?? defaultLocale);
+  const pathLocale = getLocaleFromPathname(pathname);
+  const locale = useCurrentLocale(initialLocale ?? pathLocale);
   const copy = navbarCopy[locale];
+  const canonicalPath = getCanonicalPathForPathname(pathname) ?? pathname;
 
   return (
     <Navbar
@@ -90,7 +101,7 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
           <span className="docs-logo-badge">{copy.documentation}</span>
         </span>
       }
-      logoLink={docsHomeHref}
+      logoLink={localizeHref(docsHomeHref, locale)}
     >
       <div key="docs-navbar-actions" className="docs-navbar-actions">
         <nav aria-label={copy.primary} className="docs-topnav">
@@ -99,17 +110,17 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
               .filter((navItem) => navItem.href !== docsHomeHref)
               .map((navItem) => navItem.href);
             const isDocsPath = !nonDocsPrefixes.some(
-              (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
+              (prefix) => canonicalPath === prefix || canonicalPath.startsWith(`${prefix}/`)
             );
             const isActive =
               item.href === docsHomeHref
                 ? isDocsPath
-                : pathname === item.href || pathname.startsWith(`${item.href}/`);
+                : canonicalPath === item.href || canonicalPath.startsWith(`${item.href}/`);
 
             return (
               <Link
                 key={item.href}
-                href={item.href}
+                href={localizeHref(item.href, locale)}
                 className={`docs-topnav-link${isActive ? " is-active" : ""}`}
               >
                 {copy[item.labelKey]}
@@ -125,7 +136,7 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
         >
           {copy.contactSales}
         </a>
-        <LocaleSwitcher initialLocale={initialLocale} />
+        <LocaleSwitcher initialLocale={initialLocale ?? pathLocale} />
       </div>
     </Navbar>
   );

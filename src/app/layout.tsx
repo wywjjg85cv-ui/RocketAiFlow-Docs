@@ -3,6 +3,7 @@ import { Footer, Layout } from "nextra-theme-docs";
 import { Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import { DocsNavbar } from "../components/docs-navbar";
+import { LocalizedInternalLinks } from "../components/i18n/LocalizedInternalLinks";
 import { LocalizedBackToTop, LocalizedTocTitle } from "../components/i18n/LocalizedToc";
 import { absoluteUrl, siteDescription, siteName, siteUrl } from "../config/site";
 import "nextra-theme-docs/style.css";
@@ -107,6 +108,7 @@ export default async function RootLayout({
         >
           {children}
         </Layout>
+        <LocalizedInternalLinks />
       </body>
     </html>
   );

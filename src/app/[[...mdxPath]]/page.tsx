@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { generateStaticParamsFor, importPage } from "nextra/pages";
+import { importPage } from "nextra/pages";
 import { useMDXComponents as getMDXComponents } from "../../../mdx-components";
 import type { ComponentType, ReactNode } from "react";
+import { DocsBreadcrumbs } from "../../components/docs-breadcrumbs";
 import { absoluteUrl, siteDescription, siteName } from "../../config/site";
+import {
+  docsRoutes,
+  getAlternatePaths,
+  getLocalizedPath,
+  pathToSegments,
+  resolveDocsPath
+} from "../../i18n/docs-routes";
+import { defaultLocale, locales } from "../../i18n/routing";
 
 type PageProps = {
   params: Promise<{
@@ -12,17 +21,19 @@ type PageProps = {
 };
 
 export const dynamicParams = false;
-export const generateStaticParams = generateStaticParamsFor("mdxPath");
+export function generateStaticParams() {
+  return docsRoutes.flatMap((route) =>
+    locales.map((locale) => ({
+      mdxPath: [locale, ...pathToSegments(route.paths[locale])]
+    }))
+  );
+}
 
 const Wrapper = getMDXComponents().wrapper as ComponentType<{
   children: ReactNode;
   metadata?: unknown;
   toc?: unknown;
 }>;
-
-function routeFromMdxPath(mdxPath: string[]) {
-  return mdxPath.length > 0 ? `/${mdxPath.join("/")}` : "/get-started/introduction";
-}
 
 function metadataTitleToString(title: Metadata["title"] | undefined) {
   if (typeof title === "string") {
@@ -44,7 +55,13 @@ function metadataTitleToString(title: Metadata["title"] | undefined) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { mdxPath = [] } = await params;
-  const result = await importPage(mdxPath).catch(() => null);
+  const resolvedPath = resolveDocsPath(mdxPath);
+
+  if (!resolvedPath) {
+    return {};
+  }
+
+  const result = await importPage(resolvedPath.mdxPath).catch(() => null);
 
   if (!result) {
     return {};
@@ -54,14 +71,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = metadataTitleToString(pageMetadata.title);
   const description =
     typeof pageMetadata.description === "string" ? pageMetadata.description : siteDescription;
-  const canonical = absoluteUrl(routeFromMdxPath(mdxPath));
+  const canonical = absoluteUrl(getLocalizedPath(resolvedPath.canonicalPath, resolvedPath.locale));
+  const alternates = getAlternatePaths(resolvedPath.canonicalPath);
   const image = absoluteUrl("/logo512.png");
 
   return {
     ...pageMetadata,
     alternates: {
-      ...(pageMetadata.alternates ?? {}),
-      canonical
+      canonical,
+      languages: {
+        ...Object.fromEntries(locales.map((locale) => [locale, absoluteUrl(alternates[locale])])),
+        "x-default": absoluteUrl(getLocalizedPath(resolvedPath.canonicalPath, defaultLocale))
+      }
     },
     openGraph: {
       title,
@@ -100,7 +121,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function DocsPage(props: PageProps) {
   const { mdxPath = [] } = await props.params;
-  const result = await importPage(mdxPath).catch(() => null);
+  const resolvedPath = resolveDocsPath(mdxPath);
+
+  if (!resolvedPath) {
+    notFound();
+  }
+
+  const result = await importPage(resolvedPath.mdxPath).catch(() => null);
 
   if (!result) {
     notFound();
@@ -110,7 +137,8 @@ export default async function DocsPage(props: PageProps) {
 
   return (
     <Wrapper toc={toc} metadata={metadata}>
-      <MDXContent {...props} params={{ mdxPath }} />
+      <DocsBreadcrumbs canonicalPath={resolvedPath.canonicalPath} locale={resolvedPath.locale} />
+      <MDXContent {...props} params={{ mdxPath: resolvedPath.mdxPath }} />
     </Wrapper>
   );
 }

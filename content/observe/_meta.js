@@ -2,40 +2,26 @@ import { createElement } from "react";
 import { LocalizedNavLabel } from "../../src/components/i18n/LocalizedNavLabels";
 
 const label = (labelKey) => createElement(LocalizedNavLabel, { labelKey });
+const hidden = (labelKey) => ({
+  title: label(labelKey),
+  display: "hidden"
+});
 
 const observeMeta = {
   "monitoring-and-visibility": label("monitoringAndVisibility"),
-  "campaign-analytics": label("campaignAnalytics"),
-  "endpoint-and-trunk-monitoring": label("endpointAndTrunkMonitoring"),
   "pre-provisioned-dashboards": label("preProvisionedDashboards"),
-  "logs-overview": label("logsOverview"),
-  "traces-overview": label("tracesOverview"),
-  "logs-drilldown": label("logsDrilldown"),
-  "trace-correlation": label("traceCorrelation"),
-  "infrastructure-monitoring": {
-    title: label("infrastructureMonitoring"),
-    display: "hidden"
-  },
-  "asterisk-monitoring": {
-    title: label("asteriskMonitoring"),
-    display: "hidden"
-  },
-  "container-monitoring": {
-    title: label("containerMonitoring"),
-    display: "hidden"
-  },
-  "database-monitoring": {
-    title: label("databaseMonitoring"),
-    display: "hidden"
-  },
-  "real-time-performance-metrics": {
-    title: label("realTimePerformanceMetrics"),
-    display: "hidden"
-  },
-  "time-range-reporting": {
-    title: label("timeRangeReporting"),
-    display: "hidden"
-  }
+  "dialer-dashboard-panels": label("dialerDashboardPanels"),
+  "logs-and-traces": label("logsAndTraces"),
+  "campaign-analytics": hidden("campaignAnalytics"),
+  "endpoint-and-trunk-monitoring": hidden("endpointAndTrunkMonitoring"),
+  "logs-drilldown": hidden("logsDrilldown"),
+  "trace-correlation": hidden("traceCorrelation"),
+  "infrastructure-monitoring": hidden("infrastructureMonitoring"),
+  "asterisk-monitoring": hidden("asteriskMonitoring"),
+  "container-monitoring": hidden("containerMonitoring"),
+  "database-monitoring": hidden("databaseMonitoring"),
+  "real-time-performance-metrics": hidden("realTimePerformanceMetrics"),
+  "time-range-reporting": hidden("timeRangeReporting")
 };
 
 export default observeMeta;

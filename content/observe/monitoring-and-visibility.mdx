@@ -1,154 +1,37 @@
 ---
 title: Monitoring and Visibility
-description: Review the live operational signals RocketAiFlow teams should monitor during early-access pilots and live campaign validation.
+description: Understand the RocketAiFlow observe layer across Dialer dashboards, panel-level guidance, platform health, logs, and traces.
 ---
 
-# Monitoring and Visibility
+import {
+  LocalizedMonitoringAndVisibilityTitle,
+  LocalizedMonitoringAndVisibilityIntro,
+  LocalizedMonitoringAndVisibilityOperatingModelTitle,
+  LocalizedMonitoringAndVisibilityOperatingModel,
+  LocalizedMonitoringAndVisibilityWhatToUseTitle,
+  LocalizedMonitoringAndVisibilityWhatToUse,
+  LocalizedMonitoringAndVisibilityDialerSignalsTitle,
+  LocalizedMonitoringAndVisibilityDialerSignals,
+  LocalizedMonitoringAndVisibilityRelatedPagesTitle,
+  LocalizedMonitoringAndVisibilityRelatedPages
+} from "../../src/components/i18n/LocalizedMonitoringAndVisibility";
 
-RocketAiFlow is not just a workflow builder. It is an operational product. Teams validating AI outbound campaigns and controlled inbound workflows need real-time visibility into what is happening now, what changed recently, and where performance is drifting.
+# <LocalizedMonitoringAndVisibilityTitle />
 
-That includes the telephony path. RocketAiFlow uses an Asterisk-based telephony layer, so
-observability needs to cover not only workflow behavior but also the practical SIP / PBX
-environment behind inbound and outbound calling.
+<LocalizedMonitoringAndVisibilityIntro />
 
-## Why monitoring matters
+## <LocalizedMonitoringAndVisibilityOperatingModelTitle /> [#operating-model]
 
-Monitoring helps teams:
+<LocalizedMonitoringAndVisibilityOperatingModel />
 
-- detect issues faster before they turn into missed outcomes
-- understand campaign and endpoint behavior while calls are active
-- compare live load with configured limits
-- see whether outcomes are shifting over time
-- make better optimization decisions with operational evidence
+## <LocalizedMonitoringAndVisibilityWhatToUseTitle /> [#what-to-use]
 
-## What teams usually monitor
+<LocalizedMonitoringAndVisibilityWhatToUse />
 
-The exact implementation depends on the agreed pilot setup, customer environment, telephony path, and monitoring stack, but practical coverage often includes:
+## <LocalizedMonitoringAndVisibilityDialerSignalsTitle /> [#dialer-realtime-signals]
 
-- answered calls
-- no answer activity
-- busy calls
-- failed calls
-- congestion events
-- total call volume
-- active calls versus configured call limits
-- campaign active state
-- dialing status and pacing
-- endpoint and trunk state
-- average talk time
-- average ring time
-- performance trends across selected time windows
+<LocalizedMonitoringAndVisibilityDialerSignals />
 
-## Product-led monitoring view
+## <LocalizedMonitoringAndVisibilityRelatedPagesTitle /> [#related-pages]
 
-Keep the dashboard language useful for operators and managers. On the product side, present
-monitoring as business-readable categories such as:
-
-- call outcomes in real time
-- live campaign monitoring
-- endpoint and trunk health
-- active load and pacing
-- performance insights over time
-
-The raw metric names can stay in the technical layer.
-
-## Pre-provisioned Grafana dashboards
-
-RocketAiFlow can come with a ready Grafana dashboard foundation, so teams do not need to build the
-core monitoring layer from scratch before they can see useful operational signals.
-
-That pre-provisioned starting point can include dashboard categories such as:
-
-- `Node Exporter Full`
-- `Asterisk Log`
-- `Asterisk Overview`
-- `cAdvisor`
-- `MySQL 8`
-
-Together, these give teams faster visibility into:
-
-- host and system health
-- telephony activity
-- Asterisk behavior and logs
-- container runtime monitoring
-- database visibility
-
-This is especially important for a flexible telephony architecture, where provider choice depends on pilot setup and configuration and should be validated with operational evidence.
-
-<Callout type="info">
-  Treat the pre-provisioned Grafana set as the first operational baseline. Teams can extend it
-  later, but they do not need to invent the initial observability layer just to begin operating the
-  platform responsibly.
-</Callout>
-
-<div className="docs-panel-grid docs-panel-grid-two">
-  <ProductScreenshot
-    src="/screenshots/docs/ops-total-outcomes-all.png"
-    alt="Grafana total outcomes panel across all campaigns."
-    caption="Outcome totals give operators a quick read on answer, no answer, busy, congestion, failed, and total call volume."
-  />
-  <ProductScreenshot
-    src="/screenshots/docs/ops-call-outcomes-all.png"
-    alt="Grafana call outcomes distribution panel across all campaigns."
-    caption="Distribution helps teams see whether the current outcome mix still matches the expected workflow pattern."
-  />
-</div>
-
-<div className="docs-panel-grid docs-panel-grid-three">
-  <ProductScreenshot
-    src="/screenshots/docs/ops-dialing-rate-all.png"
-    alt="Grafana dialing rate panel across all campaigns."
-    caption="Dialing pace shows how fast outbound load is being created."
-  />
-  <ProductScreenshot
-    src="/screenshots/docs/ops-calls-volume-all.png"
-    alt="Grafana calls volume panel across all campaigns."
-    caption="Call volume shows live throughput alongside the configured ceiling."
-  />
-  <ProductScreenshot
-    src="/screenshots/docs/ops-active-vs-limit-all.png"
-    alt="Grafana active calls versus limit gauge across all campaigns."
-    caption="The active-versus-limit gauge makes campaign pressure visible before the platform hits its ceiling."
-  />
-</div>
-
-## Related pages
-
-<CardGroup cols={2}>
-  <Card title="Pre-Provisioned Dashboards" href="/observe/pre-provisioned-dashboards">
-    Review the built-in Grafana dashboard categories and when teams use each one.
-  </Card>
-  <Card title="Infrastructure Monitoring" href="/observe/infrastructure-monitoring">
-    See how Node Exporter Full helps confirm host and system health.
-  </Card>
-  <Card title="Asterisk Monitoring" href="/observe/asterisk-monitoring">
-    Review the telephony dashboards that support higher-level monitoring and log-based analysis.
-  </Card>
-  <Card title="Container Monitoring" href="/observe/container-monitoring">
-    Use cAdvisor-backed views to understand container runtime conditions.
-  </Card>
-  <Card title="Database Monitoring" href="/observe/database-monitoring">
-    See when MySQL 8 visibility belongs in the daily operations and troubleshooting path.
-  </Card>
-  <Card title="Campaign Analytics" href="/observe/campaign-analytics">
-    Understand how call outcomes, pacing, and campaign activity fit together over time.
-  </Card>
-  <Card title="Endpoint and Trunk Monitoring" href="/observe/endpoint-and-trunk-monitoring">
-    Review the telephony-side health signals that can affect live workflow behavior.
-  </Card>
-  <Card title="Deployment Overview" href="/deploy/deployment-overview">
-    Review how the selected deploy path connects trunk setup, workflow execution, and operations.
-  </Card>
-  <Card title="Real-Time Performance Metrics" href="/observe/real-time-performance-metrics">
-    See the main metrics categories teams usually need once workflows are live.
-  </Card>
-  <Card title="Time-Range Reporting" href="/observe/time-range-reporting">
-    Compare behavior across selected windows instead of relying on one moment in time.
-  </Card>
-  <Card title="Logs Overview" href="/observe/logs-overview">
-    See where dashboard review should hand off to log review during investigation.
-  </Card>
-  <Card title="Traces Overview" href="/observe/traces-overview">
-    Understand how traces complement dashboards and logs where tracing is enabled.
-  </Card>
-</CardGroup>
+<LocalizedMonitoringAndVisibilityRelatedPages />

@@ -14,6 +14,7 @@ type CardCopy = {
 type SectionCopy = {
   title: string;
   paragraphs: ReactNode[];
+  cards?: CardCopy[];
   items?: ReactNode[];
 };
 
@@ -39,14 +40,6 @@ const deploymentCopy: Record<Locale, DeploymentCopy> = {
     pathsTitle: "Deployment paths",
     paths: [
       {
-        title: "Clean dedicated server",
-        description: "Install RocketAiFlow on a dedicated Linux server prepared for the first deployment."
-      },
-      {
-        title: "Customer environment integration",
-        description: "Keep existing PBX, Asterisk, databases, or internal systems separate and connect them through explicit integration points."
-      },
-      {
         title: "SIP / PBX integration",
         href: "/integrations/telephony",
         description: "Connect customer PBX systems, SIP trunks, or provider paths when calls must pass through an existing telephony environment."
@@ -60,13 +53,22 @@ const deploymentCopy: Record<Locale, DeploymentCopy> = {
     setup: {
       title: "Recommended setup",
       paragraphs: [
-        "For the first deployment, provide a clean dedicated Linux server. The RocketAiFlow team will install and prepare the product so the environment is ready for validation.",
-        "If the customer already has Asterisk, a PBX, databases, or internal systems, keep RocketAiFlow separate when possible and connect to those systems through SIP trunks, APIs, and explicit routing rules."
+        "Choose the setup model before configuring trunks, agents, integrations, and monitoring."
+      ],
+      cards: [
+        {
+          title: "Clean dedicated server",
+          description: "Install RocketAiFlow on a dedicated Linux server prepared for the first deployment."
+        },
+        {
+          title: "Customer environment integration",
+          description: "Keep existing PBX, Asterisk, databases, or internal systems separate and connect them through explicit integration points."
+        }
       ],
       items: [
-        "Use a clean server for the first installation to reduce conflicts with existing services.",
-        "Connect the customer PBX or SIP provider through trunk configuration when the existing telephony environment must remain in control.",
-        "Install on a machine that already hosts customer services only when that choice has been reviewed and approved as an advanced setup."
+        "Use a clean server for the first deployment when possible; it is the most predictable setup.",
+        "Connect the customer PBX or SIP provider through trunk configuration when the existing telephony environment must remain central.",
+        "Avoid installing RocketAiFlow on servers that already host critical customer services, unless an advanced setup has been agreed and reviewed first."
       ]
     },
     nextStepsTitle: "Next steps",
@@ -102,14 +104,6 @@ const deploymentCopy: Record<Locale, DeploymentCopy> = {
     pathsTitle: "Percorsi deploy",
     paths: [
       {
-        title: "Server dedicato pulito",
-        description: "Installa RocketAiFlow su un server Linux dedicato e preparato per il primo deploy."
-      },
-      {
-        title: "Integrazione con ambiente cliente",
-        description: "Mantieni PBX, Asterisk, database o sistemi interni separati e collegali tramite punti di integrazione espliciti."
-      },
-      {
         title: "Integrazione SIP / PBX",
         href: "/integrations/telephony",
         description: "Collega PBX cliente, trunk SIP o provider quando le chiamate devono passare da un ambiente telefonico esistente."
@@ -123,13 +117,22 @@ const deploymentCopy: Record<Locale, DeploymentCopy> = {
     setup: {
       title: "Setup consigliato",
       paragraphs: [
-        "Per il primo deploy consigliamo un server Linux dedicato e pulito fornito dal cliente. Il team RocketAiFlow esegue l'installazione e prepara il prodotto per la validazione.",
-        "Se il cliente ha già Asterisk, un PBX, database o sistemi interni, quando possibile mantieni RocketAiFlow separato e collegalo a quei sistemi tramite trunk SIP, API e regole di routing esplicite."
+        "Prima di configurare trunk, agenti, integrazioni e monitoring, scegli il modello di setup."
+      ],
+      cards: [
+        {
+          title: "Server dedicato pulito",
+          description: "Installa RocketAiFlow su un server Linux dedicato e preparato per il primo deploy."
+        },
+        {
+          title: "Integrazione con ambiente cliente",
+          description: "Mantieni PBX, Asterisk, database o sistemi interni separati e collegali tramite punti di integrazione espliciti."
+        }
       ],
       items: [
-        "Usa un server pulito per la prima installazione, così riduci conflitti con servizi già presenti.",
+        "Usa un server pulito per il primo deploy quando possibile: è il setup più prevedibile.",
         "Collega il PBX o provider SIP del cliente tramite configurazione trunk quando l'ambiente telefonico esistente deve rimanere centrale.",
-        "Installa su una macchina che ospita già servizi del cliente solo quando questa scelta è stata valutata e approvata come setup avanzato."
+        "Evita di installare RocketAiFlow su server che ospitano già servizi critici del cliente, salvo setup avanzati concordati e verificati prima."
       ]
     },
     nextStepsTitle: "Passaggi successivi",
@@ -169,6 +172,7 @@ function Section({ section }: { section: SectionCopy }) {
       {section.paragraphs.map((paragraph, index) => (
         <p key={index}>{paragraph}</p>
       ))}
+      {section.cards ? <Cards cards={section.cards} /> : null}
       {section.items ? (
         <ul>
           {section.items.map((item, index) => (

@@ -11,6 +11,7 @@ const pageMeta = {
   deploy: label("deploy"),
   observe: label("observe"),
   troubleshoot: label("troubleshoot"),
+  legal: label("legal"),
   reference: label("reference")
 };
 
