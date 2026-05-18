@@ -8,6 +8,19 @@ import { localizeHref } from "../../i18n/docs-routes";
 
 type HeadingKey = "dialer" | "cadvisor" | "mysql" | "nodeExporter" | "asteriskLog" | "asteriskOverview" | "relatedPages";
 
+type DialerPanelSectionKey =
+  | "realTimeOverview"
+  | "realTimeAgentsTrunks"
+  | "allCampaignsPerformance"
+  | "singleCampaignPerformance";
+
+const dialerPanelDetailIds: Record<DialerPanelSectionKey, string> = {
+  realTimeOverview: "real-time-overview",
+  realTimeAgentsTrunks: "real-time-agents-trunks",
+  allCampaignsPerformance: "all-campaigns-performance",
+  singleCampaignPerformance: "single-campaign-performance"
+};
+
 type ScreenshotCopy = {
   src: string;
   alt: string;
@@ -427,23 +440,23 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
     relatedCards: [
       {
         title: "Dialer Dashboard Panels",
-        href: "/observe/dialer-dashboard-panels",
+        href: "/monitoring/dialer-dashboard-panels",
         description: "Open the deeper breakdown of each Dialer dashboard panel."
       },
       {
         title: "Monitoring and Visibility",
-        href: "/observe/monitoring-and-visibility",
+        href: "/monitoring/monitoring-and-visibility",
         description: "See how dashboards fit into the full operating view."
       },
       {
         title: "Logs and Traces",
-        href: "/observe/logs-and-traces",
+        href: "/monitoring/logs-and-traces",
         description: "Move from dashboard symptoms to event and path-level evidence."
       },
       {
-        title: "Investigating Workflow Issues",
-        href: "/troubleshoot/investigating-workflow-issues",
-        description: "Follow the operational troubleshooting path."
+        title: "Troubleshooting",
+        href: "/troubleshoot/troubleshooting",
+        description: "Use the setup checks when dashboard signals point to a workflow issue."
       }
     ]
   },
@@ -820,23 +833,23 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
     relatedCards: [
       {
         title: "Pannelli Dashboard Dialer",
-        href: "/observe/dialer-dashboard-panels",
+        href: "/monitoring/dialer-dashboard-panels",
         description: "Apri l'approfondimento dei singoli pannelli della dashboard Dialer."
       },
       {
         title: "Monitoring e visibilità",
-        href: "/observe/monitoring-and-visibility",
+        href: "/monitoring/monitoring-and-visibility",
         description: "Vedi come le dashboard entrano nella vista operativa completa."
       },
       {
         title: "Log e trace",
-        href: "/observe/logs-and-traces",
+        href: "/monitoring/logs-and-traces",
         description: "Passa dai sintomi in dashboard all'evidenza su eventi e percorsi."
       },
       {
-        title: "Analisi problemi workflow",
-        href: "/troubleshoot/investigating-workflow-issues",
-        description: "Segui il percorso operativo di troubleshooting."
+        title: "Risoluzione problemi",
+        href: "/troubleshoot/troubleshooting",
+        description: "Usa i controlli di setup quando i segnali dashboard indicano un problema di workflow."
       }
     ]
   }
@@ -876,7 +889,7 @@ function DashboardPanelDetail({ panel }: { panel: DashboardPanelCopy }) {
           <img className="docs-screenshot-img" src={panel.src} alt={panel.alt} loading="lazy" />
         </div>
       </figure>
-      <h4>{panel.title}</h4>
+      <h3 className="docs-dashboard-panel-title">{panel.title}</h3>
       <p>{panel.description}</p>
     </article>
   );
@@ -906,7 +919,7 @@ function DashboardScreenshotDetail({ screenshot }: { screenshot: ScreenshotCopy 
         <p>
           <Link
             className="docs-inline-link"
-            href={localizeHref(`/observe/dialer-dashboard-panels#${screenshot.detailId}`, locale)}
+            href={localizeHref(`/monitoring/dialer-dashboard-panels#${screenshot.detailId}`, locale)}
           >
             <span>
               {copy.panelDetailsLinkLabel}: {screenshot.title}
@@ -994,24 +1007,55 @@ export function LocalizedDialerDashboardPanelsIntro() {
   );
 }
 
-export function LocalizedDialerDashboardPanelsPage() {
+function getDialerPanelScreenshot(copy: DashboardsCopy, sectionKey: DialerPanelSectionKey) {
+  return copy.sections.dialer.screenshots.find(
+    (screenshot) => screenshot.detailId === dialerPanelDetailIds[sectionKey]
+  );
+}
+
+function DialerDashboardPanelSection({ screenshot }: { screenshot: ScreenshotCopy }) {
   const copy = useDashboardsCopy();
-  const screenshots = copy.sections.dialer.screenshots.filter((screenshot) => screenshot.detailPanels?.length);
 
   return (
+    <section className="docs-home-section docs-home-section-nested">
+      {screenshot.description ? <p>{screenshot.description}</p> : null}
+      <p className="docs-dashboard-panel-kicker">{copy.panelDetailsHeading}</p>
+      <div className="docs-panel-grid docs-panel-grid-three docs-dashboard-panel-grid">
+        {screenshot.detailPanels?.map((panel) => (
+          <DashboardPanelDetail key={panel.src} panel={panel} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export function LocalizedDialerDashboardPanelsHeading({
+  sectionKey
+}: {
+  sectionKey: DialerPanelSectionKey;
+}) {
+  const copy = useDashboardsCopy();
+  return <>{getDialerPanelScreenshot(copy, sectionKey)?.title ?? ""}</>;
+}
+
+export function LocalizedDialerDashboardPanelsSection({
+  sectionKey
+}: {
+  sectionKey: DialerPanelSectionKey;
+}) {
+  const copy = useDashboardsCopy();
+  const screenshot = getDialerPanelScreenshot(copy, sectionKey);
+
+  return screenshot ? <DialerDashboardPanelSection screenshot={screenshot} /> : null;
+}
+
+export function LocalizedDialerDashboardPanelsPage() {
+  return (
     <>
-      {screenshots.map((screenshot) => (
-        <section key={screenshot.src} id={screenshot.detailId} className="docs-home-section docs-home-section-nested">
-          <h2>{screenshot.title}</h2>
-          {screenshot.description ? <p>{screenshot.description}</p> : null}
-          <h3>{copy.panelDetailsHeading}</h3>
-          <div className="docs-panel-grid docs-panel-grid-three docs-dashboard-panel-grid">
-            {screenshot.detailPanels?.map((panel) => (
-              <DashboardPanelDetail key={panel.src} panel={panel} />
-            ))}
-          </div>
-        </section>
-      ))}
+      <LocalizedDialerDashboardPanelsSection sectionKey="realTimeOverview" />
+      <LocalizedDialerDashboardPanelsSection sectionKey="realTimeAgentsTrunks" />
+      <LocalizedDialerDashboardPanelsSection sectionKey="allCampaignsPerformance" />
+      <LocalizedDialerDashboardPanelsSection sectionKey="singleCampaignPerformance" />
     </>
   );
 }

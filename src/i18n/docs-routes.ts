@@ -44,23 +44,22 @@ export const docsRoutes = [
     paths: { en: "/run-workflows/ai-dialer-flows", it: "/esegui-workflow/ai-dialer-flows" }
   },
   {
-    canonicalPath: "/run-workflows/dialer-pacing-and-limits",
+    canonicalPath: "/run-workflows/ai-dialer-flows/import-contacts",
     paths: {
-      en: "/run-workflows/dialer-pacing-and-limits",
-      it: "/esegui-workflow/pacing-e-limiti-dialer"
+      en: "/run-workflows/ai-dialer-flows/import-contacts",
+      it: "/esegui-workflow/ai-dialer-flows/importa-contatti"
     }
   },
   {
-    canonicalPath: "/run-workflows/import-contacts",
-    paths: { en: "/run-workflows/import-contacts", it: "/esegui-workflow/importa-contatti" }
-  },
-  {
     canonicalPath: "/run-workflows/contact-inbounds",
-    paths: { en: "/run-workflows/contact-inbounds", it: "/esegui-workflow/contact-inbounds" }
+    paths: { en: "/run-workflows/contact-inbounds", it: "/esegui-workflow/contatti-inbound" }
   },
   {
-    canonicalPath: "/run-workflows/call-records",
-    paths: { en: "/run-workflows/call-records", it: "/esegui-workflow/call-records" }
+    canonicalPath: "/run-workflows/ai-dialer-flows/call-records",
+    paths: {
+      en: "/run-workflows/ai-dialer-flows/call-records",
+      it: "/esegui-workflow/ai-dialer-flows/registro-chiamate"
+    }
   },
   {
     canonicalPath: "/run-workflows/call-history-and-review",
@@ -93,31 +92,24 @@ export const docsRoutes = [
     paths: { en: "/deploy/deployment-overview", it: "/deploy/panoramica-deploy" }
   },
   {
-    canonicalPath: "/observe/monitoring-and-visibility",
-    paths: { en: "/observe/monitoring-and-visibility", it: "/osserva/monitoraggio-e-visibilita" }
+    canonicalPath: "/monitoring/monitoring-and-visibility",
+    paths: { en: "/monitoring/monitoring-and-visibility", it: "/monitoraggio/monitoraggio-e-visibilita" }
   },
   {
-    canonicalPath: "/observe/pre-provisioned-dashboards",
-    paths: { en: "/observe/pre-provisioned-dashboards", it: "/osserva/dashboard-preconfigurate" }
+    canonicalPath: "/monitoring/pre-provisioned-dashboards",
+    paths: { en: "/monitoring/pre-provisioned-dashboards", it: "/monitoraggio/dashboard-preconfigurate" }
   },
   {
-    canonicalPath: "/observe/dialer-dashboard-panels",
-    paths: { en: "/observe/dialer-dashboard-panels", it: "/osserva/pannelli-dashboard-dialer" }
+    canonicalPath: "/monitoring/dialer-dashboard-panels",
+    paths: { en: "/monitoring/dialer-dashboard-panels", it: "/monitoraggio/pannelli-dashboard-dialer" }
   },
   {
-    canonicalPath: "/observe/logs-and-traces",
-    paths: { en: "/observe/logs-and-traces", it: "/osserva/log-e-trace" }
-  },
-  {
-    canonicalPath: "/troubleshoot/investigating-workflow-issues",
-    paths: {
-      en: "/troubleshoot/investigating-workflow-issues",
-      it: "/risoluzione-problemi/analisi-problemi-workflow"
-    }
+    canonicalPath: "/monitoring/logs-and-traces",
+    paths: { en: "/monitoring/logs-and-traces", it: "/monitoraggio/log-e-trace" }
   },
   {
     canonicalPath: "/troubleshoot/troubleshooting",
-    paths: { en: "/troubleshoot/troubleshooting", it: "/risoluzione-problemi/troubleshooting" }
+    paths: { en: "/troubleshoot/troubleshooting", it: "/risoluzione-problemi/diagnostica" }
   },
   {
     canonicalPath: "/troubleshoot/faq",
@@ -164,27 +156,6 @@ const canonicalPathAliases = new Map<string, string>([
   ["/build", "/build/create-your-first-ai-voice-agent"],
   ["/run-workflows", "/run-workflows/ai-inbound-routing"],
   ["/deploy", "/deploy/deployment-overview"],
-  ["/observe", "/observe/monitoring-and-visibility"],
-  ["/observe/campaign-analytics", "/observe/pre-provisioned-dashboards"],
-  ["/observe/endpoint-and-trunk-monitoring", "/observe/pre-provisioned-dashboards"],
-  ["/observe/infrastructure-monitoring", "/observe/pre-provisioned-dashboards"],
-  ["/observe/asterisk-monitoring", "/observe/pre-provisioned-dashboards"],
-  ["/observe/container-monitoring", "/observe/pre-provisioned-dashboards"],
-  ["/observe/database-monitoring", "/observe/pre-provisioned-dashboards"],
-  ["/observe/real-time-performance-metrics", "/observe/pre-provisioned-dashboards"],
-  ["/observe/time-range-reporting", "/observe/pre-provisioned-dashboards"],
-  ["/observe/logs-drilldown", "/observe/logs-and-traces"],
-  ["/observe/trace-correlation", "/observe/logs-and-traces"],
-  ["/osserva/analytics-campagne", "/observe/pre-provisioned-dashboards"],
-  ["/osserva/monitoraggio-endpoint-e-trunk", "/observe/pre-provisioned-dashboards"],
-  ["/osserva/monitoraggio-infrastruttura", "/observe/pre-provisioned-dashboards"],
-  ["/osserva/monitoraggio-asterisk", "/observe/pre-provisioned-dashboards"],
-  ["/osserva/monitoraggio-container", "/observe/pre-provisioned-dashboards"],
-  ["/osserva/monitoraggio-database", "/observe/pre-provisioned-dashboards"],
-  ["/osserva/metriche-real-time", "/observe/pre-provisioned-dashboards"],
-  ["/osserva/report-per-intervallo", "/observe/pre-provisioned-dashboards"],
-  ["/osserva/analisi-log", "/observe/logs-and-traces"],
-  ["/osserva/correlazione-trace", "/observe/logs-and-traces"],
   ["/troubleshoot", "/troubleshoot/troubleshooting"],
   ["/reference", "/reference/api-reference"]
 ]);

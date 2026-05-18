@@ -12,7 +12,7 @@ type CardCopy = {
   description: string;
 };
 
-type ObserveCopy = {
+type MonitoringCopy = {
   title: string;
   intro: ReactNode[];
   operatingModel: {
@@ -38,24 +38,24 @@ type ObserveCopy = {
   };
 };
 
-const observeCopy: Record<Locale, ObserveCopy> = {
+const monitoringCopy: Record<Locale, MonitoringCopy> = {
   en: {
     title: "Monitoring and Visibility",
     intro: [
-      "Observe is the operational entry point for RocketAiFlow. Start here to understand whether outbound campaigns are running, whether telephony is ready, how the platform is behaving, and which evidence to inspect when something needs investigation.",
-      "The section is intentionally compact: dashboards show current state and time-range trends, the Dialer panel breakdown explains how to read each Grafana panel, and logs plus traces provide event-level evidence when a dashboard symptom needs deeper analysis."
+      "Monitoring is the operational entry point for RocketAiFlow. Start here to check outbound campaign execution, telephony readiness, platform health, and the evidence behind a live issue.",
+      "Use dashboards first for real-time state and selected time-range trends. Use Dialer Dashboard Panels when you need to interpret a specific metric, then move to logs and traces when you need event-level evidence."
     ],
     operatingModel: {
       title: "Operating model",
       paragraphs: [
-        "Use Observe as an escalation path, not as a catalog of separate monitoring pages. An operator should be able to move from a live symptom to the right evidence without guessing which technical layer owns the issue.",
-        "Start with the Dialer dashboard for campaign state and outcome quality. Use the platform dashboards when the symptom points to telephony, containers, database, or host pressure. Move to logs and traces when you need the exact event path, timing, or downstream behavior."
+        "Open Monitoring when a campaign, trunk, endpoint, host, container, database, or API action needs operational verification. Start from the symptom and follow the evidence to the layer that owns the issue.",
+        "Start with the Dialer dashboard for campaign state and outcome quality. Use platform dashboards when the symptom points to telephony, containers, database, or host pressure. Move to logs and traces when you need the exact event path, timing, or downstream behavior."
       ],
       items: [
-        <>Use <strong>Pre-Provisioned Dashboards</strong> for live campaign state, Dialer performance, telephony readiness, Asterisk, containers, MySQL, and host visibility.</>,
-        <>Use <strong>Dialer Dashboard Panels</strong> when you need to explain what an individual Grafana panel means and how an operator should read it.</>,
-        <>Use <strong>Logs and Traces</strong> when you need event detail, service timing, API action behavior, or OpenTelemetry correlation.</>,
-        <>Use <strong>Call Records</strong> from the workflow area when you need the result of a specific call, transcript, recording state, or timing.</>
+        <>Open <strong>Pre-Provisioned Dashboards</strong> for live campaign state, Dialer performance, telephony readiness, Asterisk, containers, MySQL, and host visibility.</>,
+        <>Open <strong>Dialer Dashboard Panels</strong> when a specific Dialer metric needs interpretation.</>,
+        <>Open <strong>Logs and Traces</strong> when you need event detail, service timing, API action behavior, or OpenTelemetry correlation.</>,
+        <>Open <strong>Call Records</strong> from the workflow area when you need the result of a specific call, transcript, recording state, or timing.</>
       ]
     },
     whatToUse: {
@@ -74,7 +74,7 @@ const observeCopy: Record<Locale, ObserveCopy> = {
         {
           title: "Panel-level interpretation",
           description:
-            "Use Dialer Dashboard Panels when you need to document the meaning of Total Outcomes, Call Outcomes, dialing rate, call volume, endpoint state, talk time, ring time, and selected-range performance."
+            "Use Dialer Dashboard Panels to interpret Total Outcomes, Call Outcomes, dialing rate, call volume, endpoint state, talk time, ring time, and selected-range performance."
         },
         {
           title: "Telephony and platform health",
@@ -105,23 +105,23 @@ const observeCopy: Record<Locale, ObserveCopy> = {
       cards: [
         {
           title: "Pre-Provisioned Dashboards",
-          href: "/observe/pre-provisioned-dashboards",
+          href: "/monitoring/pre-provisioned-dashboards",
           description: "Review the Dialer, Asterisk, cAdvisor, MySQL, and Node Exporter dashboards."
         },
         {
           title: "Dialer Dashboard Panels",
-          href: "/observe/dialer-dashboard-panels",
-          description: "Use the detailed Dialer panel breakdown when operators need metric-by-metric guidance."
+          href: "/monitoring/dialer-dashboard-panels",
+          description: "Read the Dialer panel guide when operators need metric-by-metric guidance."
         },
         {
           title: "Logs and Traces",
-          href: "/observe/logs-and-traces",
+          href: "/monitoring/logs-and-traces",
           description: "Use OpenTelemetry-based logs and traces when a dashboard symptom needs evidence."
         },
         {
-          title: "Investigating Workflow Issues",
-          href: "/troubleshoot/investigating-workflow-issues",
-          description: "Follow the broader path from symptom to evidence and owning layer."
+          title: "Troubleshooting",
+          href: "/troubleshoot/troubleshooting",
+          description: "Use setup checks when monitoring points to a workflow configuration issue."
         }
       ]
     }
@@ -129,24 +129,24 @@ const observeCopy: Record<Locale, ObserveCopy> = {
   it: {
     title: "Monitoring e visibilità",
     intro: [
-      "Osserva è il punto di ingresso operativo di RocketAiFlow. Parti da qui per capire se le campagne outbound stanno girando, se la telefonia è pronta, come si comporta la piattaforma e quale evidenza controllare quando qualcosa richiede investigazione.",
-      "La sezione resta volutamente compatta: le dashboard mostrano stato corrente e trend sull'intervallo selezionato, l'approfondimento dei pannelli Dialer spiega come leggere ogni pannello Grafana, mentre log e trace danno evidenza a livello evento quando un sintomo richiede analisi più profonda."
+      "Il monitoraggio è il punto di ingresso operativo di RocketAiFlow. Parti da qui per controllare esecuzione delle campagne outbound, readiness telefonica, salute della piattaforma ed evidenze dietro un problema live.",
+      "Usa prima le dashboard per stato in tempo reale e trend sull'intervallo selezionato. Usa Pannelli Dashboard Dialer quando devi interpretare una metrica specifica, poi passa a log e trace quando ti serve evidenza a livello evento."
     ],
     operatingModel: {
       title: "Modello operativo",
       paragraphs: [
-        "Usa Osserva come percorso di escalation, non come catalogo di pagine tecniche separate. Un operatore deve poter passare da un sintomo live all'evidenza corretta senza indovinare quale layer è responsabile.",
-        "Parti dalla dashboard Dialer per stato campagna e qualità outcome. Usa le dashboard di piattaforma quando il sintomo punta a telefonia, container, database o pressione host. Passa a log e trace quando ti serve il percorso esatto dell'evento, il timing o il comportamento downstream."
+        "Apri Monitoraggio quando devi verificare una campagna, un trunk, un endpoint, un host, un container, il database o una chiamata API. Parti dal sintomo e segui l'evidenza fino al livello che genera il problema.",
+        "Parti dalla dashboard Dialer per stato campagna e qualità outcome. Usa le dashboard di piattaforma quando il sintomo punta a telefonia, container, database o pressione host. Passa a log e trace quando ti servono percorso esatto dell'evento, timing o comportamento downstream."
       ],
       items: [
-        <>Usa <strong>Dashboard preconfigurate</strong> per stato live delle campagne, performance Dialer, readiness telefonica, Asterisk, container, MySQL e visibilità host.</>,
-        <>Usa <strong>Pannelli Dashboard Dialer</strong> quando devi spiegare cosa significa un singolo pannello Grafana e come deve leggerlo un operatore.</>,
-        <>Usa <strong>Log e trace</strong> quando servono dettaglio evento, timing dei servizi, comportamento delle azioni API o correlazione OpenTelemetry.</>,
-        <>Usa <strong>Call Records</strong> nell'area workflow quando devi rivedere il risultato di una singola chiamata, transcript, stato registrazione o timing.</>
+        <>Apri <strong>Dashboard preconfigurate</strong> per stato live delle campagne, performance Dialer, readiness telefonica, Asterisk, container, MySQL e visibilità host.</>,
+        <>Apri <strong>Pannelli Dashboard Dialer</strong> quando devi interpretare una metrica specifica del Dialer.</>,
+        <>Apri <strong>Log e trace</strong> quando servono dettaglio evento, timing dei servizi, comportamento delle azioni API o correlazione OpenTelemetry.</>,
+        <>Apri <strong>Registro chiamate</strong> nell'area workflow quando devi rivedere risultato di una singola chiamata, transcript, stato registrazione o timing.</>
       ]
     },
     whatToUse: {
-      title: "Cosa usare",
+      title: "Dove guardare",
       items: [
         {
           title: "Monitoraggio campagne outbound",
@@ -154,14 +154,14 @@ const observeCopy: Record<Locale, ObserveCopy> = {
             "Usa la dashboard Dialer. È la control room principale dell'outbound per stato campagne, chiamate attive, limiti, dialing rate, outcome e performance nell'intervallo selezionato."
         },
         {
-          title: "Readiness trunk ed endpoint",
+          title: "Disponibilità trunk ed endpoint",
           description:
             "Usa Real-Time Agents & Trunks dentro la dashboard Dialer. Mostra se endpoint e trunk sono disponibili, not in use, in use, unavailable o invalid."
         },
         {
           title: "Lettura dei singoli pannelli",
           description:
-            "Usa Pannelli Dashboard Dialer quando devi documentare il significato di Total Outcomes, Call Outcomes, dialing rate, call volume, stato endpoint, talk time, ring time e performance sull'intervallo selezionato."
+            "Usa Pannelli Dashboard Dialer per interpretare Total Outcomes, Call Outcomes, dialing rate, call volume, stato endpoint, talk time, ring time e performance sull'intervallo selezionato."
         },
         {
           title: "Salute telefonia e piattaforma",
@@ -169,7 +169,7 @@ const observeCopy: Record<Locale, ObserveCopy> = {
             "Usa le dashboard Asterisk Overview, Asterisk Log, cAdvisor, MySQL e Node Exporter. Aiutano a separare problemi di workflow da telefonia, runtime, database, container o pressione host."
         },
         {
-          title: "Investigazione più profonda",
+          title: "Analisi avanzata",
           description:
             "Usa Log e trace quando una dashboard mostra un sintomo ma devi capire evento, percorso dei servizi, timing o comportamento di API downstream."
         }
@@ -192,36 +192,36 @@ const observeCopy: Record<Locale, ObserveCopy> = {
       cards: [
         {
           title: "Dashboard preconfigurate",
-          href: "/observe/pre-provisioned-dashboards",
+          href: "/monitoring/pre-provisioned-dashboards",
           description: "Rivedi le dashboard Dialer, Asterisk, cAdvisor, MySQL e Node Exporter."
         },
         {
           title: "Pannelli Dashboard Dialer",
-          href: "/observe/dialer-dashboard-panels",
-          description: "Usa l'approfondimento dei pannelli Dialer quando agli operatori serve una guida metrica per metrica."
+          href: "/monitoring/dialer-dashboard-panels",
+          description: "Apri la guida dei pannelli Dialer quando agli operatori serve una lettura metrica per metrica."
         },
         {
           title: "Log e trace",
-          href: "/observe/logs-and-traces",
+          href: "/monitoring/logs-and-traces",
           description: "Usa log e trace basati su OpenTelemetry quando un sintomo in dashboard richiede evidenza."
         },
         {
-          title: "Analisi problemi workflow",
-          href: "/troubleshoot/investigating-workflow-issues",
-          description: "Segui il percorso completo dal sintomo all'evidenza e al livello responsabile."
+          title: "Risoluzione problemi",
+          href: "/troubleshoot/troubleshooting",
+          description: "Usa i controlli di setup quando il monitoraggio indica un problema di configurazione workflow."
         }
       ]
     }
   }
 };
 
-function useObserveCopy() {
+function useMonitoringCopy() {
   const locale = useCurrentLocale(defaultLocale);
-  return { copy: observeCopy[locale], locale };
+  return { copy: monitoringCopy[locale], locale };
 }
 
 function Cards({ cards }: { cards: CardCopy[] }) {
-  const { locale } = useObserveCopy();
+  const { locale } = useMonitoringCopy();
 
   return (
     <div className="docs-home-card-grid docs-home-card-grid-2">
@@ -236,11 +236,11 @@ function Cards({ cards }: { cards: CardCopy[] }) {
 }
 
 export function LocalizedMonitoringAndVisibilityTitle() {
-  return <>{useObserveCopy().copy.title}</>;
+  return <>{useMonitoringCopy().copy.title}</>;
 }
 
 export function LocalizedMonitoringAndVisibilityIntro() {
-  const { copy } = useObserveCopy();
+  const { copy } = useMonitoringCopy();
 
   return (
     <section className="docs-home-section">
@@ -252,7 +252,7 @@ export function LocalizedMonitoringAndVisibilityIntro() {
 }
 
 export function LocalizedMonitoringAndVisibilityOperatingModel() {
-  const { copy } = useObserveCopy();
+  const { copy } = useMonitoringCopy();
 
   return (
     <section className="docs-home-section docs-home-section-nested">
@@ -269,11 +269,11 @@ export function LocalizedMonitoringAndVisibilityOperatingModel() {
 }
 
 export function LocalizedMonitoringAndVisibilityOperatingModelTitle() {
-  return <>{useObserveCopy().copy.operatingModel.title}</>;
+  return <>{useMonitoringCopy().copy.operatingModel.title}</>;
 }
 
 export function LocalizedMonitoringAndVisibilityWhatToUse() {
-  const { copy } = useObserveCopy();
+  const { copy } = useMonitoringCopy();
 
   return (
     <section className="docs-home-card-grid docs-home-card-grid-2">
@@ -288,11 +288,11 @@ export function LocalizedMonitoringAndVisibilityWhatToUse() {
 }
 
 export function LocalizedMonitoringAndVisibilityWhatToUseTitle() {
-  return <>{useObserveCopy().copy.whatToUse.title}</>;
+  return <>{useMonitoringCopy().copy.whatToUse.title}</>;
 }
 
 export function LocalizedMonitoringAndVisibilityDialerSignals() {
-  const { copy } = useObserveCopy();
+  const { copy } = useMonitoringCopy();
 
   return (
     <section className="docs-home-section docs-home-section-nested">
@@ -309,13 +309,13 @@ export function LocalizedMonitoringAndVisibilityDialerSignals() {
 }
 
 export function LocalizedMonitoringAndVisibilityDialerSignalsTitle() {
-  return <>{useObserveCopy().copy.dialerSignals.title}</>;
+  return <>{useMonitoringCopy().copy.dialerSignals.title}</>;
 }
 
 export function LocalizedMonitoringAndVisibilityRelatedPages() {
-  return <Cards cards={useObserveCopy().copy.relatedPages.cards} />;
+  return <Cards cards={useMonitoringCopy().copy.relatedPages.cards} />;
 }
 
 export function LocalizedMonitoringAndVisibilityRelatedPagesTitle() {
-  return <>{useObserveCopy().copy.relatedPages.title}</>;
+  return <>{useMonitoringCopy().copy.relatedPages.title}</>;
 }

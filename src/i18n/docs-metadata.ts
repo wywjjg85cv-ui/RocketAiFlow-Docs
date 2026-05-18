@@ -47,23 +47,18 @@ const italianMetadata: Record<string, DocsMetadata> = {
     description:
       "Crea una prima campagna outbound in RocketAiFlow e preparala per un test controllato."
   },
-  "/run-workflows/dialer-pacing-and-limits": {
-    title: "Pacing e limiti dialer",
-    description:
-      "Controlla calls per second, concurrent call capacity e concorrenza outbound con un rollout pratico."
-  },
-  "/run-workflows/import-contacts": {
+  "/run-workflows/ai-dialer-flows/import-contacts": {
     title: "Importa contatti",
     description:
       "Carica e mappa i contatti per campagne outbound o recupero contatto inbound sull'agente."
   },
   "/run-workflows/contact-inbounds": {
-    title: "Contact Inbounds",
+    title: "Contatti inbound",
     description:
       "Rivedi come i chiamanti inbound vengono associati ai contatti e ai workflow di follow-up."
   },
-  "/run-workflows/call-records": {
-    title: "Call Records",
+  "/run-workflows/ai-dialer-flows/call-records": {
+    title: "Registro chiamate",
     description:
       "Rivedi outcome, timestamp, transcript, registrazioni quando abilitate e timing delle chiamate in RocketAiFlow."
   },
@@ -97,90 +92,85 @@ const italianMetadata: Record<string, DocsMetadata> = {
     description:
       "Esegui il deploy di RocketAiFlow scegliendo setup di installazione e percorso di integrazione per telefonia, SIP/PBX e API aziendali."
   },
-  "/observe/monitoring-and-visibility": {
+  "/monitoring/monitoring-and-visibility": {
     title: "Monitoring e visibilità",
     description:
-      "Comprendi il livello Observe di RocketAiFlow tra dashboard Dialer, pannelli operativi, salute piattaforma, log e trace."
+      "Comprendi il livello Monitoring di RocketAiFlow tra dashboard Dialer, pannelli operativi, salute piattaforma, log e trace."
   },
-  "/observe/pre-provisioned-dashboards": {
+  "/monitoring/pre-provisioned-dashboards": {
     title: "Dashboard preconfigurate",
     description:
       "Comprendi le dashboard Grafana incluse in RocketAiFlow per monitoraggio dialer outbound, infrastruttura, database, container e telefonia Asterisk."
   },
-  "/observe/dialer-dashboard-panels": {
+  "/monitoring/dialer-dashboard-panels": {
     title: "Pannelli Dashboard Dialer",
     description:
       "Approfondisci i pannelli della Dashboard Dialer e capisci cosa rappresenta ogni metrica."
   },
-  "/observe/logs-and-traces": {
+  "/monitoring/logs-and-traces": {
     title: "Log e trace",
     description:
       "Monitora eventi RocketAiFlow e percorsi richiesta con log, trace e viste Grafana Drilldown basati su OpenTelemetry."
   },
-  "/observe/campaign-analytics": {
+  "/monitoring/campaign-analytics": {
     title: "Analytics campagne",
     description:
       "Comprendi outcome, pacing, stato e pattern di utilizzo delle campagne in RocketAiFlow."
   },
-  "/observe/endpoint-and-trunk-monitoring": {
+  "/monitoring/endpoint-and-trunk-monitoring": {
     title: "Monitoring endpoint e trunk",
     description:
       "Rivedi i segnali di stato lato telefonia che possono influenzare i workflow RocketAiFlow."
   },
-  "/observe/real-time-performance-metrics": {
+  "/monitoring/real-time-performance-metrics": {
     title: "Metriche performance real-time",
     description:
       "Comprendi le categorie di metriche live usate dai team RocketAiFlow per rivedere le performance dei workflow voce."
   },
-  "/observe/time-range-reporting": {
+  "/monitoring/time-range-reporting": {
     title: "Reporting per intervallo temporale",
     description:
       "Confronta le performance RocketAiFlow su finestre temporali selezionate invece che su snapshot isolati."
   },
-  "/observe/logs-drilldown": {
+  "/monitoring/logs-drilldown": {
     title: "Logs Drilldown",
     description:
       "Passa dai sintomi live a evidenze operative con un percorso pratico di investigazione log per RocketAiFlow."
   },
-  "/observe/trace-correlation": {
+  "/monitoring/trace-correlation": {
     title: "Correlazione trace",
     description:
       "Usa la correlazione dei trace per collegare sintomi workflow, percorsi API e servizi di supporto nelle indagini RocketAiFlow."
   },
-  "/observe/container-monitoring": {
+  "/monitoring/container-monitoring": {
     title: "Monitoring container",
     description:
       "Usa cAdvisor per rivedere runtime container e visibilità risorse nei deploy RocketAiFlow."
   },
-  "/observe/database-monitoring": {
+  "/monitoring/database-monitoring": {
     title: "Monitoring database",
     description:
       "Usa la dashboard MySQL 8 per rivedere salute database e controlli operativi in RocketAiFlow."
   },
-  "/observe/infrastructure-monitoring": {
+  "/monitoring/infrastructure-monitoring": {
     title: "Monitoring infrastruttura",
     description:
       "Usa Node Exporter Full per rivedere salute host e sistema nei deploy RocketAiFlow."
   },
-  "/observe/asterisk-monitoring": {
+  "/monitoring/asterisk-monitoring": {
     title: "Monitoring Asterisk",
     description:
       "Usa le dashboard Asterisk Overview e Asterisk Log per monitorare il comportamento telefonico in RocketAiFlow."
   },
-  "/troubleshoot/investigating-workflow-issues": {
-    title: "Analisi problemi workflow",
-    description:
-      "Segui un flusso pratico di investigazione che collega call records, dashboard, log e trace in RocketAiFlow."
-  },
   "/troubleshoot/troubleshooting": {
-    title: "Troubleshooting",
+    title: "Risoluzione problemi",
     description:
       "Diagnostica problemi comuni su agenti, prompt, routing, campagne, contatti, trunk e revisione chiamate."
   },
   "/troubleshoot/faq": {
     title: "FAQ",
     description:
-      "Risposte pratiche alle domande comuni su setup, workflow, osservabilità, telefonia, troubleshooting e readiness legale in RocketAiFlow."
+      "Risposte pratiche alle domande comuni su setup, workflow, monitoraggio, telefonia, troubleshooting e readiness legale in RocketAiFlow."
   },
   "/legal": {
     title: "Stato legale",
@@ -209,7 +199,7 @@ const italianMetadata: Record<string, DocsMetadata> = {
   "/reference/api-reference": {
     title: "Riferimento API",
     description:
-      "Pagina di riferimento per le future API, webhook e documentazione payload tecnica di RocketAiFlow."
+      "Consulta le API RocketAiFlow disponibili nella sezione /api/docs."
   },
   "/reference/changelog": {
     title: "Changelog",

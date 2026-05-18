@@ -112,7 +112,7 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
         <><strong>Outbound:</strong> variables are rendered from the contact loaded into the campaign. Custom fields must be included in the contact <code>data</code> object.</>,
         <><strong>Inbound:</strong> variables are rendered only when Agent settings allow contact lookup and <UiPill>Contact Inbounds</UiPill> contains a contact list with a number that matches the caller.</>,
         <>In fields that support variables, type <code>@</code> to open suggestions or click the variables shown under the field.</>,
-        <>To prepare contacts, see <InlineDocsLink href="/run-workflows/import-contacts#associate-contacts-with-a-campaign-or-agent">Import Contacts</InlineDocsLink>.</>
+        <>To prepare contacts, see <InlineDocsLink href="/run-workflows/ai-dialer-flows/import-contacts#associate-contacts-with-a-campaign-or-agent">Import Contacts</InlineDocsLink>.</>
       ]
     },
     functionUsage: {
@@ -155,8 +155,8 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
         description: "Use contact fields and runtime values inside function descriptions and API URL templates."
       },
       {
-        title: "Import Contacts",
-        href: "/run-workflows/import-contacts",
+        title: "Importa contatti",
+        href: "/run-workflows/ai-dialer-flows/import-contacts",
         description: "Prepare outbound campaign contacts or inbound agent contacts with the expected data keys."
       }
     ]
@@ -174,7 +174,7 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
         "Mantieni chiara questa distinzione quando configuri le functions. Alcuni valori sono noti prima che la chiamata inizi; altri devono essere raccolti dall'agente durante la conversazione."
       ],
       items: [
-        <><strong>Valori contatto/template:</strong> valori già salvati nel contatto outbound o nel contatto inbound trovato tramite <UiPill>Contact Inbounds</UiPill>.</>,
+        <><strong>Valori contatto/template:</strong> valori già salvati nel contatto outbound o nel contatto inbound trovato tramite <UiPill>Contatti inbound</UiPill>.</>,
         <><strong>Valori generati dall'LLM:</strong> valori che il modello estrae o crea durante la chiamata, come intento, orario callback, stato lead, note, città o risultato della qualificazione.</>
       ]
     },
@@ -202,9 +202,9 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
       ],
       items: [
         <><strong>Outbound:</strong> le variabili vengono renderizzate dal contatto caricato nella campagna. I campi custom devono essere dentro l'oggetto <code>data</code> del contatto.</>,
-        <><strong>Inbound:</strong> le variabili vengono renderizzate solo se negli Agent settings è abilitato il recupero del contatto e <UiPill>Contact Inbounds</UiPill> contiene una lista con un numero che corrisponde al chiamante.</>,
+        <><strong>Inbound:</strong> le variabili vengono renderizzate solo se negli Agent settings è abilitato il recupero del contatto e <UiPill>Contatti inbound</UiPill> contiene una lista con un numero che corrisponde al chiamante.</>,
         <>Nei campi che supportano le variabili, digita <code>@</code> per aprire i suggerimenti oppure clicca le variabili mostrate sotto il campo.</>,
-        <>Per preparare i contatti, vedi <InlineDocsLink href="/run-workflows/import-contacts#associate-contacts-with-a-campaign-or-agent">Import Contacts</InlineDocsLink>.</>
+        <>Per preparare i contatti, vedi <InlineDocsLink href="/run-workflows/ai-dialer-flows/import-contacts#associate-contacts-with-a-campaign-or-agent">Importa contatti</InlineDocsLink>.</>
       ]
     },
     functionUsage: {
@@ -248,7 +248,7 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
       },
       {
         title: "Import Contacts",
-        href: "/run-workflows/import-contacts",
+        href: "/run-workflows/ai-dialer-flows/import-contacts",
         description: "Prepara contatti per campagne outbound o agenti inbound con le chiavi data attese."
       }
     ]

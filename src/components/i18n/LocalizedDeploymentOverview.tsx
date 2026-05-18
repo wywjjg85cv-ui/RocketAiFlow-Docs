@@ -90,7 +90,7 @@ const deploymentCopy: Record<Locale, DeploymentCopy> = {
       },
       {
         title: "Monitoring and visibility",
-        href: "/observe/monitoring-and-visibility",
+        href: "/monitoring/monitoring-and-visibility",
         description: "Confirm the live operating view before scaling."
       }
     ]
@@ -154,7 +154,7 @@ const deploymentCopy: Record<Locale, DeploymentCopy> = {
       },
       {
         title: "Monitoring e visibilità",
-        href: "/observe/monitoring-and-visibility",
+        href: "/monitoring/monitoring-and-visibility",
         description: "Conferma la vista operativa live prima di scalare."
       }
     ]

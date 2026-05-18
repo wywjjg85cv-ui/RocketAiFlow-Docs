@@ -4,8 +4,7 @@ import { LocalizedNavLabel } from "../../src/components/i18n/LocalizedNavLabels"
 const label = (labelKey) => createElement(LocalizedNavLabel, { labelKey });
 
 const troubleshootMeta = {
-  "investigating-workflow-issues": label("investigatingWorkflowIssues"),
-  troubleshooting: label("troubleshoot"),
+  troubleshooting: label("troubleshootingPage"),
   faq: label("faq")
 };
 

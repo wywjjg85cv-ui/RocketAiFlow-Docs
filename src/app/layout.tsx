@@ -99,7 +99,7 @@ export default async function RootLayout({
           }
           editLink={null}
           feedback={{ content: null }}
-          sidebar={{ autoCollapse: true, defaultMenuCollapseLevel: 1 }}
+          sidebar={{ autoCollapse: false, defaultMenuCollapseLevel: 1 }}
           darkMode
           nextThemes={{
             defaultTheme: "dark",

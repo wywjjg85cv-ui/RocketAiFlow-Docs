@@ -98,8 +98,8 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
           "Launch one controlled inbound or outbound test before increasing volume."
       },
       {
-        title: "5. Observe",
-        href: "/observe/monitoring-and-visibility",
+        title: "5. Monitoring",
+        href: "/monitoring/monitoring-and-visibility",
         description:
           "Monitor live calls, campaign state, trunk status, outcomes, call volume, and execution pace."
       },
@@ -131,7 +131,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         paragraphs: [
           "Inbound workflows usually start from a route, entry point, queue, or trunk path. They focus on answering, qualifying, routing, collecting data, or escalating to a human team.",
           "Outbound workflows usually start from a campaign and contact list. They focus on campaign execution, scheduling, callbacks, pacing, active-call limits, outcomes, and post-call review.",
-          "Both workflow types reuse the same agent, prompt, function, telephony, and observability model."
+          "Both workflow types reuse the same agent, prompt, function, telephony, and monitoring model."
         ]
       },
       {
@@ -142,9 +142,9 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         ]
       },
       {
-        title: "Observability and review",
+        title: "Monitoring and review",
         paragraphs: [
-          "Live voice operations need evidence. RocketAiFlow documentation treats observability as part of the core workflow, not an optional extra.",
+          "Live voice operations need evidence. RocketAiFlow documentation treats monitoring as part of the core workflow, not an optional extra.",
           "Use dashboards, call records, endpoint and trunk monitoring, logs, traces, transcripts, recordings when enabled, talk time, and ring time to understand what happened and what to improve."
         ]
       }
@@ -185,7 +185,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "Investigate workflow issues",
-        href: "/troubleshoot/investigating-workflow-issues",
+        href: "/troubleshoot/troubleshooting",
         description: "Move from symptom to evidence using call history, dashboards, logs, traces, and telephony checks."
       }
     ],
@@ -222,12 +222,12 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "Call Records",
-        href: "/run-workflows/call-records",
+        href: "/run-workflows/ai-dialer-flows/call-records",
         description: "Review outcome, transcript, recording status, and call timing."
       },
       {
         title: "Monitoring and Visibility",
-        href: "/observe/monitoring-and-visibility",
+        href: "/monitoring/monitoring-and-visibility",
         description: "Review live campaign state, trunk status, outcomes, and operational signals."
       },
       {
@@ -307,8 +307,8 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
           "Avvia un test inbound o outbound controllato prima di aumentare il volume."
       },
       {
-        title: "5. Osserva",
-        href: "/observe/monitoring-and-visibility",
+        title: "5. Monitoraggio",
+        href: "/monitoring/monitoring-and-visibility",
         description:
           "Monitora chiamate live, stato campagne, stato trunk, outcome, volumi e ritmo di esecuzione."
       },
@@ -340,7 +340,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         paragraphs: [
           "I workflow inbound partono di solito da una route, un entry point, una coda o un percorso trunk. Servono per rispondere, qualificare, instradare, raccogliere dati o scalare a un team umano.",
           "I workflow outbound partono di solito da una campagna e da una lista contatti. Servono per execution campaign, scheduling, callback, pacing, limiti di chiamate attive, outcome e review post-chiamata.",
-          "Entrambi i tipi di workflow riusano lo stesso modello di agente, prompt, funzioni, telephony e osservabilità."
+          "Entrambi i tipi di workflow riusano lo stesso modello di agente, prompt, funzioni, telephony e monitoraggio."
         ]
       },
       {
@@ -351,9 +351,9 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         ]
       },
       {
-        title: "Osservabilità e review",
+        title: "Monitoraggio e revisione",
         paragraphs: [
-          "Le operations vocali live richiedono evidenze. La documentazione RocketAiFlow tratta l'osservabilità come parte del workflow centrale, non come extra opzionale.",
+          "Le operations vocali live richiedono evidenze. La documentazione RocketAiFlow tratta il monitoraggio come parte del workflow centrale, non come extra opzionale.",
           "Usa dashboard, call record, endpoint e trunk monitoring, log, trace, transcript, registrazioni quando abilitate, talk time e ring time per capire cosa è successo e cosa migliorare."
         ]
       }
@@ -394,7 +394,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "Investiga problemi workflow",
-        href: "/troubleshoot/investigating-workflow-issues",
+        href: "/troubleshoot/troubleshooting",
         description: "Passa dal sintomo all'evidenza usando storico chiamate, dashboard, log, trace e controlli telephony."
       }
     ],
@@ -430,17 +430,17 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         description: "Crea una campagna outbound ed esegui un test controllato."
       },
       {
-        title: "Call Records",
-        href: "/run-workflows/call-records",
+        title: "Registro chiamate",
+        href: "/run-workflows/ai-dialer-flows/call-records",
         description: "Rivedi outcome, transcript, stato registrazione e timing della chiamata."
       },
       {
-        title: "Monitoring and Visibility",
-        href: "/observe/monitoring-and-visibility",
+        title: "Monitoring e visibilità",
+        href: "/monitoring/monitoring-and-visibility",
         description: "Rivedi stato campagne live, stato trunk, outcome e segnali operativi."
       },
       {
-        title: "Troubleshooting",
+        title: "Risoluzione problemi",
         href: "/troubleshoot/troubleshooting",
         description: "Usa controlli guidati quando un test non funziona come previsto."
       }

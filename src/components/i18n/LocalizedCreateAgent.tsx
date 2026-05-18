@@ -153,7 +153,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
       <>In the greeting field, type <code>@</code> to see template variable suggestions, or click one of the variables shown under the greeting input.</>,
       "A variable is replaced only when the value exists on the contact used for that call. If the value is missing, that variable is not rendered.",
       <>In the <InlineDocsLink href="#agent-settings">Agent settings</InlineDocsLink> section, we will show in detail how to enable contact lookup when someone calls inbound.</>,
-      <>To prepare the source contacts, see <InlineDocsLink href="/run-workflows/import-contacts#associate-contacts-with-a-campaign-or-agent">Import Contacts</InlineDocsLink>.</>,
+      <>To prepare the source contacts, see <InlineDocsLink href="/run-workflows/ai-dialer-flows/import-contacts#associate-contacts-with-a-campaign-or-agent">Import Contacts</InlineDocsLink>.</>,
       <>See <InlineDocsLink href="/build/dynamic-parameters#contact-template-variables">Contact template variables</InlineDocsLink> for the detailed model and how to create template variables.</>
     ],
     screenshotAlt: "AI Voice Agent creation screen with Voice settings, language, speak provider, greeting message, and contact template variables.",
@@ -304,13 +304,13 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
     ],
     templateUsageItems: [
       <><strong>Outbound:</strong> le variabili del template vengono renderizzate dal contatto caricato nella campagna. Se ti servono valori custom, importa o crea contatti con le key-value attese dentro l'oggetto <code>data</code>.</>,
-      <><strong>Inbound:</strong> le variabili del template vengono renderizzate da <UiPill>Contact Inbounds</UiPill> solo se negli agent settings è abilitato il recupero del contatto e <UiPill>Contact Inbounds</UiPill> contiene una lista caricata con un contatto associato al numero che sta chiamando.</>
+      <><strong>Inbound:</strong> le variabili del template vengono renderizzate da <UiPill>Contatti inbound</UiPill> solo se negli agent settings è abilitato il recupero del contatto e <UiPill>Contatti inbound</UiPill> contiene una lista caricata con un contatto associato al numero che sta chiamando.</>
     ],
     templateNotes: [
       <>Nel campo greeting puoi digitare <code>@</code> per vedere i suggerimenti delle variabili del template, oppure cliccare una delle variabili che appaiono sotto il greeting.</>,
       "Una variabile viene sostituita solo quando il valore esiste nel contatto usato per quella chiamata. Se il valore manca, quella variabile non viene renderizzata.",
       <>Nella sezione <InlineDocsLink href="#agent-settings">Agent settings</InlineDocsLink> vedremo in dettaglio come abilitare il recupero del contatto quando qualcuno chiama in inbound.</>,
-      <>Per preparare i contatti sorgente, vedi <InlineDocsLink href="/run-workflows/import-contacts#associate-contacts-with-a-campaign-or-agent">Import Contacts</InlineDocsLink>.</>,
+      <>Per preparare i contatti sorgente, vedi <InlineDocsLink href="/run-workflows/ai-dialer-flows/import-contacts#associate-contacts-with-a-campaign-or-agent">Importa contatti</InlineDocsLink>.</>,
       <>Vedi <InlineDocsLink href="/build/dynamic-parameters#contact-template-variables">variabili del contact template</InlineDocsLink> per il modello dettagliato e per come creare le variabili del template.</>
     ],
     screenshotAlt: "Schermata creazione AI Voice Agent con impostazioni Voice, lingua, speak provider, greeting message e variabili contact template.",
@@ -398,7 +398,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
         "Post Agent Silence Hangup Seconds: quanto tempo può passare con il customer in silenzio prima dell'hangup automatico.",
         "Max Call Duration Minutes: durata massima della chiamata prima dell'hangup automatico.",
         "Enable transcription: salva il transcript delle chiamate gestite da questo agente.",
-        "Retrieve contact data for templates: per le chiamate inbound, cerca il chiamante in Contact Inbounds e usa i campi del contatto trovato per renderizzare le variabili del template.",
+        "Retrieve contact data for templates: per le chiamate inbound, cerca il chiamante in Contatti inbound e usa i campi del contatto trovato per renderizzare le variabili del template.",
         "Silence Recovery Message: messaggio inviato dopo 5 secondi di silenzio del customer per tenere viva la conversazione.",
         "Silence Follow-up Message: secondo messaggio inviato dopo altri 15 secondi di silenzio.",
         "Automatic Hangup Message: messaggio finale prima dell'hangup automatico."
@@ -406,7 +406,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
     },
     agentSettingsNotes: [
       <>Anche i messaggi di recovery, follow-up e hangup possono usare variabili del template. Digita <code>@</code> oppure clicca le variabili sotto ogni campo.</>,
-      <>Abilita <strong>Retrieve contact data for templates</strong> solo quando l'agente viene usato per chiamate inbound e in <UiPill>Contact Inbounds</UiPill> è stata caricata una lista contatti.</>
+      <>Abilita <strong>Retrieve contact data for templates</strong> solo quando l'agente viene usato per chiamate inbound e in <UiPill>Contatti inbound</UiPill> è stata caricata una lista contatti.</>
     ],
     agentSettingsScreenshotAlt: "Schermata runtime Agent settings con silence hangup seconds, max call duration, transcription, inbound contact data, messaggi di silenzio e automatic hangup message.",
     nextStepsTitle: "Passaggi successivi",

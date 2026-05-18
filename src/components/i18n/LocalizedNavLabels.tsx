@@ -1,7 +1,43 @@
 "use client";
 
-import { defaultLocale, type Locale } from "../../i18n/routing";
+import {
+  Activity,
+  BarChart3,
+  Bot,
+  BookOpen,
+  Braces,
+  Bug,
+  Clock,
+  Compass,
+  Database,
+  FileText,
+  GitBranch,
+  History,
+  LayoutDashboard,
+  LifeBuoy,
+  ListChecks,
+  Lock,
+  MessageSquareText,
+  Network,
+  Phone,
+  PhoneIncoming,
+  PhoneOutgoing,
+  Plug,
+  Radar,
+  Rocket,
+  Scale,
+  ScrollText,
+  Server,
+  ShieldCheck,
+  Sparkles,
+  Upload,
+  Users,
+  Wrench,
+  Zap,
+  type LucideIcon
+} from "lucide-react";
 import { useCurrentLocale } from "../../i18n/client-locale";
+import { defaultLocale, type Locale } from "../../i18n/routing";
 
 type NavLabelKey =
   | "getStarted"
@@ -9,7 +45,7 @@ type NavLabelKey =
   | "runWorkflows"
   | "integrations"
   | "deploy"
-  | "observe"
+  | "monitoring"
   | "troubleshoot"
   | "legal"
   | "reference"
@@ -24,7 +60,7 @@ type NavLabelKey =
   | "asteriskBasedPbxSystems"
   | "aiInboundRouting"
   | "aiDialerFlows"
-  | "dialerPacingAndLimits"
+  | "aiDialerFlowsOverview"
   | "importContacts"
   | "contactInbounds"
   | "callRecords"
@@ -45,7 +81,7 @@ type NavLabelKey =
   | "databaseMonitoring"
   | "realTimePerformanceMetrics"
   | "timeRangeReporting"
-  | "investigatingWorkflowIssues"
+  | "troubleshootingPage"
   | "faq"
   | "legalOverview"
   | "termsAndCommercialModel"
@@ -63,7 +99,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     runWorkflows: "Run Workflows",
     integrations: "Integrations",
     deploy: "Deploy",
-    observe: "Observe",
+    monitoring: "Monitoring",
     troubleshoot: "Troubleshoot",
     legal: "Legal",
     reference: "Reference",
@@ -78,7 +114,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     asteriskBasedPbxSystems: "Asterisk-based PBX Systems",
     aiInboundRouting: "AI Inbound Routing",
     aiDialerFlows: "AI Dialer Flows",
-    dialerPacingAndLimits: "Dialer Pacing and Limits",
+    aiDialerFlowsOverview: "Overview",
     importContacts: "Import Contacts",
     contactInbounds: "Contact Inbounds",
     callRecords: "Call Records",
@@ -99,7 +135,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     databaseMonitoring: "Database Monitoring",
     realTimePerformanceMetrics: "Real-Time Performance Metrics",
     timeRangeReporting: "Time-Range Reporting",
-    investigatingWorkflowIssues: "Investigating Workflow Issues",
+    troubleshootingPage: "Troubleshooting",
     faq: "FAQ",
     legalOverview: "Legal Status",
     termsAndCommercialModel: "Pilot Terms",
@@ -116,8 +152,8 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     runWorkflows: "Esegui workflow",
     integrations: "Integrazioni",
     deploy: "Deploy",
-    observe: "Osserva",
-    troubleshoot: "Troubleshooting",
+    monitoring: "Monitoraggio",
+    troubleshoot: "Risoluzione problemi",
     legal: "Legal",
     reference: "Riferimenti",
     introduction: "Introduzione",
@@ -131,10 +167,10 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     asteriskBasedPbxSystems: "Sistemi PBX basati su Asterisk",
     aiInboundRouting: "AI Inbound Routing",
     aiDialerFlows: "AI Dialer Flows",
-    dialerPacingAndLimits: "Pacing e limiti dialer",
+    aiDialerFlowsOverview: "Panoramica",
     importContacts: "Importa contatti",
-    contactInbounds: "Contact Inbounds",
-    callRecords: "Call Records",
+    contactInbounds: "Contatti inbound",
+    callRecords: "Registro chiamate",
     callHistoryAndReview: "Storico e revisione chiamate",
     phone: "Phone",
     pilotSetupOverview: "Panoramica deploy",
@@ -152,7 +188,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     databaseMonitoring: "Monitoraggio database",
     realTimePerformanceMetrics: "Metriche real-time",
     timeRangeReporting: "Report per intervallo",
-    investigatingWorkflowIssues: "Analisi problemi workflow",
+    troubleshootingPage: "Diagnostica",
     faq: "FAQ",
     legalOverview: "Stato legal",
     termsAndCommercialModel: "Termini pilot",
@@ -165,8 +201,68 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
   }
 };
 
+const navIcons: Record<NavLabelKey, LucideIcon> = {
+  getStarted: Rocket,
+  build: Wrench,
+  runWorkflows: GitBranch,
+  integrations: Plug,
+  deploy: Server,
+  monitoring: Activity,
+  troubleshoot: LifeBuoy,
+  legal: Scale,
+  reference: BookOpen,
+  introduction: Compass,
+  quickstart: Zap,
+  createFirstAgent: Bot,
+  configureAgentPrompt: MessageSquareText,
+  configureAgentFunctions: Sparkles,
+  dynamicParameters: Braces,
+  telephony: Phone,
+  telephonyOverview: Radar,
+  asteriskBasedPbxSystems: Network,
+  aiInboundRouting: PhoneIncoming,
+  aiDialerFlows: PhoneOutgoing,
+  aiDialerFlowsOverview: Radar,
+  importContacts: Upload,
+  contactInbounds: Users,
+  callRecords: FileText,
+  callHistoryAndReview: History,
+  phone: Phone,
+  pilotSetupOverview: Server,
+  monitoringAndVisibility: Radar,
+  campaignAnalytics: BarChart3,
+  endpointAndTrunkMonitoring: Network,
+  preProvisionedDashboards: LayoutDashboard,
+  dialerDashboardPanels: BarChart3,
+  logsAndTraces: GitBranch,
+  logsDrilldown: ScrollText,
+  traceCorrelation: GitBranch,
+  infrastructureMonitoring: Server,
+  asteriskMonitoring: Phone,
+  containerMonitoring: LayoutDashboard,
+  databaseMonitoring: Database,
+  realTimePerformanceMetrics: Activity,
+  timeRangeReporting: Clock,
+  troubleshootingPage: Bug,
+  faq: LifeBuoy,
+  legalOverview: Scale,
+  termsAndCommercialModel: ListChecks,
+  privacyAndDataProtection: Lock,
+  aiTransparency: Sparkles,
+  securityAndTrust: ShieldCheck,
+  imprint: FileText,
+  apiReference: Braces,
+  changelog: Clock
+};
+
 export function LocalizedNavLabel({ labelKey }: { labelKey: NavLabelKey }) {
   const locale = useCurrentLocale(defaultLocale);
+  const Icon = navIcons[labelKey];
 
-  return <>{navLabels[locale][labelKey]}</>;
+  return (
+    <span className="docs-nav-label">
+      <Icon aria-hidden="true" className="docs-nav-label-icon" focusable="false" size={16} strokeWidth={2} />
+      <span className="docs-nav-label-text">{navLabels[locale][labelKey]}</span>
+    </span>
+  );
 }

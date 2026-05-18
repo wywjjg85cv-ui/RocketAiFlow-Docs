@@ -7,7 +7,7 @@ const hidden = (labelKey) => ({
   display: "hidden"
 });
 
-const observeMeta = {
+const monitoringMeta = {
   "monitoring-and-visibility": label("monitoringAndVisibility"),
   "pre-provisioned-dashboards": label("preProvisionedDashboards"),
   "dialer-dashboard-panels": label("dialerDashboardPanels"),
@@ -24,4 +24,4 @@ const observeMeta = {
   "time-range-reporting": hidden("timeRangeReporting")
 };
 
-export default observeMeta;
+export default monitoringMeta;

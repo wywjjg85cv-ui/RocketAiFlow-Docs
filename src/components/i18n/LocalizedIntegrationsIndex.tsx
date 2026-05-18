@@ -83,6 +83,12 @@ const integrationsCopy: Record<Locale, {
         description: "Workflow automation candidate for webhook-based actions that send RocketAiFlow outcomes to other apps."
       },
       {
+        name: "n8n",
+        status: "validate",
+        description:
+          "Workflow automation candidate for self-hosted or cloud workflows. Validate webhook triggers, authentication, payload mapping, retries, and the actions RocketAiFlow should start after a call."
+      },
+      {
         name: "WhatsApp Business",
         status: "validate",
         description: "Channel integration candidate. Validate provider path, voice/calling support, message flow, and compliance constraints."
@@ -167,6 +173,12 @@ const integrationsCopy: Record<Locale, {
         name: "Zapier",
         status: "validate",
         description: "Candidato workflow automation per azioni via webhook che inviano outcome RocketAiFlow ad altre app."
+      },
+      {
+        name: "n8n",
+        status: "validate",
+        description:
+          "Candidato workflow automation per workflow self-hosted o cloud. Valida trigger webhook, autenticazione, mapping payload, retry e azioni che RocketAiFlow deve avviare dopo la chiamata."
       },
       {
         name: "WhatsApp Business",

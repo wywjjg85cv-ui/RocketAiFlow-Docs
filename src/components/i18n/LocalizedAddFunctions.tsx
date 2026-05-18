@@ -27,7 +27,6 @@ type LinkCard = {
 type AddFunctionsCopy = {
   title: string;
   intro: ReactNode[];
-  recommended: SectionCopy;
   preconfigured: SectionCopy;
   hangup: SectionCopy;
   transfer: SectionCopy;
@@ -45,7 +44,6 @@ type AddFunctionsCopy = {
 };
 
 type HeadingKey =
-  | "recommended"
   | "preconfigured"
   | "hangup"
   | "transfer"
@@ -67,16 +65,6 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
       "Functions give the agent controlled ways to act during the call.",
       "For a first implementation, keep the function set small and directly tied to the workflow you are testing."
     ],
-    recommended: {
-      title: "Recommended First Functions",
-      paragraphs: ["Start with:"],
-      items: [
-        <><code>hangup_call</code>: use this when the call is complete and should end cleanly.</>,
-        <><code>transfer</code>: use this when the caller should move to a human extension or destination.</>,
-        <><code>rescheduled_contact</code>: use this when the contact asks to be called later or the campaign needs to retry the contact at a specific time.</>,
-        <><code>save_lead_qualification</code>: use this when the agent qualifies a lead and the result should be saved as structured data.</>
-      ]
-    },
     preconfigured: {
       title: "Preconfigured Function Examples",
       paragraphs: [
@@ -270,6 +258,7 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
       title: "How To Structure Function Descriptions",
       paragraphs: [
         <>OpenAI recommends clear function names, parameter descriptions, and instructions. In RocketAiFlow, treat the function description as the call contract: it should tell the LLM exactly what the function does, when to call it, what data is required, and when not to call it.</>,
+        "OpenAI does not require Markdown headings such as # inside the function description. Use clear plain text or short labels such as Purpose, Call when, Do not call when, and Arguments only if they make the description easier to read.",
         "Keep the workflow policy in the agent prompt, then use the function and parameter descriptions to make each API action precise."
       ],
       items: [
@@ -339,16 +328,6 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
       "Le functions danno all'agente modi controllati per agire durante la chiamata.",
       "Per la prima implementazione, tieni il set di funzioni piccolo e collegato direttamente al workflow che stai testando."
     ],
-    recommended: {
-      title: "Prime functions consigliate",
-      paragraphs: ["Inizia da:"],
-      items: [
-        <><code>hangup_call</code>: usala quando la chiamata è completa e deve essere chiusa correttamente.</>,
-        <><code>transfer</code>: usala quando il chiamante deve essere trasferito a un interno o a una destinazione umana.</>,
-        <><code>rescheduled_contact</code>: usala quando il contatto chiede di essere richiamato più avanti o quando la campagna deve ritentare il contatto a un orario specifico.</>,
-        <><code>save_lead_qualification</code>: usala quando l'agente qualifica un lead e il risultato deve essere salvato come dato strutturato.</>
-      ]
-    },
     preconfigured: {
       title: "Esempi di functions preconfigurate",
       paragraphs: [
@@ -542,6 +521,7 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
       title: "Come strutturare le descrizioni delle functions",
       paragraphs: [
         <>OpenAI raccomanda nomi funzione, descrizioni parametro e istruzioni chiare. In RocketAiFlow, considera la descrizione della function come il contratto di chiamata: deve dire all'LLM cosa fa la function, quando chiamarla, quali dati servono e quando non chiamarla.</>,
+        "OpenAI non richiede heading Markdown come # dentro la description della function. Usa testo chiaro oppure label brevi come Scopo, Chiamala quando, Non chiamarla quando e Argomenti solo se rendono la descrizione più leggibile.",
         "Tieni la policy del workflow nel prompt dell'agente, poi usa descrizione della function e descrizione dei parametri per rendere precisa ogni azione API."
       ],
       items: [
@@ -663,7 +643,6 @@ export function LocalizedAddFunctionsTitle() {
 export function LocalizedAddFunctionsHeading({ labelKey }: { labelKey: HeadingKey }) {
   const copy = useAddFunctionsCopy();
   const labels: Record<HeadingKey, string> = {
-    recommended: copy.recommended.title,
     preconfigured: copy.preconfigured.title,
     hangup: copy.hangup.title,
     transfer: copy.transfer.title,
@@ -691,10 +670,6 @@ export function LocalizedAddFunctionsIntro() {
       ))}
     </section>
   );
-}
-
-export function LocalizedAddFunctionsRecommended() {
-  return <Section section={useAddFunctionsCopy().recommended} />;
 }
 
 export function LocalizedAddFunctionsPreconfiguredExamples() {

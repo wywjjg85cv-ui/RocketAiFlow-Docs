@@ -9,7 +9,7 @@ const pageMeta = {
   "run-workflows": label("runWorkflows"),
   integrations: label("integrations"),
   deploy: label("deploy"),
-  observe: label("observe"),
+  monitoring: label("monitoring"),
   troubleshoot: label("troubleshoot"),
   legal: label("legal"),
   reference: label("reference")

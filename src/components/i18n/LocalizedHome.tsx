@@ -75,7 +75,7 @@ const homeCopy: Record<Locale, HomeCopy> = {
       before: "Start with",
       link: "Get Started",
       after:
-        "for the onboarding path, then move into Build, Run Workflows, Deploy, Observe, and Troubleshoot as your evaluation becomes more hands-on."
+        "for the onboarding path, then move into Build, Run Workflows, Deploy, Monitoring, and Troubleshoot as your evaluation becomes more hands-on."
     },
     why: {
       title: "Why teams use these docs",
@@ -113,10 +113,9 @@ const homeCopy: Record<Locale, HomeCopy> = {
       cards: [
         { href: "/run-workflows/ai-inbound-routing", title: "AI Inbound Routing" },
         { href: "/run-workflows/ai-dialer-flows", title: "AI Dialer Flows" },
-        { href: "/run-workflows/dialer-pacing-and-limits", title: "Dialer Pacing and Limits" },
-        { href: "/run-workflows/import-contacts", title: "Import Contacts" },
+        { href: "/run-workflows/ai-dialer-flows/import-contacts", title: "Import Contacts" },
         { href: "/run-workflows/contact-inbounds", title: "Contact Inbounds" },
-        { href: "/run-workflows/call-records", title: "Call Records" },
+        { href: "/run-workflows/ai-dialer-flows/call-records", title: "Call Records" },
         { href: "/run-workflows/call-history-and-review", title: "Call History and Review" },
         { href: "/run-workflows/phone", title: "Phone" }
       ]
@@ -125,10 +124,9 @@ const homeCopy: Record<Locale, HomeCopy> = {
       title: "Pilot, monitor, and operate with control",
       cards: [
         { href: "/deploy/deployment-overview", title: "Deployment Overview", description: "Connect the selected live path with trunk, agent, route or campaign, integrations, and monitoring." },
-        { href: "/run-workflows/dialer-pacing-and-limits", title: "Campaign Control", description: "Control calls per second, active-call limits, callbacks, scheduled contacts, priority, and execution pressure." },
-        { href: "/observe/monitoring-and-visibility", title: "Monitoring and Visibility", description: "Start from the main operational view for live campaigns, telephony state, and workflow health." },
-        { href: "/observe/pre-provisioned-dashboards", title: "Pre-Provisioned Dashboards", description: "Review the ready dashboard foundation that helps teams get to live visibility faster." },
-        { href: "/troubleshoot/investigating-workflow-issues", title: "Investigating Workflow Issues", description: "Follow the full path from symptom to evidence using call records, dashboards, logs, and traces." }
+        { href: "/monitoring/monitoring-and-visibility", title: "Monitoring and Visibility", description: "Start from the main operational view for live campaigns, telephony state, and workflow health." },
+        { href: "/monitoring/pre-provisioned-dashboards", title: "Pre-Provisioned Dashboards", description: "Review the ready dashboard foundation that helps teams get to live visibility faster." },
+        { href: "/troubleshoot/troubleshooting", title: "Troubleshooting", description: "Use setup checks with call records, dashboards, logs, and traces." }
       ]
     },
     roles: {
@@ -169,7 +167,7 @@ const homeCopy: Record<Locale, HomeCopy> = {
       before: "Inizia da",
       link: "Per iniziare",
       after:
-        "per il percorso di onboarding, poi passa a Build, Run Workflows, Deploy, Observe e Troubleshoot man mano che la valutazione diventa più operativa."
+        "per il percorso di onboarding, poi passa a Build, Run Workflows, Deploy, Monitoraggio e Troubleshoot man mano che la valutazione diventa più operativa."
     },
     why: {
       title: "Perché i team usano queste docs",
@@ -207,10 +205,9 @@ const homeCopy: Record<Locale, HomeCopy> = {
       cards: [
         { href: "/run-workflows/ai-inbound-routing", title: "Routing AI inbound" },
         { href: "/run-workflows/ai-dialer-flows", title: "Flussi AI dialer" },
-        { href: "/run-workflows/dialer-pacing-and-limits", title: "Pacing e limiti dialer" },
-        { href: "/run-workflows/import-contacts", title: "Importa contatti" },
-        { href: "/run-workflows/contact-inbounds", title: "Contact inbounds" },
-        { href: "/run-workflows/call-records", title: "Call records" },
+        { href: "/run-workflows/ai-dialer-flows/import-contacts", title: "Importa contatti" },
+        { href: "/run-workflows/contact-inbounds", title: "Contatti inbound" },
+        { href: "/run-workflows/ai-dialer-flows/call-records", title: "Registro chiamate" },
         { href: "/run-workflows/call-history-and-review", title: "Storico e review chiamate" },
         { href: "/run-workflows/phone", title: "Phone" }
       ]
@@ -219,10 +216,9 @@ const homeCopy: Record<Locale, HomeCopy> = {
       title: "Pilot, monitoring e operations con controllo",
       cards: [
         { href: "/deploy/deployment-overview", title: "Panoramica deploy", description: "Collega il percorso live scelto con trunk, agente, route o campagna, integrazioni e monitoring." },
-        { href: "/run-workflows/dialer-pacing-and-limits", title: "Controllo campagna", description: "Controlla calls per second, limiti chiamate attive, richiami automatici, contatti programmati, priorità e pressione dialer." },
-        { href: "/observe/monitoring-and-visibility", title: "Monitoring e visibilità", description: "Parti dalla vista operativa principale per campagne live, stato telephony e salute dei workflow." },
-        { href: "/observe/pre-provisioned-dashboards", title: "Dashboard pre-provisionate", description: "Rivedi la base dashboard pronta che accelera la visibilità operativa." },
-        { href: "/troubleshoot/investigating-workflow-issues", title: "Investigazione issue workflow", description: "Segui il percorso da sintomo a evidenza usando call record, dashboard, log e trace." }
+        { href: "/monitoring/monitoring-and-visibility", title: "Monitoring e visibilità", description: "Parti dalla vista operativa principale per campagne live, stato telephony e salute dei workflow." },
+        { href: "/monitoring/pre-provisioned-dashboards", title: "Dashboard pre-provisionate", description: "Rivedi la base dashboard pronta che accelera la visibilità operativa." },
+        { href: "/troubleshoot/troubleshooting", title: "Risoluzione problemi", description: "Usa i controlli di setup con call record, dashboard, log e trace." }
       ]
     },
     roles: {

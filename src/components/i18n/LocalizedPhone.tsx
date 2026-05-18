@@ -85,7 +85,7 @@ const phoneCopy: Record<Locale, PhoneCopy> = {
     nextSteps: [
       {
         title: "Inbound Call Records",
-        href: "/run-workflows/call-records",
+        href: "/run-workflows/ai-dialer-flows/call-records",
         description: "Review the outcome of the manual test after the call completes."
       },
       {
@@ -147,7 +147,7 @@ const phoneCopy: Record<Locale, PhoneCopy> = {
     nextSteps: [
       {
         title: "Inbound Call Records",
-        href: "/run-workflows/call-records",
+        href: "/run-workflows/ai-dialer-flows/call-records",
         description: "Rivedi l'esito del test manuale quando la chiamata termina."
       },
       {

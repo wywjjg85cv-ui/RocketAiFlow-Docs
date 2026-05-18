@@ -172,7 +172,8 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       items: ["lead qualification", "appointment intake", "routing to a human team"],
       paragraphs: [
         "Create one focused agent with a narrow business goal such as:",
-        "You can select the default template right away if you want to use variables. Templates are covered in another section, so do not use them in this quickstart yet.",
+        <>For advanced voice, LLM, transcription, functions, templates, and agent settings, use <InternalInlineLink href="/build/create-your-first-ai-voice-agent">Create Your First AI Voice Agent</InternalInlineLink>. For the quickstart, the basic setup is ready to test.</>,
+        <>RocketAiFlow includes two preconfigured examples, <code>Lead Qualification IT</code> and <code>Lead Qualification EN</code>. They are already configured so you can test a complete lead qualification flow quickly. Treat them as starting examples, not production-ready agents: validate the behavior with the customer and adapt it to the business context before going live. If you choose one of these examples, you can go directly to <InternalInlineLink href="#test-the-agent-in-phone">test it with Phone</InternalInlineLink>.</>,
         <>Use a simple example such as <code>lead qualification</code> and keep the scope limited to one workflow.</>
       ],
       image: {
@@ -181,11 +182,12 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       }
     },
     prompt: {
+      preListParagraphCount: 2,
       items: ["role", "tone", "information to collect", "when to transfer or end the call"],
       paragraphs: [
-        "Write short, clear instructions for the agent.",
-        <>Use the RocketAiFlow <InternalInlineLink href="/build/configure-agent-prompt">Configure Agent Prompt</InternalInlineLink> guide as a reference.</>,
-        "For now, define only:"
+        "If you use a preconfigured agent, you can start from the prompt already included.",
+        "If you create an agent from scratch, keep the prompt simple and define only:",
+        <>For more complete examples, see <InternalInlineLink href="/build/configure-agent-prompt">Configure Agent Prompt</InternalInlineLink>.</>
       ],
       image: {
         src: screenshotPaths.prompt,
@@ -414,8 +416,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       { title: "AI Inbound Routing", href: "/run-workflows/ai-inbound-routing", description: "Go deeper on inbound setup after the inbound trunk and agent are ready." },
       { title: "AI Dialer Flows", href: "/run-workflows/ai-dialer-flows", description: "Go deeper on outbound campaign setup after the outbound trunk and agent are ready." },
       { title: "Configure Agent Functions", href: "/build/add-functions", description: "Review call control, transfer, rescheduling, lead qualification, and custom API functions." },
-      { title: "Monitoring and Visibility", href: "/observe/monitoring-and-visibility", description: "Review how the first workflow should be monitored once it is live." },
-      { title: "Dialer Pacing and Limits", href: "/run-workflows/dialer-pacing-and-limits", description: "Review calls per second and maximum active calls before scaling an outbound campaign." },
+      { title: "Monitoring and Visibility", href: "/monitoring/monitoring-and-visibility", description: "Review how the first workflow should be monitored once it is live." },
       { title: "Call History and Review", href: "/run-workflows/call-history-and-review", description: "Review completed calls through transcripts, recordings when enabled, and timing metrics." }
     ]
   },
@@ -468,7 +469,8 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     agent: {
       paragraphs: [
         "Crea un agente focalizzato con un obiettivo di business ristretto, ad esempio:",
-        "Puoi selezionare subito il template di default se vuoi usare le variabili. I template vengono approfonditi in un'altra sezione, quindi non usarli ancora in questo quickstart.",
+        <>Per voice, LLM, transcription, functions, template e Agent settings avanzati, usa <InternalInlineLink href="/build/create-your-first-ai-voice-agent">Crea il primo AI Voice Agent</InternalInlineLink>. Per il quickstart, la configurazione base è pronta per essere testata.</>,
+        <>RocketAiFlow include due esempi preconfigurati, <code>Lead Qualification IT</code> e <code>Lead Qualification EN</code>. Sono già configurati e puoi provarli subito come esempi di qualificazione lead. Considerali esempi di partenza, non agenti pronti per la produzione: prima della messa in produzione, valida il comportamento con il cliente e adattali al contesto del suo business. Se scegli uno di questi esempi, puoi passare subito a <InternalInlineLink href="#test-the-agent-in-phone">provarlo con Phone</InternalInlineLink>.</>,
         <>Usa un esempio semplice come <code>lead qualification</code> e limita l'ambito a un solo workflow.</>
       ],
       items: ["qualificazione lead", "raccolta appuntamenti", "instradamento verso un team umano"],
@@ -478,10 +480,11 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       }
     },
     prompt: {
+      preListParagraphCount: 2,
       paragraphs: [
-        "Scrivi istruzioni brevi e chiare per l'agente.",
-        <>Usa la guida RocketAiFlow <InternalInlineLink href="/build/configure-agent-prompt">Configura il prompt</InternalInlineLink> come riferimento.</>,
-        "Per ora definisci solo:"
+        "Se usi un agente preconfigurato, puoi partire dal prompt già incluso.",
+        "Se invece crei un agente da zero, mantieni il prompt semplice e definisci solo:",
+        <>Per esempi più completi, vedi <InternalInlineLink href="/build/configure-agent-prompt">Configura il prompt</InternalInlineLink>.</>
       ],
       items: ["ruolo", "tono", "informazioni da raccogliere", "quando trasferire o terminare la chiamata"],
       image: {
@@ -627,7 +630,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     },
     outboundTest: {
       paragraphs: [
-        "Fai partire la chiamata e verifica il risultato nella sezione Call Records.",
+        "Fai partire la chiamata e verifica il risultato nella sezione Registro chiamate.",
         "Una volta effettuato il primo test con il primo contatto, decidi il ritmo da dare alla campagna selezionando quante chiamate concorrenti effettuare."
       ],
       image: {
@@ -703,7 +706,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
             size="quarter"
           />
         </>,
-        "controlla il risultato finale nei Call Records"
+        "controlla il risultato finale nel Registro chiamate"
       ]
     },
     nextSteps: [
@@ -711,8 +714,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       { title: "AI Inbound Routing", href: "/run-workflows/ai-inbound-routing", description: "Approfondisci il setup inbound dopo che trunk inbound e agente sono pronti." },
       { title: "AI Dialer Flows", href: "/run-workflows/ai-dialer-flows", description: "Approfondisci il setup outbound dopo che trunk outbound e agente sono pronti." },
       { title: "Configura le functions", href: "/build/add-functions", description: "Rivedi call control, transfer, rescheduling, lead qualification e funzioni API custom." },
-      { title: "Monitoring and Visibility", href: "/observe/monitoring-and-visibility", description: "Rivedi come monitorare il primo workflow una volta live." },
-      { title: "Dialer pacing e limiti", href: "/run-workflows/dialer-pacing-and-limits", description: "Rivedi calls per second e maximum active calls prima di scalare una campagna outbound." },
+      { title: "Monitoring and Visibility", href: "/monitoring/monitoring-and-visibility", description: "Rivedi come monitorare il primo workflow una volta live." },
       { title: "Cronologia e revisione chiamate", href: "/run-workflows/call-history-and-review", description: "Rivedi chiamate completate, trascrizioni, registrazioni quando abilitate e metriche temporali." }
     ]
   }
@@ -809,7 +811,7 @@ export function LocalizedQuickstartTroubleshootingLink() {
   const card =
     locale === "it"
       ? {
-          title: "Troubleshooting",
+          title: "Risoluzione problemi",
           href: "/troubleshoot/troubleshooting#quickstart-checks",
           description: "Apri i controlli inbound e outbound quando il primo test non funziona come previsto."
         }
@@ -823,7 +825,7 @@ export function LocalizedQuickstartTroubleshootingLink() {
     <section className="docs-home-section">
       <p>
         {locale === "it"
-          ? "Se il primo test non funziona come previsto, apri la pagina Troubleshooting e segui i controlli inbound o outbound."
+          ? "Se il primo test non funziona come previsto, apri la pagina Risoluzione problemi e segui i controlli inbound o outbound."
           : "If the first test does not behave as expected, open the Troubleshooting page and follow the inbound or outbound checks."}
       </p>
       <CardGrid cards={[card]} />

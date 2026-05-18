@@ -230,7 +230,7 @@ const asteriskPbxCopy: Record<Locale, AsteriskPbxCopy> = {
         "L'AI voice agent gestisce la conversazione e decide se serve un trasferimento in base al prompt e alle functions abilitate.",
         <><code>transfer</code>, <code>transfer_call</code> o <code>transfer_to_service</code> invia la destinazione, l'interno o il servizio scelto dal workflow.</>,
         <>Asterisk instrada la destinazione usando il contesto configurato. Se nella function non selezioni un contesto custom, RocketAiFlow usa il contesto di default <code>raf-internal</code>.</>,
-        "Dopo il test, valida la chiamata nei Call Records e controlla lo stato del trunk nel monitoring."
+        "Dopo il test, valida la chiamata nel Registro chiamate e controlla lo stato del trunk nel monitoring."
       ]
     },
     trunkConfig: {
@@ -285,7 +285,7 @@ const asteriskPbxCopy: Record<Locale, AsteriskPbxCopy> = {
         "Per l'outbound, avvia una campagna con un contatto e Concurrent Call Capacity impostato a 1.",
         "Chiedi all'agente di trasferire verso una destinazione umana o un reparto supportato.",
         "Conferma che Asterisk riceva e instradi correttamente la destinazione.",
-        "Rivedi Call Records, transcript, timing, stato finale e monitoring trunk dopo la chiamata."
+        "Rivedi Registro chiamate, transcript, timing, stato finale e monitoring trunk dopo la chiamata."
       ]
     },
     nextStepsTitle: "Passaggi successivi",

@@ -45,7 +45,7 @@ const logsAndTracesCopy: Record<Locale, LogsAndTracesCopy> = {
       relatedPages: "Related pages"
     },
     intro: [
-      "RocketAiFlow uses OpenTelemetry-based observability so teams can inspect what happens across workflow execution, telephony behavior, API actions, runtime services, and supporting infrastructure.",
+      "RocketAiFlow uses OpenTelemetry-based monitoring so teams can inspect what happens across workflow execution, telephony behavior, API actions, runtime services, and supporting infrastructure.",
       "Logs and traces should be read together. Logs show event detail: what happened, when it happened, which service produced it, and which metadata was attached. Traces show the path: how the same operation moved across services and where latency, failure, or unexpected behavior started."
     ],
     whyTogetherIntro:
@@ -98,18 +98,18 @@ const logsAndTracesCopy: Record<Locale, LogsAndTracesCopy> = {
     relatedCards: [
       {
         title: "Monitoring and Visibility",
-        href: "/observe/monitoring-and-visibility",
-        description: "Return to the main observability model for live operations."
+        href: "/monitoring/monitoring-and-visibility",
+        description: "Return to the main monitoring model for live operations."
       },
       {
         title: "Pre-Provisioned Dashboards",
-        href: "/observe/pre-provisioned-dashboards",
+        href: "/monitoring/pre-provisioned-dashboards",
         description: "Start from the dashboard view before moving into log or trace evidence."
       },
       {
-        title: "Investigating Workflow Issues",
-        href: "/troubleshoot/investigating-workflow-issues",
-        description: "Follow the broader troubleshooting path from symptom to evidence."
+        title: "Troubleshooting",
+        href: "/troubleshoot/troubleshooting",
+        description: "Use setup checks after logs and traces identify the likely workflow area."
       }
     ]
   },
@@ -123,7 +123,7 @@ const logsAndTracesCopy: Record<Locale, LogsAndTracesCopy> = {
       relatedPages: "Pagine correlate"
     },
     intro: [
-      "RocketAiFlow usa osservabilità basata su OpenTelemetry per monitorare quello che succede durante l'esecuzione dei workflow, il comportamento telefonico, le azioni API, i servizi runtime e l'infrastruttura di supporto.",
+      "RocketAiFlow usa monitoraggio basato su OpenTelemetry per monitorare quello che succede durante l'esecuzione dei workflow, il comportamento telefonico, le azioni API, i servizi runtime e l'infrastruttura di supporto.",
       "Log e trace vanno letti insieme. I log mostrano il dettaglio dell'evento: cosa è successo, quando è successo, quale servizio lo ha prodotto e quali metadati sono associati. I trace mostrano il percorso: come la stessa operazione attraversa i servizi e dove iniziano latenza, errori o comportamenti inattesi."
     ],
     whyTogetherIntro:
@@ -176,18 +176,18 @@ const logsAndTracesCopy: Record<Locale, LogsAndTracesCopy> = {
     relatedCards: [
       {
         title: "Monitoring e visibilità",
-        href: "/observe/monitoring-and-visibility",
-        description: "Torna al modello principale di osservabilità per le operations live."
+        href: "/monitoring/monitoring-and-visibility",
+        description: "Torna al modello principale di monitoraggio per le operations live."
       },
       {
         title: "Dashboard preconfigurate",
-        href: "/observe/pre-provisioned-dashboards",
+        href: "/monitoring/pre-provisioned-dashboards",
         description: "Parti dalla vista dashboard prima di passare all'evidenza di log o trace."
       },
       {
-        title: "Analisi problemi workflow",
-        href: "/troubleshoot/investigating-workflow-issues",
-        description: "Segui il percorso completo dal sintomo all'evidenza."
+        title: "Risoluzione problemi",
+        href: "/troubleshoot/troubleshooting",
+        description: "Usa i controlli di setup dopo che log e trace indicano l'area probabile del workflow."
       }
     ]
   }
