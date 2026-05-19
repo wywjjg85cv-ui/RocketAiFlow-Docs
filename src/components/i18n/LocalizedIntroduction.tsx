@@ -32,6 +32,9 @@ type IntroductionCopy = {
   whatBody: string;
   usesTitle: string;
   uses: string[];
+  platformFitIntro: string;
+  platformFitItems: string[];
+  platformFitNote: string;
   operatingPathTitle: string;
   operatingPathIntro: string;
   operatingPath: IntroCard[];
@@ -73,6 +76,18 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       "connect calls to business systems through functions and APIs",
       "review outcomes, transcripts, recordings when enabled, timing, and live metrics"
     ],
+    platformFitIntro:
+      "RocketAiFlow is designed for teams that want Voice AI workflows to run inside a customer-managed environment instead of relying only on a fully managed external phone-agent stack. It is most useful when control, integration, and operational visibility matter.",
+    platformFitItems: [
+      "the deployment should run on premise or in infrastructure controlled by the customer",
+      "calls must connect to existing SIP trunks, PBX systems, or Asterisk-based telephony",
+      "the same platform should support inbound routing and outbound campaign execution",
+      "the team needs to choose or manage STT, TTS, LLM, telephony, and provider accounts",
+      "agents need custom functions that call CRM, calendar, helpdesk, database, or internal APIs",
+      "operators need dashboards, call records, logs, traces, and timing metrics to investigate live workflows"
+    ],
+    platformFitNote:
+      "If the goal is only a hosted voice bot with bundled phone numbers and minimal infrastructure ownership, a managed SaaS may be faster to start. RocketAiFlow makes more sense when the voice workflow must fit the customer's telephony, data, provider, and monitoring model.",
     operatingPathTitle: "Recommended documentation path",
     operatingPathIntro: "Use this order to move from the first test to a monitored workflow:",
     operatingPath: [
@@ -289,6 +304,18 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       "collegare le chiamate ai sistemi aziendali tramite funzioni e API",
       "rivedere outcome, transcript, registrazioni quando abilitate, timing e metriche live"
     ],
+    platformFitIntro:
+      "RocketAiFlow è pensato per team che vogliono eseguire workflow Voice AI in un ambiente gestito dal cliente, invece di dipendere solo da uno stack esterno completamente gestito per phone agent. È più utile quando contano controllo, integrazione e visibilità operativa.",
+    platformFitItems: [
+      "il deployment deve girare on-premise o in infrastruttura controllata dal cliente",
+      "le chiamate devono collegarsi a trunk SIP, sistemi PBX o telefonia basata su Asterisk già esistenti",
+      "la stessa piattaforma deve supportare routing inbound ed esecuzione campagne outbound",
+      "il team deve scegliere o gestire STT, TTS, LLM, telefonia e account provider",
+      "gli agenti devono usare functions custom che chiamano CRM, calendario, helpdesk, database o API interne",
+      "gli operatori hanno bisogno di dashboard, call record, log, trace e metriche di timing per investigare workflow live"
+    ],
+    platformFitNote:
+      "Se l'obiettivo è solo un voice bot hosted con numeri telefonici inclusi e minima ownership infrastrutturale, un SaaS gestito può essere più rapido per iniziare. RocketAiFlow ha più senso quando il workflow vocale deve adattarsi al modello telefonico, dati, provider e monitoring del cliente.",
     operatingPathTitle: "Percorso consigliato nella documentazione",
     operatingPathIntro: "Segui questo ordine per passare dal primo test a un workflow configurato e monitorato:",
     operatingPath: [
@@ -565,6 +592,22 @@ export function LocalizedIntroductionWhat() {
           <li key={item}>{item}</li>
         ))}
       </ul>
+    </section>
+  );
+}
+
+export function LocalizedIntroductionPlatformFit() {
+  const copy = useIntroductionCopy();
+
+  return (
+    <section className="docs-home-section">
+      <p>{copy.platformFitIntro}</p>
+      <ul>
+        {copy.platformFitItems.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+      <p>{copy.platformFitNote}</p>
     </section>
   );
 }

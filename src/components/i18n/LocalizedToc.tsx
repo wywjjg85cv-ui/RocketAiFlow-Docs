@@ -5,6 +5,7 @@ import { useCurrentLocale } from "../../i18n/client-locale";
 
 type IntroductionTocLabelKey =
   | "what"
+  | "platformFit"
   | "operatingPath"
   | "coreConcepts"
   | "agentsAndPrompts"
@@ -47,6 +48,7 @@ const tocCopy = {
     backToTop: "Back to top",
     introduction: {
       what: "What RocketAiFlow is",
+      platformFit: "Where RocketAiFlow fits",
       operatingPath: "Recommended documentation path",
       coreConcepts: "Core concepts",
       agentsAndPrompts: "Agents and prompts",
@@ -89,6 +91,7 @@ const tocCopy = {
     backToTop: "Torna su",
     introduction: {
       what: "Che cos'è RocketAiFlow",
+      platformFit: "Dove si colloca RocketAiFlow",
       operatingPath: "Percorso consigliato nella documentazione",
       coreConcepts: "Concetti principali",
       agentsAndPrompts: "Agenti e prompt",
