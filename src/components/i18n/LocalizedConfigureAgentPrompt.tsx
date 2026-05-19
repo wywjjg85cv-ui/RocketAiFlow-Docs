@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { defaultLocale, type Locale } from "../../i18n/routing";
 import { useCurrentLocale } from "../../i18n/client-locale";
+import { localizeHref } from "../../i18n/docs-routes";
 
 type SectionCopy = {
   title: string;
@@ -34,10 +35,13 @@ type HeadingKey = "principles" | "structure" | "example" | "functions" | "variab
 
 const openAiPromptGuidanceUrl = "https://developers.openai.com/api/docs/guides/prompt-guidance";
 const openAiFunctionCallingUrl = "https://developers.openai.com/api/docs/guides/function-calling";
+const contactInboundsUrl = "/run-workflows/inbound-ai/contact-inbounds#use-contact-data-in-the-agent";
 
 function InlineDocsLink({ href, children }: { href: string; children: ReactNode }) {
+  const locale = useCurrentLocale(defaultLocale);
+
   return (
-    <Link className="docs-inline-link" href={href}>
+    <Link className="docs-inline-link" href={localizeHref(href, locale)}>
       <span>{children}</span>
     </Link>
   );
@@ -59,19 +63,19 @@ const promptCopy: Record<Locale, PromptCopy> = {
   en: {
     title: "Configure Agent Prompt",
     intro: [
-      "The prompt is the operating instruction for the voice agent. It should tell the agent what it is, what it must achieve, how it should speak, what data it must collect, and when it should use functions.",
-      "Keep the first version practical. A short prompt with clear sections is easier to test than a long prompt with many overlapping rules."
+      "Write the prompt as the operating script for a live voice call. It should define who the agent is, what the call must achieve, how the agent should speak, what data it must collect, and when it should use functions.",
+      "For voice, keep instructions short and operational: one question at a time, clear fallback behavior, explicit function triggers, and no overlapping rules."
     ],
     principles: {
       title: "Prompt principles",
       paragraphs: [
-        <>OpenAI recommends starting with clear instructions, adding specific sections for behaviors that matter, using ordered steps when the workflow has a sequence, and adding examples when behavior needs to be demonstrated. See the <ExternalDocsLink href={openAiPromptGuidanceUrl}>OpenAI prompt guidance</ExternalDocsLink>.</>,
-        "For RocketAiFlow, write prompts as operational rules for a real phone call, not as a product description."
+        "In RocketAiFlow, write prompts as operational rules for a real phone call, not as a product description.",
+        <>Use clear sections, ordered steps, and examples when behavior needs to be demonstrated. This is also aligned with the <ExternalDocsLink href={openAiPromptGuidanceUrl}>OpenAI prompt guidance</ExternalDocsLink>.</>
       ],
       items: [
         "use short sections with explicit headings",
         "state the business objective in plain language",
-        "define the speaking style with concrete rules",
+        "define the speaking style with concrete rules, short answers, and one question at a time",
         "list the required information the agent must collect",
         "name the functions the agent can call and when to call them",
         "state what the agent must do when information is missing",
@@ -85,33 +89,46 @@ const promptCopy: Record<Locale, PromptCopy> = {
       ],
       items: [
         <><strong>Role:</strong> who the agent is and who it represents.</>,
-        <><strong>Goal:</strong> the outcome the call should reach.</>,
-        <><strong>Conversation style:</strong> how the agent should speak, how long answers should be, and how it should handle uncertainty.</>,
+        <><strong>Call objective:</strong> the business outcome the call should reach.</>,
+        <><strong>Speaking style:</strong> how the agent should speak, how long answers should be, and how it should handle uncertainty.</>,
         <><strong>Information to collect:</strong> the fields needed before the workflow can continue.</>,
-        <><strong>Functions:</strong> exact function names, when to call them, and what fields must be available first.</>,
-        <><strong>Transfer or hangup:</strong> when the call should be transferred, closed, or left unresolved.</>,
+        <><strong>Function rules:</strong> exact function names, trigger conditions, required fields, and negative rules.</>,
+        <><strong>Transfer rules:</strong> when the call should be transferred to a person or destination.</>,
+        <><strong>Closing rules:</strong> how the agent should summarize, close, or leave the call unresolved.</>,
         <><strong>Context variables:</strong> contact or campaign values the prompt can use, such as <code>{`{t.name}`}</code> or <code>{`{t.data.birthDate}`}</code>.</>
       ],
       callout: (
-        <PromptBlock>{`Role: [1-2 sentences defining the model's function, context, and job]
+        <PromptBlock>{`# Role
+[who the agent is and who it represents]
 
-# Personality
-[tone, demeanor, and collaboration style]
+# Call objective
+[the business result the call should reach]
 
-# Goal
-[user-visible outcome]
+# Speaking style
+- Speak in short sentences.
+- Ask one question at a time.
+- Confirm important values such as dates, names, and phone numbers.
+- Do not invent information.
 
-# Success criteria
-[what must be true before the final answer]
+# Information to collect
+- [required field 1]
+- [required field 2]
+- [required field 3]
 
-# Constraints
-[policy, safety, business, evidence, and side-effect limits]
+# Function rules
+- Use function_name only when [trigger condition].
+- Before calling it, collect [required fields].
+- If a required field is missing, ask one short follow-up question.
+- Do not call the function when [negative condition].
 
-# Output
-[sections, length, and tone]
+# Transfer rules
+[when to transfer and which destination is allowed]
 
-# Stop rules
-[when to retry, fallback, abstain, ask, or stop]`}</PromptBlock>
+# Closing rules
+[how to summarize the result and close the call]
+
+# Context variables
+[which {t...} values may be used and what to do if they are missing]`}</PromptBlock>
       )
     },
     example: {
@@ -143,7 +160,6 @@ Qualify the caller and understand whether they want a demo, a callback, or more 
 - Use save_lead_qualification only after you have collected the required qualification fields.
 - If a required field is missing, ask one short follow-up question before calling the function.
 - Use transfer_call only when the caller asks to speak with a human or the workflow requires a handoff.
-- Use hangup_call only after the conversation has reached a clear closing point.
 
 # Closing
 Summarize the next step before ending or transferring the call.`}</PromptBlock>
@@ -152,10 +168,13 @@ Summarize the next step before ending or transferring the call.`}</PromptBlock>
     functions: {
       title: "Prompt functions clearly",
       paragraphs: [
-        <>OpenAI function calling works best when functions have clear names, descriptions, and schemas, and when the prompt explains when the model should call them. See the <ExternalDocsLink href={openAiFunctionCallingUrl}>OpenAI function calling guide</ExternalDocsLink>.</>,
-        "In the prompt, mention a function by its exact name and connect it to a concrete condition."
+        "In RocketAiFlow, function rules belong in the prompt when the agent must decide whether to call a configured function during a live call.",
+        <>Provider function-calling guidance is useful for schemas, names, and tool behavior. See the <ExternalDocsLink href={openAiFunctionCallingUrl}>OpenAI function calling guide</ExternalDocsLink>.</>
       ],
       items: [
+        "mention each function by its exact name and connect it to a concrete trigger condition",
+        "list the required fields that must be collected before the function can be called",
+        "if a required value is missing, tell the agent to ask one short follow-up question before calling the function",
         <><strong>Good:</strong> “Use <code>transfer_to_service</code> when the caller asks for sales, support, or administration. Set <code>exten</code> to the matching supported service.”</>,
         <><strong>Good:</strong> “Use <code>rescheduled_contact</code> only after the caller asks to be contacted later and you have confirmed the callback date and time.”</>,
         <><strong>Avoid:</strong> “Use tools when useful.” This is too vague for reliable behavior.</>,
@@ -166,12 +185,13 @@ Summarize the next step before ending or transferring the call.`}</PromptBlock>
       title: "Use context variables only when they help",
       paragraphs: [
         "Template variables can personalize the prompt, but they should not make the instruction hard to read.",
-        <>Use variables such as <code>{`{t.name}`}</code>, <code>{`{t.phone}`}</code>, or <code>{`{t.externalId}`}</code> only when the prompt or function needs that context.</>
+        <>Use variables such as <code>{`{t.name}`}</code>, <code>{`{t.phone}`}</code>, or <code>{`{t.externalId}`}</code> only when the prompt or function needs that context.</>,
+        <>For outbound calls, variables come from the campaign contact. For inbound calls, variables render only when the agent has contact retrieval enabled and <InlineDocsLink href={contactInboundsUrl}>Contact Inbounds</InlineDocsLink> contains a list associated with that agent and a number that matches the caller.</>
       ],
       items: [
-        "use contact variables for known data already saved on the contact",
+        "use contact variables for known data already saved on the contact or campaign record",
         "ask the caller for values that are not already available",
-        "do not assume a variable will render unless the value exists on the active contact",
+        <>do not assume a variable will render unless the value exists on the active contact; if there is no match, variables such as <code>{`{t.name}`}</code> or <code>{`{t.data.birthDate}`}</code> are not rendered</>,
         <>review the detailed model in <InlineDocsLink href="/build/dynamic-parameters">Dynamic Parameters</InlineDocsLink></>
       ]
     },
@@ -197,19 +217,19 @@ Summarize the next step before ending or transferring the call.`}</PromptBlock>
   it: {
     title: "Configura il prompt",
     intro: [
-      "Il prompt è l'istruzione operativa dell'agente vocale. Deve dire chi è l'agente, cosa deve ottenere, come deve parlare, quali dati deve raccogliere e quando deve usare le functions.",
-      "Mantieni la prima versione pratica. Un prompt breve con sezioni chiare è più facile da testare rispetto a un prompt lungo con regole sovrapposte."
+      "Scrivi il prompt come lo script operativo di una chiamata vocale reale. Deve definire chi è l'agente, cosa deve ottenere la chiamata, come deve parlare, quali dati deve raccogliere e quando deve usare le functions.",
+      "Per la voce, mantieni istruzioni brevi e operative: una domanda alla volta, fallback chiari, trigger espliciti per le functions e nessuna regola sovrapposta."
     ],
     principles: {
       title: "Principi per costruire il prompt",
       paragraphs: [
-        <>OpenAI consiglia di partire da istruzioni chiare, aggiungere sezioni specifiche per i comportamenti importanti, usare step ordinati quando il workflow ha una sequenza e aggiungere esempi quando vuoi mostrare il comportamento atteso. Vedi la <ExternalDocsLink href={openAiPromptGuidanceUrl}>prompt guidance di OpenAI</ExternalDocsLink>.</>,
-        "In RocketAiFlow, scrivi il prompt come regole operative per una chiamata reale, non come descrizione del prodotto."
+        "In RocketAiFlow, scrivi il prompt come regole operative per una chiamata reale, non come descrizione del prodotto.",
+        <>Usa sezioni chiare, step ordinati ed esempi quando devi mostrare un comportamento atteso. Questo è allineato anche alla <ExternalDocsLink href={openAiPromptGuidanceUrl}>prompt guidance di OpenAI</ExternalDocsLink>.</>
       ],
       items: [
         "usa sezioni brevi con titoli espliciti",
         "scrivi l'obiettivo di business in modo semplice",
-        "definisci lo stile conversazionale con regole concrete",
+        "definisci lo stile conversazionale con regole concrete, risposte brevi e una domanda alla volta",
         "elenca le informazioni che l'agente deve raccogliere",
         "nomina le functions che l'agente può chiamare e quando deve chiamarle",
         "spiega cosa deve fare l'agente quando manca un'informazione",
@@ -223,33 +243,46 @@ Summarize the next step before ending or transferring the call.`}</PromptBlock>
       ],
       items: [
         <><strong>Ruolo:</strong> chi è l'agente e chi rappresenta.</>,
-        <><strong>Obiettivo:</strong> quale risultato deve raggiungere la chiamata.</>,
+        <><strong>Obiettivo chiamata:</strong> quale risultato di business deve raggiungere la chiamata.</>,
         <><strong>Stile conversazionale:</strong> come deve parlare, quanto devono essere lunghe le risposte e come deve gestire l'incertezza.</>,
         <><strong>Informazioni da raccogliere:</strong> i campi necessari prima di continuare il workflow.</>,
-        <><strong>Functions:</strong> nomi esatti delle functions, quando chiamarle e quali campi devono essere disponibili prima.</>,
-        <><strong>Transfer o hangup:</strong> quando la chiamata deve essere trasferita, chiusa o lasciata senza esito.</>,
+        <><strong>Regole functions:</strong> nomi esatti delle functions, condizioni di attivazione, campi required e regole negative.</>,
+        <><strong>Regole transfer:</strong> quando la chiamata deve essere trasferita a una persona o destinazione.</>,
+        <><strong>Regole di chiusura:</strong> come l'agente deve riassumere, chiudere o lasciare la chiamata senza esito.</>,
         <><strong>Variabili di contesto:</strong> valori contatto o campagna che il prompt può usare, come <code>{`{t.name}`}</code> o <code>{`{t.data.birthDate}`}</code>.</>
       ],
       callout: (
-        <PromptBlock>{`Ruolo: [1-2 frasi che definiscono funzione, contesto e compito del modello]
+        <PromptBlock>{`# Ruolo
+[chi è l'agente e chi rappresenta]
 
-# Personalità
-[tono, atteggiamento e stile di collaborazione]
+# Obiettivo chiamata
+[risultato di business che la chiamata deve raggiungere]
 
-# Obiettivo
-[risultato visibile all'utente]
+# Stile conversazionale
+- Parla con frasi brevi.
+- Fai una domanda alla volta.
+- Conferma valori importanti come date, nomi e numeri di telefono.
+- Non inventare informazioni.
 
-# Criteri di successo
-[cosa deve essere vero prima della risposta finale]
+# Informazioni da raccogliere
+- [campo required 1]
+- [campo required 2]
+- [campo required 3]
 
-# Vincoli
-[limiti di policy, sicurezza, business, evidenza e azioni con effetti esterni]
+# Regole functions
+- Usa function_name solo quando [condizione di attivazione].
+- Prima di chiamarla, raccogli [campi required].
+- Se manca un campo required, fai una breve domanda di follow-up.
+- Non chiamare la function quando [condizione negativa].
 
-# Output
-[sezioni, lunghezza e tono]
+# Regole transfer
+[quando trasferire e quale destinazione è consentita]
 
-# Regole di stop
-[quando riprovare, usare un fallback, astenersi, chiedere o fermarsi]`}</PromptBlock>
+# Regole di chiusura
+[come riassumere l'esito e chiudere la chiamata]
+
+# Variabili di contesto
+[quali valori {t...} possono essere usati e cosa fare se mancano]`}</PromptBlock>
       )
     },
     example: {
@@ -281,7 +314,6 @@ Qualifica il chiamante e capisci se vuole una demo, un callback o più informazi
 - Usa save_lead_qualification solo dopo aver raccolto i campi richiesti per qualificare il lead.
 - Se manca un campo obbligatorio, fai prima una breve domanda di follow-up.
 - Usa transfer_call solo quando il chiamante chiede di parlare con una persona o il workflow richiede un handoff.
-- Usa hangup_call solo quando la conversazione ha raggiunto un punto di chiusura chiaro.
 
 # Chiusura
 Riassumi il prossimo step prima di terminare o trasferire la chiamata.`}</PromptBlock>
@@ -290,10 +322,13 @@ Riassumi il prossimo step prima di terminare o trasferire la chiamata.`}</Prompt
     functions: {
       title: "Descrivi le functions in modo chiaro",
       paragraphs: [
-        <>La function calling di OpenAI funziona meglio quando le functions hanno nome, descrizione e schema chiari, e quando il prompt spiega quando il modello deve chiamarle. Vedi la <ExternalDocsLink href={openAiFunctionCallingUrl}>guida OpenAI sulle function calling</ExternalDocsLink>.</>,
-        "Nel prompt, cita la function con il suo nome esatto e collegala a una condizione concreta."
+        "In RocketAiFlow, le regole sulle functions vanno nel prompt quando l'agente deve decidere se chiamare una function configurata durante una chiamata reale.",
+        <>La guida del provider resta utile per schema, nomi e comportamento dei tool. Vedi la <ExternalDocsLink href={openAiFunctionCallingUrl}>guida OpenAI sulle function calling</ExternalDocsLink>.</>
       ],
       items: [
+        "cita ogni function con il suo nome esatto e collegala a una condizione di attivazione concreta",
+        "elenca i campi required che devono essere raccolti prima di chiamare la function",
+        "se manca un valore required, indica all'agente di fare una breve domanda di follow-up prima di chiamare la function",
         <><strong>Buono:</strong> “Usa <code>transfer_to_service</code> quando il chiamante chiede sales, support o administration. Imposta <code>exten</code> sul servizio supportato corretto.”</>,
         <><strong>Buono:</strong> “Usa <code>rescheduled_contact</code> solo dopo che il chiamante ha chiesto di essere ricontattato e hai confermato data e ora del callback.”</>,
         <><strong>Evita:</strong> “Usa i tool quando serve.” È troppo vago per ottenere un comportamento affidabile.</>,
@@ -304,12 +339,13 @@ Riassumi il prossimo step prima di terminare o trasferire la chiamata.`}</Prompt
       title: "Usa le variabili di contesto solo quando servono",
       paragraphs: [
         "Le variabili template possono personalizzare il prompt, ma non devono renderlo difficile da leggere.",
-        <>Usa variabili come <code>{`{t.name}`}</code>, <code>{`{t.phone}`}</code> o <code>{`{t.externalId}`}</code> solo quando il prompt o la function hanno bisogno di quel contesto.</>
+        <>Usa variabili come <code>{`{t.name}`}</code>, <code>{`{t.phone}`}</code> o <code>{`{t.externalId}`}</code> solo quando il prompt o la function hanno bisogno di quel contesto.</>,
+        <>Per le chiamate outbound, le variabili arrivano dal contatto della campagna. Per le chiamate inbound, le variabili vengono renderizzate solo se l'agente ha il recupero contatto abilitato e <InlineDocsLink href={contactInboundsUrl}>Contatti inbound</InlineDocsLink> contiene una lista associata a quell'agente con un numero che corrisponde al chiamante.</>
       ],
       items: [
-        "usa variabili contatto per dati già salvati sul contatto",
+        "usa variabili contatto per dati già salvati sul contatto o sul record campagna",
         "chiedi al chiamante i valori che non sono già disponibili",
-        "non dare per scontato che una variabile venga renderizzata se il valore non esiste sul contatto attivo",
+        <>non dare per scontato che una variabile venga renderizzata se il valore non esiste sul contatto attivo; se non c'è corrispondenza, variabili come <code>{`{t.name}`}</code> o <code>{`{t.data.birthDate}`}</code> non vengono renderizzate</>,
         <>rivedi il modello completo in <InlineDocsLink href="/build/dynamic-parameters">Parametri dinamici</InlineDocsLink></>
       ]
     },
@@ -358,10 +394,12 @@ function Section({ section }: { section: SectionCopy }) {
 }
 
 function CardGrid({ cards }: { cards: LinkCard[] }) {
+  const locale = useCurrentLocale(defaultLocale);
+
   return (
     <div className="docs-home-card-grid docs-home-card-grid-2">
       {cards.map((card) => (
-        <Link key={card.href} className="docs-home-card" href={card.href}>
+        <Link key={card.href} className="docs-home-card" href={localizeHref(card.href, locale)}>
           <span className="docs-home-card-title">{card.title}</span>
           <span className="docs-home-card-description">{card.description}</span>
         </Link>
