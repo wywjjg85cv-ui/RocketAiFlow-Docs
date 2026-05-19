@@ -179,36 +179,43 @@ const italianMetadata: Record<string, DocsMetadata> = {
   },
   "/legal": {
     title: "Stato legale",
-    description: "Stato legale corrente di RocketAiFlow."
+    description:
+      "Rivedi la readiness legale RocketAiFlow per valutazione iniziale, termini pilot, protezione dati, trasparenza AI e responsabilità condivisa."
   },
   "/legal/terms-and-commercial-model": {
     title: "Termini pilot",
-    description: "Stato corrente dei termini pilot di RocketAiFlow."
+    description:
+      "Rivedi termini pilot, ambito di valutazione, responsabilità on-premise, confini del supporto e readiness commerciale di RocketAiFlow."
   },
   "/legal/privacy-and-data-protection": {
     title: "Protezione dati",
-    description: "Stato corrente della protezione dati per RocketAiFlow."
+    description:
+      "Comprendi protezione dati on-premise, dati controllati dal cliente, accesso supporto, telemetry e confini di trattamento in RocketAiFlow."
   },
   "/legal/ai-transparency": {
     title: "Trasparenza AI",
-    description: "Stato corrente della trasparenza AI per RocketAiFlow."
+    description:
+      "Rivedi le linee guida RocketAiFlow per disclosure AI, trasparenza verso i chiamanti e responsabilità del cliente nei workflow voce."
   },
   "/legal/security-and-trust": {
     title: "Sicurezza",
-    description: "Stato corrente delle responsabilità di sicurezza per RocketAiFlow."
+    description:
+      "Rivedi la responsabilità condivisa di sicurezza RocketAiFlow per deploy on-premise, software, infrastruttura, secret, log e supporto."
   },
   "/legal/imprint": {
     title: "Note legali",
-    description: "Note legali correnti per RocketAiFlow."
+    description:
+      "Rivedi le note legali RocketAiFlow, lo stato pre-company e le informazioni societarie ancora in attesa di finalizzazione."
   },
   "/reference/api-reference": {
     title: "Riferimento API",
     description:
-      "Consulta le API RocketAiFlow disponibili nella sezione /api/docs."
+      "Apri il riferimento API RocketAiFlow per rivedere endpoint, schemi e percorsi di integrazione per l'automazione dei workflow."
   },
   "/reference/changelog": {
     title: "Changelog",
-    description: "Documentazione e note di rilascio RocketAiFlow."
+    description:
+      "Segui modifiche documentazione e note di rilascio RocketAiFlow mentre la prima versione pubblica evolve verso aggiornamenti futuri."
   }
 };
 

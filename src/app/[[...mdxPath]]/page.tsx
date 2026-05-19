@@ -4,7 +4,8 @@ import { importPage } from "nextra/pages";
 import { useMDXComponents as getMDXComponents } from "../../../mdx-components";
 import type { ComponentType, ReactNode } from "react";
 import { DocsBreadcrumbs } from "../../components/docs-breadcrumbs";
-import { absoluteUrl, siteDescription, siteName } from "../../config/site";
+import { absoluteUrl, siteDescription, siteName, siteOgImagePath } from "../../config/site";
+import { LocaleProvider } from "../../i18n/client-locale";
 import { getLocalizedDocsMetadata } from "../../i18n/docs-metadata";
 import {
   docsRoutes,
@@ -82,7 +83,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { title, description } = localizedMetadata;
   const canonical = absoluteUrl(getLocalizedPath(resolvedPath.canonicalPath, resolvedPath.locale));
   const alternates = getAlternatePaths(resolvedPath.canonicalPath);
-  const image = absoluteUrl("/logo512.png");
+  const image = absoluteUrl(siteOgImagePath);
 
   return {
     ...pageMetadata,
@@ -104,8 +105,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: [
         {
           url: image,
-          width: 512,
-          height: 512,
+          width: 1200,
+          height: 630,
           alt: "RocketAiFlow"
         }
       ]
@@ -145,11 +146,44 @@ export default async function DocsPage(props: PageProps) {
   }
 
   const { default: MDXContent, toc, metadata } = result;
+  const pageMetadata = metadata as Metadata;
+  const fallbackMetadata = {
+    title: metadataTitleToString(pageMetadata.title),
+    description:
+      typeof pageMetadata.description === "string" ? pageMetadata.description : siteDescription
+  };
+  const localizedMetadata = getLocalizedDocsMetadata(
+    resolvedPath.canonicalPath,
+    resolvedPath.locale,
+    fallbackMetadata
+  );
+  const canonical = absoluteUrl(getLocalizedPath(resolvedPath.canonicalPath, resolvedPath.locale));
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: localizedMetadata.title,
+    description: localizedMetadata.description,
+    url: canonical,
+    inLanguage: resolvedPath.locale,
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteName,
+      url: absoluteUrl("/")
+    }
+  };
 
   return (
-    <Wrapper toc={toc} metadata={metadata}>
-      <DocsBreadcrumbs canonicalPath={resolvedPath.canonicalPath} locale={resolvedPath.locale} />
-      <MDXContent {...props} params={{ mdxPath: resolvedPath.mdxPath }} />
-    </Wrapper>
+    <LocaleProvider initialLocale={resolvedPath.locale}>
+      <Wrapper toc={toc} metadata={metadata}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c")
+          }}
+        />
+        <DocsBreadcrumbs canonicalPath={resolvedPath.canonicalPath} locale={resolvedPath.locale} />
+        <MDXContent {...props} params={{ mdxPath: resolvedPath.mdxPath }} />
+      </Wrapper>
+    </LocaleProvider>
   );
 }

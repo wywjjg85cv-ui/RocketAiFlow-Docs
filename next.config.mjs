@@ -25,10 +25,18 @@ export default withNextra({
         permanent: true
       },
       { source: "/05-add-functions", destination: "/en/build/add-functions", permanent: true },
-      { source: "/06-ai-inbound-routing", destination: "/en/run-workflows/ai-inbound-routing", permanent: true },
+      {
+        source: "/06-ai-inbound-routing",
+        destination: "/en/run-workflows/inbound-ai/ai-inbound-routing",
+        permanent: true
+      },
       { source: "/07-ai-dialer-flows", destination: "/en/run-workflows/ai-dialer-flows", permanent: true },
       { source: "/08-import-contacts", destination: "/en/run-workflows/import-contacts", permanent: true },
-      { source: "/09-contact-inbounds", destination: "/en/run-workflows/contact-inbounds", permanent: true },
+      {
+        source: "/09-contact-inbounds",
+        destination: "/en/run-workflows/inbound-ai/contact-inbounds",
+        permanent: true
+      },
       { source: "/10-call-records", destination: "/en/run-workflows/call-records", permanent: true },
       { source: "/11-trunk-configuration", destination: "/en/deploy/deployment-overview", permanent: true },
       { source: "/12-phone", destination: "/en/run-workflows/phone", permanent: true },
@@ -43,8 +51,8 @@ export default withNextra({
         permanent: true
       },
       { source: "/28-telephony-architecture", destination: "/en/deploy/deployment-overview", permanent: true },
-      { source: "/29-dialer-pacing-and-limits", destination: "/en/run-workflows/dialer-pacing-and-limits", permanent: true },
-      { source: "/30-call-history-and-review", destination: "/en/run-workflows/call-history-and-review", permanent: true },
+      { source: "/29-dialer-pacing-and-limits", destination: "/en/run-workflows/ai-dialer-flows", permanent: true },
+      { source: "/30-call-history-and-review", destination: "/en/run-workflows/call-records", permanent: true },
       { source: "/api-reference", destination: "/en/reference/api-reference", permanent: true },
       { source: "/changelog", destination: "/en/reference/changelog", permanent: true },
       { source: "/deploy/on-premise-deployment", destination: "/en/deploy/deployment-overview", permanent: true },
@@ -63,14 +71,22 @@ export default withNextra({
       { source: "/agent-settings", destination: "/en/build/create-your-first-ai-voice-agent", permanent: true },
       { source: "/agent-settings/:path*", destination: "/en/build/create-your-first-ai-voice-agent", permanent: true },
       { source: "/build/core-concepts", destination: "/en/get-started/introduction", permanent: true },
-      { source: "/build/inbound-workflows", destination: "/en/run-workflows/ai-inbound-routing", permanent: true },
+      {
+        source: "/build/inbound-workflows",
+        destination: "/en/run-workflows/inbound-ai/ai-inbound-routing",
+        permanent: true
+      },
       { source: "/build/outbound-workflows", destination: "/en/run-workflows/ai-dialer-flows", permanent: true },
       {
         source: "/build/workflow-design",
         destination: "/en/build/create-your-first-ai-voice-agent",
         permanent: true
       },
-      { source: "/build/routing-and-handoff", destination: "/en/run-workflows/ai-inbound-routing", permanent: true },
+      {
+        source: "/build/routing-and-handoff",
+        destination: "/en/run-workflows/inbound-ai/ai-inbound-routing",
+        permanent: true
+      },
       { source: "/build/provider-flexibility", destination: "/en/integrations/telephony", permanent: true },
       {
         source: "/build/platform-agnostic-architecture",

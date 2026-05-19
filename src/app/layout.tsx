@@ -6,7 +6,7 @@ import { DocsNavbar } from "../components/docs-navbar";
 import { LocalizedInternalLinks } from "../components/i18n/LocalizedInternalLinks";
 import { LocalizedSearch } from "../components/i18n/LocalizedSearch";
 import { LocalizedBackToTop, LocalizedTocTitle } from "../components/i18n/LocalizedToc";
-import { absoluteUrl, siteDescription, siteName, siteUrl } from "../config/site";
+import { absoluteUrl, siteDescription, siteName, siteOgImagePath, siteUrl } from "../config/site";
 import "nextra-theme-docs/style.css";
 import "./globals.css";
 
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: absoluteUrl("/logo512.png"),
-        width: 512,
-        height: 512,
+        url: absoluteUrl(siteOgImagePath),
+        width: 1200,
+        height: 630,
         alt: "RocketAiFlow"
       }
     ]
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
-    images: [absoluteUrl("/logo512.png")]
+    images: [absoluteUrl(siteOgImagePath)]
   },
   robots: {
     index: true,
@@ -67,6 +67,15 @@ export const metadata: Metadata = {
       "max-video-preview": -1
     }
   }
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteName,
+  url: siteUrl,
+  inLanguage: ["en", "it"],
+  description: siteDescription
 };
 
 export default async function RootLayout({
@@ -113,6 +122,12 @@ export default async function RootLayout({
           {children}
         </Layout>
         <LocalizedInternalLinks />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteJsonLd).replace(/</g, "\\u003c")
+          }}
+        />
       </body>
     </html>
   );

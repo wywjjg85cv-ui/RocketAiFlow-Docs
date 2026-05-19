@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { createContext, createElement, useContext, useEffect, useSyncExternalStore, type ReactNode } from "react";
 import {
   defaultLocale,
+  isLocale,
   localeCookieMaxAge,
   localeCookieName,
   normalizeLocale,
@@ -10,18 +11,34 @@ import {
 } from "./routing";
 
 const localeListeners = new Set<() => void>();
+const InitialLocaleContext = createContext<Locale | null>(null);
 
-function getCookieLocale() {
+function getPathLocale() {
+  if (typeof window === "undefined") {
+    return undefined;
+  }
+
+  const [maybeLocale] = window.location.pathname.split("/").filter(Boolean);
+  return isLocale(maybeLocale) ? maybeLocale : undefined;
+}
+
+function getBrowserLocale() {
   if (typeof document === "undefined") {
     return defaultLocale;
   }
 
-  const cookie = document.cookie
+  const pathLocale = getPathLocale();
+
+  if (pathLocale) {
+    return pathLocale;
+  }
+
+  const cookieLocale = document.cookie
     .split("; ")
     .find((item) => item.startsWith(`${localeCookieName}=`))
     ?.split("=")[1];
 
-  return normalizeLocale(cookie);
+  return normalizeLocale(cookieLocale);
 }
 
 function subscribeLocale(listener: () => void) {
@@ -40,8 +57,20 @@ export function setClientLocale(locale: Locale) {
   emitLocaleChange();
 }
 
-export function useCurrentLocale(initialLocale: Locale = defaultLocale) {
-  const locale = useSyncExternalStore(subscribeLocale, getCookieLocale, () => initialLocale);
+export function LocaleProvider({
+  initialLocale,
+  children
+}: {
+  initialLocale: Locale;
+  children: ReactNode;
+}) {
+  return createElement(InitialLocaleContext.Provider, { value: initialLocale }, children);
+}
+
+export function useCurrentLocale(initialLocale?: Locale) {
+  const contextLocale = useContext(InitialLocaleContext);
+  const serverLocale = contextLocale ?? initialLocale ?? defaultLocale;
+  const locale = useSyncExternalStore(subscribeLocale, getBrowserLocale, () => serverLocale);
 
   useEffect(() => {
     document.documentElement.lang = locale;
