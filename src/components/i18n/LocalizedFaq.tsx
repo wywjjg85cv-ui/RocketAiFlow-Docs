@@ -53,7 +53,7 @@ const faqCopy: Record<Locale, FaqCopy> = {
         question: "Do I need inbound routing before testing an agent?",
         answer: (
           <>
-            Not always. You can test the agent from the <FaqLink href="/run-workflows/phone">Phone</FaqLink> area first, then connect the validated agent to <FaqLink href="/run-workflows/ai-inbound-routing">AI Inbound Routing</FaqLink>.
+            Not always. You can test the agent from the <FaqLink href="/run-workflows/phone">Phone</FaqLink> area first, then connect the validated agent to <FaqLink href="/run-workflows/inbound-ai/ai-inbound-routing">AI Inbound Routing</FaqLink>.
           </>
         )
       },
@@ -61,7 +61,7 @@ const faqCopy: Record<Locale, FaqCopy> = {
         question: "What should I review after the first call?",
         answer: (
           <>
-            Open <FaqLink href="/run-workflows/ai-dialer-flows/call-records">Call Records</FaqLink> and check status, outcome, timing, transcript, recording state when enabled, and any useful review notes. This confirms whether the workflow behaved as expected.
+            Open <FaqLink href="/run-workflows/call-records">Call Records</FaqLink> and check status, outcome, timing, transcript, recording state when enabled, and any useful review notes. This confirms whether the workflow behaved as expected.
           </>
         )
       },
@@ -154,7 +154,7 @@ const faqCopy: Record<Locale, FaqCopy> = {
         question: "Serve configurare routing inbound prima di testare un agente?",
         answer: (
           <>
-            Non sempre. Puoi testare prima l'agente dall'area <FaqLink href="/run-workflows/phone">Phone</FaqLink>, poi collegare l'agente validato a <FaqLink href="/run-workflows/ai-inbound-routing">AI Inbound Routing</FaqLink>.
+            Non sempre. Puoi testare prima l'agente dall'area <FaqLink href="/run-workflows/phone">Phone</FaqLink>, poi collegare l'agente validato a <FaqLink href="/run-workflows/inbound-ai/ai-inbound-routing">AI Inbound Routing</FaqLink>.
           </>
         )
       },
@@ -162,7 +162,7 @@ const faqCopy: Record<Locale, FaqCopy> = {
         question: "Cosa devo controllare dopo la prima chiamata?",
         answer: (
           <>
-            Apri <FaqLink href="/run-workflows/ai-dialer-flows/call-records">Registro chiamate</FaqLink> e controlla status, outcome, timing, transcript, stato registrazione quando abilitata e note utili di review. Questo conferma se il workflow si è comportato come previsto.
+            Apri <FaqLink href="/run-workflows/call-records">Registro chiamate</FaqLink> e controlla status, outcome, timing, transcript, stato registrazione quando abilitata e note utili di review. Questo conferma se il workflow si è comportato come previsto.
           </>
         )
       },

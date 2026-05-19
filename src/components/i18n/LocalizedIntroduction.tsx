@@ -105,9 +105,9 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "6. Improve",
-        href: "/run-workflows/call-history-and-review",
+        href: "/run-workflows/processed-contacts",
         description:
-          "Use call records, transcripts, recordings when enabled, and timing metrics to improve the workflow."
+          "Use processed contacts, call records, transcripts, recordings when enabled, and timing metrics to improve the workflow."
       }
     ],
     conceptsTitle: "Core concepts",
@@ -170,7 +170,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "Connect inbound routing",
-        href: "/run-workflows/ai-inbound-routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
         description: "Route a live inbound entry point to the right agent and validate call delivery."
       },
       {
@@ -179,9 +179,9 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         description: "Import contacts, configure campaign rules, set pacing, and run a controlled test."
       },
       {
-        title: "Review call records",
-        href: "/run-workflows/call-history-and-review",
-        description: "Check outcomes, transcripts, recordings when enabled, talk time, ring time, and review notes."
+        title: "Review processed contacts",
+        href: "/run-workflows/processed-contacts",
+        description: "Find contacts handled by inbound and outbound workflows, then open the call record for outcome, transcript, recording and timing detail."
       },
       {
         title: "Investigate workflow issues",
@@ -212,7 +212,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "AI Inbound Routing",
-        href: "/run-workflows/ai-inbound-routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
         description: "Route an inbound phone number to the right agent."
       },
       {
@@ -222,7 +222,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "Call Records",
-        href: "/run-workflows/ai-dialer-flows/call-records",
+        href: "/run-workflows/call-records",
         description: "Review outcome, transcript, recording status, and call timing."
       },
       {
@@ -314,9 +314,9 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "6. Migliora",
-        href: "/run-workflows/call-history-and-review",
+        href: "/run-workflows/processed-contacts",
         description:
-          "Usa call record, transcript, registrazioni quando abilitate e metriche di timing per migliorare il workflow."
+          "Usa contatti elaborati, call record, transcript, registrazioni quando abilitate e metriche di timing per migliorare il workflow."
       }
     ],
     conceptsTitle: "Concetti principali",
@@ -379,7 +379,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "Connetti routing inbound",
-        href: "/run-workflows/ai-inbound-routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
         description: "Instrada un entry point inbound live verso l'agente corretto e valida la consegna della chiamata."
       },
       {
@@ -388,9 +388,9 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         description: "Importa contatti, configura regole campagna, imposta pacing ed esegui un test controllato."
       },
       {
-        title: "Rivedi i call record",
-        href: "/run-workflows/call-history-and-review",
-        description: "Controlla outcome, transcript, registrazioni quando abilitate, talk time, ring time e note di review."
+        title: "Rivedi i contatti elaborati",
+        href: "/run-workflows/processed-contacts",
+        description: "Trova i contatti gestiti da workflow inbound e outbound, poi apri il call record per outcome, transcript, registrazione e timing."
       },
       {
         title: "Investiga problemi workflow",
@@ -421,7 +421,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "AI Inbound Routing",
-        href: "/run-workflows/ai-inbound-routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
         description: "Instrada un numero inbound verso l'agente corretto."
       },
       {
@@ -431,7 +431,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       },
       {
         title: "Registro chiamate",
-        href: "/run-workflows/ai-dialer-flows/call-records",
+        href: "/run-workflows/call-records",
         description: "Rivedi outcome, transcript, stato registrazione e timing della chiamata."
       },
       {

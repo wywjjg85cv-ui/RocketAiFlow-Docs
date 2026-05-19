@@ -91,7 +91,7 @@ const promptCopy: Record<Locale, PromptCopy> = {
         <><strong>Information to collect:</strong> the fields needed before the workflow can continue.</>,
         <><strong>Functions:</strong> exact function names, when to call them, and what fields must be available first.</>,
         <><strong>Transfer or hangup:</strong> when the call should be transferred, closed, or left unresolved.</>,
-        <><strong>Context variables:</strong> contact or campaign values the prompt can use, such as <code>{`{t.name}`}</code> or <code>{`{t.data.cf}`}</code>.</>
+        <><strong>Context variables:</strong> contact or campaign values the prompt can use, such as <code>{`{t.name}`}</code> or <code>{`{t.data.birthDate}`}</code>.</>
       ],
       callout: (
         <PromptBlock>{`Role: [1-2 sentences defining the model's function, context, and job]
@@ -167,7 +167,7 @@ Summarize the next step before ending or transferring the call.`}</PromptBlock>
       title: "Use context variables only when they help",
       paragraphs: [
         "Template variables can personalize the prompt, but they should not make the instruction hard to read.",
-        <>Use variables such as <code>{`{t.name}`}</code>, <code>{`{t.phone}`}</code>, or <code>{`{t.data.externalId}`}</code> only when the prompt or function needs that context.</>
+        <>Use variables such as <code>{`{t.name}`}</code>, <code>{`{t.phone}`}</code>, or <code>{`{t.externalId}`}</code> only when the prompt or function needs that context.</>
       ],
       items: [
         "use contact variables for known data already saved on the contact",
@@ -205,7 +205,7 @@ Summarize the next step before ending or transferring the call.`}</PromptBlock>
       },
       {
         title: "AI Inbound Routing",
-        href: "/run-workflows/ai-inbound-routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
         description: "Connect the configured agent to the first inbound route."
       }
     ]
@@ -244,7 +244,7 @@ Summarize the next step before ending or transferring the call.`}</PromptBlock>
         <><strong>Informazioni da raccogliere:</strong> i campi necessari prima di continuare il workflow.</>,
         <><strong>Functions:</strong> nomi esatti delle functions, quando chiamarle e quali campi devono essere disponibili prima.</>,
         <><strong>Transfer o hangup:</strong> quando la chiamata deve essere trasferita, chiusa o lasciata senza esito.</>,
-        <><strong>Variabili di contesto:</strong> valori contatto o campagna che il prompt può usare, come <code>{`{t.name}`}</code> o <code>{`{t.data.cf}`}</code>.</>
+        <><strong>Variabili di contesto:</strong> valori contatto o campagna che il prompt può usare, come <code>{`{t.name}`}</code> o <code>{`{t.data.birthDate}`}</code>.</>
       ],
       callout: (
         <PromptBlock>{`Ruolo: [1-2 frasi che definiscono funzione, contesto e compito del modello]
@@ -320,7 +320,7 @@ Riassumi il prossimo step prima di terminare o trasferire la chiamata.`}</Prompt
       title: "Usa le variabili di contesto solo quando servono",
       paragraphs: [
         "Le variabili template possono personalizzare il prompt, ma non devono renderlo difficile da leggere.",
-        <>Usa variabili come <code>{`{t.name}`}</code>, <code>{`{t.phone}`}</code> o <code>{`{t.data.externalId}`}</code> solo quando il prompt o la function hanno bisogno di quel contesto.</>
+        <>Usa variabili come <code>{`{t.name}`}</code>, <code>{`{t.phone}`}</code> o <code>{`{t.externalId}`}</code> solo quando il prompt o la function hanno bisogno di quel contesto.</>
       ],
       items: [
         "usa variabili contatto per dati già salvati sul contatto",
@@ -358,7 +358,7 @@ Riassumi il prossimo step prima di terminare o trasferire la chiamata.`}</Prompt
       },
       {
         title: "AI Inbound Routing",
-        href: "/run-workflows/ai-inbound-routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
         description: "Collega l'agente configurato alla prima route inbound."
       }
     ]

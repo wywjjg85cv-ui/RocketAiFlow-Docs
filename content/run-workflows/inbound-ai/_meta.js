@@ -3,9 +3,9 @@ import { LocalizedNavLabel } from "../../../src/components/i18n/LocalizedNavLabe
 
 const label = (labelKey) => createElement(LocalizedNavLabel, { labelKey });
 
-const aiDialerFlowsMeta = {
-  index: label("aiDialerFlowsOverview"),
-  contacts: label("dialerContacts")
+const inboundAiMeta = {
+  "contact-inbounds": label("contactInbounds"),
+  "ai-inbound-routing": label("aiInboundRouting")
 };
 
-export default aiDialerFlowsMeta;
+export default inboundAiMeta;

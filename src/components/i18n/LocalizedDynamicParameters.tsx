@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { defaultLocale, type Locale } from "../../i18n/routing";
 import { useCurrentLocale } from "../../i18n/client-locale";
+import { localizeHref } from "../../i18n/docs-routes";
 
 type SectionCopy = {
   title: string;
@@ -55,14 +56,18 @@ const defaultTemplateVariables = [
 ];
 
 const contactTemplateScreenshot = "/screenshots/docs/contact-template-custom-cf.png";
+const contactInboundsUrl = "/run-workflows/inbound-ai/contact-inbounds#use-contact-data-in-the-agent";
+const agentSettingsUrl = "/build/create-your-first-ai-voice-agent#agent-settings";
 
 function UiPill({ children }: { children: ReactNode }) {
   return <span className="docs-ui-pill">{children}</span>;
 }
 
 function InlineDocsLink({ href, children }: { href: string; children: ReactNode }) {
+  const locale = useCurrentLocale(defaultLocale);
+
   return (
-    <Link className="docs-inline-link" href={href}>
+    <Link className="docs-inline-link" href={localizeHref(href, locale)}>
       <span>{children}</span>
     </Link>
   );
@@ -82,7 +87,7 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
         "Keep this distinction clear when you configure functions. Some values are known before the call starts; other values must be collected by the agent during the conversation."
       ],
       items: [
-        <><strong>Contact/template values:</strong> values already stored on the outbound contact or on the inbound contact matched through <UiPill>Contact Inbounds</UiPill>.</>,
+        <><strong>Contact/template values:</strong> values already stored on the outbound contact or on the inbound contact matched through <InlineDocsLink href={contactInboundsUrl}>Contact Inbounds</InlineDocsLink>.</>,
         <><strong>LLM-generated values:</strong> values the model extracts or creates during the call, such as intent, callback time, lead status, notes, city, or qualification result.</>
       ]
     },
@@ -91,8 +96,8 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
       paragraphs: [
         "Contact templates define which contact fields can be inserted dynamically in agent fields.",
         "The default template includes the main parameters of a contact created in RocketAiFlow:",
-        <>You can edit the default template and add custom keys. Custom keys are rendered from <code>data</code>. For example, if you add a key named <code>cf</code>, the variable becomes <code>{`{t.data.cf}`}</code>.</>,
-        "Create separate templates for different contact schemas. If one workflow imports custom fields like data.externalId and another imports data.cf or data.policyNumber, add those keys to the relevant template so they appear as selectable variables when creating or editing an agent.",
+        <>You can edit the default template and add custom keys. Custom keys are rendered from <code>data</code>. For example, if you add a key named <code>birthDate</code>, the variable becomes <code>{`{t.data.birthDate}`}</code>.</>,
+        "Create separate templates for different contact schemas. If one workflow imports custom fields like externalId and another imports data.birthDate or data.policyNumber, add those keys to the relevant template so they appear as selectable variables when creating or editing an agent.",
         "This reduces typing mistakes: instead of manually writing variable names, use the variables suggested by the UI."
       ],
       items: defaultTemplateVariables.map((variable) => <code key={variable}>{variable}</code>),
@@ -108,18 +113,23 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
         "A variable is replaced only when the matching value exists on the contact used for that call.",
         "If the value does not exist, the variable is not rendered. Before using custom variables, make sure the contact data contains the expected key-value pairs."
       ],
+      callout: (
+        <>
+          Inbound variables render only when <InlineDocsLink href={agentSettingsUrl}>Agent settings</InlineDocsLink> has <strong>Retrieve contact data for templates</strong> enabled and <InlineDocsLink href={contactInboundsUrl}>Contact Inbounds</InlineDocsLink> contains a list with a phone number matching the caller. Without a matching inbound contact, variables such as <code>{`{t.name}`}</code> or <code>{`{t.data.birthDate}`}</code> are not rendered.
+        </>
+      ),
       items: [
         <><strong>Outbound:</strong> variables are rendered from the contact loaded into the campaign. Custom fields must be included in the contact <code>data</code> object.</>,
-        <><strong>Inbound:</strong> variables are rendered only when Agent settings allow contact lookup and <UiPill>Contact Inbounds</UiPill> contains a contact list with a number that matches the caller.</>,
+        <><strong>Inbound:</strong> variables are rendered only when Agent settings allow contact lookup and <InlineDocsLink href={contactInboundsUrl}>Contact Inbounds</InlineDocsLink> contains a contact list with a number that matches the caller.</>,
         <>In fields that support variables, type <code>@</code> to open suggestions or click the variables shown under the field.</>,
-        <>To prepare contacts, see <InlineDocsLink href="/run-workflows/ai-dialer-flows/import-contacts#associate-contacts-with-a-campaign-or-agent">Import Contacts</InlineDocsLink>.</>
+        <>To prepare contacts, see <InlineDocsLink href="/run-workflows/import-contacts#associate-contacts-with-a-campaign-or-agent">Import Contacts</InlineDocsLink>.</>
       ]
     },
     functionUsage: {
       title: "Use dynamic values in functions",
       paragraphs: [
         "Dynamic values are useful when a function must call the right API endpoint or pass the right context without hardcoding a value for every contact.",
-        <>Example: if a custom <code>PUT</code> function updates a CRM contact and the CRM id is stored on the contact as <code>data.externalId</code>, use that value in the API URL, for example <code>https://crm.example.com/contacts/{"{t.data.externalId}"}</code>.</>,
+        <>Example: if a custom <code>PUT</code> function updates a CRM contact and the CRM id is stored on the contact as <code>externalId</code>, use that value in the API URL, for example <code>https://crm.example.com/contacts/{"{t.externalId}"}</code>.</>,
         "RocketAiFlow renders the contact id from the active contact. The LLM can then generate only the values that must be updated, such as status, notes, or qualification result."
       ],
       items: [
@@ -156,7 +166,7 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
       },
       {
         title: "Importa contatti",
-        href: "/run-workflows/ai-dialer-flows/import-contacts",
+        href: "/run-workflows/import-contacts",
         description: "Prepare outbound campaign contacts or inbound agent contacts with the expected data keys."
       }
     ]
@@ -174,7 +184,7 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
         "Mantieni chiara questa distinzione quando configuri le functions. Alcuni valori sono noti prima che la chiamata inizi; altri devono essere raccolti dall'agente durante la conversazione."
       ],
       items: [
-        <><strong>Valori contatto/template:</strong> valori già salvati nel contatto outbound o nel contatto inbound trovato tramite <UiPill>Contatti inbound</UiPill>.</>,
+        <><strong>Valori contatto/template:</strong> valori già salvati nel contatto outbound o nel contatto inbound trovato tramite <InlineDocsLink href={contactInboundsUrl}>Contatti inbound</InlineDocsLink>.</>,
         <><strong>Valori generati dall'LLM:</strong> valori che il modello estrae o crea durante la chiamata, come intento, orario callback, stato lead, note, città o risultato della qualificazione.</>
       ]
     },
@@ -183,8 +193,8 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
       paragraphs: [
         "I contact template definiscono quali campi del contatto possono essere inseriti dinamicamente nei campi dell'agente.",
         "Il template di default include i principali parametri di un contatto creato in RocketAiFlow:",
-        <>Puoi modificare il template di default e aggiungere chiavi custom. Le chiavi custom vengono renderizzate da <code>data</code>. Per esempio, se aggiungi una chiave chiamata <code>cf</code>, la variabile diventa <code>{`{t.data.cf}`}</code>.</>,
-        "Crea template diversi in base alle variabili custom che vuoi caricare nei contatti. Per esempio, se un workflow usa data.externalId e un altro usa data.cf o data.policyNumber, aggiungi quelle chiavi nel template corretto così saranno disponibili come variabili selezionabili quando crei o modifichi un agente.",
+        <>Puoi modificare il template di default e aggiungere chiavi custom. Le chiavi custom vengono renderizzate da <code>data</code>. Per esempio, se aggiungi una chiave chiamata <code>birthDate</code>, la variabile diventa <code>{`{t.data.birthDate}`}</code>.</>,
+        "Crea template diversi in base alle variabili custom che vuoi caricare nei contatti. Per esempio, se un workflow usa externalId e un altro usa data.birthDate o data.policyNumber, aggiungi quelle chiavi nel template corretto così saranno disponibili come variabili selezionabili quando crei o modifichi un agente.",
         "Questo riduce gli errori di typing: invece di scrivere manualmente i nomi delle variabili, usa i suggerimenti mostrati dalla UI."
       ],
       items: defaultTemplateVariables.map((variable) => <code key={variable}>{variable}</code>),
@@ -200,18 +210,23 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
         "Una variabile viene sostituita solo quando il valore corrispondente esiste nel contatto usato per quella chiamata.",
         "Se il valore non esiste, la variabile non viene renderizzata. Prima di usare variabili custom, assicurati che i dati del contatto contengano le key-value attese."
       ],
+      callout: (
+        <>
+          Le variabili inbound vengono renderizzate solo se in <InlineDocsLink href={agentSettingsUrl}>Agent settings</InlineDocsLink> è abilitato <strong>Retrieve contact data for templates</strong> e <InlineDocsLink href={contactInboundsUrl}>Contatti inbound</InlineDocsLink> contiene una lista con un numero che corrisponde al chiamante. Senza un contatto inbound corrispondente, variabili come <code>{`{t.name}`}</code> o <code>{`{t.data.birthDate}`}</code> non vengono renderizzate.
+        </>
+      ),
       items: [
         <><strong>Outbound:</strong> le variabili vengono renderizzate dal contatto caricato nella campagna. I campi custom devono essere dentro l'oggetto <code>data</code> del contatto.</>,
-        <><strong>Inbound:</strong> le variabili vengono renderizzate solo se negli Agent settings è abilitato il recupero del contatto e <UiPill>Contatti inbound</UiPill> contiene una lista con un numero che corrisponde al chiamante.</>,
+        <><strong>Inbound:</strong> le variabili vengono renderizzate solo se negli Agent settings è abilitato il recupero del contatto e <InlineDocsLink href={contactInboundsUrl}>Contatti inbound</InlineDocsLink> contiene una lista con un numero che corrisponde al chiamante.</>,
         <>Nei campi che supportano le variabili, digita <code>@</code> per aprire i suggerimenti oppure clicca le variabili mostrate sotto il campo.</>,
-        <>Per preparare i contatti, vedi <InlineDocsLink href="/run-workflows/ai-dialer-flows/import-contacts#associate-contacts-with-a-campaign-or-agent">Importa contatti</InlineDocsLink>.</>
+        <>Per preparare i contatti, vedi <InlineDocsLink href="/run-workflows/import-contacts#associate-contacts-with-a-campaign-or-agent">Importa contatti</InlineDocsLink>.</>
       ]
     },
     functionUsage: {
       title: "Usa valori dinamici nelle functions",
       paragraphs: [
         "I valori dinamici sono utili quando una function deve chiamare l'endpoint API corretto o passare il contesto giusto senza creare valori statici per ogni contatto.",
-        <>Esempio: se una function custom <code>PUT</code> aggiorna un contatto nel tuo CRM e l'id CRM è salvato nel contatto come <code>data.externalId</code>, puoi usare quel valore nella URL API, per esempio <code>https://crm.example.com/contacts/{"{t.data.externalId}"}</code>.</>,
+        <>Esempio: se una function custom <code>PUT</code> aggiorna un contatto nel tuo CRM e l'id CRM è salvato nel contatto come <code>externalId</code>, puoi usare quel valore nella URL API, per esempio <code>https://crm.example.com/contacts/{"{t.externalId}"}</code>.</>,
         "RocketAiFlow renderizza l'id dal contatto attivo. L'LLM può generare solo i valori da aggiornare, come stato, note o risultato della qualificazione."
       ],
       items: [
@@ -248,7 +263,7 @@ const dynamicParametersCopy: Record<Locale, DynamicParametersCopy> = {
       },
       {
         title: "Import Contacts",
-        href: "/run-workflows/ai-dialer-flows/import-contacts",
+        href: "/run-workflows/import-contacts",
         description: "Prepara contatti per campagne outbound o agenti inbound con le chiavi data attese."
       }
     ]
@@ -282,16 +297,22 @@ function Section({ section }: { section: SectionCopy }) {
           {section.screenshot.caption ? <figcaption className="docs-screenshot-caption">{section.screenshot.caption}</figcaption> : null}
         </figure>
       ) : null}
-      {section.callout ? <div className="docs-note-callout">{section.callout}</div> : null}
+      {section.callout ? (
+        <div className="docs-feature-callout docs-feature-callout-warning">
+          <div className="docs-feature-callout-body">{section.callout}</div>
+        </div>
+      ) : null}
     </section>
   );
 }
 
 function CardGrid({ cards }: { cards: LinkCard[] }) {
+  const locale = useCurrentLocale(defaultLocale);
+
   return (
     <div className="docs-home-card-grid docs-home-card-grid-2">
       {cards.map((card) => (
-        <Link key={card.href} className="docs-home-card" href={card.href}>
+        <Link key={card.href} className="docs-home-card" href={localizeHref(card.href, locale)}>
           <span className="docs-home-card-title">{card.title}</span>
           <span className="docs-home-card-description">{card.description}</span>
         </Link>

@@ -111,12 +111,12 @@ const homeCopy: Record<Locale, HomeCopy> = {
     workflows: {
       title: "Run real workflows",
       cards: [
-        { href: "/run-workflows/ai-inbound-routing", title: "AI Inbound Routing" },
+        { href: "/run-workflows/inbound-ai/ai-inbound-routing", title: "AI Inbound Routing" },
         { href: "/run-workflows/ai-dialer-flows", title: "AI Dialer Flows" },
-        { href: "/run-workflows/ai-dialer-flows/import-contacts", title: "Import Contacts" },
-        { href: "/run-workflows/contact-inbounds", title: "Contact Inbounds" },
-        { href: "/run-workflows/ai-dialer-flows/call-records", title: "Call Records" },
-        { href: "/run-workflows/call-history-and-review", title: "Call History and Review" },
+        { href: "/run-workflows/import-contacts", title: "Import Contacts" },
+        { href: "/run-workflows/inbound-ai/contact-inbounds", title: "Contact Inbounds" },
+        { href: "/run-workflows/call-records", title: "Call Records" },
+        { href: "/run-workflows/processed-contacts", title: "Processed Contacts" },
         { href: "/run-workflows/phone", title: "Phone" }
       ]
     },
@@ -203,12 +203,12 @@ const homeCopy: Record<Locale, HomeCopy> = {
     workflows: {
       title: "Esegui workflow reali",
       cards: [
-        { href: "/run-workflows/ai-inbound-routing", title: "Routing AI inbound" },
+        { href: "/run-workflows/inbound-ai/ai-inbound-routing", title: "Routing AI inbound" },
         { href: "/run-workflows/ai-dialer-flows", title: "Flussi AI dialer" },
-        { href: "/run-workflows/ai-dialer-flows/import-contacts", title: "Importa contatti" },
-        { href: "/run-workflows/contact-inbounds", title: "Contatti inbound" },
-        { href: "/run-workflows/ai-dialer-flows/call-records", title: "Registro chiamate" },
-        { href: "/run-workflows/call-history-and-review", title: "Storico e review chiamate" },
+        { href: "/run-workflows/import-contacts", title: "Importa contatti" },
+        { href: "/run-workflows/inbound-ai/contact-inbounds", title: "Contatti inbound" },
+        { href: "/run-workflows/call-records", title: "Registro chiamate" },
+        { href: "/run-workflows/processed-contacts", title: "Contatti elaborati" },
         { href: "/run-workflows/phone", title: "Phone" }
       ]
     },

@@ -28,6 +28,12 @@ type CampaignField = {
   note: ReactNode;
 };
 
+type ScreenshotPanel = {
+  title: string;
+  description: string;
+  crop: "top" | "bottom";
+};
+
 type SectionCopy = {
   paragraphs: ReactNode[];
   bullets?: ReactNode[];
@@ -50,7 +56,7 @@ type AiDialerFlowsCopy = {
   screenshotLabel: string;
   screenshotReplace: string;
   sections: Record<Exclude<SectionKey, "nextSteps">, SectionCopy>;
-  screenshots: Record<ScreenshotKey, { title: string; description: string; src?: string; alt?: string }>;
+  screenshots: Record<ScreenshotKey, { title: string; description: string; src?: string; alt?: string; panels?: ScreenshotPanel[] }>;
   nextSteps: {
     cards: CardCopy[];
   };
@@ -221,14 +227,26 @@ const aiDialerFlowsCopy: Record<Locale, AiDialerFlowsCopy> = {
         title: "Edit Campaign form",
         description: "Screenshot of Name, Concurrent Call Capacity, Active, Enable Recording, Agent Setting, Trunk Name, Context, and Exten.",
         src: "/screenshots/docs/campaign-call-capacity-schedule.png",
-        alt: "Edit Campaign form with call capacity, scheduling, agent, and trunk settings."
+        alt: "Edit Campaign form with call capacity, scheduling, agent, and trunk settings.",
+        panels: [
+          {
+            title: "Campaign configuration",
+            description: "Name, active status, recording, agent, trunk, context, extension, and concurrent call capacity.",
+            crop: "top"
+          },
+          {
+            title: "Scheduling and retry",
+            description: "Retry behavior, active days, active hours, start date, end date, and timezone.",
+            crop: "bottom"
+          }
+        ]
       },
     },
     nextSteps: {
       cards: [
         {
           title: "Import Contacts",
-          href: "/run-workflows/ai-dialer-flows/import-contacts",
+          href: "/run-workflows/import-contacts",
           description: "Prepare a CSV import or create contacts manually for Dialer Campaigns."
         },
         {
@@ -238,7 +256,7 @@ const aiDialerFlowsCopy: Record<Locale, AiDialerFlowsCopy> = {
         },
         {
           title: "Call Records",
-          href: "/run-workflows/ai-dialer-flows/call-records",
+          href: "/run-workflows/call-records",
           description: "Review the result of each outbound call after the campaign runs."
         }
       ]
@@ -408,14 +426,26 @@ const aiDialerFlowsCopy: Record<Locale, AiDialerFlowsCopy> = {
         title: "Form Edit Campaign",
         description: "Screenshot di Name, Concurrent Call Capacity, Active, Enable Recording, Agent Setting, Trunk Name, Context ed Exten.",
         src: "/screenshots/docs/campaign-call-capacity-schedule.png",
-        alt: "Form Edit Campaign con impostazioni di call capacity, schedulazione, agente e trunk."
+        alt: "Form Edit Campaign con impostazioni di call capacity, schedulazione, agente e trunk.",
+        panels: [
+          {
+            title: "Configurazione campagna",
+            description: "Name, stato active, recording, agente, trunk, context, exten e concurrent call capacity.",
+            crop: "top"
+          },
+          {
+            title: "Scheduling e retry",
+            description: "Retry, giorni attivi, fasce orarie, data di inizio, data di fine e timezone.",
+            crop: "bottom"
+          }
+        ]
       },
     },
     nextSteps: {
       cards: [
         {
           title: "Importa contatti",
-          href: "/run-workflows/ai-dialer-flows/import-contacts",
+          href: "/run-workflows/import-contacts",
           description: "Prepara un import CSV o crea manualmente i contatti per le Dialer Campaigns."
         },
         {
@@ -425,7 +455,7 @@ const aiDialerFlowsCopy: Record<Locale, AiDialerFlowsCopy> = {
         },
         {
           title: "Registro chiamate",
-          href: "/run-workflows/ai-dialer-flows/call-records",
+          href: "/run-workflows/call-records",
           description: "Rivedi il risultato di ogni chiamata outbound dopo l'esecuzione della campagna."
         }
       ]
@@ -535,11 +565,35 @@ export function LocalizedAiDialerFlowsScreenshot({ screenshotKey }: { screenshot
   const screenshot = copy.screenshots[screenshotKey];
 
   if (screenshot.src) {
-    const className = screenshotKey === "campaignForm" ? "docs-screenshot docs-screenshot-half" : "docs-screenshot";
+    if (screenshot.panels?.length) {
+      return (
+        <section className="docs-home-section">
+          <div className="docs-screenshot-split-grid">
+            {screenshot.panels.map((panel) => (
+              <figure className="docs-screenshot docs-screenshot-split" key={panel.title}>
+                <div className="docs-screenshot-frame docs-screenshot-split-frame">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className={`docs-screenshot-img docs-screenshot-split-img docs-screenshot-split-img-${panel.crop}`}
+                    src={screenshot.src}
+                    alt={`${screenshot.alt ?? screenshot.title}: ${panel.title}`}
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption className="docs-screenshot-caption docs-screenshot-split-caption">
+                  <strong>{panel.title}</strong>
+                  <span>{panel.description}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      );
+    }
 
     return (
       <section className="docs-home-section">
-        <figure className={className}>
+        <figure className="docs-screenshot">
           <div className="docs-screenshot-frame">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="docs-screenshot-img" src={screenshot.src} alt={screenshot.alt ?? screenshot.title} loading="lazy" />

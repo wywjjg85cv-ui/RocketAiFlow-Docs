@@ -5,9 +5,10 @@ const label = (labelKey) => createElement(LocalizedNavLabel, { labelKey });
 
 const runWorkflowsMeta = {
   "ai-dialer-flows": label("aiDialerFlows"),
-  "ai-inbound-routing": label("aiInboundRouting"),
-  "contact-inbounds": label("contactInbounds"),
-  "call-history-and-review": label("callHistoryAndReview"),
+  "inbound-ai": label("inboundAi"),
+  "import-contacts": label("importContacts"),
+  "processed-contacts": label("processedContacts"),
+  "call-records": label("callRecords"),
   phone: label("phone")
 };
 

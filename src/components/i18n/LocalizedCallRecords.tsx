@@ -6,12 +6,19 @@ import { useCurrentLocale } from "../../i18n/client-locale";
 import { localizeHref } from "../../i18n/docs-routes";
 import { defaultLocale, type Locale } from "../../i18n/routing";
 
-type SectionKey = "firstCheck" | "operationalUse" | "recordings" | "timing" | "reviewHabit" | "signals" | "nextSteps";
+type SectionKey = "sharedRecords" | "overview" | "recording" | "dataOutcome" | "reviewFlow" | "nextSteps";
+type ScreenshotKey = "overview" | "recording" | "dataOutcome";
 
 type SectionCopy = {
   title: string;
   paragraphs?: ReactNode[];
   items?: ReactNode[];
+};
+
+type ScreenshotCopy = {
+  src: string;
+  alt: string;
+  caption: string;
 };
 
 type LinkCard = {
@@ -25,11 +32,7 @@ type CallRecordsCopy = {
   intro: ReactNode[];
   headings: Record<SectionKey, string>;
   sections: Record<Exclude<SectionKey, "nextSteps">, SectionCopy>;
-  screenshot: {
-    src: string;
-    alt: string;
-    caption: string;
-  };
+  screenshots: Record<ScreenshotKey, ScreenshotCopy>;
   nextSteps: LinkCard[];
 };
 
@@ -37,174 +40,204 @@ const callRecordsCopy: Record<Locale, CallRecordsCopy> = {
   en: {
     title: "Call Records",
     intro: [
-      "Call Records is the validation surface after testing or running real calls.",
-      "Use it to confirm whether the route, campaign, agent, trunk, transcript, recording state, and timing match the expected workflow."
+      "Call Records is the shared review surface for outbound and inbound calls.",
+      "Use one explanation for both flows: the call detail keeps the same operational meaning. What changes is only where the call came from, such as a Dialer Campaign, AI Inbound Routing, or Phone test."
     ],
     headings: {
-      firstCheck: "What to check first",
-      operationalUse: "How to use Call Records operationally",
-      recordings: "Review recordings and transcripts when available",
-      timing: "Use timing metrics, not just outcomes",
-      reviewHabit: "Review habit",
-      signals: "Common signals to watch",
+      sharedRecords: "Use the same review model for inbound and outbound",
+      overview: "Read the call overview",
+      recording: "Review the recording when enabled",
+      dataOutcome: "Review Data and Lead Qualification Outcome",
+      reviewFlow: "Use the record as the source of truth",
       nextSteps: "Next steps"
     },
     sections: {
-      firstCheck: {
-        title: "What to check first",
-        paragraphs: ["After a call, review the fields that explain the result before changing configuration."],
-        items: ["call status", "timestamps", "outcome", "transcript or recording data when available", "talk time and ring time"]
-      },
-      operationalUse: {
-        title: "How to use Call Records operationally",
-        paragraphs: ["Call Records helps answer practical questions during review."],
-        items: [
-          "did the call start and end as expected",
-          "did the correct route or campaign run",
-          "did the conversation lead to transfer, hangup, or another intended outcome",
-          "do prompt, routing, contacts, or trunk configuration need review"
-        ]
-      },
-      recordings: {
-        title: "Review recordings and transcripts when available",
+      sharedRecords: {
+        title: "Use the same review model for inbound and outbound",
         paragraphs: [
-          "Use transcripts to confirm whether the agent stayed on task and reached the intended business outcome.",
-          "Use recordings for deeper review only where that is operationally and legally appropriate."
+          "Do not duplicate the concept for inbound call records and outbound call records. The record detail should explain the same evidence for both directions.",
+          "An outbound record usually starts from a campaign contact. An inbound record usually starts from a caller matched through inbound routing or contact lookup. After the call is created, the review fields are read in the same way."
+        ],
+        items: [
+          "caller or contact identity",
+          "agent used by the call",
+          "timeline, status, reason and cause",
+          "ring time, hold time and talk time",
+          "recording and transcript when enabled",
+          "contact data and function output saved during the call"
         ]
       },
-      timing: {
-        title: "Use timing metrics, not just outcomes",
-        paragraphs: ["Outcomes alone do not explain how the interaction behaved. Talk time and ring time help identify pacing, telephony, and workflow issues."],
-        items: [
-          "calls ending too early",
-          "contacts taking longer to answer",
-          "pacing changes affecting conversation quality",
-          "one campaign behaving differently from another"
+      overview: {
+        title: "Read the call overview",
+        paragraphs: [
+          "The overview gives the first operational answer: who was called or who called in, which agent handled the interaction, when the call happened, and how it ended.",
+          "Use the duration and timeline areas to separate telephony behavior from conversation behavior. For example, ring time helps explain answer delay, while talk time helps explain how long the agent stayed in the workflow."
         ]
       },
-      reviewHabit: {
-        title: "Review habit",
-        paragraphs: ["Review call records after controlled changes. It is easier to connect a result to a specific change when prompt, routing, campaign settings, and trunk configuration are not changed together."]
+      recording: {
+        title: "Review the recording when enabled",
+        paragraphs: [
+          "The recording panel appears when recording is enabled for the call path. It shows the generated filename and gives operators a quick way to listen to or download the audio.",
+          "Use recordings for deeper review when transcript alone is not enough, for example when you need to verify audio quality, interruptions, silence, or the exact customer phrasing."
+        ]
       },
-      signals: {
-        title: "Common signals to watch",
+      dataOutcome: {
+        title: "Review Data and Lead Qualification Outcome",
+        paragraphs: [
+          "The Data section reports custom data that the customer loaded on the contact. These values come from the contact record and are useful for context, personalization, template variables, and downstream review.",
+          "Lead Qualification Outcome is where RocketAiFlow shows the structured data collected by the agent during the conversation. In a lead qualification workflow, this can include fields such as email, phone, timeline, lead name, AI summary, interest level, score, requested action, demo date, pain points, important notes and raw interview data.",
+          "If a value was not available or was not collected, the record can show an empty value or the unresolved placeholder. This makes the call record useful for spotting which data is missing before changing the prompt or function schema."
+        ]
+      },
+      reviewFlow: {
+        title: "Use the record as the source of truth",
+        paragraphs: [
+          "Start from the call record before changing route, campaign, prompt or function configuration.",
+          "The record tells you whether the problem is in telephony, contact data, agent behavior, function output, recording setup, or timing."
+        ],
         items: [
-          "repeated failed calls",
-          "missing expected outcomes",
-          "transfer attempts that do not complete",
-          "unexpected timing or abrupt call endings",
-          "transcripts showing the agent drifting away from the intended workflow",
-          "recordings confirming audio or execution problems when enabled"
+          "check overview and timeline first",
+          "check recording and transcript when available",
+          "check Data to confirm contact fields were passed correctly",
+          "check Lead Qualification Outcome to confirm what the agent collected",
+          "change one configuration area at a time after review"
         ]
       }
     },
-    screenshot: {
-      src: "/screenshots/docs/call-review-timing-status.png",
-      alt: "RocketAiFlow call review screen showing timing, status, and cause details.",
-      caption: "The detailed call review surface helps teams validate outcome, timing, and final state before changing prompts, campaigns, or telephony settings."
+    screenshots: {
+      overview: {
+        src: "/screenshots/docs/call-record-overview-timeline.png",
+        alt: "RocketAiFlow call record overview with caller card, voice agent details, duration and timeline status.",
+        caption: "The overview and timeline show caller identity, agent, contact id, call timestamps, status, reason, cause, ring time and talk time."
+      },
+      recording: {
+        src: "/screenshots/docs/call-record-recording.png",
+        alt: "RocketAiFlow call record recording panel with recording status, filename, listen button, download button and audio player.",
+        caption: "The recording panel is available when recording is enabled and lets operators listen to or download the audio file."
+      },
+      dataOutcome: {
+        src: "/screenshots/docs/call-record-data-lead-qualification.png",
+        alt: "RocketAiFlow call record data section and lead qualification outcome section with custom contact data and structured fields collected by the agent.",
+        caption: "Data contains custom contact fields loaded by the customer. Lead Qualification Outcome contains structured information collected or saved by the agent during the call."
+      }
     },
     nextSteps: [
       {
-        title: "Call History and Review",
-        href: "/run-workflows/call-history-and-review",
-        description: "Review completed calls in more detail through call history, transcripts, recordings, and timing metrics."
+        title: "AI Dialer Flows",
+        href: "/run-workflows/ai-dialer-flows",
+        description: "Review the campaign configuration that generated outbound calls."
+      },
+      {
+        title: "AI Inbound Routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
+        description: "Review the inbound route that sent calls to an agent."
       },
       {
         title: "Troubleshooting",
         href: "/troubleshoot/troubleshooting",
-        description: "Use troubleshooting when call records show an unexpected result."
-      },
-      {
-        title: "Phone",
-        href: "/run-workflows/phone",
-        description: "Run another controlled test from Phone after adjusting the configuration."
+        description: "Use diagnostics when the call record shows an unexpected result."
       }
     ]
   },
   it: {
     title: "Registro chiamate",
     intro: [
-      "Il Registro chiamate è la superficie di validazione dopo i test o dopo l'esecuzione di chiamate reali.",
-      "Usalo per confermare che route, campagna, agente, trunk, transcript, stato registrazione e timing corrispondano al workflow atteso."
+      "Il Registro chiamate è la superficie di review condivisa per chiamate outbound e inbound.",
+      "Usa una spiegazione unica per entrambi i flussi: il dettaglio della chiamata mantiene lo stesso significato operativo. Cambia solo da dove nasce la chiamata, per esempio Dialer Campaign, AI Inbound Routing o test da Phone."
     ],
     headings: {
-      firstCheck: "Cosa controllare per primo",
-      operationalUse: "Come usare il Registro chiamate",
-      recordings: "Rivedi registrazioni e transcript quando disponibili",
-      timing: "Usa le metriche di timing, non solo gli outcome",
-      reviewHabit: "Abitudine di review",
-      signals: "Segnali comuni da controllare",
+      sharedRecords: "Usa lo stesso modello di review per inbound e outbound",
+      overview: "Leggi la panoramica della chiamata",
+      recording: "Rivedi la registrazione quando abilitata",
+      dataOutcome: "Rivedi Data e Lead Qualification Outcome",
+      reviewFlow: "Usa il record come fonte principale",
       nextSteps: "Prossimi passi"
     },
     sections: {
-      firstCheck: {
-        title: "Cosa controllare per primo",
-        paragraphs: ["Dopo una chiamata, rivedi i campi che spiegano il risultato prima di cambiare configurazione."],
-        items: ["stato chiamata", "timestamp", "outcome", "transcript o registrazione quando disponibili", "talk time e ring time"]
-      },
-      operationalUse: {
-        title: "Come usare il Registro chiamate",
-        paragraphs: ["Il Registro chiamate aiuta a rispondere a domande pratiche durante la review."],
-        items: [
-          "la chiamata è partita e terminata come previsto",
-          "la route o la campagna corretta è stata eseguita",
-          "la conversazione ha portato a transfer, hangup o altro outcome previsto",
-          "prompt, routing, contatti o configurazione trunk devono essere rivisti"
-        ]
-      },
-      recordings: {
-        title: "Rivedi registrazioni e transcript quando disponibili",
+      sharedRecords: {
+        title: "Usa lo stesso modello di review per inbound e outbound",
         paragraphs: [
-          "Usa i transcript per confermare se l'agente è rimasto sul task e ha raggiunto l'outcome di business previsto.",
-          "Usa le registrazioni per una review più profonda solo quando è appropriato dal punto di vista operativo e legale."
+          "Non conviene duplicare il concetto tra inbound call record e outbound call record. Il dettaglio del record deve spiegare le stesse evidenze per entrambe le direzioni.",
+          "Un record outbound di solito nasce da un contatto campagna. Un record inbound di solito nasce da un chiamante gestito da routing inbound o contact lookup. Dopo la creazione della chiamata, i campi di review si leggono nello stesso modo."
+        ],
+        items: [
+          "identità chiamante o contatto",
+          "agente usato dalla chiamata",
+          "timeline, status, reason e cause",
+          "ring time, hold time e talk time",
+          "registrazione e transcript quando abilitati",
+          "dati contatto e output delle function salvati durante la chiamata"
         ]
       },
-      timing: {
-        title: "Usa le metriche di timing, non solo gli outcome",
-        paragraphs: ["Gli outcome da soli non spiegano come si è comportata l'interazione. Talk time e ring time aiutano a individuare problemi di pacing, telefonia e workflow."],
-        items: [
-          "chiamate che terminano troppo presto",
-          "contatti che impiegano più tempo a rispondere",
-          "modifiche di pacing che influenzano la qualità della conversazione",
-          "una campagna che si comporta diversamente da un'altra"
+      overview: {
+        title: "Leggi la panoramica della chiamata",
+        paragraphs: [
+          "La panoramica dà la prima risposta operativa: chi è stato chiamato o chi ha chiamato, quale agente ha gestito l'interazione, quando è avvenuta la chiamata e come si è chiusa.",
+          "Usa le aree durata e timeline per separare il comportamento telefonico dal comportamento conversazionale. Per esempio, il ring time aiuta a capire il tempo di risposta, mentre il talk time aiuta a capire quanto l'agente è rimasto nel workflow."
         ]
       },
-      reviewHabit: {
-        title: "Abitudine di review",
-        paragraphs: ["Rivedi il registro chiamate dopo modifiche controllate. È più facile collegare un risultato a una modifica specifica quando prompt, routing, impostazioni campagna e configurazione trunk non vengono cambiati insieme."]
+      recording: {
+        title: "Rivedi la registrazione quando abilitata",
+        paragraphs: [
+          "Il pannello Recording appare quando la registrazione è abilitata per il percorso della chiamata. Mostra il nome del file generato e permette agli operatori di ascoltare o scaricare rapidamente l'audio.",
+          "Usa le registrazioni per una review più profonda quando il transcript non basta, per esempio quando devi verificare qualità audio, interruzioni, silenzi o la formulazione esatta del customer."
+        ]
       },
-      signals: {
-        title: "Segnali comuni da controllare",
+      dataOutcome: {
+        title: "Rivedi Data e Lead Qualification Outcome",
+        paragraphs: [
+          "La sezione Data riporta i dati custom che il cliente ha caricato nel contatto. Questi valori arrivano dal record contatto e servono per contesto, personalizzazione, variabili template e review successive.",
+          "Lead Qualification Outcome è la sezione dove RocketAiFlow mostra i dati strutturati raccolti dall'agente durante la conversazione. In un workflow di qualificazione lead può includere campi come email, phone, timeline, lead name, AI summary, interest level, score, requested action, demo date, pain points, important notes e raw interview data.",
+          "Se un valore non era disponibile o non è stato raccolto, il record può mostrare un valore vuoto o il placeholder non risolto. Questo rende il call record utile per capire quali dati mancano prima di modificare prompt o schema della function."
+        ]
+      },
+      reviewFlow: {
+        title: "Usa il record come fonte principale",
+        paragraphs: [
+          "Parti dal call record prima di modificare route, campagna, prompt o configurazione delle function.",
+          "Il record ti dice se il problema riguarda telefonia, dati contatto, comportamento dell'agente, output della function, setup registrazione o timing."
+        ],
         items: [
-          "chiamate fallite ripetute",
-          "outcome attesi mancanti",
-          "tentativi di transfer che non completano",
-          "timing inatteso o chiusure improvvise",
-          "transcript che mostrano l'agente fuori dal workflow previsto",
-          "registrazioni che confermano problemi audio o di esecuzione quando abilitate"
+          "controlla prima overview e timeline",
+          "controlla registrazione e transcript quando disponibili",
+          "controlla Data per confermare che i campi contatto siano passati correttamente",
+          "controlla Lead Qualification Outcome per confermare cosa ha raccolto l'agente",
+          "modifica una sola area di configurazione alla volta dopo la review"
         ]
       }
     },
-    screenshot: {
-      src: "/screenshots/docs/call-review-timing-status.png",
-      alt: "Schermata RocketAiFlow di review chiamata con timing, stato e dettagli causa.",
-      caption: "La review dettagliata della chiamata aiuta a validare outcome, timing e stato finale prima di modificare prompt, campagne o impostazioni telefoniche."
+    screenshots: {
+      overview: {
+        src: "/screenshots/docs/call-record-overview-timeline.png",
+        alt: "Registro chiamata RocketAiFlow con scheda chiamante, dettagli voice agent, durata e stato timeline.",
+        caption: "Overview e timeline mostrano identità chiamante, agente, contact id, timestamp, status, reason, cause, ring time e talk time."
+      },
+      recording: {
+        src: "/screenshots/docs/call-record-recording.png",
+        alt: "Pannello Recording del registro chiamata RocketAiFlow con stato registrazione, filename, pulsante listen, download e player audio.",
+        caption: "Il pannello Recording è disponibile quando la registrazione è abilitata e permette agli operatori di ascoltare o scaricare il file audio."
+      },
+      dataOutcome: {
+        src: "/screenshots/docs/call-record-data-lead-qualification.png",
+        alt: "Sezione Data e Lead Qualification Outcome nel registro chiamata RocketAiFlow con dati custom del contatto e campi strutturati raccolti dall'agente.",
+        caption: "Data contiene i campi custom del contatto caricati dal cliente. Lead Qualification Outcome contiene le informazioni strutturate raccolte o salvate dall'agente durante la chiamata."
+      }
     },
     nextSteps: [
       {
-        title: "Storico e revisione chiamate",
-        href: "/run-workflows/call-history-and-review",
-        description: "Rivedi le chiamate completate attraverso storico, transcript, registrazioni e metriche di timing."
+        title: "AI Dialer Flows",
+        href: "/run-workflows/ai-dialer-flows",
+        description: "Rivedi la configurazione della campagna che ha generato le chiamate outbound."
+      },
+      {
+        title: "AI Inbound Routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
+        description: "Rivedi la route inbound che ha inviato le chiamate all'agente."
       },
       {
         title: "Diagnostica",
         href: "/troubleshoot/troubleshooting",
-        description: "Usa la diagnostica quando il registro chiamate mostra un risultato inatteso."
-      },
-      {
-        title: "Phone",
-        href: "/run-workflows/phone",
-        description: "Esegui un altro test controllato da Phone dopo aver modificato la configurazione."
+        description: "Usa la diagnostica quando il call record mostra un risultato inatteso."
       }
     ]
   }
@@ -255,9 +288,9 @@ export function LocalizedCallRecordsSection({ sectionKey }: { sectionKey: Exclud
   );
 }
 
-export function LocalizedCallRecordsScreenshot() {
+export function LocalizedCallRecordsScreenshot({ screenshotKey }: { screenshotKey: ScreenshotKey }) {
   const { copy } = useCallRecordsCopy();
-  const screenshot = copy.screenshot;
+  const screenshot = copy.screenshots[screenshotKey];
 
   return (
     <section className="docs-home-section">
@@ -277,7 +310,7 @@ export function LocalizedCallRecordsNextSteps() {
 
   return (
     <section className="docs-home-section">
-      <div className="docs-home-card-grid docs-home-card-grid-2">
+      <div className="docs-home-card-grid docs-home-card-grid-3">
         {copy.nextSteps.map((card) => (
           <Link className="docs-home-card" href={localizeHref(card.href, locale)} key={card.href}>
             <span className="docs-home-card-title">{card.title}</span>

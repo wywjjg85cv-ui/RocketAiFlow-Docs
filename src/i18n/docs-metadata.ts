@@ -37,7 +37,7 @@ const italianMetadata: Record<string, DocsMetadata> = {
     description:
       "Usa variabili template, dati contatto e valori runtime nei prompt e nelle functions RocketAiFlow."
   },
-  "/run-workflows/ai-inbound-routing": {
+  "/run-workflows/inbound-ai/ai-inbound-routing": {
     title: "AI Inbound Routing",
     description:
       "Collega le chiamate inbound all'agente voce AI corretto e valida la prima route."
@@ -47,25 +47,30 @@ const italianMetadata: Record<string, DocsMetadata> = {
     description:
       "Crea una prima campagna outbound in RocketAiFlow e preparala per un test controllato."
   },
-  "/run-workflows/ai-dialer-flows/import-contacts": {
+  "/run-workflows/ai-dialer-flows/contacts": {
+    title: "Contatti campagna",
+    description:
+      "Gestisci i contatti usati dal dialer per chiamate automatiche e variabili template dell'agente."
+  },
+  "/run-workflows/import-contacts": {
     title: "Importa contatti",
     description:
       "Carica e mappa i contatti per campagne outbound o recupero contatto inbound sull'agente."
   },
-  "/run-workflows/contact-inbounds": {
+  "/run-workflows/inbound-ai/contact-inbounds": {
     title: "Contatti inbound",
     description:
       "Rivedi come i chiamanti inbound vengono associati ai contatti e ai workflow di follow-up."
   },
-  "/run-workflows/ai-dialer-flows/call-records": {
+  "/run-workflows/call-records": {
     title: "Registro chiamate",
     description:
-      "Rivedi outcome, timestamp, transcript, registrazioni quando abilitate e timing delle chiamate in RocketAiFlow."
+      "Rivedi panoramica chiamata, registrazioni, dati contatto, outcome di qualificazione lead, transcript e timing in RocketAiFlow."
   },
-  "/run-workflows/call-history-and-review": {
-    title: "Storico e revisione chiamate",
+  "/run-workflows/processed-contacts": {
+    title: "Contatti elaborati",
     description:
-      "Rivedi chiamate completate, registrazioni quando abilitate, transcript e metriche di timing per capire i workflow outbound e inbound."
+      "Rivedi i contatti già gestiti da RocketAiFlow nei workflow inbound e outbound."
   },
   "/run-workflows/phone": {
     title: "Phone",

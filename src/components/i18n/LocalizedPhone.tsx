@@ -85,12 +85,12 @@ const phoneCopy: Record<Locale, PhoneCopy> = {
     nextSteps: [
       {
         title: "Inbound Call Records",
-        href: "/run-workflows/ai-dialer-flows/call-records",
+        href: "/run-workflows/call-records",
         description: "Review the outcome of the manual test after the call completes."
       },
       {
         title: "AI Inbound Routing",
-        href: "/run-workflows/ai-inbound-routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
         description: "Connect the validated agent to a real inbound route."
       }
     ]
@@ -147,12 +147,12 @@ const phoneCopy: Record<Locale, PhoneCopy> = {
     nextSteps: [
       {
         title: "Inbound Call Records",
-        href: "/run-workflows/ai-dialer-flows/call-records",
+        href: "/run-workflows/call-records",
         description: "Rivedi l'esito del test manuale quando la chiamata termina."
       },
       {
         title: "AI Inbound Routing",
-        href: "/run-workflows/ai-inbound-routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
         description: "Collega l'agente validato a una route inbound reale."
       }
     ]

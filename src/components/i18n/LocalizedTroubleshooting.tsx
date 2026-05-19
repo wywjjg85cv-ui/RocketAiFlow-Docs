@@ -80,7 +80,7 @@ const troubleshootingCopy: Record<Locale, TroubleshootingCopy> = {
     nextSteps: [
       {
         title: "Call Records",
-        href: "/run-workflows/ai-dialer-flows/call-records",
+        href: "/run-workflows/call-records",
         description: "Return to the exact call record for the test you are diagnosing."
       },
       {
@@ -152,7 +152,7 @@ const troubleshootingCopy: Record<Locale, TroubleshootingCopy> = {
     nextSteps: [
       {
         title: "Registro chiamate",
-        href: "/run-workflows/ai-dialer-flows/call-records",
+        href: "/run-workflows/call-records",
         description: "Torna al call record esatto del test che stai diagnosticando."
       },
       {

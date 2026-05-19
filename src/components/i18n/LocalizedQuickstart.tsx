@@ -14,7 +14,8 @@ type LinkCard = {
 type ImageCopy = {
   src: string;
   alt: string;
-  size?: "quarter";
+  size?: "quarter" | "half";
+  variant?: "campaignSplit";
 };
 
 type StepCopy = {
@@ -310,7 +311,8 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       ],
       image: {
         src: screenshotPaths.contacts,
-        alt: "Contact import and field mapping flow."
+        alt: "Contact import and field mapping flow.",
+        size: "half"
       }
     },
     outboundCampaign: {
@@ -326,8 +328,9 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
         <>Path to follow: <NavigationPath steps={["AI Dialer Flows", "Dialer Campaigns", "Add Campaigns"]} /> Then configure a simple campaign for the first test:</>
       ],
       image: {
-        src: screenshotPaths.campaign,
-        alt: "Outbound campaign setup for a small controlled test."
+        src: screenshotPaths.campaignCallCapacitySchedule,
+        alt: "Outbound campaign setup for a small controlled test.",
+        variant: "campaignSplit"
       }
     },
     outboundTest: {
@@ -402,22 +405,18 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
         </>,
         <>
           check concurrent call capacity, campaign start and end dates, active days, and timezone
-          <ProductScreenshot
-            src={screenshotPaths.campaignCallCapacitySchedule}
-            alt="Edit campaign screen showing concurrent call capacity, active days, start and end dates, and timezone."
-            size="quarter"
-          />
+          <CampaignSettingsSplitScreenshot />
         </>,
         "check the final result in Call Records"
       ]
     },
     nextSteps: [
       { title: "Deployment Overview", href: "/deploy/deployment-overview", description: "Review the deploy path that connects trunk, agent, routing, campaign, and monitoring." },
-      { title: "AI Inbound Routing", href: "/run-workflows/ai-inbound-routing", description: "Go deeper on inbound setup after the inbound trunk and agent are ready." },
+      { title: "AI Inbound Routing", href: "/run-workflows/inbound-ai/ai-inbound-routing", description: "Go deeper on inbound setup after the inbound trunk and agent are ready." },
       { title: "AI Dialer Flows", href: "/run-workflows/ai-dialer-flows", description: "Go deeper on outbound campaign setup after the outbound trunk and agent are ready." },
       { title: "Configure Agent Functions", href: "/build/add-functions", description: "Review call control, transfer, rescheduling, lead qualification, and custom API functions." },
       { title: "Monitoring and Visibility", href: "/monitoring/monitoring-and-visibility", description: "Review how the first workflow should be monitored once it is live." },
-      { title: "Call History and Review", href: "/run-workflows/call-history-and-review", description: "Review completed calls through transcripts, recordings when enabled, and timing metrics." }
+      { title: "Processed Contacts", href: "/run-workflows/processed-contacts", description: "Review contacts already handled by inbound or outbound workflows before opening the detailed call record." }
     ]
   },
   it: {
@@ -608,7 +607,8 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       ],
       image: {
         src: screenshotPaths.contacts,
-        alt: "Flusso di importazione contatti e mapping dei campi."
+        alt: "Flusso di importazione contatti e mapping dei campi.",
+        size: "half"
       }
     },
     outboundCampaign: {
@@ -624,8 +624,9 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
         "aggiungi o importa un contatto per fare il primo test"
       ],
       image: {
-        src: screenshotPaths.campaign,
-        alt: "Setup di una campagna outbound per un piccolo test controllato."
+        src: screenshotPaths.campaignCallCapacitySchedule,
+        alt: "Setup di una campagna outbound per un piccolo test controllato.",
+        variant: "campaignSplit"
       }
     },
     outboundTest: {
@@ -700,35 +701,56 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
         </>,
         <>
           controlla il numero di chiamate concorrenti, data di inizio e fine, giorni attivi e timezone della campagna
-          <ProductScreenshot
-            src={screenshotPaths.campaignCallCapacitySchedule}
-            alt="Schermata modifica campagna con numero di chiamate concorrenti, giorni attivi, date di inizio e fine e timezone."
-            size="quarter"
-          />
+          <CampaignSettingsSplitScreenshot />
         </>,
         "controlla il risultato finale nel Registro chiamate"
       ]
     },
     nextSteps: [
       { title: "Panoramica deploy", href: "/deploy/deployment-overview", description: "Rivedi il percorso deploy che collega trunk, agente, routing, campagna e monitoring." },
-      { title: "AI Inbound Routing", href: "/run-workflows/ai-inbound-routing", description: "Approfondisci il setup inbound dopo che trunk inbound e agente sono pronti." },
+      { title: "AI Inbound Routing", href: "/run-workflows/inbound-ai/ai-inbound-routing", description: "Approfondisci il setup inbound dopo che trunk inbound e agente sono pronti." },
       { title: "AI Dialer Flows", href: "/run-workflows/ai-dialer-flows", description: "Approfondisci il setup outbound dopo che trunk outbound e agente sono pronti." },
       { title: "Configura le functions", href: "/build/add-functions", description: "Rivedi call control, transfer, rescheduling, lead qualification e funzioni API custom." },
       { title: "Monitoring and Visibility", href: "/monitoring/monitoring-and-visibility", description: "Rivedi come monitorare il primo workflow una volta live." },
-      { title: "Cronologia e revisione chiamate", href: "/run-workflows/call-history-and-review", description: "Rivedi chiamate completate, trascrizioni, registrazioni quando abilitate e metriche temporali." }
+      { title: "Contatti elaborati", href: "/run-workflows/processed-contacts", description: "Rivedi i contatti già gestiti da workflow inbound o outbound prima di aprire il call record dettagliato." }
     ]
   }
 };
 
 function ProductScreenshot({ src, alt, size }: ImageCopy) {
+  if (src === screenshotPaths.campaignCallCapacitySchedule) {
+    return <CampaignSettingsSplitScreenshot alt={alt} />;
+  }
+
   return (
-    <figure className={`docs-screenshot${size === "quarter" ? " docs-screenshot-quarter" : ""}`}>
+    <figure className={`docs-screenshot${size === "quarter" ? " docs-screenshot-quarter" : ""}${size === "half" ? " docs-screenshot-half" : ""}`}>
       <div className="docs-screenshot-frame">
         {/* Screenshots are served from public and rendered responsively inside MDX layouts. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="docs-screenshot-img" src={src} alt={alt} loading="lazy" />
       </div>
     </figure>
+  );
+}
+
+function CampaignSettingsSplitScreenshot({ alt }: { alt?: string }) {
+  return (
+    <div className="docs-screenshot-split-grid docs-screenshot-split-grid-compact">
+      {(["top", "bottom"] as const).map((crop) => (
+        <figure className="docs-screenshot docs-screenshot-split" key={crop}>
+          <div className="docs-screenshot-frame docs-screenshot-split-frame">
+            {/* Screenshots are served from public and cropped responsively inside docs layouts. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className={`docs-screenshot-img docs-screenshot-split-img docs-screenshot-split-img-${crop}`}
+              src={screenshotPaths.campaignCallCapacitySchedule}
+              alt={alt ?? "Edit campaign screen showing concurrent call capacity, active days, start and end dates, and timezone."}
+              loading="lazy"
+            />
+          </div>
+        </figure>
+      ))}
+    </div>
   );
 }
 

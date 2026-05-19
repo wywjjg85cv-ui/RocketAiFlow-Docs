@@ -4,17 +4,24 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { defaultLocale, type Locale } from "../../i18n/routing";
 import { useCurrentLocale } from "../../i18n/client-locale";
+import { localizeHref } from "../../i18n/docs-routes";
 
 type StepCopy = {
   title: string;
   paragraphs: ReactNode[];
-  items?: string[];
+  items?: ReactNode[];
 };
 
 type LinkCard = {
   title: string;
   href: string;
   description: string;
+};
+
+type SpeakProvider = {
+  name: string;
+  value: string;
+  href: string;
 };
 
 type CreateAgentCopy = {
@@ -24,12 +31,13 @@ type CreateAgentCopy = {
   languageTitle: string;
   languages: string[];
   providerTitle: string;
-  providers: string[];
+  providers: SpeakProvider[];
   customProvider: ReactNode[];
   greetingTitle: string;
   templateVariables: string[];
   greeting: ReactNode[];
   templateUsageItems: ReactNode[];
+  templateInboundCallout: ReactNode;
   templateNotes: ReactNode[];
   llm: StepCopy;
   llmProviders: string[];
@@ -73,10 +81,16 @@ const transcriptionScreenshotPath = "/screenshots/docs/transcription-deepgram-no
 const agentSettingsScreenshotPath = "/screenshots/docs/agent-settings-runtime.png";
 const openAiPromptGuidanceUrl = "https://developers.openai.com/api/docs/guides/prompt-guidance";
 const openAiFunctionCallingUrl = "https://developers.openai.com/api/docs/guides/function-calling";
+const openAiTextToSpeechUrl = "https://developers.openai.com/api/docs/guides/text-to-speech";
 const deepgramConfigureVoiceAgentUrl = "https://developers.deepgram.com/docs/configure-voice-agent";
 const deepgramFunctionCallingUrl = "https://developers.deepgram.com/docs/voice-agents-function-calling";
 const deepgramModelsUrl = "https://developers.deepgram.com/docs/models-languages-overview";
+const deepgramUrl = "https://deepgram.com/";
+const elevenLabsUrl = "https://elevenlabs.io/";
+const cartesiaUrl = "https://cartesia.ai/";
+const amazonPollyUrl = "https://aws.amazon.com/polly/";
 const preconfiguredFunctionExamplesUrl = "/build/add-functions#preconfigured-function-examples";
+const contactInboundsUrl = "/run-workflows/inbound-ai/contact-inbounds#use-contact-data-in-the-agent";
 const defaultTemplateVariables = [
   "{t.CampaignId}",
   "{t.ContactId}",
@@ -85,7 +99,15 @@ const defaultTemplateVariables = [
   "{t.phone}",
   "{t.priority}",
   "{t.surname}",
-  "{t.totalGlobal}"
+  "{t.totalGlobal}",
+  "{t.data.birthDate}"
+];
+const speakProviders: SpeakProvider[] = [
+  { name: "Deepgram", value: "deepgram", href: deepgramUrl },
+  { name: "ElevenLabs", value: "eleven_labs", href: elevenLabsUrl },
+  { name: "Cartesia", value: "cartesia", href: cartesiaUrl },
+  { name: "OpenAI", value: "open_ai", href: openAiTextToSpeechUrl },
+  { name: "Amazon Polly", value: "aws_polly", href: amazonPollyUrl }
 ];
 
 function UiPill({ children }: { children: ReactNode }) {
@@ -93,8 +115,10 @@ function UiPill({ children }: { children: ReactNode }) {
 }
 
 function InlineDocsLink({ href, children }: { href: string; children: ReactNode }) {
+  const locale = useCurrentLocale(defaultLocale);
+
   return (
-    <Link className="docs-inline-link" href={href}>
+    <Link className="docs-inline-link" href={localizeHref(href, locale)}>
       <span>{children}</span>
     </Link>
   );
@@ -104,7 +128,18 @@ function ExternalDocsLink({ href, children }: { href: string; children: ReactNod
   return (
     <a className="docs-inline-link" href={href} target="_blank" rel="noreferrer">
       <span>{children}</span>
+      <ExternalLinkIcon />
     </a>
+  );
+}
+
+function ExternalLinkIcon() {
+  return (
+    <svg aria-hidden="true" className="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M15 3h6v6" />
+      <path d="M10 14 21 3" />
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    </svg>
   );
 }
 
@@ -123,7 +158,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
       ],
       items: [
         "Agent name: use a name that makes the agent easy to recognize later in inbound routing and outbound campaigns.",
-        "Deepgram API key: required for the agent setup in this flow.",
+        <><ProviderBadge href={deepgramUrl}>Deepgram</ProviderBadge> API key: required for the agent setup in this flow.</>,
         "Language: select the language the agent should use during the call.",
         "Speak Provider Type: choose the voice provider used to generate the spoken response."
       ]
@@ -131,7 +166,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
     languageTitle: "Available languages",
     languages: ["Multilingual", "English", "Spanish", "Dutch", "French", "German", "Italian", "Japanese"],
     providerTitle: "Available speak providers",
-    providers: ["deepgram", "eleven_labs", "cartesia", "open_ai", "aws_polly"],
+    providers: speakProviders,
     customProvider: [
       "When you use a provider other than Deepgram, you can select one of the available agents or choose Custom Agent.",
       "With Custom Agent, enter the endpoint URL and API key to connect a custom voice agent/provider endpoint."
@@ -142,18 +177,23 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
       "Use the greeting message to define the first sentence the agent says when the call starts.",
       "Use the contact template when the greeting, prompt, or function context needs dynamic contact values instead of fixed text.",
       <>The default template already includes the main parameters that belong to a contact created in RocketAiFlow.</>,
-      <>You can extend the default template with additional keys. Custom keys are rendered from <code>data</code>: for example, a template key named <code>cf</code> is rendered as <code>{`{t.data.cf}`}</code>.</>,
+      <>You can extend the default template with additional keys. Custom keys are rendered from <code>data</code>: for example, a template key named <code>birthDate</code> is rendered as <code>{`{t.data.birthDate}`}</code>.</>,
       "The clearest way to use templates is to separate outbound and inbound data sources:"
     ],
     templateUsageItems: [
       <><strong>Outbound:</strong> template variables are rendered from the contact loaded into the campaign. If you need custom values, import or create contacts with the expected key-value pairs inside the <code>data</code> object.</>,
-      <><strong>Inbound:</strong> template variables are rendered from <UiPill>Contact Inbounds</UiPill> only when agent settings allow contact lookup and <UiPill>Contact Inbounds</UiPill> contains a loaded list with a contact matching the caller number.</>
+      <><strong>Inbound:</strong> template variables are rendered from <InlineDocsLink href={contactInboundsUrl}>Contact Inbounds</InlineDocsLink> only when agent settings allow contact lookup and the inbound contact list contains a contact matching the caller number.</>
     ],
+    templateInboundCallout: (
+      <>
+        For inbound calls, template variables render only when <strong>Retrieve contact data for templates</strong> is enabled in <InlineDocsLink href="#agent-settings">Agent settings</InlineDocsLink> and <InlineDocsLink href={contactInboundsUrl}>Contact Inbounds</InlineDocsLink> contains a contact list with a phone number that matches the caller. If no matching contact is associated with the agent, the variable is not rendered.
+      </>
+    ),
     templateNotes: [
       <>In the greeting field, type <code>@</code> to see template variable suggestions, or click one of the variables shown under the greeting input.</>,
       "A variable is replaced only when the value exists on the contact used for that call. If the value is missing, that variable is not rendered.",
       <>In the <InlineDocsLink href="#agent-settings">Agent settings</InlineDocsLink> section, we will show in detail how to enable contact lookup when someone calls inbound.</>,
-      <>To prepare the source contacts, see <InlineDocsLink href="/run-workflows/ai-dialer-flows/import-contacts#associate-contacts-with-a-campaign-or-agent">Import Contacts</InlineDocsLink>.</>,
+      <>To prepare the source contacts, see <InlineDocsLink href="/run-workflows/import-contacts#associate-contacts-with-a-campaign-or-agent">Import Contacts</InlineDocsLink>.</>,
       <>See <InlineDocsLink href="/build/dynamic-parameters#contact-template-variables">Contact template variables</InlineDocsLink> for the detailed model and how to create template variables.</>
     ],
     screenshotAlt: "AI Voice Agent creation screen with Voice settings, language, speak provider, greeting message, and contact template variables.",
@@ -241,7 +281,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
         "Post Agent Silence Hangup Seconds: how long the customer can stay silent before the system ends the call automatically.",
         "Max Call Duration Minutes: the maximum call duration before automatic hangup.",
         "Enable transcription: save the transcript for calls handled by this agent.",
-        "Retrieve contact data for templates: for inbound calls, look up the caller in Contact Inbounds and use matched contact fields to render template variables.",
+        <>Retrieve contact data for templates: for inbound calls, look up the caller in <InlineDocsLink href={contactInboundsUrl}>Contact Inbounds</InlineDocsLink> and use matched contact fields to render template variables.</>,
         "Silence Recovery Message: message sent after 5 seconds of customer silence to keep the conversation alive.",
         "Silence Follow-up Message: second message sent after another 15 seconds of silence.",
         "Automatic Hangup Message: final message spoken before the automatic hangup."
@@ -249,7 +289,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
     },
     agentSettingsNotes: [
       <>The silence recovery, follow-up, and hangup messages can also use template variables. Type <code>@</code> or click the variables under each field.</>,
-      <>Enable <strong>Retrieve contact data for templates</strong> only when the agent is used for inbound calls and a contact list has been loaded in <UiPill>Contact Inbounds</UiPill>.</>
+      <>Enable <strong>Retrieve contact data for templates</strong> only when the agent is used for inbound calls and a contact list has been loaded in <InlineDocsLink href={contactInboundsUrl}>Contact Inbounds</InlineDocsLink>.</>
     ],
     agentSettingsScreenshotAlt: "Agent settings runtime screen with silence hangup seconds, max call duration, transcription, inbound contact data, silence messages, and automatic hangup message.",
     nextStepsTitle: "Next steps",
@@ -280,7 +320,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
       ],
       items: [
         "Nome agente: usa un nome che renda l'agente facile da riconoscere dopo in routing inbound e campagne outbound.",
-        "API key di Deepgram: richiesta per il setup agente in questo flusso.",
+        <>API key di <ProviderBadge href={deepgramUrl}>Deepgram</ProviderBadge>: richiesta per il setup agente in questo flusso.</>,
         "Lingua: seleziona la lingua che l'agente deve usare durante la chiamata.",
         "Speak Provider Type: scegli il provider voce usato per generare la risposta parlata."
       ]
@@ -288,7 +328,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
     languageTitle: "Lingue disponibili",
     languages: ["Multilingual", "English", "Spanish", "Dutch", "French", "German", "Italian", "Japanese"],
     providerTitle: "Speak provider disponibili",
-    providers: ["deepgram", "eleven_labs", "cartesia", "open_ai", "aws_polly"],
+    providers: speakProviders,
     customProvider: [
       "Quando usi un provider diverso da Deepgram, puoi selezionare uno degli agenti disponibili oppure scegliere Custom Agent.",
       "Con Custom Agent inserisci endpoint URL e API key per collegare un agente/provider voce custom."
@@ -299,18 +339,23 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
       "Usa il greeting message per definire la prima frase che l'agente dice quando parte la chiamata.",
       "Usa il contact template quando greeting, prompt o contesto funzioni devono usare valori dinamici del contatto invece di testo fisso.",
       <>Il template di default include già i parametri principali che appartengono a un contatto creato in RocketAiFlow.</>,
-      <>Puoi modificare il template di default aggiungendo altre chiavi. Le chiavi custom vengono renderizzate da <code>data</code>: ad esempio, una chiave template chiamata <code>cf</code> viene renderizzata come <code>{`{t.data.cf}`}</code>.</>,
+      <>Puoi modificare il template di default aggiungendo altre chiavi. Le chiavi custom vengono renderizzate da <code>data</code>: ad esempio, una chiave template chiamata <code>birthDate</code> viene renderizzata come <code>{`{t.data.birthDate}`}</code>.</>,
       "Il modo più chiaro per usare i template è separare le sorgenti dati outbound e inbound:"
     ],
     templateUsageItems: [
       <><strong>Outbound:</strong> le variabili del template vengono renderizzate dal contatto caricato nella campagna. Se ti servono valori custom, importa o crea contatti con le key-value attese dentro l'oggetto <code>data</code>.</>,
-      <><strong>Inbound:</strong> le variabili del template vengono renderizzate da <UiPill>Contatti inbound</UiPill> solo se negli agent settings è abilitato il recupero del contatto e <UiPill>Contatti inbound</UiPill> contiene una lista caricata con un contatto associato al numero che sta chiamando.</>
+      <><strong>Inbound:</strong> le variabili del template vengono renderizzate da <InlineDocsLink href={contactInboundsUrl}>Contatti inbound</InlineDocsLink> solo se negli agent settings è abilitato il recupero del contatto e la lista inbound contiene un contatto associato al numero che sta chiamando.</>
     ],
+    templateInboundCallout: (
+      <>
+        Per l'inbound, le variabili vengono renderizzate solo se in <InlineDocsLink href="#agent-settings">Agent settings</InlineDocsLink> è abilitato <strong>Retrieve contact data for templates</strong> e <InlineDocsLink href={contactInboundsUrl}>Contatti inbound</InlineDocsLink> contiene una lista con un numero che corrisponde al chiamante. Se non esiste un contatto associato all'agente per quel numero, la variabile non viene renderizzata.
+      </>
+    ),
     templateNotes: [
       <>Nel campo greeting puoi digitare <code>@</code> per vedere i suggerimenti delle variabili del template, oppure cliccare una delle variabili che appaiono sotto il greeting.</>,
       "Una variabile viene sostituita solo quando il valore esiste nel contatto usato per quella chiamata. Se il valore manca, quella variabile non viene renderizzata.",
       <>Nella sezione <InlineDocsLink href="#agent-settings">Agent settings</InlineDocsLink> vedremo in dettaglio come abilitare il recupero del contatto quando qualcuno chiama in inbound.</>,
-      <>Per preparare i contatti sorgente, vedi <InlineDocsLink href="/run-workflows/ai-dialer-flows/import-contacts#associate-contacts-with-a-campaign-or-agent">Importa contatti</InlineDocsLink>.</>,
+      <>Per preparare i contatti sorgente, vedi <InlineDocsLink href="/run-workflows/import-contacts#associate-contacts-with-a-campaign-or-agent">Importa contatti</InlineDocsLink>.</>,
       <>Vedi <InlineDocsLink href="/build/dynamic-parameters#contact-template-variables">variabili del contact template</InlineDocsLink> per il modello dettagliato e per come creare le variabili del template.</>
     ],
     screenshotAlt: "Schermata creazione AI Voice Agent con impostazioni Voice, lingua, speak provider, greeting message e variabili contact template.",
@@ -398,7 +443,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
         "Post Agent Silence Hangup Seconds: quanto tempo può passare con il customer in silenzio prima dell'hangup automatico.",
         "Max Call Duration Minutes: durata massima della chiamata prima dell'hangup automatico.",
         "Enable transcription: salva il transcript delle chiamate gestite da questo agente.",
-        "Retrieve contact data for templates: per le chiamate inbound, cerca il chiamante in Contatti inbound e usa i campi del contatto trovato per renderizzare le variabili del template.",
+        <>Retrieve contact data for templates: per le chiamate inbound, cerca il chiamante in <InlineDocsLink href={contactInboundsUrl}>Contatti inbound</InlineDocsLink> e usa i campi del contatto trovato per renderizzare le variabili del template.</>,
         "Silence Recovery Message: messaggio inviato dopo 5 secondi di silenzio del customer per tenere viva la conversazione.",
         "Silence Follow-up Message: secondo messaggio inviato dopo altri 15 secondi di silenzio.",
         "Automatic Hangup Message: messaggio finale prima dell'hangup automatico."
@@ -406,7 +451,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
     },
     agentSettingsNotes: [
       <>Anche i messaggi di recovery, follow-up e hangup possono usare variabili del template. Digita <code>@</code> oppure clicca le variabili sotto ogni campo.</>,
-      <>Abilita <strong>Retrieve contact data for templates</strong> solo quando l'agente viene usato per chiamate inbound e in <UiPill>Contatti inbound</UiPill> è stata caricata una lista contatti.</>
+      <>Abilita <strong>Retrieve contact data for templates</strong> solo quando l'agente viene usato per chiamate inbound e in <InlineDocsLink href={contactInboundsUrl}>Contatti inbound</InlineDocsLink> è stata caricata una lista contatti.</>
     ],
     agentSettingsScreenshotAlt: "Schermata runtime Agent settings con silence hangup seconds, max call duration, transcription, inbound contact data, messaggi di silenzio e automatic hangup message.",
     nextStepsTitle: "Passaggi successivi",
@@ -440,6 +485,35 @@ function PillList({ items }: { items: string[] }) {
         </span>
       ))}
     </div>
+  );
+}
+
+function ProviderList({ providers }: { providers: SpeakProvider[] }) {
+  return (
+    <div className="docs-pill-list">
+      {providers.map((provider) => (
+        <a
+          key={provider.value}
+          className="docs-ui-pill docs-provider-pill"
+          href={provider.href}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>{provider.name}</span>
+          <span className="docs-provider-pill-code">({provider.value})</span>
+          <ExternalLinkIcon />
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function ProviderBadge({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a className="docs-ui-pill docs-provider-pill" href={href} target="_blank" rel="noreferrer">
+      {children}
+      <ExternalLinkIcon />
+    </a>
   );
 }
 
@@ -486,8 +560,8 @@ export function LocalizedCreateAgentPage() {
           <p key={index}>{paragraph}</p>
         ))}
         <ul>
-          {copy.voiceSetup.items?.map((item) => (
-            <li key={item}>{item}</li>
+          {copy.voiceSetup.items?.map((item, index) => (
+            <li key={index}>{item}</li>
           ))}
         </ul>
 
@@ -497,7 +571,7 @@ export function LocalizedCreateAgentPage() {
         <PillList items={copy.languages} />
 
         <h3>{copy.providerTitle}</h3>
-        <PillList items={copy.providers} />
+        <ProviderList providers={copy.providers} />
 
         {copy.customProvider.map((paragraph, index) => (
           <p key={index}>{paragraph}</p>
@@ -559,8 +633,8 @@ export function LocalizedCreateAgentVoiceSetup() {
         <p key={index}>{paragraph}</p>
       ))}
       <ul>
-        {copy.voiceSetup.items?.map((item) => (
-          <li key={item}>{item}</li>
+        {copy.voiceSetup.items?.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
       <ProductScreenshot alt={copy.screenshotAlt} />
@@ -581,7 +655,7 @@ export function LocalizedCreateAgentProviders() {
 
   return (
     <section className="docs-home-section docs-home-section-nested">
-      <PillList items={copy.providers} />
+      <ProviderList providers={copy.providers} />
       {copy.customProvider.map((paragraph, index) => (
         <p key={index}>{paragraph}</p>
       ))}
@@ -604,6 +678,9 @@ export function LocalizedCreateAgentGreeting() {
           <li key={index}>{item}</li>
         ))}
       </ul>
+      <div className="docs-feature-callout docs-feature-callout-warning">
+        <div className="docs-feature-callout-body">{copy.templateInboundCallout}</div>
+      </div>
       {copy.templateNotes.map((paragraph, index) => (
         <p key={index}>{paragraph}</p>
       ))}
@@ -621,8 +698,8 @@ export function LocalizedCreateAgentLlm() {
       ))}
       <PillList items={copy.llmProviders} />
       <ul>
-        {copy.llm.items?.map((item) => (
-          <li key={item}>{item}</li>
+        {copy.llm.items?.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
       <ProductScreenshot src={llmScreenshotPath} alt={copy.llmScreenshotAlt} />
@@ -644,8 +721,8 @@ export function LocalizedCreateAgentFunctions() {
       ))}
       <PillList items={copy.functionPills} />
       <ul>
-        {copy.functions.items?.map((item) => (
-          <li key={item}>{item}</li>
+        {copy.functions.items?.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
       <ProductScreenshot src={functionsScreenshotPath} alt={copy.functionsScreenshotAlt} />
@@ -666,8 +743,8 @@ export function LocalizedCreateAgentTranscription() {
       ))}
       <PillList items={copy.transcriptionSettings} />
       <ul>
-        {copy.transcription.items?.map((item) => (
-          <li key={item}>{item}</li>
+        {copy.transcription.items?.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
       <ProductScreenshot src={transcriptionScreenshotPath} alt={copy.transcriptionScreenshotAlt} />
@@ -687,8 +764,8 @@ export function LocalizedCreateAgentAgentSettings() {
         <p key={index}>{paragraph}</p>
       ))}
       <ul>
-        {copy.agentSettings.items?.map((item) => (
-          <li key={item}>{item}</li>
+        {copy.agentSettings.items?.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
       <ProductScreenshot src={agentSettingsScreenshotPath} alt={copy.agentSettingsScreenshotAlt} />

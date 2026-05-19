@@ -36,36 +36,43 @@ export const docsRoutes = [
     paths: { en: "/build/dynamic-parameters", it: "/costruisci/parametri-dinamici" }
   },
   {
-    canonicalPath: "/run-workflows/ai-inbound-routing",
-    paths: { en: "/run-workflows/ai-inbound-routing", it: "/esegui-workflow/ai-inbound-routing" }
+    canonicalPath: "/run-workflows/inbound-ai/ai-inbound-routing",
+    paths: { en: "/run-workflows/inbound-ai/ai-inbound-routing", it: "/esegui-workflow/inbound-ai/ai-inbound-routing" }
   },
   {
     canonicalPath: "/run-workflows/ai-dialer-flows",
     paths: { en: "/run-workflows/ai-dialer-flows", it: "/esegui-workflow/ai-dialer-flows" }
   },
   {
-    canonicalPath: "/run-workflows/ai-dialer-flows/import-contacts",
+    canonicalPath: "/run-workflows/ai-dialer-flows/contacts",
     paths: {
-      en: "/run-workflows/ai-dialer-flows/import-contacts",
-      it: "/esegui-workflow/ai-dialer-flows/importa-contatti"
+      en: "/run-workflows/ai-dialer-flows/contacts",
+      it: "/esegui-workflow/ai-dialer-flows/contatti"
     }
   },
   {
-    canonicalPath: "/run-workflows/contact-inbounds",
-    paths: { en: "/run-workflows/contact-inbounds", it: "/esegui-workflow/contatti-inbound" }
-  },
-  {
-    canonicalPath: "/run-workflows/ai-dialer-flows/call-records",
+    canonicalPath: "/run-workflows/import-contacts",
     paths: {
-      en: "/run-workflows/ai-dialer-flows/call-records",
-      it: "/esegui-workflow/ai-dialer-flows/registro-chiamate"
+      en: "/run-workflows/import-contacts",
+      it: "/esegui-workflow/importa-contatti"
     }
   },
   {
-    canonicalPath: "/run-workflows/call-history-and-review",
+    canonicalPath: "/run-workflows/inbound-ai/contact-inbounds",
+    paths: { en: "/run-workflows/inbound-ai/contact-inbounds", it: "/esegui-workflow/inbound-ai/contatti-inbound" }
+  },
+  {
+    canonicalPath: "/run-workflows/call-records",
     paths: {
-      en: "/run-workflows/call-history-and-review",
-      it: "/esegui-workflow/storico-e-revisione-chiamate"
+      en: "/run-workflows/call-records",
+      it: "/esegui-workflow/registro-chiamate"
+    }
+  },
+  {
+    canonicalPath: "/run-workflows/processed-contacts",
+    paths: {
+      en: "/run-workflows/processed-contacts",
+      it: "/esegui-workflow/contatti-elaborati"
     }
   },
   {
@@ -154,7 +161,7 @@ export const docsRouteByCanonical = new Map(docsRoutes.map((route) => [route.can
 const canonicalPathAliases = new Map<string, string>([
   ["/get-started", docsHomePath],
   ["/build", "/build/create-your-first-ai-voice-agent"],
-  ["/run-workflows", "/run-workflows/ai-inbound-routing"],
+  ["/run-workflows", "/run-workflows/inbound-ai/ai-inbound-routing"],
   ["/deploy", "/deploy/deployment-overview"],
   ["/troubleshoot", "/troubleshoot/troubleshooting"],
   ["/reference", "/reference/api-reference"]

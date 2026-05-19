@@ -58,13 +58,15 @@ type NavLabelKey =
   | "telephony"
   | "telephonyOverview"
   | "asteriskBasedPbxSystems"
+  | "inboundAi"
   | "aiInboundRouting"
   | "aiDialerFlows"
   | "aiDialerFlowsOverview"
+  | "dialerContacts"
   | "importContacts"
   | "contactInbounds"
   | "callRecords"
-  | "callHistoryAndReview"
+  | "processedContacts"
   | "phone"
   | "pilotSetupOverview"
   | "monitoringAndVisibility"
@@ -112,13 +114,15 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     telephony: "Telephony",
     telephonyOverview: "Overview",
     asteriskBasedPbxSystems: "Asterisk-based PBX Systems",
+    inboundAi: "Inbound Ai",
     aiInboundRouting: "AI Inbound Routing",
     aiDialerFlows: "AI Dialer Flows",
     aiDialerFlowsOverview: "Overview",
+    dialerContacts: "Campaign Contacts",
     importContacts: "Import Contacts",
     contactInbounds: "Contact Inbounds",
     callRecords: "Call Records",
-    callHistoryAndReview: "Call History and Review",
+    processedContacts: "Processed Contacts",
     phone: "Phone",
     pilotSetupOverview: "Deployment Overview",
     monitoringAndVisibility: "Monitoring and Visibility",
@@ -165,13 +169,15 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     telephony: "Telefonia",
     telephonyOverview: "Panoramica",
     asteriskBasedPbxSystems: "Sistemi PBX basati su Asterisk",
+    inboundAi: "Inbound Ai",
     aiInboundRouting: "AI Inbound Routing",
     aiDialerFlows: "AI Dialer Flows",
     aiDialerFlowsOverview: "Panoramica",
+    dialerContacts: "Contatti campagna",
     importContacts: "Importa contatti",
     contactInbounds: "Contatti inbound",
     callRecords: "Registro chiamate",
-    callHistoryAndReview: "Storico e revisione chiamate",
+    processedContacts: "Contatti elaborati",
     phone: "Phone",
     pilotSetupOverview: "Panoramica deploy",
     monitoringAndVisibility: "Monitoring e visibilità",
@@ -220,13 +226,15 @@ const navIcons: Record<NavLabelKey, LucideIcon> = {
   telephony: Phone,
   telephonyOverview: Radar,
   asteriskBasedPbxSystems: Network,
+  inboundAi: PhoneIncoming,
   aiInboundRouting: PhoneIncoming,
   aiDialerFlows: PhoneOutgoing,
   aiDialerFlowsOverview: Radar,
+  dialerContacts: Users,
   importContacts: Upload,
   contactInbounds: Users,
   callRecords: FileText,
-  callHistoryAndReview: History,
+  processedContacts: History,
   phone: Phone,
   pilotSetupOverview: Server,
   monitoringAndVisibility: Radar,

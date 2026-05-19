@@ -206,7 +206,7 @@ const asteriskPbxCopy: Record<Locale, AsteriskPbxCopy> = {
       },
       {
         title: "AI Inbound Routing",
-        href: "/run-workflows/ai-inbound-routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
         description: "Connect the registered trunk and agent to the inbound route."
       }
     ]
@@ -302,7 +302,7 @@ const asteriskPbxCopy: Record<Locale, AsteriskPbxCopy> = {
       },
       {
         title: "AI Inbound Routing",
-        href: "/run-workflows/ai-inbound-routing",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
         description: "Collega trunk registrato e agente alla route inbound."
       }
     ]
