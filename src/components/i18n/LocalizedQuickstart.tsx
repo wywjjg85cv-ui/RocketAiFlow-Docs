@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { localizeHref } from "../../i18n/docs-routes";
 import { defaultLocale, type Locale } from "../../i18n/routing";
 import { useCurrentLocale } from "../../i18n/client-locale";
 
@@ -96,8 +97,10 @@ function ExternalInlineLink({ href, children }: { href: string; children: ReactN
 }
 
 function InternalInlineLink({ href, children }: { href: string; children: ReactNode }) {
+  const locale = useCurrentLocale(defaultLocale);
+
   return (
-    <Link className="docs-inline-link" href={href}>
+    <Link className="docs-inline-link" href={localizeHref(href, locale)}>
       <span>{children}</span>
     </Link>
   );
@@ -127,29 +130,29 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     title: "Quickstart",
     hero: [
       "Use this page when you want the shortest practical path to a working RocketAiFlow workflow.",
-      "The goal is not to configure every possible option. The goal is to prove one real path, review the result, and confirm that trunk setup, agent behavior, functions, call records, and monitoring are clear enough for broader evaluation.",
-      "Inbound and outbound should be validated as separate flows. They share the same agent, prompt, and functions, but they depend on different calling paths."
+      "The goal is to validate one real path, review the result, and confirm that the trunk, agent, call records, and monitoring are working before you expand the setup.",
+      "Complete the common setup first, then follow either the inbound path or the outbound path for the first test."
     ],
     beforeStart: {
       items: [
-        "credentials for a real trunk",
-        <>a <ExternalInlineLink href={deepgramUrl}>Deepgram</ExternalInlineLink> API key</>,
-        "for outbound, a contact list in a CSV file to import or one contact to add manually to the campaign you created"
+        <>a <ExternalInlineLink href={deepgramUrl}>Deepgram</ExternalInlineLink> API key for the agent voice setup</>,
+        "SIP trunk credentials when you want to test real inbound or outbound calls",
+        "for outbound, one contact to add manually or a small CSV file to import after the campaign is created"
       ],
       paragraphs: [
-        "Before you start, make sure you have:"
+        "Before you start, prepare only what is needed for the first test:"
       ]
     },
     choosePath: {
       preListParagraphCount: 3,
       paragraphs: [
-        "Choose the flow based on what you want to test first.",
-        <>For inbound, go to <UiPill>Inbound Ai</UiPill> and configure <UiPill>AI Inbound Routing</UiPill>.</>,
-        <>For outbound, go to <UiPill>AI Dialer Flows</UiPill> and configure <UiPill>Dialer Campaigns</UiPill>.</>
+        "Choose what you want to validate first. You do not need to complete both paths for the first quickstart run.",
+        <>Inbound: <NavigationPath steps={["Inbound Ai", "AI Inbound Routing"]} /> when an incoming call should reach the agent.</>,
+        <>Outbound: <NavigationPath steps={["AI Dialer Flows", "Dialer Campaigns"]} /> when a campaign should call contacts.</>
       ]
     },
     sharedFoundation: {
-      paragraphs: [<>First configure the shared parts: trunk and agent. Then continue with <UiPill>AI Inbound Routing</UiPill> for inbound or <UiPill>AI Dialer Flows</UiPill> and <UiPill>Dialer Campaigns</UiPill> for outbound.</>]
+      paragraphs: [<>Configure the shared parts once: trunk, agent, prompt, optional functions, and a direct Phone test. After that, continue with <UiPill>AI Inbound Routing</UiPill> for inbound or <UiPill>Dialer Campaigns</UiPill> for outbound.</>]
     },
     trunk: {
       preListParagraphCount: 2,
@@ -198,21 +201,17 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     functions: {
       preListParagraphCount: 2,
       items: [
-        <><code>hangup_call</code> ends the call when the workflow is complete</>,
         <><code>transfer_call</code> transfers the caller to a human team or another destination</>,
         <><code>rescheduled_contact</code> saves that the contact should be called again later</>,
-        <><code>save_lead_qualification</code> stores the qualification result and the useful details collected during the call</>,
-        "a custom function lets you start from zero and connect the workflow to almost any API your business needs"
+        <><code>save_lead_qualification</code> stores the qualification result and the useful details collected during the call</>
       ],
       paragraphs: [
-        "Functions are where the agent stops being only a conversation and starts taking useful actions.",
-        "RocketAiFlow includes ready-made functions you can use as examples or starting points:"
+        "Functions are optional in the quickstart. Add one only when the first test must do something beyond the conversation.",
+        "Start with a small set:"
       ],
-      callout: "Functions are not required for the quickstart. Add them only if you want to test actions beyond the basic conversation.",
+      callout: "For the first validation, it is acceptable to skip functions and test only the conversation.",
       secondaryItems: [
-        "For this quickstart, attach only the functions that make sense for the first test. You can add more later.",
-        "When the workflow needs something specific, create a custom function and connect it to the API you need: CRM, calendar, helpdesk, database, enrichment service, internal system, or any provider that exposes an API.",
-        "In the future, RocketAiFlow will also include more functions you can use as starting points for popular CRMs and API-based providers."
+        "Use custom API functions later when the workflow must update a CRM, calendar, helpdesk, database, or another internal system."
       ],
       image: {
         src: screenshotPaths.functions,
@@ -227,10 +226,9 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       ],
       items: [
         <>open <strong>Phone</strong></>,
-        <>enter the password for the default <code>2000</code> agent</>,
+        <>enter the password for the default SIP/WebRTC user <code>2000</code></>,
         "select the agent you created in Voice agent test mode",
-        "start the call and check that the agent responds as expected",
-        "enable auto-answer only if you want the browser client to answer incoming test calls automatically"
+        "start the call and check that the agent responds as expected"
       ],
       image: {
         src: screenshotPaths.phone,
@@ -252,7 +250,8 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       items: [
         "the agent you created",
         "the trunk you created",
-        "the number of concurrent calls to handle"
+        "whether the inbound route should be active",
+        "the maximum number of concurrent calls this agent can handle on the route"
       ],
       paragraphs: [
         <>Path to follow: <NavigationPath steps={["Inbound Ai", "AI Inbound Routing", "Add Inbound"]} /> Then select only:</>
@@ -300,7 +299,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
         <>custom fields in <code>data</code> when the agent or API action needs business context</>
       ],
       paragraphs: [
-        <>Upload a CSV for the outbound campaign and set <code>Usage</code> to <UiPill>AI Dialer Flows</UiPill>. This is required when contacts must be called by the outbound dialer.</>,
+        <>After the campaign is saved, upload a CSV for the outbound campaign and set <code>Usage</code> to <UiPill>AI Dialer Flows</UiPill>. This is required when contacts must be called by the outbound dialer.</>,
         <>Map <code>Phone</code> as the required field. All other contact fields are optional, so keep the first import limited to the values the workflow actually needs:</>,
         "Before using the contacts in a campaign, confirm:"
       ],
@@ -322,10 +321,11 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
         "select the campaign timezone",
         "set Concurrent Call Capacity to 1",
         "leave Retry Minutes To Reschedule at the default value",
-        "add or import one contact for the first test"
+        "save the campaign before importing contacts, because the import step needs a campaign to attach them to"
       ],
       paragraphs: [
-        <>Path to follow: <NavigationPath steps={["AI Dialer Flows", "Dialer Campaigns", "Add Campaigns"]} /> Then configure a simple campaign for the first test:</>
+        <>Path to follow: <NavigationPath steps={["AI Dialer Flows", "Dialer Campaigns", "Add Campaigns"]} /> Then configure a simple campaign for the first test:</>,
+        "Contacts are added in the next step because they need an existing campaign to attach to."
       ],
       image: {
         src: screenshotPaths.campaignCallCapacitySchedule,
@@ -423,29 +423,29 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     title: "Guida rapida",
     hero: [
       "Usa questa pagina quando vuoi arrivare al primo workflow funzionante in RocketAiFlow nel modo più diretto possibile.",
-      "L'obiettivo non è configurare ogni opzione disponibile. L'obiettivo è provare un percorso reale, rivedere il risultato e confermare che trunk, agente, funzioni, call records e monitoring siano chiari abbastanza per una valutazione più ampia.",
-      "Inbound e outbound vanno validati come flussi separati. Condividono agente, prompt e funzioni, ma dipendono da percorsi di chiamata diversi."
+      "L'obiettivo è validare un percorso reale, rivedere il risultato e confermare che trunk, agente, record chiamata e monitoraggio funzionino prima di ampliare il setup.",
+      "Completa prima la configurazione comune, poi segui il percorso inbound oppure il percorso outbound per il primo test."
     ],
     beforeStart: {
       paragraphs: [
-        "Prima di iniziare, assicurati di avere:"
+        "Prima di iniziare, prepara solo quello che serve per il primo test:"
       ],
       items: [
-        "le credenziali di un trunk reale",
-        <>una API key di <ExternalInlineLink href={deepgramUrl}>Deepgram</ExternalInlineLink></>,
-        "per l'outbound, una lista di contatti in un file CSV da importare oppure aggiungi un contatto manualmente nella campagna creata"
+        <>una API key di <ExternalInlineLink href={deepgramUrl}>Deepgram</ExternalInlineLink> per il setup voce dell'agente</>,
+        "le credenziali del trunk SIP quando vuoi testare chiamate inbound o outbound reali",
+        "per l'outbound, un contatto da aggiungere manualmente oppure un piccolo CSV da importare dopo aver creato la campagna"
       ]
     },
     choosePath: {
       preListParagraphCount: 3,
       paragraphs: [
-        "Scegli il flusso in base a cosa vuoi testare per primo.",
-        <>Per l'inbound, vai in <UiPill>Inbound Ai</UiPill> e configura <UiPill>AI Inbound Routing</UiPill>.</>,
-        <>Per l'outbound, vai in <UiPill>AI Dialer Flows</UiPill> e configura <UiPill>Dialer Campaigns</UiPill>.</>
+        "Scegli cosa vuoi validare per primo. Non devi completare entrambi i percorsi per il primo quickstart.",
+        <>Inbound: <NavigationPath steps={["Inbound Ai", "AI Inbound Routing"]} /> quando una chiamata in ingresso deve arrivare all'agente.</>,
+        <>Outbound: <NavigationPath steps={["AI Dialer Flows", "Dialer Campaigns"]} /> quando una campagna deve chiamare i contatti.</>
       ]
     },
     sharedFoundation: {
-      paragraphs: [<>Configura prima le parti comuni: trunk e agente. Poi continua con <UiPill>AI Inbound Routing</UiPill> per l'inbound oppure con <UiPill>AI Dialer Flows</UiPill> e <UiPill>Dialer Campaigns</UiPill> per l'outbound.</>]
+      paragraphs: [<>Configura una sola volta le parti comuni: trunk, agente, prompt, funzioni opzionali e test diretto da Phone. Poi continua con <UiPill>AI Inbound Routing</UiPill> per l'inbound oppure con <UiPill>Dialer Campaigns</UiPill> per l'outbound.</>]
     },
     trunk: {
       preListParagraphCount: 2,
@@ -494,21 +494,17 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     functions: {
       preListParagraphCount: 2,
       paragraphs: [
-        "Le funzioni sono il punto in cui l'agente smette di essere solo una conversazione e inizia a compiere azioni utili.",
-        "RocketAiFlow include funzioni già preimpostate che puoi usare come esempi o punti di partenza:"
+        "Le funzioni sono opzionali nel quickstart. Aggiungine una solo quando il primo test deve fare qualcosa oltre alla conversazione.",
+        "Parti da un set piccolo:"
       ],
-      callout: "Le funzioni non sono obbligatorie per il quickstart. Aggiungile solo se vuoi testare azioni oltre alla conversazione base.",
+      callout: "Per la prima validazione puoi anche saltare le funzioni e testare solo la conversazione.",
       secondaryItems: [
-        "Per questo quickstart collega solo le funzioni che servono al primo test. Potrai aggiungerne altre dopo.",
-        "Quando il workflow ha bisogno di qualcosa di specifico, crea una funzione custom e collegala all'API che ti serve: CRM, calendario, helpdesk, database, enrichment, sistema interno o qualunque provider esponga API.",
-        "In futuro RocketAiFlow includerà anche più funzioni da usare come base di partenza per i CRM più usati e per provider che offrono servizi via API."
+        "Usa funzioni API custom più avanti, quando il workflow deve aggiornare un CRM, calendario, helpdesk, database o sistema interno."
       ],
       items: [
-        <><code>hangup_call</code> termina la chiamata quando il workflow è completato</>,
         <><code>transfer_call</code> trasferisce la chiamata a un team umano o a un'altra destinazione</>,
         <><code>rescheduled_contact</code> salva che il contatto deve essere richiamato più avanti</>,
-        <><code>save_lead_qualification</code> salva l'esito della qualificazione e i dati utili raccolti durante la chiamata</>,
-        "una funzione custom ti permette di partire da zero e integrare il workflow con quasi qualsiasi API utile al tuo business"
+        <><code>save_lead_qualification</code> salva l'esito della qualificazione e i dati utili raccolti durante la chiamata</>
       ],
       image: {
         src: screenshotPaths.functions,
@@ -523,10 +519,9 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       ],
       items: [
         <>vai nella sezione <strong>Phone</strong></>,
-        <>inserisci la password dell'agente <code>2000</code>, creato di default</>,
+        <>inserisci la password dell'utente SIP/WebRTC <code>2000</code>, creato di default</>,
         "seleziona l'agente che hai creato in Voice agent test mode",
-        "avvia la chiamata e controlla che l'agente risponda come previsto",
-        "abilita auto-answer solo se vuoi che il client browser risponda automaticamente alle chiamate di test in ingresso"
+        "avvia la chiamata e controlla che l'agente risponda come previsto"
       ],
       image: {
         src: screenshotPaths.phone,
@@ -551,7 +546,8 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       items: [
         "l'agente che hai creato",
         "il trunk che hai creato",
-        "il numero di chiamate concorrenti da gestire"
+        "se la route inbound deve essere attiva",
+        "il numero massimo di chiamate concorrenti che l'agente può gestire su questa route"
       ],
       image: {
         src: screenshotPaths.inbound,
@@ -588,7 +584,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     importContacts: {
       preListParagraphCount: 2,
       paragraphs: [
-        <>Carica un CSV per la campagna outbound e imposta <code>Usage</code> su <UiPill>AI Dialer Flows</UiPill>. Questo è l'uso richiesto quando i contatti devono essere chiamati dal dialer outbound.</>,
+        <>Dopo aver salvato la campagna, carica un CSV per la campagna outbound e imposta <code>Usage</code> su <UiPill>AI Dialer Flows</UiPill>. Questo è l'uso richiesto quando i contatti devono essere chiamati dal dialer outbound.</>,
         <>Mappa <code>Phone</code> come campo obbligatorio. Tutti gli altri campi sono opzionali, quindi limita la prima importazione ai valori che il workflow usa davvero:</>,
         "Prima di usare i contatti in una campagna, conferma che:"
       ],
@@ -613,7 +609,8 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     },
     outboundCampaign: {
       paragraphs: [
-        <>Percorso da seguire: <NavigationPath steps={["AI Dialer Flows", "Dialer Campaigns", "Add Campaigns"]} /> Poi configura una campagna semplice per il primo test:</>
+        <>Percorso da seguire: <NavigationPath steps={["AI Dialer Flows", "Dialer Campaigns", "Add Campaigns"]} /> Poi configura una campagna semplice per il primo test:</>,
+        "I contatti si aggiungono nello step successivo perché devono essere collegati a una campagna già esistente."
       ],
       items: [
         "seleziona l'agente che hai creato",
@@ -621,7 +618,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
         "seleziona il timezone della campagna",
         "imposta Concurrent Call Capacity a 1",
         "lascia Retry Minutes To Reschedule al valore di default",
-        "aggiungi o importa un contatto per fare il primo test"
+        "salva la campagna prima di importare i contatti, perché l'import deve associarli a una campagna"
       ],
       image: {
         src: screenshotPaths.campaignCallCapacitySchedule,
@@ -755,10 +752,12 @@ function CampaignSettingsSplitScreenshot({ alt }: { alt?: string }) {
 }
 
 function CardGrid({ cards }: { cards: LinkCard[] }) {
+  const locale = useCurrentLocale(defaultLocale);
+
   return (
     <div className="docs-home-card-grid docs-home-card-grid-2">
       {cards.map((card) => (
-        <Link key={card.href} className="docs-home-card" href={card.href}>
+        <Link key={card.href} className="docs-home-card" href={localizeHref(card.href, locale)}>
           <span className="docs-home-card-title">{card.title}</span>
           <span className="docs-home-card-description">{card.description}</span>
         </Link>
@@ -842,6 +841,18 @@ export function LocalizedQuickstartTroubleshootingLink() {
           href: "/troubleshoot/troubleshooting#quickstart-checks",
           description: "Open the inbound and outbound checks when the first test does not behave as expected."
         };
+  const checks =
+    locale === "it"
+      ? [
+          "il trunk mostra Registered",
+          "la route inbound o la campagna usa l'agente corretto",
+          "il risultato compare in Inbound Call Records o Call Records"
+        ]
+      : [
+          "the trunk shows Registered",
+          "the inbound route or campaign uses the correct agent",
+          "the result appears in Inbound Call Records or Call Records"
+        ];
 
   return (
     <section className="docs-home-section">
@@ -850,6 +861,11 @@ export function LocalizedQuickstartTroubleshootingLink() {
           ? "Se il primo test non funziona come previsto, apri la pagina Risoluzione problemi e segui i controlli inbound o outbound."
           : "If the first test does not behave as expected, open the Troubleshooting page and follow the inbound or outbound checks."}
       </p>
+      <ul>
+        {checks.map((check) => (
+          <li key={check}>{check}</li>
+        ))}
+      </ul>
       <CardGrid cards={[card]} />
     </section>
   );

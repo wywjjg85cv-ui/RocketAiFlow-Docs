@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { localizeHref } from "../../i18n/docs-routes";
 import { defaultLocale, type Locale } from "../../i18n/routing";
 import { useCurrentLocale } from "../../i18n/client-locale";
 
@@ -24,6 +25,7 @@ type IntroductionCopy = {
   title: string;
   lead: string;
   websiteIntro: string;
+  websiteHref: string;
   websiteLink: string;
   websiteAfter: string;
   whatTitle: string;
@@ -54,14 +56,15 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
   en: {
     title: "Introduction",
     lead:
-      "Meet your AI-powered voice workflow platform. RocketAiFlow helps teams automate inbound and outbound phone conversations with voice agents, campaign control, API actions, call records, transcripts, recordings when enabled, and live monitoring.",
+      "Meet your AI-powered voice workflow platform. RocketAiFlow helps teams automate inbound and outbound phone conversations with voice agents, campaign control, API actions, call records, and live monitoring.",
     websiteIntro: "If you arrived from the",
+    websiteHref: "https://rocketaiflow.com/en",
     websiteLink: "RocketAiFlow website",
     websiteAfter:
-      "use this page as the starting point. The website explains the product value; these docs explain how to configure, test, monitor, and improve real voice workflows.",
+      "use this page as the starting point. The website explains the product value; these docs show how to configure, test, monitor, and improve real voice workflows.",
     whatTitle: "What RocketAiFlow is",
     whatBody:
-      "RocketAiFlow is a real-time Voice AI platform for business operations. It is outbound-first, inbound-ready, and built for real phone workflows rather than generic voice demos.",
+      "RocketAiFlow is a real-time Voice AI platform for business operations. It is outbound-first, inbound-ready, and built for real SIP and PBX workflows.",
     usesTitle: "Teams use RocketAiFlow to:",
     uses: [
       "create focused Voice AI agents",
@@ -77,37 +80,43 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         title: "1. Start",
         href: "/get-started/quickstart",
         description:
-          "Use the quickstart to configure the common setup and choose inbound or outbound."
+          "Validate one controlled inbound or outbound workflow."
       },
       {
-        title: "2. Build",
+        title: "2. Configure in depth",
         href: "/build/create-your-first-ai-voice-agent",
         description:
-          "Create the first agent, configure the prompt, and attach only the functions you need."
+          "Review agent voice, prompts, functions, templates, and settings."
       },
       {
         title: "3. Connect",
         href: "/deploy/deployment-overview",
         description:
-          "Choose the deploy path and connect trunk, inbound routing, or outbound campaign setup."
+          "Choose the deploy path and connect trunk, routing, or campaign setup."
       },
       {
-        title: "4. Run",
+        title: "4A. Run inbound",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
+        description:
+          "Route inbound calls to the right agent."
+      },
+      {
+        title: "4B. Run outbound",
         href: "/run-workflows/ai-dialer-flows",
         description:
-          "Launch one controlled inbound or outbound test before increasing volume."
+          "Launch a controlled outbound campaign."
       },
       {
         title: "5. Monitoring",
         href: "/monitoring/monitoring-and-visibility",
         description:
-          "Monitor live calls, campaign state, trunk status, outcomes, call volume, and execution pace."
+          "Monitor live calls, trunk status, outcomes, and execution pace."
       },
       {
         title: "6. Improve",
         href: "/run-workflows/processed-contacts",
         description:
-          "Use processed contacts, call records, transcripts, recordings when enabled, and timing metrics to improve the workflow."
+          "Use contacts, call records, transcripts, recordings, and timing metrics."
       }
     ],
     conceptsTitle: "Core concepts",
@@ -150,7 +159,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       }
     ],
     deploymentModels: [
-      "Clean Linux server with the RocketAiFlow setup script for the first installation.",
+      "Clean dedicated Linux server with the RocketAiFlow setup script for the first installation.",
       "Customer PBX, SIP trunk, API, and monitoring integration when the workflow must fit an existing environment."
     ],
     screenshotCaption:
@@ -263,14 +272,15 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
   it: {
     title: "Introduzione",
     lead:
-      "Incontra la tua piattaforma Voice AI per workflow telefonici. RocketAiFlow aiuta i team ad automatizzare conversazioni inbound e outbound con agenti Voice AI, controllo campagne, azioni API, call record, transcript, registrazioni quando abilitate e monitoraggio live.",
+      "Incontra la tua piattaforma Voice AI per workflow telefonici. RocketAiFlow aiuta i team ad automatizzare conversazioni inbound e outbound con agenti Voice AI, controllo campagne, azioni API, call record e monitoraggio live.",
     websiteIntro: "Se arrivi dal",
+    websiteHref: "https://rocketaiflow.com/it",
     websiteLink: "sito RocketAiFlow",
     websiteAfter:
-      "usa questa pagina come punto di partenza. Il sito spiega il valore del prodotto; queste docs spiegano come configurare, testare, monitorare e migliorare workflow vocali reali.",
+      "usa questa pagina come punto di partenza. Il sito spiega il valore del prodotto; queste docs mostrano come configurare, testare, monitorare e migliorare workflow vocali reali.",
     whatTitle: "Che cos'è RocketAiFlow",
     whatBody:
-      "RocketAiFlow è una piattaforma Voice AI in tempo reale per operations aziendali. È outbound-first, inbound-ready ed è costruita per workflow telefonici reali, non per demo vocali generiche.",
+      "RocketAiFlow è una piattaforma Voice AI in tempo reale per operations aziendali. È outbound-first, inbound-ready ed è costruita per workflow SIP e PBX reali.",
     usesTitle: "I team usano RocketAiFlow per:",
     uses: [
       "creare agenti Voice AI focalizzati",
@@ -286,37 +296,43 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
         title: "1. Inizia",
         href: "/get-started/quickstart",
         description:
-          "Usa il quickstart per configurare le parti comuni e scegliere inbound o outbound."
+          "Valida un workflow inbound o outbound controllato."
       },
       {
-        title: "2. Costruisci",
+        title: "2. Approfondisci la configurazione",
         href: "/build/create-your-first-ai-voice-agent",
         description:
-          "Crea il primo agente, configura il prompt e collega solo le funzioni che ti servono."
+          "Rivedi voce agente, prompt, functions, template e settings."
       },
       {
         title: "3. Connetti",
         href: "/deploy/deployment-overview",
         description:
-          "Scegli il percorso deploy e collega trunk, routing inbound o setup campagna outbound."
+          "Scegli il percorso deploy e collega trunk, routing o campagna."
       },
       {
-        title: "4. Esegui",
+        title: "4A. Esegui inbound",
+        href: "/run-workflows/inbound-ai/ai-inbound-routing",
+        description:
+          "Instrada le chiamate inbound verso l'agente corretto."
+      },
+      {
+        title: "4B. Esegui outbound",
         href: "/run-workflows/ai-dialer-flows",
         description:
-          "Avvia un test inbound o outbound controllato prima di aumentare il volume."
+          "Avvia una campagna outbound controllata."
       },
       {
         title: "5. Monitoraggio",
         href: "/monitoring/monitoring-and-visibility",
         description:
-          "Monitora chiamate live, stato campagne, stato trunk, outcome, volumi e ritmo di esecuzione."
+          "Monitora chiamate live, stato trunk, outcome e ritmo di esecuzione."
       },
       {
         title: "6. Migliora",
         href: "/run-workflows/processed-contacts",
         description:
-          "Usa contatti elaborati, call record, transcript, registrazioni quando abilitate e metriche di timing per migliorare il workflow."
+          "Usa contatti, call record, transcript, registrazioni e metriche di timing."
       }
     ],
     conceptsTitle: "Concetti principali",
@@ -359,7 +375,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       }
     ],
     deploymentModels: [
-      "Server Linux pulito con script di setup RocketAiFlow per la prima installazione.",
+      "Server Linux dedicato pulito con script di setup RocketAiFlow per la prima installazione.",
       "Integrazione con PBX cliente, trunk SIP, API e monitoring quando il workflow deve adattarsi a un ambiente esistente."
     ],
     screenshotCaption:
@@ -472,8 +488,10 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
 };
 
 function DocsCard({ href, title, description }: IntroCard) {
+  const locale = useCurrentLocale(defaultLocale);
+
   return (
-    <Link href={href} className="docs-home-card">
+    <Link href={localizeHref(href, locale)} className="docs-home-card">
       <strong>{title}</strong>
       <span>{description}</span>
     </Link>
@@ -529,7 +547,7 @@ export function LocalizedIntroductionHero() {
     <>
       <p>{copy.lead}</p>
       <p>
-        {copy.websiteIntro} <a href="https://rocketaiflow.com/en">{copy.websiteLink}</a>, {copy.websiteAfter}
+        {copy.websiteIntro} <a href={copy.websiteHref}>{copy.websiteLink}</a>, {copy.websiteAfter}
       </p>
     </>
   );
