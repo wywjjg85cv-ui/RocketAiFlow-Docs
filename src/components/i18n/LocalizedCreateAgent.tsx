@@ -147,14 +147,15 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
   en: {
     title: "Create Your First AI Voice Agent",
     intro: [
-      "Start with one agent configured for a specific workflow, then reuse it in inbound routing or outbound campaigns after the first test.",
-      "This section covers the Voice configuration: agent name, Deepgram API key, language, speak provider, greeting message, and contact template variables."
+      "Use this page as the complete configuration guide for the first reusable AI Voice Agent.",
+      "The agent you create here can later be attached to inbound routing, outbound campaigns, Phone tests, and workflow automations.",
+      "This page covers the full agent setup: Voice, languages, speak providers, greeting message, contact template variables, LLM, functions, transcription, and Agent settings."
     ],
     voiceSetup: {
       title: "1. Create the agent and configure Voice",
       paragraphs: [
         <>Go to <UiPill>AI Voice Agent</UiPill> and click <UiPill>Add Agent</UiPill>. In the Voice section, choose a clear agent name and enter the Deepgram API key.</>,
-        "Then choose the language and the speak provider. For the first test, use the simplest provider setup that matches the voice you want to validate."
+        "Then choose the language and the speak provider. Keep the first agent easy to recognize and configure it around one clear workflow goal."
       ],
       items: [
         "Agent name: use a name that makes the agent easy to recognize later in inbound routing and outbound campaigns.",
@@ -204,7 +205,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
         "Configure the language model that controls the agent reasoning, instructions, and prompt behavior.",
         <>You can use dynamic template variables here too. Type <code>@</code> in the prompt field or choose one of the template variables shown below the prompt.</>,
         <>When you select a provider, choose the related Think Provider Model. If you select <UiPill>Custom</UiPill>, configure the custom endpoint URL and authorization header.</>,
-        <>For prompt writing, follow the guidance from the provider you choose. If you use OpenAI, start from the <ExternalDocsLink href={openAiPromptGuidanceUrl}>OpenAI prompt guidance</ExternalDocsLink>.</>
+        <>For prompt writing, start from the RocketAiFlow <InlineDocsLink href="/build/configure-agent-prompt">Configure Agent Prompt</InlineDocsLink> guide.</>
       ],
       items: [
         "Think Provider Type: choose the LLM provider.",
@@ -243,7 +244,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
     },
     functionPills: ["hangup_call", "transfer", "rescheduled_contact", "save_lead_qualification", "Custom Endpoint", "GET", "POST", "PUT", "PATCH", "DELETE"],
     functionNotes: [
-      <>For the first test, attach only the functions the agent really needs. <InlineDocsLink href={preconfiguredFunctionExamplesUrl}>See preconfigured examples</InlineDocsLink>.</>,
+      <>Attach the functions the agent needs for its workflow, then refine them as the workflow becomes more specific. <InlineDocsLink href={preconfiguredFunctionExamplesUrl}>See preconfigured examples</InlineDocsLink>.</>,
       <>Reference docs: <ExternalDocsLink href={openAiFunctionCallingUrl}>OpenAI function calling</ExternalDocsLink> and <ExternalDocsLink href={deepgramFunctionCallingUrl}>Deepgram Voice Agent function calling</ExternalDocsLink>.</>
     ],
     functionsScreenshotAlt: "Functions builder showing a custom get_weather endpoint with required location parameter, GET method, template URL, API headers, and JSON preview.",
@@ -251,14 +252,14 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
       title: "4. Configure transcription",
       paragraphs: [
         "Configure transcription so the agent can understand the caller and the call record can show a readable conversation.",
-        <>For this voice agent flow, use <UiPill>deepgram</UiPill> as the listen provider. The screenshot shows the currently validated setup for the first test: <UiPill>v1</UiPill> with <UiPill>nova-3</UiPill>.</>,
+        <>For the voice agent flow shown here, use <UiPill>deepgram</UiPill> as the listen provider. The screenshot shows the validated setup: <UiPill>v1</UiPill> with <UiPill>nova-3</UiPill>.</>,
         <>Deepgram documents Flux as the model family built for real-time voice agents, while <code>nova-3</code> is their high-performing general-purpose streaming and batch ASR model. If you switch to Flux or another model, validate it with a controlled call before using it in production.</>,
         <>Choose the transcription language/model based on Deepgram support. If you know the caller language, use the specific language; if the call can contain multiple languages, check Deepgram multilingual guidance before changing the setup.</>
       ],
       items: [
         "Listen Provider Type: deepgram",
         "Listen Provider Version: v1 for Nova models, v2 for Flux models",
-        "Listen Provider Model: start with nova-3 for the first validated test shown here",
+        "Listen Provider Model: nova-3 for the validated setup shown here",
         "Keyterms: add domain terms only when the agent repeatedly mishears important words",
         "Audio Input Encoding: choose the encoding used by the real telephony audio path",
         "Audio Input Sample Rate: keep 8000 for telephony, because phone audio runs at 8 kHz"
@@ -302,21 +303,22 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
       {
         title: "Configure Agent Functions",
         href: "/build/add-functions",
-        description: "Attach only the functions needed for the first controlled test."
+        description: "Configure ready-made functions and custom API actions for the agent workflow."
       }
     ]
   },
   it: {
     title: "Crea il primo AI Voice Agent",
     intro: [
-      "Parti da un agente configurato per un workflow specifico, poi riusalo in routing inbound o campagne outbound dopo il primo test.",
-      "Questa sezione copre la configurazione Voice: nome agente, API key di Deepgram, lingua, speak provider, greeting message e variabili del contact template."
+      "Usa questa pagina come guida completa alla configurazione del primo AI Voice Agent riutilizzabile.",
+      "L'agente che crei qui potrà poi essere collegato a routing inbound, campagne outbound, test da Phone e automazioni di workflow.",
+      "Questa pagina copre tutto il setup agente: Voice, lingue, speak provider, greeting message, variabili del contact template, LLM, functions, transcription e Agent settings."
     ],
     voiceSetup: {
       title: "1. Crea l'agente e configura Voice",
       paragraphs: [
         <>Vai in <UiPill>AI Voice Agent</UiPill> e premi <UiPill>Add Agent</UiPill>. Nella sezione Voice scegli un nome chiaro per l'agente e inserisci l'API key di Deepgram.</>,
-        "Poi scegli la lingua e lo speak provider. Per il primo test usa il setup più semplice che ti permette di validare la voce scelta."
+        "Poi scegli la lingua e lo speak provider. Mantieni il primo agente facile da riconoscere e configurato attorno a un obiettivo di workflow chiaro."
       ],
       items: [
         "Nome agente: usa un nome che renda l'agente facile da riconoscere dopo in routing inbound e campagne outbound.",
@@ -366,7 +368,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
         "Configura il modello linguistico che controlla ragionamento, istruzioni e comportamento del prompt dell'agente.",
         <>Anche qui puoi usare le variabili dinamiche del template. Digita <code>@</code> nel campo prompt oppure scegli una delle variabili che appaiono sotto il prompt.</>,
         <>Quando selezioni un provider, scegli il relativo Think Provider Model. Se selezioni <UiPill>Custom</UiPill>, configura endpoint URL e header di authorization.</>,
-        <>Per scrivere il prompt, fai riferimento alla guida del provider che scegli. Se usi OpenAI, parti dalla <ExternalDocsLink href={openAiPromptGuidanceUrl}>prompt guidance di OpenAI</ExternalDocsLink>.</>
+        <>Per scrivere il prompt, parti dalla guida RocketAiFlow <InlineDocsLink href="/build/configure-agent-prompt">Configura il prompt</InlineDocsLink>.</>
       ],
       items: [
         "Think Provider Type: scegli il provider LLM.",
@@ -405,7 +407,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
     },
     functionPills: ["hangup_call", "transfer", "rescheduled_contact", "save_lead_qualification", "Custom Endpoint", "GET", "POST", "PUT", "PATCH", "DELETE"],
     functionNotes: [
-      <>Per il primo test collega solo le funzioni che servono davvero all'agente. <InlineDocsLink href={preconfiguredFunctionExamplesUrl}>Vedi esempi preconfigurati</InlineDocsLink>.</>,
+      <>Collega le functions che servono al workflow dell'agente, poi perfezionale quando il workflow diventa più specifico. <InlineDocsLink href={preconfiguredFunctionExamplesUrl}>Vedi esempi preconfigurati</InlineDocsLink>.</>,
       <>Riferimenti: <ExternalDocsLink href={openAiFunctionCallingUrl}>function calling di OpenAI</ExternalDocsLink> e <ExternalDocsLink href={deepgramFunctionCallingUrl}>function calling per Deepgram Voice Agent</ExternalDocsLink>.</>
     ],
     functionsScreenshotAlt: "Function builder con endpoint custom get_weather, parametro location required, metodo GET, template URL, API headers e JSON preview.",
@@ -413,14 +415,14 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
       title: "4. Configura transcription",
       paragraphs: [
         "Configura la transcription così l'agente può capire il chiamante e il call record può mostrare una conversazione leggibile.",
-        <>Per questo flusso Voice Agent usa <UiPill>deepgram</UiPill> come listen provider. Lo screenshot mostra il setup validato per il primo test: <UiPill>v1</UiPill> con <UiPill>nova-3</UiPill>.</>,
+        <>Per il flusso Voice Agent mostrato qui usa <UiPill>deepgram</UiPill> come listen provider. Lo screenshot mostra il setup validato: <UiPill>v1</UiPill> con <UiPill>nova-3</UiPill>.</>,
         <>Nella documentazione Deepgram, Flux è la famiglia pensata per voice agent real-time, mentre <code>nova-3</code> è il modello ASR general-purpose ad alte performance per streaming e batch. Se cambi verso Flux o un altro modello, valida sempre con una chiamata controllata prima di usarlo in produzione.</>,
         <>Scegli lingua e modello in base al supporto Deepgram. Se conosci la lingua del chiamante, usa quella specifica; se la chiamata può contenere più lingue, controlla la guida multilingual Deepgram prima di cambiare setup.</>
       ],
       items: [
         "Listen Provider Type: deepgram",
         "Listen Provider Version: v1 per modelli Nova, v2 per modelli Flux",
-        "Listen Provider Model: parti da nova-3 per il primo test validato mostrato qui",
+        "Listen Provider Model: nova-3 per il setup validato mostrato qui",
         "Keyterms: aggiungi termini di dominio solo se l'agente capisce male parole importanti",
         "Audio Input Encoding: scegli l'encoding usato dal percorso audio reale della telefonia",
         "Audio Input Sample Rate: lascia 8000 per la telefonia, perché l'audio telefonico lavora a 8 kHz"
@@ -464,7 +466,7 @@ const createAgentCopy: Record<Locale, CreateAgentCopy> = {
       {
         title: "Configura le functions",
         href: "/build/add-functions",
-        description: "Collega solo le funzioni necessarie al primo test controllato."
+        description: "Configura funzioni pronte e azioni API custom per il workflow dell'agente."
       }
     ]
   }
@@ -529,10 +531,12 @@ function ProductScreenshot({ src = screenshotPath, alt }: { src?: string; alt: s
 }
 
 function CardGrid({ cards }: { cards: LinkCard[] }) {
+  const locale = useCurrentLocale(defaultLocale);
+
   return (
     <div className="docs-home-card-grid docs-home-card-grid-2">
       {cards.map((card) => (
-        <Link key={card.href} className="docs-home-card" href={card.href}>
+        <Link key={card.href} className="docs-home-card" href={localizeHref(card.href, locale)}>
           <span className="docs-home-card-title">{card.title}</span>
           <span className="docs-home-card-description">{card.description}</span>
         </Link>

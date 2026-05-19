@@ -26,12 +26,11 @@ type PromptCopy = {
   example: SectionCopy;
   functions: SectionCopy;
   variables: SectionCopy;
-  review: SectionCopy;
   nextStepsTitle: string;
   nextSteps: LinkCard[];
 };
 
-type HeadingKey = "principles" | "structure" | "example" | "functions" | "variables" | "review" | "nextSteps";
+type HeadingKey = "principles" | "structure" | "example" | "functions" | "variables" | "nextSteps";
 
 const openAiPromptGuidanceUrl = "https://developers.openai.com/api/docs/guides/prompt-guidance";
 const openAiFunctionCallingUrl = "https://developers.openai.com/api/docs/guides/function-calling";
@@ -176,21 +175,6 @@ Summarize the next step before ending or transferring the call.`}</PromptBlock>
         <>review the detailed model in <InlineDocsLink href="/build/dynamic-parameters">Dynamic Parameters</InlineDocsLink></>
       ]
     },
-    review: {
-      title: "Review before testing",
-      paragraphs: [
-        "Before attaching the agent to inbound routing or an outbound campaign, read the prompt once as if you were the caller."
-      ],
-      items: [
-        "the role is obvious in the first lines",
-        "the goal of the call is explicit",
-        "the agent knows what to collect before acting",
-        "every function has a clear trigger condition",
-        "the prompt says what to do when a field is missing",
-        "transfer and hangup rules are not ambiguous",
-        "there are no conflicting instructions"
-      ]
-    },
     nextStepsTitle: "Next Steps",
     nextSteps: [
       {
@@ -329,21 +313,6 @@ Riassumi il prossimo step prima di terminare o trasferire la chiamata.`}</Prompt
         <>rivedi il modello completo in <InlineDocsLink href="/build/dynamic-parameters">Parametri dinamici</InlineDocsLink></>
       ]
     },
-    review: {
-      title: "Controllo prima del test",
-      paragraphs: [
-        "Prima di collegare l'agente al routing inbound o a una campagna outbound, rileggi il prompt come se fossi il chiamante."
-      ],
-      items: [
-        "il ruolo è chiaro nelle prime righe",
-        "l'obiettivo della chiamata è esplicito",
-        "l'agente sa cosa raccogliere prima di agire",
-        "ogni function ha una condizione chiara di chiamata",
-        "il prompt dice cosa fare quando manca un campo",
-        "le regole di transfer e hangup non sono ambigue",
-        "non ci sono istruzioni in conflitto"
-      ]
-    },
     nextStepsTitle: "Passaggi successivi",
     nextSteps: [
       {
@@ -413,7 +382,6 @@ export function LocalizedConfigureAgentPromptHeading({ labelKey }: { labelKey: H
     example: copy.example.title,
     functions: copy.functions.title,
     variables: copy.variables.title,
-    review: copy.review.title,
     nextSteps: copy.nextStepsTitle
   };
 
@@ -449,10 +417,6 @@ export function LocalizedConfigureAgentPromptFunctions() {
 
 export function LocalizedConfigureAgentPromptVariables() {
   return <Section section={usePromptCopy().variables} />;
-}
-
-export function LocalizedConfigureAgentPromptReview() {
-  return <Section section={usePromptCopy().review} />;
 }
 
 export function LocalizedConfigureAgentPromptNextSteps() {
