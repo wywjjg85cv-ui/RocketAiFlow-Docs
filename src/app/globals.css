@@ -35,12 +35,12 @@
   --docs-warning-border: rgba(251, 146, 60, 0.32);
   --docs-warning-text: #7c2d12;
   --docs-feature-bg: var(--docs-surface);
-  --docs-feature-border: rgba(37, 99, 235, 0.26);
-  --docs-feature-text: #1e3a8a;
-  --docs-feature-icon-bg: rgba(37, 99, 235, 0.1);
-  --docs-feature-icon-text: #1d4ed8;
-  --docs-token-bg: rgba(37, 99, 235, 0.08);
-  --docs-token-text: #1d4ed8;
+  --docs-feature-border: rgba(251, 146, 60, 0.32);
+  --docs-feature-text: #7c2d12;
+  --docs-feature-icon-bg: rgba(251, 146, 60, 0.12);
+  --docs-feature-icon-text: #9a3412;
+  --docs-token-bg: rgba(251, 146, 60, 0.12);
+  --docs-token-text: #9a3412;
   --docs-pill-bg: rgba(79, 70, 229, 0.1);
   --docs-pill-border: rgba(79, 70, 229, 0.28);
   --docs-pill-text: #3730a3;
@@ -101,12 +101,12 @@
   --docs-warning-border: rgba(251, 146, 60, 0.28);
   --docs-warning-text: rgba(255, 237, 213, 0.92);
   --docs-feature-bg: var(--docs-surface);
-  --docs-feature-border: rgba(125, 211, 252, 0.3);
-  --docs-feature-text: rgba(226, 232, 240, 0.92);
-  --docs-feature-icon-bg: rgba(37, 99, 235, 0.22);
-  --docs-feature-icon-text: #bfdbfe;
-  --docs-token-bg: rgba(37, 99, 235, 0.2);
-  --docs-token-text: #bfdbfe;
+  --docs-feature-border: rgba(251, 146, 60, 0.28);
+  --docs-feature-text: rgba(255, 237, 213, 0.92);
+  --docs-feature-icon-bg: rgba(251, 146, 60, 0.12);
+  --docs-feature-icon-text: rgba(255, 237, 213, 0.92);
+  --docs-token-bg: rgba(251, 146, 60, 0.16);
+  --docs-token-text: rgba(255, 237, 213, 0.94);
   --docs-pill-bg: rgba(79, 70, 229, 0.18);
   --docs-pill-border: rgba(129, 140, 248, 0.34);
   --docs-pill-text: rgba(224, 231, 255, 0.96);
@@ -1259,6 +1259,37 @@ body {
   overflow-x: auto;
   padding: 1rem;
   white-space: pre-wrap;
+}
+
+.docs-code-block-shell {
+  margin: 1rem 0;
+}
+
+.docs-code-block-header {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.docs-code-copy-button {
+  background: var(--docs-surface);
+  border: 1px solid var(--docs-border);
+  border-radius: 0.5rem;
+  color: var(--docs-text);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.45rem 0.7rem;
+}
+
+.docs-code-copy-button:hover {
+  border-color: var(--docs-accent);
+  color: var(--docs-accent);
 }
 
 .docs-feature-callout {

@@ -136,7 +136,7 @@ const importContactsCopy: Record<Locale, ImportContactsCopy> = {
         ],
         callout: (
           <>
-            Inbound template variables work only when the agent can retrieve contact data and <InlineDocsLink href={contactInboundsUrl}>Contact Inbounds</InlineDocsLink> has a contact whose phone number matches the caller.
+            <strong>Inbound contact lookup:</strong> inbound template variables work only when the agent can retrieve contact data and <InlineDocsLink href={contactInboundsUrl}>Contact Inbounds</InlineDocsLink> has a contact whose phone number matches the caller.
           </>
         ),
         orderedItems: [
@@ -271,7 +271,7 @@ const importContactsCopy: Record<Locale, ImportContactsCopy> = {
         ],
         callout: (
           <>
-            Le variabili inbound funzionano solo quando l'agente può recuperare i dati contatto e <InlineDocsLink href={contactInboundsUrl}>Contatti inbound</InlineDocsLink> contiene un contatto con numero di telefono uguale al chiamante.
+            <strong>Recupero contatto inbound:</strong> le variabili inbound funzionano solo quando l'agente può recuperare i dati contatto e <InlineDocsLink href={contactInboundsUrl}>Contatti inbound</InlineDocsLink> contiene un contatto con numero di telefono uguale al chiamante.
           </>
         ),
         orderedItems: [
@@ -383,7 +383,11 @@ export function LocalizedImportContactsSection({ sectionKey }: { sectionKey: Exc
       {section.paragraphs?.map((paragraph, index) => (
         <p key={`p-${index}`}>{paragraph}</p>
       ))}
-      {section.callout ? <div className="docs-feature-callout docs-feature-callout-warning">{section.callout}</div> : null}
+      {section.callout ? (
+        <div className="docs-feature-callout docs-feature-callout-warning">
+          <div className="docs-feature-callout-body">{section.callout}</div>
+        </div>
+      ) : null}
       {section.orderedItems ? (
         <ol>
           {section.orderedItems.map((item, index) => (

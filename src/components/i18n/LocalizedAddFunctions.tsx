@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { defaultLocale, type Locale } from "../../i18n/routing";
 import { useCurrentLocale } from "../../i18n/client-locale";
+import { localizeHref } from "../../i18n/docs-routes";
 
 type SectionCopy = {
   title: string;
@@ -27,6 +28,7 @@ type LinkCard = {
 type AddFunctionsCopy = {
   title: string;
   intro: ReactNode[];
+  setup: SectionCopy;
   preconfigured: SectionCopy;
   hangup: SectionCopy;
   transfer: SectionCopy;
@@ -34,6 +36,7 @@ type AddFunctionsCopy = {
   leadQualification: SectionCopy;
   decide: SectionCopy;
   apiBacked: SectionCopy;
+  customApi: SectionCopy;
   dynamicValues: SectionCopy;
   promptUsage: SectionCopy;
   bestPractices: SectionCopy;
@@ -44,6 +47,7 @@ type AddFunctionsCopy = {
 };
 
 type HeadingKey =
+  | "setup"
   | "preconfigured"
   | "hangup"
   | "transfer"
@@ -51,6 +55,7 @@ type HeadingKey =
   | "leadQualification"
   | "decide"
   | "apiBacked"
+  | "customApi"
   | "dynamicValues"
   | "promptUsage"
   | "bestPractices"
@@ -58,18 +63,68 @@ type HeadingKey =
   | "mistakes"
   | "nextSteps";
 
+const openAiPromptGuidanceUrl = "https://developers.openai.com/api/docs/guides/prompt-guidance";
+const openAiFunctionCallingUrl = "https://developers.openai.com/api/docs/guides/function-calling";
+
+function ExternalLinkIcon() {
+  return (
+    <svg aria-hidden="true" className="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M15 3h6v6" />
+      <path d="M10 14 21 3" />
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    </svg>
+  );
+}
+
+function ExternalDocsLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a className="docs-inline-link" href={href} target="_blank" rel="noreferrer">
+      <span>{children}</span>
+      <ExternalLinkIcon />
+    </a>
+  );
+}
+
+function InlineDocsLink({ href, children }: { href: string; children: ReactNode }) {
+  const locale = useCurrentLocale(defaultLocale);
+
+  return (
+    <Link className="docs-inline-link" href={localizeHref(href, locale)}>
+      <span>{children}</span>
+    </Link>
+  );
+}
+
 const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
   en: {
     title: "Configure Agent Functions",
     intro: [
-      "Functions give the agent controlled ways to act during the call.",
-      "For a first implementation, keep the function set small and directly tied to the workflow you are testing."
+      "Functions give the voice agent controlled ways to act during the call: transfer the call, save a callback, record structured data, or call an API.",
+      "The most important use case is connecting RocketAiFlow to the tools the company already uses. Through API-backed functions, the agent can update CRM records, check availability, create follow-ups, route requests, or use internal software automatically while following the rules you define."
     ],
+    setup: {
+      title: "Where functions are configured",
+      paragraphs: [
+        "Open the AI Voice Agent and use the Functions area to add preconfigured functions or create a custom API-backed function.",
+        "For each function, configure the name, description, endpoint behavior, parameters, required fields, enum values, and any dynamic values the function needs."
+      ],
+      items: [
+        "use preconfigured functions for call control and common workflow actions",
+        "use custom functions when the agent must call software used by the business",
+        "save the function, then mention the exact function name and trigger condition in the agent prompt"
+      ],
+      screenshots: [
+        {
+          src: "/screenshots/docs/function-setup.png",
+          alt: "RocketAiFlow agent Functions area showing function setup options for creating and configuring agent actions."
+        }
+      ]
+    },
     preconfigured: {
       title: "Preconfigured Function Examples",
       paragraphs: [
         "RocketAiFlow includes ready functions that can be used as a starting point instead of building every action from zero.",
-        "Use these examples first when they match the workflow. Create a custom endpoint only when the agent needs to call a business system through an API.",
+        "Use these examples first when they match the workflow. When the agent needs to call business systems through APIs, RocketAiFlow lets you create and call as many custom functions as the workflow requires.",
         <>For <code>hangup_call</code>, <code>transfer</code>, and <code>rescheduled_contact</code>, keep the preconfigured parameters exactly as they are. Do not delete, rename, or change the parameter structure. These parameters are already aligned with RocketAiFlow&apos;s internal APIs. Adapt descriptions and allowed values only where the function asks you to.</>
       ],
       items: [
@@ -93,8 +148,7 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         <><code>reason</code> description: explain what reason the agent should pass when closing the call</>,
         <><code>booking_completed</code>: use it when the main objective of the conversation has been completed</>,
         <><code>goodbye</code>: use it when the conversation has naturally ended and there is nothing else to say</>,
-        <><code>abandoned_call</code>: use it when the user stops participating or the call is no longer usable</>,
-        <><code>silence_timeout</code>: use it when the configured silence timeout is reached</>
+        <><code>abandoned_call</code>: use it when the user stops participating or the call is no longer usable</>
       ],
       screenshots: [
         {
@@ -107,18 +161,14 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
       title: "transfer",
       paragraphs: [
         "Use a transfer function when the agent should move the active call to another destination.",
-        "RocketAiFlow provides three preconfigured transfer functions. Each one automatically sets the internal API used to transfer the call. You do not need to configure the API manually.",
-        <>Choose the option that matches the workflow, then adapt only descriptions and allowed values. Do not delete, rename, or replace the provided <code>exten</code> parameter.</>,
-        <>You can also choose the transfer context used for the <code>exten</code>. If you do not select a context, RocketAiFlow uses the preconfigured default context <code>raf-internal</code>.</>
+        <>RocketAiFlow provides preconfigured transfer options that automatically use the internal transfer API. Choose the option that matches the workflow, then adapt only descriptions and allowed values. Do not delete, rename, or replace the provided <code>exten</code> parameter.</>,
+        <>If no custom transfer context is selected, RocketAiFlow uses the default context <code>raf-internal</code>. Keep <code>Priority</code> as <code>1</code> unless your telephony route requires another value.</>
       ],
       items: [
         <><code>transfer</code>: transfers the call to the phone number or extension provided in the <code>exten</code> parameter.</>,
-        <><code>transfer_call</code>: created by the <strong>Transfer To Extension</strong> preset. It transfers the call to the phone number or extension provided. Keep <code>exten</code> required and leave <code>Use enum</code> off, because the value is a phone number or extension. Example: if the user says "let me talk to a human", call this function with <code>exten</code> set to <code>600</code>.</>,
-        <><code>transfer_to_service</code>: created by the <strong>Transfer To Service</strong> preset. It transfers the call to the correct supported service. Keep <code>exten</code> required and keep <code>Use enum</code> enabled, because the value must be one of the supported services: <code>sales</code>, <code>support</code>, or <code>administration</code>. Do not invent other service values.</>,
-        <><strong>Transfer To Extension</strong>: ready setup for an extension or phone number. Leave the default mode for the first test. Switch to <code>Custom</code> only if you need to use a different transfer context. If no custom context is selected, RocketAiFlow uses <code>raf-internal</code>; keep <code>Priority</code> as <code>1</code> unless your route requires another value.</>,
-        <><strong>Transfer To Service</strong>: ready setup for a service/department transfer. Leave the default mode for the first test. Switch to <code>Custom</code> only if you need to use a different transfer context. If no custom context is selected, RocketAiFlow uses <code>raf-internal</code>; keep <code>Priority</code> as <code>1</code> unless your route requires another value.</>,
-        <><strong>Mode</strong>: choose <code>Custom</code> when you want to select a custom transfer context. Otherwise keep the default mode for the first test.</>,
-        <><strong>Priority</strong>: keep the default value for the first test unless your telephony route requires another priority.</>
+        <><code>transfer_call</code>: created by <strong>Transfer To Extension</strong>. Use it for a known extension or phone number. Keep <code>exten</code> required and leave <code>Use enum</code> off. Example: transfer to <code>600</code>.</>,
+        <><code>transfer_to_service</code>: created by <strong>Transfer To Service</strong>. Use it for a supported department. Keep <code>exten</code> required and keep <code>Use enum</code> enabled with supported values such as <code>sales</code>, <code>support</code>, and <code>administration</code>.</>,
+        <><strong>Mode</strong> and <strong>Priority</strong>: use <code>Custom</code> only when you need a different transfer context, and change priority only when your route requires it.</>
       ],
       screenshots: [
         {
@@ -158,20 +208,14 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
       paragraphs: [
         <>Use <code>save_lead_qualification</code> when the agent needs to collect structured information and save the qualification result for a lead.</>,
         <>Unlike call-control functions such as <code>hangup_call</code> or <code>transfer</code>, this function is meant to be adapted to the business goal. Keep only the parameters that are useful for your qualification flow and add new ones when the agent needs to collect more information.</>,
-        "You can start from a broad schema that includes identity fields, qualification outcome, interest level, budget, timeline, decision maker status, requested action, callback/demo dates, lead score, summary, notes, and raw interview data.",
-        "Do not keep the full schema by default. For each campaign or inbound flow, remove the parameters that do not support the business objective and keep only the fields you will actually review or send to another system.",
-        "For example, you may track:",
-        "Customize the function by removing parameters that do not matter and adding the fields required by your business process. Then update the function and parameter descriptions so the LLM knows exactly what to collect before saving the lead qualification."
+        <>In many workflows, <code>save_lead_qualification</code> can be called more than once during the same call. Use repeated calls to save partial information as the agent collects it, instead of waiting until the end and risking losing useful data.</>,
+        "Start from the example schema, then remove fields that do not support the campaign or inbound goal. Keep only the data you will review, report, or send to another system.",
+        "After changing the schema, update the function and parameter descriptions so the LLM knows exactly what to collect before each save."
       ],
       items: [
         "default example parameters: lead_name, phone, email, company_name, role, interested, qualification_status",
-        "extended optional parameters: interest_level, not_interested_reason, pain_points, current_solution, budget_level, timeline, decision_maker, requested_action, callback_at_utc, demo_requested, demo_at_utc, lead_score, ai_summary, important_notes, raw_interview_data",
-        "customer interest",
-        "budget range",
-        "company size",
-        "preferred follow-up channel",
-        "qualification outcome",
-        "notes collected during the call"
+        "progressive save pattern: call the function after important fields are collected, then call it again when new qualification data is available",
+        "useful fields: customer interest, budget range, company size, preferred follow-up channel, qualification outcome, and call notes"
       ],
       screenshots: [
         {
@@ -183,60 +227,98 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
     decide: {
       title: "How To Decide What Belongs In A Function",
       paragraphs: [
-        "Use a function when the agent needs to:",
-        "Functions are the practical bridge between the conversation and the rest of the business workflow. This is where RocketAiFlow becomes more than a static voice script.",
-        "Do not add functions for behavior that can be handled by prompt instructions alone."
+        "Use a function when the agent must perform a real action, not only speak.",
+        "Functions connect the conversation to the business workflow. With a function, the agent can transfer a call, save data, create a follow-up, or use business software through an API.",
+        "Do not create a function for rules that belong in the prompt. Voice tone, phrases to say, questions to ask, and conversational behavior should stay in the prompt.",
+        "Create a function when the agent must:"
       ],
       items: [
         "transfer the call",
         "end the call",
-        "request structured information from another system"
+        "save data collected during the conversation",
+        "retrieve information from another system",
+        "update a CRM or another business tool through an API",
+        "create a follow-up, callback, task, ticket, lead, or appointment"
       ]
     },
     apiBacked: {
-      title: "Functions can trigger API-backed actions",
+      title: "Functions can use business software through APIs",
       paragraphs: [
-        "Functions can support external actions such as:",
-        "The goal is not to add APIs everywhere. The goal is to add functions only where the workflow needs structured interaction with another system."
+        "This is the core value of functions: the agent is not limited to speaking. It can use APIs from the tools the company already works with and perform structured actions automatically.",
+        "Use API-backed functions only where the workflow needs a controlled external action. The agent decides when the function should run; RocketAiFlow sends the structured request to the configured endpoint."
       ],
       items: [
         "updating a CRM after lead qualification",
-        "checking availability before appointment booking",
-        "looking up account or contact details",
-        "sending a follow-up action after a call outcome is confirmed",
-        "routing the call based on an external rule or decision service"
+        "checking availability or looking up account details",
+        "creating a follow-up, ticket, task, opportunity, note, quote, or appointment",
+        "calling internal software that exposes a safe API endpoint"
+      ]
+    },
+    customApi: {
+      title: "Custom API functions",
+      paragraphs: [
+        "Use a custom API function when a preconfigured function is not enough and the agent must call a company tool, provider, or internal service.",
+        "RocketAiFlow can create custom functions for any workflow that exposes a reachable API endpoint. You can add multiple custom functions to the same agent when the workflow needs different business actions.",
+        "A custom function defines the API call: method, URL, headers, body or query values, LLM-generated parameters, contact-rendered values, response usage, and error behavior."
+      ],
+      items: [
+        "Method and URL: choose GET, POST, PUT, PATCH, or DELETE and use a fixed URL or template URL such as https://api.example.com/contacts/{t.externalId}/notes.",
+        "Headers and auth: add the authentication and content headers required by the API, such as Authorization or Content-Type.",
+        "LLM parameters: values the agent collects or decides during the call, such as location, callback_reason, interest_level, note, or appointment_date.",
+        "Contact/template parameters: values rendered from the active contact, such as {t.name}, {t.phone}, {t.email}, {t.externalId}, or custom contact data.",
+        "Required fields and enums: mark values as required when the API cannot run without them, and use enums when the API accepts only fixed options.",
+        "Response and errors: describe how the agent should use the API response and what fallback to use if the API is unavailable, rejects the request, or returns missing data."
+      ],
+      screenshots: [
+        {
+          src: "/screenshots/docs/functions-builder-custom-endpoint.png",
+          alt: "Custom endpoint function builder showing method, URL, headers, body, and parameter configuration."
+        },
+        {
+          src: "/screenshots/docs/functions-builder-weather-get.png",
+          alt: "Custom GET function example using a required location parameter and a template URL.",
+          caption: "GET example"
+        }
+      ],
+      callouts: [
+        <div className="docs-prompt-schema" key="custom-api-example">
+          <strong>Example custom API function</strong>
+          <span>Name: <span className="docs-callout-token">create_crm_followup</span></span>
+          <span>Method: <span className="docs-callout-token">POST</span></span>
+          <span>URL: <span className="docs-callout-token">https://crm.example.com/contacts/{"{t.externalId}"}/tasks</span></span>
+          <span>LLM parameters: follow-up reason, summary, priority, preferred date.</span>
+          <span>Contact/template values: contact id, name, phone, email, or campaign metadata.</span>
+          <span>Prompt rule: call this function only after the caller confirms they want a follow-up and the agent has collected the required fields.</span>
+        </div>
       ]
     },
     dynamicValues: {
       title: "Dynamic values belong in function inputs",
       paragraphs: [
-        "Function inputs do not have to stay static. They can receive context-specific values such as:",
-        "When contact data is available, you can use contact fields inside function descriptions and inside API URL templates. This lets the same function call the right endpoint or pass the right context without hardcoding values for every contact.",
+        "Function inputs do not have to stay static. They can combine values collected by the LLM with values rendered from the active contact or workflow context.",
+        "When contact data is available, use contact fields inside descriptions, API URL templates, body values, or query values. This lets one function work across different contacts without hardcoding contact-specific URLs.",
         <>Example: if a custom <code>PUT</code> function must update a CRM contact and the CRM id was imported in the contact data as <code>externalId</code>, use that value in the API URL, for example <code>https://crm.example.com/contacts/{"{t.externalId}"}</code>. RocketAiFlow renders the contact id from the active contact, while the LLM can generate only the fields that need to be updated, such as status, notes, or qualification result.</>,
-        "This is useful when one function should behave differently depending on who is calling, which campaign is running, or what the agent has already learned during the call."
+        "Use dynamic values when the same function should behave differently by contact, campaign, route, call metadata, or information collected during the conversation."
       ],
       items: [
-        "contact fields, for example name, phone, email, campaign id, or custom data keys",
+        "contact fields such as name, phone, email, campaign id, externalId, or custom data keys",
         "API URL templates that include contact values when the endpoint needs them",
-        "function descriptions that mention contact values so the LLM knows how to use available context",
-        "workflow variables",
-        "campaign identifiers",
-        "route or call metadata",
+        "workflow, campaign, route, or call metadata",
         "runtime values collected during the conversation"
       ]
     },
     promptUsage: {
       title: "Tell the LLM when to call each function",
       paragraphs: [
-        <>OpenAI describes function calling as a way for models to use external functionality and data when needed to follow instructions. See the <a href="https://developers.openai.com/api/docs/guides/function-calling" target="_blank" rel="noreferrer">OpenAI function calling guide</a>.</>,
-        <>For RocketAiFlow, do not rely only on the function name. Add a short <code>Functions</code> section in the agent prompt and map each business situation to the exact function the agent should call. This matches OpenAI&apos;s broader recommendation to structure prompts with clear sections and instructions. See <a href="https://developers.openai.com/api/docs/guides/prompt-guidance" target="_blank" rel="noreferrer">OpenAI prompt guidance</a>.</>,
+        <>For RocketAiFlow, do not rely only on the function name. Add a short <code>Functions</code> section in the agent prompt and map each business situation to the exact function the agent should call. See <InlineDocsLink href="/build/configure-agent-prompt">Configure Agent Prompt</InlineDocsLink>.</>,
+        <>OpenAI describes function calling as a way for models to use external functionality and data when needed to follow instructions. See the <ExternalDocsLink href={openAiFunctionCallingUrl}>OpenAI function calling guide</ExternalDocsLink> and <ExternalDocsLink href={openAiPromptGuidanceUrl}>OpenAI prompt guidance</ExternalDocsLink>.</>,
         "Write the prompt like an operating rule, not like a generic feature description."
       ],
       items: [
         <><code>transfer_to_service</code>: call it only when the caller asks for a supported department such as sales, support, or administration. Use the matching <code>exten</code> enum value.</>,
         <><code>transfer_call</code>: call it when the caller explicitly asks to speak with a human or when the workflow requires a handoff to a known extension.</>,
         <><code>rescheduled_contact</code>: call it only after the caller asks to be contacted later and the agent has collected or confirmed the callback date and time.</>,
-        <><code>save_lead_qualification</code>: call it after the agent has collected the required qualification fields. If a required field is missing, ask a short follow-up question before calling the function.</>,
+        <><code>save_lead_qualification</code>: call it when useful qualification fields have been collected. It can be called multiple times during the same call to save partial progress, then called again when more data is available. If a required field for that update is missing, ask a short follow-up question before calling the function.</>,
         <><code>hangup_call</code>: call it only after the conversation has reached a clear closing point, such as completed booking, goodbye, abandoned call, or silence timeout.</>,
         "For every function, include a negative rule: do not call the function if the required information is missing or the user has not expressed the relevant intent."
       ],
@@ -248,8 +330,9 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         </div>,
         <div className="docs-prompt-schema" key="example">
           <strong>Prompt example</strong>
-          <span>Use <span className="docs-callout-token">save_lead_qualification</span> only after you have collected the required qualification fields.</span>
-          <span>If a required field is missing, ask one short follow-up question before calling the function.</span>
+          <span>Use <span className="docs-callout-token">save_lead_qualification</span> after useful qualification fields are collected.</span>
+          <span>You may call it multiple times during the same call to save partial data, then update it again as the conversation continues.</span>
+          <span>If a required field for the current update is missing, ask one short follow-up question before calling the function.</span>
           <span>Do not call the function if the customer has not provided enough information to evaluate the lead.</span>
         </div>
       ]
@@ -290,17 +373,22 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         "the function names are clear",
         "required parameters are present",
         "transfer destinations are valid",
-        "the prompt tells the agent when to call each function"
+        "the prompt tells the agent when to call each function",
+        "the agent does not call a function when required information is missing",
+        "API-backed functions send the expected payload to the target business tool",
+        "rescheduled callbacks are saved in the intended campaign when campaign storage is required"
       ]
     },
     mistakes: {
       title: "Common Function Mistakes",
       paragraphs: [],
       items: [
-        "adding too many functions before the first test",
+        "adding too many unrelated functions to one agent",
         "using unclear parameter names",
         "forgetting to align the prompt with the available functions",
-        "testing transfers without a valid destination"
+        "testing transfers without a valid destination",
+        "using a business API without checking authentication, required fields, and error handling",
+        "putting too many unrelated business actions inside one function"
       ]
     },
     nextStepsTitle: "Next Steps",
@@ -313,7 +401,7 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
       {
         title: "AI Dialer Flows",
         href: "/run-workflows/ai-dialer-flows",
-        description: "Reuse the same agent in an outbound campaign after the first inbound behavior is stable."
+        description: "Reuse the same agent in an outbound campaign after the prompt and functions are aligned."
       },
       {
         title: "Dynamic Parameters",
@@ -325,14 +413,32 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
   it: {
     title: "Configura le functions dell'agente",
     intro: [
-      "Le functions danno all'agente modi controllati per agire durante la chiamata.",
-      "Per la prima implementazione, tieni il set di funzioni piccolo e collegato direttamente al workflow che stai testando."
+      "Le functions danno all'agente vocale modi controllati per agire durante la chiamata: trasferire la chiamata, salvare un callback, registrare dati strutturati o chiamare un'API.",
+      "Il punto più importante è collegare RocketAiFlow agli strumenti che l'azienda usa già. Tramite functions basate su API, l'agente può aggiornare CRM, controllare disponibilità, creare follow-up, instradare richieste o usare software interni automaticamente seguendo le regole che definisci."
     ],
+    setup: {
+      title: "Dove si configurano le functions",
+      paragraphs: [
+        "Apri l'AI Voice Agent e usa l'area Functions per aggiungere functions preconfigurate o creare una function custom basata su API.",
+        "Per ogni function configura nome, descrizione, comportamento endpoint, parametri, campi required, valori enum e valori dinamici necessari."
+      ],
+      items: [
+        "usa le functions preconfigurate per call control e azioni comuni del workflow",
+        "usa functions custom quando l'agente deve chiamare software usati dall'azienda",
+        "salva la function, poi cita nel prompt dell'agente il nome esatto della function e la condizione in cui deve essere chiamata"
+      ],
+      screenshots: [
+        {
+          src: "/screenshots/docs/function-setup.png",
+          alt: "Area Functions dell'agente RocketAiFlow con opzioni per creare e configurare azioni dell'agente."
+        }
+      ]
+    },
     preconfigured: {
       title: "Esempi di functions preconfigurate",
       paragraphs: [
         "RocketAiFlow include funzioni pronte che puoi usare come base di partenza invece di costruire ogni azione da zero.",
-        "Usa prima questi esempi quando corrispondono al workflow. Crea un endpoint custom solo quando l'agente deve chiamare un sistema aziendale tramite API.",
+        "Usa prima questi esempi quando corrispondono al workflow. Quando l'agente deve chiamare sistemi aziendali tramite API, RocketAiFlow ti permette di creare e chiamare tutte le functions custom necessarie al workflow.",
         <>Per <code>hangup_call</code>, <code>transfer</code> e <code>rescheduled_contact</code>, mantieni i parametri preconfigurati esattamente come sono. Non eliminarli, non rinominarli e non modificarne la struttura. Sono già allineati alle API interne di RocketAiFlow. Adatta solo descrizioni e valori consentiti dove la funzione lo richiede.</>
       ],
       items: [
@@ -356,8 +462,7 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         <>descrizione del parametro <code>reason</code>: spiega quale motivo l'agente deve passare quando chiude la chiamata</>,
         <><code>booking_completed</code>: usalo quando l'obiettivo principale della conversazione è stato completato</>,
         <><code>goodbye</code>: usalo quando la conversazione si è conclusa naturalmente e non c'è altro da dire</>,
-        <><code>abandoned_call</code>: usalo quando l'utente smette di partecipare o la chiamata non è più utilizzabile</>,
-        <><code>silence_timeout</code>: usalo quando viene raggiunto il timeout di silenzio configurato</>
+        <><code>abandoned_call</code>: usalo quando l'utente smette di partecipare o la chiamata non è più utilizzabile</>
       ],
       screenshots: [
         {
@@ -370,18 +475,14 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
       title: "transfer",
       paragraphs: [
         "Usa una funzione di transfer quando l'agente deve spostare la chiamata attiva verso un'altra destinazione.",
-        "RocketAiFlow include tre funzioni di transfer preconfigurate. Ognuna imposta automaticamente l'API interna usata per trasferire la chiamata. Non devi configurare manualmente l'API.",
-        <>Scegli l'opzione più adatta al workflow, poi modifica solo descrizioni e valori consentiti. Non eliminare, rinominare o sostituire il parametro <code>exten</code> fornito.</>,
-        <>Puoi anche scegliere il contesto di transfer usato per l'<code>exten</code>. Se non selezioni nessun contesto, RocketAiFlow usa il contesto preconfigurato di default <code>raf-internal</code>.</>
+        <>RocketAiFlow include opzioni di transfer preconfigurate che usano automaticamente l'API interna di transfer. Scegli l'opzione più adatta al workflow, poi modifica solo descrizioni e valori consentiti. Non eliminare, rinominare o sostituire il parametro <code>exten</code> fornito.</>,
+        <>Se non selezioni un contesto di transfer personalizzato, RocketAiFlow usa il contesto di default <code>raf-internal</code>. Mantieni <code>Priority</code> a <code>1</code>, salvo routing telefonico specifico.</>
       ],
       items: [
         <><code>transfer</code>: trasferisce la chiamata al numero di telefono o interno fornito nel parametro <code>exten</code>.</>,
-        <><code>transfer_call</code>: viene creata dal preset <strong>Transfer To Extension</strong>. Trasferisce la chiamata al numero di telefono o interno fornito. Mantieni <code>exten</code> required e lascia <code>Use enum</code> disattivato, perché il valore è un numero o interno. Esempio: se l'utente dice "fammi parlare con un operatore", chiama questa funzione con <code>exten</code> impostato a <code>600</code>.</>,
-        <><code>transfer_to_service</code>: viene creata dal preset <strong>Transfer To Service</strong>. Trasferisce la chiamata al servizio supportato corretto. Mantieni <code>exten</code> required e mantieni <code>Use enum</code> abilitato, perché il valore deve essere uno dei servizi supportati: <code>sales</code>, <code>support</code> o <code>administration</code>. Non inventare altri valori servizio.</>,
-        <><strong>Transfer To Extension</strong>: setup pronto per un interno o numero telefonico. Lascia il mode di default per il primo test. Cambia a <code>Custom</code> solo se vuoi usare un contesto di transfer diverso. Se non selezioni un contesto personalizzato, RocketAiFlow usa <code>raf-internal</code>; mantieni <code>Priority</code> a <code>1</code> salvo routing specifico.</>,
-        <><strong>Transfer To Service</strong>: setup pronto per trasferire verso un servizio o reparto. Lascia il mode di default per il primo test. Cambia a <code>Custom</code> solo se vuoi usare un contesto di transfer diverso. Se non selezioni un contesto personalizzato, RocketAiFlow usa <code>raf-internal</code>; mantieni <code>Priority</code> a <code>1</code> salvo routing specifico.</>,
-        <><strong>Mode</strong>: scegli <code>Custom</code> quando vuoi selezionare un contesto di transfer personalizzato. Altrimenti lascia il mode di default per il primo test.</>,
-        <><strong>Priority</strong>: lascia il valore di default per il primo test, salvo routing telefonico specifico.</>
+        <><code>transfer_call</code>: viene creata da <strong>Transfer To Extension</strong>. Usala per un interno o numero noto. Mantieni <code>exten</code> required e lascia <code>Use enum</code> disattivato. Esempio: transfer a <code>600</code>.</>,
+        <><code>transfer_to_service</code>: viene creata da <strong>Transfer To Service</strong>. Usala per un reparto supportato. Mantieni <code>exten</code> required e <code>Use enum</code> abilitato con valori come <code>sales</code>, <code>support</code> e <code>administration</code>.</>,
+        <><strong>Mode</strong> e <strong>Priority</strong>: usa <code>Custom</code> solo quando serve un contesto di transfer diverso, e cambia la priority solo quando la rotta lo richiede.</>
       ],
       screenshots: [
         {
@@ -421,20 +522,14 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
       paragraphs: [
         <>Usa <code>save_lead_qualification</code> quando l'agente deve raccogliere informazioni strutturate e salvare il risultato di qualificazione di un lead.</>,
         <>A differenza delle funzioni di call control come <code>hangup_call</code> o <code>transfer</code>, questa funzione è pensata per essere adattata all'obiettivo di business. Mantieni solo i parametri utili al tuo flusso di qualificazione e aggiungine di nuovi quando l'agente deve raccogliere più informazioni.</>,
-        "Puoi partire da uno schema ampio che include dati identificativi, outcome di qualificazione, livello di interesse, budget, timeline, ruolo decisionale, azione richiesta, date callback/demo, lead score, summary, note e raw interview data.",
-        "Non tenere tutto lo schema di default. Per ogni campagna o flusso inbound, rimuovi i parametri che non supportano l'obiettivo di business e mantieni solo i campi che andrai davvero a rivedere o inviare a un altro sistema.",
-        "Per esempio puoi tracciare:",
-        "Personalizza la funzione rimuovendo i parametri che non servono e aggiungendo i campi richiesti dal tuo processo di business. Poi aggiorna la descrizione della funzione e le descrizioni dei parametri, così l'LLM sa esattamente cosa raccogliere prima di salvare la qualificazione del lead."
+        <>In molti workflow, <code>save_lead_qualification</code> può essere chiamata più volte durante la stessa chiamata. Usa chiamate ripetute per salvare informazioni parziali man mano che l'agente le raccoglie, invece di aspettare solo la fine e rischiare di perdere dati utili.</>,
+        "Parti dallo schema di esempio, poi rimuovi i campi che non servono alla campagna o al flusso inbound. Mantieni solo i dati che andrai davvero a rivedere, riportare o inviare a un altro sistema.",
+        "Dopo aver cambiato lo schema, aggiorna descrizione della function e descrizioni dei parametri, così l'LLM sa cosa raccogliere prima di ogni salvataggio."
       ],
       items: [
         "parametri di esempio preimpostati: lead_name, phone, email, company_name, role, interested, qualification_status",
-        "parametri opzionali estesi: interest_level, not_interested_reason, pain_points, current_solution, budget_level, timeline, decision_maker, requested_action, callback_at_utc, demo_requested, demo_at_utc, lead_score, ai_summary, important_notes, raw_interview_data",
-        "interesse del customer",
-        "range di budget",
-        "dimensione azienda",
-        "canale di follow-up preferito",
-        "outcome di qualificazione",
-        "note raccolte durante la chiamata"
+        "salvataggio progressivo: chiama la function dopo aver raccolto campi importanti, poi richiamala quando sono disponibili nuovi dati di qualificazione",
+        "campi utili: interesse del customer, range di budget, dimensione azienda, canale di follow-up preferito, outcome di qualificazione e note chiamata"
       ],
       screenshots: [
         {
@@ -446,60 +541,98 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
     decide: {
       title: "Come decidere cosa mettere in una function",
       paragraphs: [
-        "Usa una function quando l'agente deve:",
-        "Le functions sono il ponte pratico tra conversazione e resto del workflow aziendale. Qui RocketAiFlow diventa più di uno script vocale statico.",
-        "Non aggiungere functions per comportamenti che possono essere gestiti solo con istruzioni nel prompt."
+        "Usa una function quando l'agente deve eseguire un'azione reale, non solo parlare.",
+        "Le functions collegano la conversazione al workflow aziendale. Con una function, l'agente può trasferire una chiamata, salvare dati, creare un follow-up o usare un software aziendale tramite API.",
+        "Non creare una function per regole che possono stare nel prompt. Tono di voce, frasi da dire, domande da fare e comportamento conversazionale vanno nel prompt.",
+        "Crea una function quando l'agente deve:"
       ],
       items: [
         "trasferire la chiamata",
         "chiudere la chiamata",
-        "richiedere informazioni strutturate da un altro sistema"
+        "salvare dati raccolti durante la conversazione",
+        "recuperare informazioni da un altro sistema",
+        "aggiornare un CRM o un altro software tramite API",
+        "creare follow-up, callback, task, ticket, lead o appuntamenti"
       ]
     },
     apiBacked: {
-      title: "Le functions possono attivare azioni via API",
+      title: "Le functions possono usare software aziendali tramite API",
       paragraphs: [
-        "Le functions possono supportare azioni esterne come:",
-        "L'obiettivo non è aggiungere API ovunque. L'obiettivo è aggiungere functions solo dove il workflow ha bisogno di interagire in modo strutturato con un altro sistema."
+        "Questo è il valore principale delle functions: l'agente non si limita a parlare. Può usare le API degli strumenti che l'azienda usa già ed eseguire automaticamente azioni strutturate.",
+        "Usa functions basate su API solo dove il workflow richiede un'azione esterna controllata. L'agente decide quando la function deve partire; RocketAiFlow invia la richiesta strutturata all'endpoint configurato."
       ],
       items: [
         "aggiornare un CRM dopo la qualificazione di un lead",
-        "controllare disponibilità prima di prenotare un appuntamento",
-        "recuperare dettagli account o contatto",
-        "creare un follow-up dopo la conferma dell'esito della chiamata",
-        "instradare la chiamata in base a una regola esterna o a un decision service"
+        "controllare disponibilità o recuperare dettagli account",
+        "creare follow-up, ticket, task, opportunità, note, preventivi o appuntamenti",
+        "chiamare software interni che espongono un endpoint API sicuro"
+      ]
+    },
+    customApi: {
+      title: "Functions custom con API",
+      paragraphs: [
+        "Usa una function custom con API quando una function preconfigurata non basta e l'agente deve chiamare un tool aziendale, un provider o un servizio interno.",
+        "RocketAiFlow può creare functions custom per qualunque workflow che espone un endpoint API raggiungibile. Puoi aggiungere più functions custom allo stesso agente quando il workflow richiede azioni aziendali diverse.",
+        "Una function custom definisce la chiamata API: metodo, URL, headers, body o valori query, parametri generati dall'LLM, valori renderizzati dal contatto, uso della risposta e gestione errori."
+      ],
+      items: [
+        "Method e URL: scegli GET, POST, PUT, PATCH o DELETE e usa una URL fissa o una template URL come https://api.example.com/contacts/{t.externalId}/notes.",
+        "Headers e auth: aggiungi autenticazione e header richiesti dall'API, come Authorization o Content-Type.",
+        "Parametri LLM: valori che l'agente raccoglie o decide durante la chiamata, come location, callback_reason, interest_level, note o appointment_date.",
+        "Parametri contact/template: valori renderizzati dal contatto attivo, come {t.name}, {t.phone}, {t.email}, {t.externalId} o dati custom del contatto.",
+        "Campi required ed enum: marca un valore come required quando l'API non può partire senza quel dato, e usa enum quando l'API accetta solo opzioni fisse.",
+        "Risposta ed errori: descrivi come l'agente deve usare la risposta API e quale fallback usare se l'API non è disponibile, rifiuta la richiesta o restituisce dati mancanti."
+      ],
+      screenshots: [
+        {
+          src: "/screenshots/docs/functions-builder-custom-endpoint.png",
+          alt: "Function builder per endpoint custom con metodo, URL, headers, body e configurazione parametri."
+        },
+        {
+          src: "/screenshots/docs/functions-builder-weather-get.png",
+          alt: "Esempio function custom GET con parametro location required e template URL.",
+          caption: "Esempio GET"
+        }
+      ],
+      callouts: [
+        <div className="docs-prompt-schema" key="custom-api-example">
+          <strong>Esempio function custom API</strong>
+          <span>Nome: <span className="docs-callout-token">create_crm_followup</span></span>
+          <span>Method: <span className="docs-callout-token">POST</span></span>
+          <span>URL: <span className="docs-callout-token">https://crm.example.com/contacts/{"{t.externalId}"}/tasks</span></span>
+          <span>Parametri LLM: motivo follow-up, summary, priorità, data preferita.</span>
+          <span>Valori contact/template: id contatto, nome, telefono, email o metadata campagna.</span>
+          <span>Regola prompt: chiama questa function solo dopo che il chiamante ha confermato di volere un follow-up e l'agente ha raccolto i campi required.</span>
+        </div>
       ]
     },
     dynamicValues: {
       title: "I valori dinamici appartengono agli input delle functions",
       paragraphs: [
-        "Gli input delle functions non devono restare statici. Possono ricevere valori specifici del contesto come:",
-        "Quando i dati del contatto sono disponibili, puoi usare i campi del contatto nelle descrizioni della funzione e nella composizione delle URL per chiamate API. Questo permette alla stessa function di chiamare l'endpoint corretto o passare il contesto giusto senza creare valori statici per ogni contatto.",
+        "Gli input delle functions non devono restare statici. Possono combinare valori raccolti dall'LLM con valori renderizzati dal contatto attivo o dal contesto del workflow.",
+        "Quando i dati del contatto sono disponibili, usa i campi del contatto in descrizioni, template URL, body o query. Così una stessa function funziona su contatti diversi senza hardcodare URL specifiche.",
         <>Esempio: se una function custom <code>PUT</code> deve aggiornare un contatto nel tuo CRM e l'id del CRM è stato caricato nei dati del contatto come <code>externalId</code>, puoi usare quel valore nella URL API, per esempio <code>https://crm.example.com/contacts/{"{t.externalId}"}</code>. RocketAiFlow renderizza l'id dal contatto attivo, mentre l'LLM genera solo i campi da aggiornare, come stato, note o risultato della qualificazione.</>,
-        "Questo è utile quando una stessa function deve comportarsi diversamente in base a chi chiama, quale campagna è in corso o cosa l'agente ha già raccolto durante la chiamata."
+        "Usa valori dinamici quando la stessa function deve comportarsi diversamente per contatto, campagna, route, metadata chiamata o informazioni raccolte durante la conversazione."
       ],
       items: [
-        "campi del contatto, ad esempio name, phone, email, campaign id o chiavi custom dentro data",
+        "campi del contatto come name, phone, email, campaign id, externalId o chiavi custom dentro data",
         "template URL API che includono valori del contatto quando l'endpoint ne ha bisogno",
-        "descrizioni funzione che citano valori del contatto così l'LLM sa usare il contesto disponibile",
-        "variabili del workflow",
-        "identificativi campagna",
-        "metadata di route o chiamata",
+        "metadata di workflow, campagna, route o chiamata",
         "valori raccolti durante la conversazione"
       ]
     },
     promptUsage: {
       title: "Spiega all'LLM quando chiamare ogni function",
       paragraphs: [
-        <>OpenAI descrive le function come strumenti che permettono al modello di usare funzionalità e dati esterni quando servono per seguire le istruzioni. Vedi la <a href="https://developers.openai.com/api/docs/guides/function-calling" target="_blank" rel="noreferrer">guida OpenAI sulle function calling</a>.</>,
-        <>In RocketAiFlow non basta dare un nome chiaro alla function. Nel prompt dell'agente aggiungi una breve sezione <code>Functions</code> e collega ogni situazione di business al nome esatto della function da chiamare. Questo segue anche la raccomandazione OpenAI di strutturare i prompt con sezioni e istruzioni chiare. Vedi la <a href="https://developers.openai.com/api/docs/guides/prompt-guidance" target="_blank" rel="noreferrer">prompt guidance di OpenAI</a>.</>,
+        <>In RocketAiFlow non basta dare un nome chiaro alla function. Nel prompt dell'agente aggiungi una breve sezione <code>Functions</code> e collega ogni situazione di business al nome esatto della function da chiamare. Vedi <InlineDocsLink href="/build/configure-agent-prompt">Configura il prompt</InlineDocsLink>.</>,
+        <>OpenAI descrive le function come strumenti che permettono al modello di usare funzionalità e dati esterni quando servono per seguire le istruzioni. Vedi la <ExternalDocsLink href={openAiFunctionCallingUrl}>guida OpenAI sulle function calling</ExternalDocsLink> e la <ExternalDocsLink href={openAiPromptGuidanceUrl}>prompt guidance di OpenAI</ExternalDocsLink>.</>,
         "Scrivi il prompt come una regola operativa, non come una descrizione generica della funzionalità."
       ],
       items: [
         <><code>transfer_to_service</code>: chiamala solo quando il chiamante chiede un reparto supportato, per esempio sales, support o administration. Usa il valore enum corretto in <code>exten</code>.</>,
         <><code>transfer_call</code>: chiamala quando il chiamante chiede esplicitamente di parlare con una persona o quando il workflow richiede un trasferimento a un interno noto.</>,
         <><code>rescheduled_contact</code>: chiamala solo dopo che il chiamante ha chiesto di essere ricontattato e l'agente ha raccolto o confermato data e ora del callback.</>,
-        <><code>save_lead_qualification</code>: chiamala dopo che l'agente ha raccolto i campi richiesti per la qualificazione. Se manca un campo required, fai prima una breve domanda di follow-up.</>,
+        <><code>save_lead_qualification</code>: chiamala quando sono stati raccolti campi utili per la qualificazione. Può essere chiamata più volte durante la stessa chiamata per salvare progressivamente i dati, poi richiamata quando sono disponibili nuove informazioni. Se manca un campo required per quell'aggiornamento, fai prima una breve domanda di follow-up.</>,
         <><code>hangup_call</code>: chiamala solo quando la conversazione ha raggiunto un punto di chiusura chiaro, per esempio prenotazione completata, saluto finale, chiamata abbandonata o silence timeout.</>,
         "Per ogni function, aggiungi anche una regola negativa: non chiamarla se mancano le informazioni richieste o se l'utente non ha espresso l'intenzione corretta."
       ],
@@ -511,8 +644,9 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         </div>,
         <div className="docs-prompt-schema" key="example">
           <strong>Esempio prompt</strong>
-          <span>Usa <span className="docs-callout-token">save_lead_qualification</span> solo dopo aver raccolto i campi richiesti per qualificare il lead.</span>
-          <span>Se manca un campo obbligatorio, fai prima una breve domanda di follow-up.</span>
+          <span>Usa <span className="docs-callout-token">save_lead_qualification</span> dopo aver raccolto campi utili per qualificare il lead.</span>
+          <span>Puoi chiamarla più volte durante la stessa chiamata per salvare dati parziali, poi aggiornarli mentre la conversazione prosegue.</span>
+          <span>Se manca un campo obbligatorio per l'aggiornamento corrente, fai prima una breve domanda di follow-up.</span>
           <span>Non chiamare la function se il cliente non ha dato abbastanza informazioni per valutare il lead.</span>
         </div>
       ]
@@ -553,17 +687,22 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
         "i nomi delle funzioni siano chiari",
         "i parametri required siano presenti",
         "le destinazioni di transfer siano valide",
-        "il prompt dica all'agente quando chiamare ogni funzione"
+        "il prompt dica all'agente quando chiamare ogni funzione",
+        "l'agente non chiami una function quando mancano informazioni required",
+        "le functions basate su API inviino il payload atteso allo strumento aziendale di destinazione",
+        "i callback rischedulati vengano salvati nella campagna prevista quando serve salvarli in campagna"
       ]
     },
     mistakes: {
       title: "Errori comuni sulle functions",
       paragraphs: [],
       items: [
-        "aggiungere troppe functions prima del primo test",
+        "aggiungere troppe functions non correlate nello stesso agente",
         "usare nomi parametro poco chiari",
         "non allineare il prompt alle funzioni disponibili",
-        "testare transfer senza una destinazione valida"
+        "testare transfer senza una destinazione valida",
+        "usare un'API aziendale senza controllare autenticazione, campi required e gestione errori",
+        "mettere troppe azioni di business non correlate dentro la stessa function"
       ]
     },
     nextStepsTitle: "Passaggi successivi",
@@ -576,7 +715,7 @@ const addFunctionsCopy: Record<Locale, AddFunctionsCopy> = {
       {
         title: "AI Dialer Flows",
         href: "/run-workflows/ai-dialer-flows",
-        description: "Riusa lo stesso agente in una campagna outbound dopo aver stabilizzato il comportamento inbound."
+        description: "Riusa lo stesso agente in una campagna outbound dopo aver allineato prompt e functions."
       },
       {
         title: "Parametri dinamici",
@@ -624,10 +763,12 @@ function Section({ section }: { section: SectionCopy }) {
 }
 
 function CardGrid({ cards }: { cards: LinkCard[] }) {
+  const locale = useCurrentLocale(defaultLocale);
+
   return (
     <div className="docs-home-card-grid docs-home-card-grid-2">
       {cards.map((card) => (
-        <Link key={card.href} className="docs-home-card" href={card.href}>
+        <Link key={card.href} className="docs-home-card" href={localizeHref(card.href, locale)}>
           <span className="docs-home-card-title">{card.title}</span>
           <span className="docs-home-card-description">{card.description}</span>
         </Link>
@@ -643,6 +784,7 @@ export function LocalizedAddFunctionsTitle() {
 export function LocalizedAddFunctionsHeading({ labelKey }: { labelKey: HeadingKey }) {
   const copy = useAddFunctionsCopy();
   const labels: Record<HeadingKey, string> = {
+    setup: copy.setup.title,
     preconfigured: copy.preconfigured.title,
     hangup: copy.hangup.title,
     transfer: copy.transfer.title,
@@ -650,6 +792,7 @@ export function LocalizedAddFunctionsHeading({ labelKey }: { labelKey: HeadingKe
     leadQualification: copy.leadQualification.title,
     decide: copy.decide.title,
     apiBacked: copy.apiBacked.title,
+    customApi: copy.customApi.title,
     dynamicValues: copy.dynamicValues.title,
     promptUsage: copy.promptUsage.title,
     bestPractices: copy.bestPractices.title,
@@ -676,6 +819,10 @@ export function LocalizedAddFunctionsPreconfiguredExamples() {
   return <Section section={useAddFunctionsCopy().preconfigured} />;
 }
 
+export function LocalizedAddFunctionsSetup() {
+  return <Section section={useAddFunctionsCopy().setup} />;
+}
+
 export function LocalizedAddFunctionsHangup() {
   return <Section section={useAddFunctionsCopy().hangup} />;
 }
@@ -698,6 +845,10 @@ export function LocalizedAddFunctionsDecide() {
 
 export function LocalizedAddFunctionsApiBacked() {
   return <Section section={useAddFunctionsCopy().apiBacked} />;
+}
+
+export function LocalizedAddFunctionsCustomApi() {
+  return <Section section={useAddFunctionsCopy().customApi} />;
 }
 
 export function LocalizedAddFunctionsDynamicValues() {

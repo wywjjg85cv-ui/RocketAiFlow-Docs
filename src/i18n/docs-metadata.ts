@@ -25,12 +25,12 @@ const italianMetadata: Record<string, DocsMetadata> = {
   "/build/configure-agent-prompt": {
     title: "Configura il prompt",
     description:
-      "Scrivi prompt operativi chiari per agenti voce RocketAiFlow, includendo ruolo, obiettivo, functions, contesto e checklist di test."
+      "Scrivi prompt operativi per agenti voce RocketAiFlow, includendo obiettivo chiamata, stile conversazionale, regole functions e variabili di contesto."
   },
   "/build/add-functions": {
     title: "Configura le functions",
     description:
-      "Configura le functions operative che l'agente RocketAiFlow può usare per transfer, hangup, qualificazione lead, scheduling e chiamate API."
+      "Configura le functions che l'agente RocketAiFlow usa per call control, raccolta dati strutturati, azioni via API e automazione dei software aziendali."
   },
   "/build/dynamic-parameters": {
     title: "Parametri dinamici",

@@ -138,7 +138,7 @@ const aiDialerFlowsCopy: Record<Locale, AiDialerFlowsCopy> = {
               },
               {
                 field: "Context",
-                value: "from-rocketaiflow",
+                value: "raf-pjsipProvider",
                 note: "Advanced setting that defines the telephony context where the answered customer call is connected."
               },
               {
@@ -337,7 +337,7 @@ const aiDialerFlowsCopy: Record<Locale, AiDialerFlowsCopy> = {
               },
               {
                 field: "Context",
-                value: "from-rocketaiflow",
+                value: "raf-pjsipProvider",
                 note: "Impostazione avanzata che definisce il contesto telefonico dove viene collegata la chiamata dopo la risposta del customer."
               },
               {

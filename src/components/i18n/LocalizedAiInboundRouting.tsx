@@ -36,6 +36,21 @@ function UiPill({ children }: { children: ReactNode }) {
   return <span className="docs-ui-pill">{children}</span>;
 }
 
+function NavigationPath({ steps }: { steps: string[] }) {
+  return (
+    <span className="docs-nav-path">
+      {steps.map((step, index) => (
+        <span className="docs-nav-path-group" key={`${step}-${index}`}>
+          <span className={`docs-nav-path-step${index === steps.length - 1 ? " docs-nav-path-step-action" : ""}`}>
+            {step}
+          </span>
+          {index < steps.length - 1 ? <span className="docs-nav-path-separator" aria-hidden="true">›</span> : null}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 const aiInboundRoutingCopy: Record<Locale, AiInboundRoutingCopy> = {
   en: {
     title: "AI Inbound Routing",
@@ -66,7 +81,7 @@ const aiInboundRoutingCopy: Record<Locale, AiInboundRoutingCopy> = {
       setup: {
         title: "Basic routing setup",
         paragraphs: [
-          <>Open <UiPill>Inbound Ai</UiPill>, then <UiPill>AI Inbound Routing</UiPill>, and create or edit the inbound route.</>
+          <>Path to follow: <NavigationPath steps={["Inbound Ai", "AI Inbound Routing"]} /> Then create or edit the inbound route.</>
         ],
         items: [
           <><strong>Trunk:</strong> select the inbound trunk or entry point that receives the call from the telephony provider or PBX.</>,
@@ -155,7 +170,7 @@ const aiInboundRoutingCopy: Record<Locale, AiInboundRoutingCopy> = {
       setup: {
         title: "Setup base della route",
         paragraphs: [
-          <>Apri <UiPill>Inbound Ai</UiPill>, poi <UiPill>AI Inbound Routing</UiPill>, e crea o modifica la route inbound.</>
+          <>Percorso da seguire: <NavigationPath steps={["Inbound Ai", "AI Inbound Routing"]} /> Poi crea o modifica la route inbound.</>
         ],
         items: [
           <><strong>Trunk:</strong> seleziona il trunk inbound o entry point che riceve la chiamata dal provider telefonico o dal PBX.</>,

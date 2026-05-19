@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Footer, Layout } from "nextra-theme-docs";
-import { Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import { DocsNavbar } from "../components/docs-navbar";
 import { LocalizedInternalLinks } from "../components/i18n/LocalizedInternalLinks";
+import { LocalizedSearch } from "../components/i18n/LocalizedSearch";
 import { LocalizedBackToTop, LocalizedTocTitle } from "../components/i18n/LocalizedToc";
 import { absoluteUrl, siteDescription, siteName, siteUrl } from "../config/site";
 import "nextra-theme-docs/style.css";
@@ -85,7 +85,7 @@ export default async function RootLayout({
         <Layout
           pageMap={pageMap}
           navbar={<DocsNavbar key="docs-navbar" />}
-          search={<Search />}
+          search={<LocalizedSearch />}
           footer={
             <Footer key="docs-footer">
               <div className="docs-footer">
