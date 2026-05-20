@@ -22,6 +22,7 @@ const navbarCopy = {
     integrations: "Integrations",
     changelog: "Changelog",
     contactSales: "Contact Sales",
+    mobileContactSales: "Contact",
     primary: "Primary"
   },
   it: {
@@ -29,9 +30,16 @@ const navbarCopy = {
     integrations: "Integrazioni",
     changelog: "Changelog",
     contactSales: "Contatta sales",
+    mobileContactSales: "Contatta",
     primary: "Navigazione principale"
   }
-} as const satisfies Record<Locale, Record<"documentation" | "integrations" | "changelog" | "contactSales" | "primary", string>>;
+} as const satisfies Record<
+  Locale,
+  Record<
+    "documentation" | "integrations" | "changelog" | "contactSales" | "mobileContactSales" | "primary",
+    string
+  >
+>;
 
 type DocsNavbarProps = {
   initialLocale?: Locale;
@@ -92,7 +100,6 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
               AiFlow
             </text>
           </svg>
-          <span className="docs-logo-badge">{copy.documentation}</span>
         </span>
       }
       logoLink={localizeHref(docsHomeHref, locale)}
@@ -126,6 +133,7 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
           className="docs-contact-sales-button"
           data-analytics-event="docs_contact_sales_click"
           data-analytics-label={copy.contactSales}
+          data-mobile-label={copy.mobileContactSales}
           href="https://rocketaiflow.com/it/contatti"
           rel="noopener noreferrer"
           target="_blank"

@@ -1,5 +1,10 @@
 :root {
   color-scheme: light;
+  --nextra-bg: 248,250,252;
+  --nextra-content-width: 90rem;
+  --nextra-primary-hue: 217deg;
+  --nextra-primary-saturation: 91%;
+  --nextra-primary-lightness: 60%;
   --docs-accent: #2563eb;
   --docs-accent-strong: #1d4ed8;
   --docs-accent-hover: #1d4ed8;
@@ -66,6 +71,10 @@
 
 .dark {
   color-scheme: dark;
+  --nextra-bg: 5,8,22;
+  --nextra-primary-hue: 199deg;
+  --nextra-primary-saturation: 89%;
+  --nextra-primary-lightness: 68%;
   --docs-accent: #7dd3fc;
   --docs-accent-strong: #2563eb;
   --docs-accent-hover: #93c5fd;
@@ -142,6 +151,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
+  min-width: 0;
 }
 
 .docs-brand-logo {
@@ -149,20 +159,8 @@ body {
   display: block;
   flex: 0 0 auto;
   height: auto;
+  max-width: 100%;
   width: 9.6rem;
-}
-
-.docs-logo-badge {
-  border: 1px solid var(--docs-border-accent);
-  border-radius: 999px;
-  color: var(--docs-text);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  padding: 0.48rem 0.72rem;
-  text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .docs-topnav {
@@ -1074,6 +1072,32 @@ body {
 @media (max-width: 900px) {
   .docs-topnav {
     display: none;
+  }
+
+  .docs-navbar-actions {
+    gap: 0.35rem;
+  }
+
+  .docs-brand-logo {
+    width: clamp(9.6rem, 50vw, 11.2rem);
+  }
+
+  .docs-contact-sales-button {
+    align-items: center;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 0;
+    height: 2.25rem;
+    justify-content: center;
+    min-width: 4.2rem;
+    padding: 0 0.58rem;
+  }
+
+  .docs-contact-sales-button::after {
+    content: attr(data-mobile-label);
+    font-size: 0.76rem;
+    font-weight: 800;
+    line-height: 1;
   }
 
   .docs-hero-shots-grid,
