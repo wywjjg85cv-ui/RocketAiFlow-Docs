@@ -22,7 +22,7 @@ const navbarCopy = {
     integrations: "Integrations",
     changelog: "Changelog",
     contactSales: "Contact Sales",
-    mobileContactSales: "Contact",
+    mobileContactSales: "Contatta",
     primary: "Primary"
   },
   it: {

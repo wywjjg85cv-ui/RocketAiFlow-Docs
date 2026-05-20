@@ -160,7 +160,7 @@ body {
   flex: 0 0 auto;
   height: auto;
   max-width: 100%;
-  width: 9.6rem;
+  width: 12rem;
 }
 
 .docs-topnav {
@@ -1079,7 +1079,7 @@ body {
   }
 
   .docs-brand-logo {
-    width: clamp(9.6rem, 50vw, 11.2rem);
+    width: clamp(10.1rem, 53vw, 11.8rem);
   }
 
   .docs-contact-sales-button {
