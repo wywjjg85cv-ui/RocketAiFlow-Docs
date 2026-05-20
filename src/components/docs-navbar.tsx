@@ -12,32 +12,26 @@ const docsHomeHref = "/get-started/introduction";
 
 const navItems = [
   { href: docsHomeHref, labelKey: "documentation" },
-  { href: "/reference/api-reference", labelKey: "apiReference" },
   { href: "/integrations", labelKey: "integrations" },
-  { href: "/legal", labelKey: "legal" },
   { href: "/reference/changelog", labelKey: "changelog" }
 ] as const;
 
 const navbarCopy = {
   en: {
     documentation: "Documentation",
-    apiReference: "API Reference",
     integrations: "Integrations",
-    legal: "Legal",
     changelog: "Changelog",
     contactSales: "Contact Sales",
     primary: "Primary"
   },
   it: {
     documentation: "Documentazione",
-    apiReference: "Riferimento API",
     integrations: "Integrazioni",
-    legal: "Legal",
     changelog: "Changelog",
     contactSales: "Contatta sales",
     primary: "Navigazione principale"
   }
-} as const satisfies Record<Locale, Record<"documentation" | "apiReference" | "integrations" | "legal" | "changelog" | "contactSales" | "primary", string>>;
+} as const satisfies Record<Locale, Record<"documentation" | "integrations" | "changelog" | "contactSales" | "primary", string>>;
 
 type DocsNavbarProps = {
   initialLocale?: Locale;

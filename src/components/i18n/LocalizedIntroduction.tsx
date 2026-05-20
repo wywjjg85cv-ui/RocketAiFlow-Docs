@@ -87,7 +87,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       "operators need dashboards, call records, logs, traces, and timing metrics to investigate live workflows"
     ],
     platformFitNote:
-      "If the goal is only a hosted voice bot with bundled phone numbers and minimal infrastructure ownership, a managed SaaS may be faster to start. RocketAiFlow makes more sense when the voice workflow must fit the customer's telephony, data, provider, and monitoring model.",
+      "RocketAiFlow is best suited when the voice workflow must fit the customer's real telephony environment, data model, provider setup, API actions, and monitoring requirements.",
     operatingPathTitle: "Recommended documentation path",
     operatingPathIntro: "Use this order to move from the first test to a monitored workflow:",
     operatingPath: [
@@ -315,7 +315,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       "gli operatori hanno bisogno di dashboard, call record, log, trace e metriche di timing per investigare workflow live"
     ],
     platformFitNote:
-      "Se l'obiettivo è solo un voice bot hosted con numeri telefonici inclusi e minima ownership infrastrutturale, un SaaS gestito può essere più rapido per iniziare. RocketAiFlow ha più senso quando il workflow vocale deve adattarsi al modello telefonico, dati, provider e monitoring del cliente.",
+      "RocketAiFlow è adatto quando il workflow vocale deve integrarsi con l'ambiente telefonico reale del cliente, il suo modello dati, i provider configurati, le azioni API e le esigenze di monitoring.",
     operatingPathTitle: "Percorso consigliato nella documentazione",
     operatingPathIntro: "Segui questo ordine per passare dal primo test a un workflow configurato e monitorato:",
     operatingPath: [

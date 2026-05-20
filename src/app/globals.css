@@ -794,6 +794,16 @@ body {
   width: 100%;
 }
 
+.docs-screenshot-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1.25rem 0 1.75rem;
+}
+
+.docs-screenshot-grid .docs-screenshot {
+  margin: 0;
+}
+
 .docs-screenshot-horizontal-split-grid {
   display: grid;
   gap: 1rem;

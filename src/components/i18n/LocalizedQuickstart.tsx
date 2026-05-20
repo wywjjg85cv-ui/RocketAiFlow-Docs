@@ -15,6 +15,7 @@ type LinkCard = {
 type ImageCopy = {
   src: string;
   alt: string;
+  caption?: ReactNode;
   size?: "quarter" | "half";
   variant?: "campaignSplit";
 };
@@ -25,6 +26,7 @@ type StepCopy = {
   secondaryItems?: ReactNode[];
   orderedItems?: ReactNode[];
   image?: ImageCopy;
+  imageGrid?: ImageCopy[];
   images?: ImageCopy[];
   preListParagraphCount?: number;
   callout?: ReactNode;
@@ -59,6 +61,10 @@ const deepgramUrl = "https://deepgram.com/";
 
 const screenshotPaths = {
   trunk: "/screenshots/docs/trunk-configuration.png",
+  trunkQuickstartConfiguration: "/screenshots/docs/trunk-quickstart-configuration.png",
+  trunkQuickstartRegistration: "/screenshots/docs/trunk-quickstart-registration.png",
+  trunkQuickstartAuth: "/screenshots/docs/trunk-quickstart-auth.png",
+  trunkQuickstartStatus: "/screenshots/docs/trunk-quickstart-status.png",
   agent: "/screenshots/docs/agent-creation-form.png",
   prompt: "/screenshots/docs/prompt-configuration.png",
   functions: "/screenshots/docs/function-setup.png",
@@ -155,63 +161,61 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       paragraphs: [<>Configure the shared parts once: trunk, agent, prompt, optional functions, and a direct Phone test. After that, continue with <UiPill>AI Inbound Routing</UiPill> for inbound or <UiPill>Dialer Campaigns</UiPill> for outbound.</>]
     },
     trunk: {
-      preListParagraphCount: 2,
-      items: [
-        <><strong>trunk enabled</strong> — activate the trunk so it is available for routing and campaigns</>,
-        <><strong>registration</strong> — enable registration so the trunk can receive inbound calls</>,
-        <><strong>registration server URI</strong> — the SIP server address from your provider</>,
-        <><strong>auth username and password</strong> — the credentials used to register with the provider</>
-      ],
       paragraphs: [
-        "Inbound routing and outbound campaigns depend on a configured trunk. Before proceeding, create and enable a trunk with the credentials provided by your SIP provider.",
-        "At minimum, configure:",
-        <>After entering the correct settings, open the <strong>Trunk status</strong> section and check that the trunk shows <code>Registered</code> and <code>Not in use</code>. This means the trunk is ready.</>
+        "Inbound routing and outbound campaigns depend on a configured trunk. For a quick setup, focus on the parts that make the trunk usable: Trunk Configuration, Registration, Auth, and Trunk Status.",
+        "Follow the screens in this order:"
       ],
-      image: {
-        src: screenshotPaths.trunk,
-        alt: "Trunk status check screen showing Registered and Not in use."
-      }
+      imageGrid: [
+        {
+          src: screenshotPaths.trunkQuickstartConfiguration,
+          alt: "Trunk Configuration screen showing trunk enabled, trunk name, server URI, and shared user.",
+          caption: <><strong>Trunk Configuration.</strong> Enable the trunk, then set the trunk name, server URI, and shared user supplied by your SIP provider.</>
+        },
+        {
+          src: screenshotPaths.trunkQuickstartRegistration,
+          alt: "Registration screen showing registration enabled, server URI, client URI, contact user, retry intervals, expiration, and line setting.",
+          caption: <><strong>Registration.</strong> Enable registration when the trunk must receive inbound calls. Confirm server URI, client URI, contact user, retry intervals, expiration, and line settings.</>
+        },
+        {
+          src: screenshotPaths.trunkQuickstartAuth,
+          alt: "Auth screen showing userpass authentication with username and password fields.",
+          caption: <><strong>Auth.</strong> Keep auth type on <code>userpass</code>, then enter the username and password used to register with the provider.</>
+        },
+        {
+          src: screenshotPaths.trunkQuickstartStatus,
+          alt: "Trunk Status screen showing registration Registered and endpoint Not in use.",
+          caption: <><strong>Trunk Status.</strong> Check that Registration and Endpoint are OK.</>
+        }
+      ]
     },
     agent: {
-      items: ["lead qualification", "appointment intake", "routing to a human team"],
       paragraphs: [
-        "Create one focused agent with a narrow business goal such as:",
-        <>For advanced voice, LLM, transcription, functions, templates, and agent settings, use <InternalInlineLink href="/build/create-your-first-ai-voice-agent">Create Your First AI Voice Agent</InternalInlineLink>. For the quickstart, the basic setup is ready to test.</>,
-        <>RocketAiFlow includes two preconfigured examples, <code>Lead Qualification IT</code> and <code>Lead Qualification EN</code>. They are already configured so you can test a complete lead qualification flow quickly. Treat them as starting examples, not production-ready agents: validate the behavior with the customer and adapt it to the business context before going live. If you choose one of these examples, you can go directly to <InternalInlineLink href="#test-the-agent-in-phone">test it with Phone</InternalInlineLink>.</>,
-        <>Use a simple example such as <code>lead qualification</code> and keep the scope limited to one workflow.</>
+        "Create one agent with a clear goal, such as lead qualification, appointment intake, or routing to a human team.",
+        "To quickly test voices and languages, choose the language and voice provider, then write a short greeting message. The greeting is the first message the agent says during the call.",
+        <>For voice, LLM, transcription, functions, templates, and advanced Agent settings, see <InternalInlineLink href="/build/create-your-first-ai-voice-agent">Create Your First AI Voice Agent</InternalInlineLink>.</>,
+        <>RocketAiFlow includes two preconfigured examples, <code>Lead Qualification IT</code> and <code>Lead Qualification EN</code>. Use them as starting examples, not production-ready agents. If you want to test a ready-made agent immediately, go to <InternalInlineLink href="#test-the-agent-in-phone">Phone</InternalInlineLink>.</>
       ],
       image: {
         src: screenshotPaths.agent,
-        alt: "Agent configuration screen showing voice settings, a default contact template, and prompt variables."
+        alt: "Voice configuration screen showing name, Deepgram API key, language, voice provider, voice model, greeting, and contact template variables.",
+        caption: <><strong>Voice.</strong> Set the agent name, language, voice provider, voice model, and greeting before the first test.</>
       }
     },
     prompt: {
-      preListParagraphCount: 2,
-      items: ["role", "tone", "information to collect", "when to transfer or end the call"],
       paragraphs: [
-        "If you use a preconfigured agent, you can start from the prompt already included.",
-        "If you create an agent from scratch, keep the prompt simple and define only:",
-        <>For more complete examples, see <InternalInlineLink href="/build/configure-agent-prompt">Configure Agent Prompt</InternalInlineLink>.</>
+        "For the quickstart, the LLM prompt can stay minimal. Explain who the agent is, what it should do, and when it should stop or transfer the call.",
+        <>If you use a preconfigured agent, the prompt is already included. For a detailed prompt structure, see <InternalInlineLink href="/build/configure-agent-prompt">Configure Agent Prompt</InternalInlineLink>.</>
       ],
       image: {
         src: screenshotPaths.prompt,
-        alt: "LLM configuration screen showing OpenAI, GPT-5.5, prompt instructions, and contact template variables."
+        alt: "LLM configuration screen showing provider, temperature, model, prompt instructions, and contact template variables.",
+        caption: <><strong>LLM.</strong> Choose provider and model, then add a minimal prompt to start interacting with the agent.</>
       }
     },
     functions: {
-      preListParagraphCount: 2,
-      items: [
-        <><code>transfer_call</code> transfers the caller to a human team or another destination</>,
-        <><code>rescheduled_contact</code> saves that the contact should be called again later</>,
-        <><code>save_lead_qualification</code> stores the qualification result and the useful details collected during the call</>
-      ],
       paragraphs: [
-        "Functions are optional in the quickstart. Add one only when the first test must do something beyond the conversation.",
-        "Start with a small set:"
-      ],
-      callout: "For the first validation, it is acceptable to skip functions and test only the conversation.",
-      secondaryItems: [
-        "Use custom API functions later when the workflow must update a CRM, calendar, helpdesk, database, or another internal system."
+        "Optional. Use functions only when the agent must perform an action: transfer a call, reschedule a contact, save lead data, or call an external API.",
+        <>For this quickstart, you can skip them. To configure actions properly, see <InternalInlineLink href="/build/add-functions">Add Functions</InternalInlineLink>.</>
       ],
       image: {
         src: screenshotPaths.functions,
@@ -355,8 +359,9 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     outboundDashboard: {
       paragraphs: [
         "Use the Dashboard section to monitor campaign pace, active calls, call limits, dialing rate, and call outcomes in real time.",
-        <>In <strong>Real-Time Agents & Trunks</strong>, check the trunk state: <code>Not In Use</code> means the trunk is available, while <code>In Use</code> means calls are running through it.</>,
-        "There is also a performance view for analyzing calls over a selected time range. This is useful after the first tests and will be covered in another section."
+        <>In <strong>Real-Time Agents & Trunks</strong>, check the trunk state: <UiPill>Not In Use</UiPill> means the trunk is available, while <UiPill>In Use</UiPill> means calls are running through it.</>,
+        "There is also a performance view for analyzing calls over a selected time range.",
+        <>All Dialer dashboard panels are described in <InternalInlineLink href="/monitoring/dialer-dashboard-panels">Dialer Dashboard Panels</InternalInlineLink>.</>
       ],
       image: {
         src: screenshotPaths.dashboard,
@@ -390,7 +395,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
         </>,
         "check the number of generated calls and active calls",
         <>
-          check <strong>Real-Time Agents & Trunks</strong>: the trunk is <code>Not In Use</code> when available and becomes <code>In Use</code> while calls are running
+          check <strong>Real-Time Agents & Trunks</strong>: the trunk is <UiPill>Not In Use</UiPill> when available and becomes <UiPill>In Use</UiPill> while calls are running
           <ProductScreenshot
             src={screenshotPaths.agentsTrunks}
             alt="Real-Time Agents and Trunks dashboard showing endpoint states, Not In Use, and In Use timeline."
@@ -448,63 +453,61 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
       paragraphs: [<>Configura una sola volta le parti comuni: trunk, agente, prompt, funzioni opzionali e test diretto da Phone. Poi continua con <UiPill>AI Inbound Routing</UiPill> per l'inbound oppure con <UiPill>Dialer Campaigns</UiPill> per l'outbound.</>]
     },
     trunk: {
-      preListParagraphCount: 2,
       paragraphs: [
-        "Inbound routing e campagne outbound dipendono da un trunk configurato. Prima di procedere, crea e abilita un trunk con le credenziali fornite dal tuo provider SIP.",
-        "Al minimo, configura:",
-        <>Dopo aver inserito le configurazioni corrette, apri la sezione <strong>Stato del trunk</strong> e controlla che il trunk mostri <code>Registered</code> e <code>Not in use</code>. Questo significa che il trunk è pronto.</>
+        "Inbound routing e campagne outbound dipendono da un trunk configurato. Per prepararlo velocemente, concentrati sulle parti che rendono il trunk utilizzabile: Trunk Configuration, Registration, Auth e Stato del trunk.",
+        "Segui le schermate in questo ordine:"
       ],
-      items: [
-        <><strong>trunk enabled</strong> — attiva il trunk così può essere usato da routing e campagne</>,
-        <><strong>registration</strong> — abilita la registration così il trunk può ricevere chiamate inbound</>,
-        <><strong>registration server URI</strong> — indirizzo del server SIP fornito dal provider</>,
-        <><strong>auth username and password</strong> — credenziali usate per registrarsi al provider</>
-      ],
-      image: {
-        src: screenshotPaths.trunk,
-        alt: "Schermata Stato del trunk con Registered e Not in use."
-      }
+      imageGrid: [
+        {
+          src: screenshotPaths.trunkQuickstartConfiguration,
+          alt: "Schermata Trunk Configuration con trunk enabled, trunk name, server URI e shared user.",
+          caption: <><strong>Trunk Configuration.</strong> Abilita il trunk, poi inserisci trunk name, server URI e shared user forniti dal provider SIP.</>
+        },
+        {
+          src: screenshotPaths.trunkQuickstartRegistration,
+          alt: "Schermata Registration con registrazione abilitata, server URI, client URI, contact user, retry interval, expiration e line.",
+          caption: <><strong>Registration.</strong> Abilitala quando il trunk deve ricevere chiamate inbound. Verifica server URI, client URI, contact user, retry interval, expiration e line.</>
+        },
+        {
+          src: screenshotPaths.trunkQuickstartAuth,
+          alt: "Schermata Auth con autenticazione userpass, username e password.",
+          caption: <><strong>Auth.</strong> Lascia auth type su <code>userpass</code>, poi inserisci username e password usati per registrarsi al provider.</>
+        },
+        {
+          src: screenshotPaths.trunkQuickstartStatus,
+          alt: "Schermata Stato del trunk con registration Registered ed endpoint Not in use.",
+          caption: <><strong>Stato del trunk.</strong> Controlla che Registration ed Endpoint siano OK.</>
+        }
+      ]
     },
     agent: {
       paragraphs: [
-        "Crea un agente focalizzato con un obiettivo di business ristretto, ad esempio:",
-        <>Per voice, LLM, transcription, functions, template e Agent settings avanzati, usa <InternalInlineLink href="/build/create-your-first-ai-voice-agent">Crea il primo AI Voice Agent</InternalInlineLink>. Per il quickstart, la configurazione base è pronta per essere testata.</>,
-        <>RocketAiFlow include due esempi preconfigurati, <code>Lead Qualification IT</code> e <code>Lead Qualification EN</code>. Sono già configurati e puoi provarli subito come esempi di qualificazione lead. Considerali esempi di partenza, non agenti pronti per la produzione: prima della messa in produzione, valida il comportamento con il cliente e adattali al contesto del suo business. Se scegli uno di questi esempi, puoi passare subito a <InternalInlineLink href="#test-the-agent-in-phone">provarlo con Phone</InternalInlineLink>.</>,
-        <>Usa un esempio semplice come <code>lead qualification</code> e limita l'ambito a un solo workflow.</>
+        "Crea un agente con un obiettivo chiaro, ad esempio qualificazione lead, raccolta appuntamenti o instradamento verso un team umano.",
+        "Per provare velocemente voci e lingue, scegli lingua e voice provider, poi scrivi un messaggio breve nel greeting. Il greeting è il primo messaggio che l'agente dice durante la chiamata.",
+        <>Per voice, LLM, transcription, functions, template e Agent settings avanzati, vedi <InternalInlineLink href="/build/create-your-first-ai-voice-agent">Crea il primo AI Voice Agent</InternalInlineLink>.</>,
+        <>RocketAiFlow include due esempi preconfigurati, <code>Lead Qualification IT</code> e <code>Lead Qualification EN</code>. Usali come esempi di partenza, non come agenti pronti per la produzione. Se vuoi testare subito un agente già pronto, vai a <InternalInlineLink href="#test-the-agent-in-phone">Phone</InternalInlineLink>.</>
       ],
-      items: ["qualificazione lead", "raccolta appuntamenti", "instradamento verso un team umano"],
       image: {
         src: screenshotPaths.agent,
-        alt: "Schermata di configurazione agente con impostazioni voce, template contatto di default e variabili nel prompt."
+        alt: "Schermata Voice con nome agente, API key Deepgram, lingua, voice provider, modello voce, greeting e variabili template contatto.",
+        caption: <><strong>Voice.</strong> Imposta nome agente, lingua, voice provider, modello voce e greeting prima del primo test.</>
       }
     },
     prompt: {
-      preListParagraphCount: 2,
       paragraphs: [
-        "Se usi un agente preconfigurato, puoi partire dal prompt già incluso.",
-        "Se invece crei un agente da zero, mantieni il prompt semplice e definisci solo:",
-        <>Per esempi più completi, vedi <InternalInlineLink href="/build/configure-agent-prompt">Configura il prompt</InternalInlineLink>.</>
+        "Per il quickstart il prompt LLM può restare minimo. Spiega chi è l'agente, cosa deve fare e quando deve fermarsi o trasferire la chiamata.",
+        <>Se usi un agente preconfigurato, il prompt è già incluso. Per una struttura completa del prompt, vedi <InternalInlineLink href="/build/configure-agent-prompt">Configura il prompt</InternalInlineLink>.</>
       ],
-      items: ["ruolo", "tono", "informazioni da raccogliere", "quando trasferire o terminare la chiamata"],
       image: {
         src: screenshotPaths.prompt,
-        alt: "Schermata di configurazione LLM con OpenAI, GPT-5.5, istruzioni del prompt e variabili del template contatto."
+        alt: "Schermata LLM con provider, temperature, modello, prompt e variabili del template contatto.",
+        caption: <><strong>LLM.</strong> Scegli provider e modello, poi inserisci un prompt minimo per iniziare a interagire con l'agente.</>
       }
     },
     functions: {
-      preListParagraphCount: 2,
       paragraphs: [
-        "Le funzioni sono opzionali nel quickstart. Aggiungine una solo quando il primo test deve fare qualcosa oltre alla conversazione.",
-        "Parti da un set piccolo:"
-      ],
-      callout: "Per la prima validazione puoi anche saltare le funzioni e testare solo la conversazione.",
-      secondaryItems: [
-        "Usa funzioni API custom più avanti, quando il workflow deve aggiornare un CRM, calendario, helpdesk, database o sistema interno."
-      ],
-      items: [
-        <><code>transfer_call</code> trasferisce la chiamata a un team umano o a un'altra destinazione</>,
-        <><code>rescheduled_contact</code> salva che il contatto deve essere richiamato più avanti</>,
-        <><code>save_lead_qualification</code> salva l'esito della qualificazione e i dati utili raccolti durante la chiamata</>
+        "Opzionale. Usa le functions solo quando l'agente deve eseguire un'azione: transfer, reschedule, salvataggio dati o chiamata a una API esterna.",
+        <>Nel quickstart puoi saltarle. Per configurarle correttamente, vedi <InternalInlineLink href="/build/add-functions">Configura le functions</InternalInlineLink>.</>
       ],
       image: {
         src: screenshotPaths.functions,
@@ -638,7 +641,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     },
     outboundReview: {
       paragraphs: [
-        "Dopo la chiamata di test, apri il Call Record e controlla outcome, transcript e timing."
+        "Dopo la chiamata di test, apri il registro della chiamata e controlla l'esito, la trascrizione e i tempi."
       ],
       image: {
         src: screenshotPaths.recordingTranscript,
@@ -648,8 +651,9 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
     outboundDashboard: {
       paragraphs: [
         "Usa la sezione Dashboard per monitorare in tempo reale il ritmo delle campagne, le chiamate attive, i limiti, il dialing rate e tutti gli esiti delle chiamate.",
-        <>In <strong>Real-Time Agents & Trunks</strong>, controlla lo stato del trunk: <code>Not In Use</code> significa che il trunk è disponibile, mentre <code>In Use</code> significa che le chiamate stanno passando da quel trunk.</>,
-        "C'è anche una vista performance per analizzare le chiamate in un time range selezionato. Serve dopo i primi test e verrà approfondita in un'altra sezione."
+        <>In <strong>Real-Time Agents & Trunks</strong>, controlla lo stato del trunk: <UiPill>Not In Use</UiPill> significa che il trunk è disponibile, mentre <UiPill>In Use</UiPill> significa che le chiamate stanno passando da quel trunk.</>,
+        "C'è anche una vista performance per analizzare le chiamate in un time range selezionato.",
+        <>Tutti i pannelli della dashboard Dialer sono descritti in <InternalInlineLink href="/monitoring/dialer-dashboard-panels">Pannelli Dashboard Dialer</InternalInlineLink>.</>
       ],
       image: {
         src: screenshotPaths.dashboard,
@@ -683,7 +687,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
         </>,
         "controlla il numero di chiamate generate e le chiamate attive",
         <>
-          controlla <strong>Real-Time Agents & Trunks</strong>: il trunk è <code>Not In Use</code> quando è disponibile e diventa <code>In Use</code> mentre le chiamate sono in corso
+          controlla <strong>Real-Time Agents & Trunks</strong>: il trunk è <UiPill>Not In Use</UiPill> quando è disponibile e diventa <UiPill>In Use</UiPill> mentre le chiamate sono in corso
           <ProductScreenshot
             src={screenshotPaths.agentsTrunks}
             alt="Dashboard Real-Time Agents and Trunks con stati endpoint, Not In Use e timeline In Use."
@@ -714,7 +718,7 @@ const quickstartCopy: Record<Locale, QuickstartCopy> = {
   }
 };
 
-function ProductScreenshot({ src, alt, size }: ImageCopy) {
+function ProductScreenshot({ src, alt, caption, size }: ImageCopy) {
   if (src === screenshotPaths.campaignCallCapacitySchedule) {
     return <CampaignSettingsSplitScreenshot alt={alt} />;
   }
@@ -726,7 +730,16 @@ function ProductScreenshot({ src, alt, size }: ImageCopy) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="docs-screenshot-img" src={src} alt={alt} loading="lazy" />
       </div>
+      {caption ? <figcaption className="docs-screenshot-caption">{caption}</figcaption> : null}
     </figure>
+  );
+}
+
+function ProductScreenshotGrid({ images }: { images: ImageCopy[] }) {
+  return (
+    <div className="docs-screenshot-grid">
+      {images.map((image) => <ProductScreenshot key={image.src} {...image} />)}
+    </div>
   );
 }
 
@@ -799,6 +812,7 @@ function StepContent({ step, nested = false }: { step: StepCopy; nested?: boolea
       {renderList(step.secondaryItems)}
       {step.orderedItems ? renderOrderedList(step.orderedItems) : null}
       {step.image ? <ProductScreenshot {...step.image} /> : null}
+      {step.imageGrid ? <ProductScreenshotGrid images={step.imageGrid} /> : null}
       {step.images?.map((image) => <ProductScreenshot key={image.src} {...image} />) ?? null}
     </section>
   );

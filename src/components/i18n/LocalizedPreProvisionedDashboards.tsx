@@ -24,7 +24,7 @@ const dialerPanelDetailIds: Record<DialerPanelSectionKey, string> = {
 type ScreenshotCopy = {
   src: string;
   alt: string;
-  caption: string;
+  caption: ReactNode;
   title?: string;
   description?: ReactNode;
   points?: ReactNode[];
@@ -66,6 +66,10 @@ type DashboardsCopy = {
   relatedCards: CardCopy[];
 };
 
+function UiPill({ children }: { children: ReactNode }) {
+  return <span className="docs-ui-pill">{children}</span>;
+}
+
 const dashboardsCopy: Record<Locale, DashboardsCopy> = {
   en: {
     title: "Pre-Provisioned Dashboards",
@@ -105,7 +109,7 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
             description:
               "Start here during an outbound run. This view combines live campaign state with outcome totals, dialing pressure, active calls, configured limits, and per-campaign status.",
             points: [
-              <>Use <strong>Total Outcomes</strong> and <strong>Call Outcomes</strong> to understand whether the run is producing answers, no answers, busy signals, congestion, or failures.</>,
+              <>Use <strong>Total Outcomes</strong> and <strong>Call Outcomes</strong> to understand whether the run is producing answers, no answers, busy signals, congestion, or failures. These two panels reset every day.</>,
               <>Use <strong>Dialing Rate</strong> and <strong>Calls Volume</strong> to see whether the dialer is generating traffic at the expected pace.</>,
               <>Use the <strong>Dialer</strong> table to compare each campaign status, active flag, active calls, and call limit in one operational list.</>,
               <>Use <strong>Active Calls vs Limit</strong> to confirm whether the system is close to saturation or still has capacity available.</>
@@ -124,14 +128,14 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
                 src: "/screenshots/docs/dashboard-dialer-realtime-total-outcomes.png",
                 alt: "Total Outcomes panel with Answer, No Answer, Busy, Congestion, Failed, and Total Calls counts.",
                 description:
-                  "Shows the current total count for each outcome across all campaigns. Read it as a simple scoreboard: Answer means the call was answered, No Answer means nobody picked up, Busy means the line was busy, Congestion means the telephony side could not complete the call cleanly, Failed means the call failed, and Total Calls is the overall call count."
+                  "Shows the current daily count for each outcome across all campaigns. Read it as a simple scoreboard: Answer means the call was answered, No Answer means nobody picked up, Busy means the line was busy, Congestion means the telephony side could not complete the call cleanly, Failed means the call failed, and Total Calls is the overall call count for the day."
               },
               {
                 title: "Call Outcomes",
                 src: "/screenshots/docs/dashboard-dialer-realtime-call-outcomes.png",
                 alt: "Call Outcomes pie chart showing the percentage split between answers, no answers, busy, congestion, and failed calls.",
                 description:
-                  "Shows the same outcomes as percentages. Use it when totals are high and you want to understand the mix quickly: a larger Answer slice is good, while larger No Answer, Busy, Congestion, or Failed slices show where call quality or telephony delivery may need attention."
+                  "Shows the same daily outcomes as percentages. Use it when totals are high and you want to understand the mix quickly: a larger Answer slice is good, while larger No Answer, Busy, Congestion, or Failed slices show where call quality or telephony delivery may need attention."
               },
               {
                 title: "Dialing Rate",
@@ -167,7 +171,7 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
             description:
               "Use this view when the campaign is active but calls are not behaving as expected. It separates campaign logic from telephony readiness by showing endpoint state and timeline changes.",
             points: [
-              <>Use <strong>Endpoints by State</strong> to quickly see unavailable, not-in-use, invalid, in-use, or other endpoint states.</>,
+              <>Use <strong>Endpoints by State</strong> to quickly see unavailable, <UiPill>Not In Use</UiPill>, invalid, <UiPill>In Use</UiPill>, or other endpoint states.</>,
               <>Use the <strong>Endpoint State Timeline</strong> to understand when an endpoint changed state during the selected time range.</>,
               <>Use the <strong>Endpoints</strong> table to identify the endpoint, state code, device state, provider host, and source event behind the issue.</>,
               <>Review this view before changing campaign pacing, because a trunk or endpoint problem can look like a campaign problem.</>
@@ -178,14 +182,14 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
                 src: "/screenshots/docs/dashboard-dialer-agents-endpoints-by-state.png",
                 alt: "Endpoints by State panel with unavailable, not in use, and invalid endpoint counts.",
                 description:
-                  "Counts endpoints by their current telephony state. Not In Use means available and idle. In Use, Busy, Ringing, or Ring + InUse mean the endpoint is currently involved in call activity. Unavailable, Unreachable, Invalid, Offline, or Unknown usually point to registration, provider, or endpoint configuration problems."
+                  <>Shows how many endpoints or trunks are in each state. <UiPill>Not In Use</UiPill> means the trunk is registered and free. <UiPill>In Use</UiPill> means the trunk is handling a call. Busy, Ringing, or Ring + InUse indicate other call-related states. Unavailable, Unreachable, Invalid, Offline, or Unknown mean the endpoint is not ready: check registration, provider, and endpoint configuration.</>
               },
               {
                 title: "Endpoint State Timeline",
                 src: "/screenshots/docs/dashboard-dialer-agents-endpoint-state-timeline.png",
                 alt: "Endpoint State Timeline showing when a provider endpoint is not in use or in use.",
                 description:
-                  "Shows how the selected endpoint changed state during the time range. Read it from left to right: long green sections usually mean the endpoint was idle and available, while in-use or busy sections show when calls were active. Sudden unavailable or invalid sections help explain call failures.",
+                  <>Shows how the selected endpoint changed state during the time range. Read it from left to right: long green sections usually mean the endpoint was idle and available, while <UiPill>In Use</UiPill> or busy sections show when calls were active. Sudden unavailable or invalid sections help explain call failures.</>,
                 spanTwo: true
               },
               {
@@ -198,7 +202,7 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
               }
             ],
             caption:
-              "Real-Time Agents & Trunks shows which endpoints and trunks are available, unavailable, invalid, not in use, or in use. Use it to confirm trunk readiness before blaming campaign logic."
+              <>Real-Time Agents & Trunks shows which endpoints and trunks are available, unavailable, invalid, <UiPill>Not In Use</UiPill>, or <UiPill>In Use</UiPill>. Use it to confirm trunk readiness before blaming campaign logic.</>
           },
           {
             title: "All Campaigns Performance",
@@ -498,7 +502,7 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
             description:
               "Parti da qui durante un run outbound. Questa vista unisce stato live delle campagne, totali outcome, pressione del dialer, chiamate attive, limiti configurati e stato per campagna.",
             points: [
-              <>Usa <strong>Total Outcomes</strong> e <strong>Call Outcomes</strong> per capire se il run sta generando answer, no answer, busy, congestion o failed.</>,
+              <>Usa <strong>Total Outcomes</strong> e <strong>Call Outcomes</strong> per capire se il run sta generando answer, no answer, busy, congestion o failed. Questi due pannelli si azzerano ogni giorno.</>,
               <>Usa <strong>Dialing Rate</strong> e <strong>Calls Volume</strong> per vedere se il dialer sta producendo traffico al ritmo previsto.</>,
               <>Usa la tabella <strong>Dialer</strong> per confrontare stato, active flag, active calls e call limit di ogni campagna.</>,
               <>Usa <strong>Active Calls vs Limit</strong> per capire se il sistema è vicino alla saturazione o ha ancora capacità disponibile.</>
@@ -517,14 +521,14 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
                 src: "/screenshots/docs/dashboard-dialer-realtime-total-outcomes.png",
                 alt: "Pannello Total Outcomes con conteggi Answer, No Answer, Busy, Congestion, Failed e Total Calls.",
                 description:
-                  "Mostra il conteggio corrente di ogni esito su tutte le campagne. Leggilo come uno score generale: Answer significa chiamata risposta, No Answer significa nessuna risposta, Busy significa linea occupata, Congestion indica che la parte telefonica non ha completato bene la chiamata, Failed indica chiamata fallita e Total Calls è il totale chiamate."
+                  "Mostra il conteggio giornaliero corrente di ogni esito su tutte le campagne. Leggilo come uno score generale: Answer significa chiamata risposta, No Answer significa nessuna risposta, Busy significa linea occupata, Congestion indica che la parte telefonica non ha completato bene la chiamata, Failed indica chiamata fallita e Total Calls è il totale chiamate del giorno."
               },
               {
                 title: "Call Outcomes",
                 src: "/screenshots/docs/dashboard-dialer-realtime-call-outcomes.png",
                 alt: "Grafico Call Outcomes con percentuali di answer, no answer, busy, congestion e failed.",
                 description:
-                  "Mostra gli stessi esiti in percentuale. Usalo quando i numeri assoluti sono alti e vuoi capire rapidamente il mix: una fetta Answer più grande è positiva, mentre No Answer, Busy, Congestion o Failed più grandi indicano dove controllare qualità lista o telefonia."
+                  "Mostra gli stessi esiti giornalieri in percentuale. Usalo quando i numeri assoluti sono alti e vuoi capire rapidamente il mix: una fetta Answer più grande è positiva, mentre No Answer, Busy, Congestion o Failed più grandi indicano dove controllare qualità lista o telefonia."
               },
               {
                 title: "Dialing Rate",
@@ -560,7 +564,7 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
             description:
               "Usa questa vista quando la campagna è attiva ma le chiamate non si comportano come previsto. Ti aiuta a separare la logica campagna dalla readiness telefonica mostrando stati endpoint e cambiamenti nel tempo.",
             points: [
-              <>Usa <strong>Endpoints by State</strong> per vedere subito endpoint unavailable, not in use, invalid, in use o altri stati.</>,
+              <>Usa <strong>Endpoints by State</strong> per vedere subito endpoint unavailable, <UiPill>Not In Use</UiPill>, invalid, <UiPill>In Use</UiPill> o altri stati.</>,
               <>Usa <strong>Endpoint State Timeline</strong> per capire quando un endpoint ha cambiato stato nell'intervallo selezionato.</>,
               <>Usa la tabella <strong>Endpoints</strong> per identificare endpoint, state code, device state, provider host e source event.</>,
               <>Controlla questa vista prima di modificare il pacing campagna, perché un problema di trunk o endpoint può sembrare un problema del dialer.</>
@@ -571,14 +575,14 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
                 src: "/screenshots/docs/dashboard-dialer-agents-endpoints-by-state.png",
                 alt: "Pannello Endpoints by State con conteggio endpoint unavailable, not in use e invalid.",
                 description:
-                  "Conta gli endpoint per stato telefonico corrente. Not In Use significa disponibile e inattivo. In Use, Busy, Ringing o Ring + InUse indicano attività di chiamata. Unavailable, Unreachable, Invalid, Offline o Unknown indicano spesso problemi di registrazione, provider o configurazione endpoint."
+                  <>Mostra quanti endpoint o trunk sono in ogni stato. <UiPill>Not In Use</UiPill> significa che il trunk è registrato e libero. <UiPill>In Use</UiPill> significa che il trunk sta gestendo una chiamata. Busy, Ringing o Ring + InUse indicano altri stati legati a una chiamata. Unavailable, Unreachable, Invalid, Offline o Unknown indicano che l'endpoint non è pronto: controlla registrazione, provider e configurazione endpoint.</>
               },
               {
                 title: "Endpoint State Timeline",
                 src: "/screenshots/docs/dashboard-dialer-agents-endpoint-state-timeline.png",
                 alt: "Timeline Endpoint State con cambiamenti tra not in use e in use.",
                 description:
-                  "Mostra come cambia stato l'endpoint selezionato nell'intervallo temporale. Leggilo da sinistra a destra: sezioni verdi lunghe indicano endpoint libero e disponibile; sezioni in use o busy indicano chiamate attive. Se compaiono unavailable o invalid, possono spiegare fallimenti chiamata.",
+                  <>Mostra come cambia stato l'endpoint selezionato nell'intervallo temporale. Leggilo da sinistra a destra: sezioni verdi lunghe indicano endpoint attivo; sezioni <UiPill>In Use</UiPill> indicano chiamate attive. <UiPill>Not In Use</UiPill> indica che il trunk è libero. Se compaiono unavailable o invalid, possono spiegare fallimenti chiamata.</>,
                 spanTwo: true
               },
               {
@@ -591,7 +595,7 @@ const dashboardsCopy: Record<Locale, DashboardsCopy> = {
               }
             ],
             caption:
-              "Real-Time Agents & Trunks mostra endpoint e trunk disponibili, non disponibili, invalidi, not in use o in use. Serve a confermare che il trunk sia pronto prima di intervenire sulla logica campagna."
+              <>Real-Time Agents & Trunks mostra endpoint e trunk disponibili, non disponibili, invalidi, <UiPill>Not In Use</UiPill> o <UiPill>In Use</UiPill>. Serve a confermare che il trunk sia pronto prima di intervenire sulla logica campagna.</>
           },
           {
             title: "All Campaigns Performance",
