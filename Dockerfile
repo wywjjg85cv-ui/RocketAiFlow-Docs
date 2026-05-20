@@ -8,7 +8,9 @@ RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
 FROM node:24-alpine AS build
 WORKDIR /app
-ENV NEXT_TELEMETRY_DISABLED=1
+ARG NEXT_PUBLIC_GA_MEASUREMENT_ID
+ENV NEXT_TELEMETRY_DISABLED=1 \
+    NEXT_PUBLIC_GA_MEASUREMENT_ID=$NEXT_PUBLIC_GA_MEASUREMENT_ID
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY package*.json ./
