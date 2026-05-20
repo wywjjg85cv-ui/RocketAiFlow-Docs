@@ -62,13 +62,13 @@ const homeCopy: Record<Locale, HomeCopy> = {
       eyebrow: "RocketAiFlow Docs",
       title: "Validate AI outbound campaigns and controlled inbound workflows with live visibility.",
       intro:
-        "RocketAiFlow documentation is structured for teams evaluating or running an early-access pilot. Start from outbound campaign control, controlled inbound automation, API actions, call data, transcripts, recordings when enabled, and live monitoring on real voice workflows.",
+        "RocketAiFlow documentation is structured for companies and integrators evaluating or running an early-access pilot. Start from outbound campaign control, controlled inbound automation, API actions, call data, transcripts, recordings when enabled, and live monitoring on real voice workflows.",
       noteTitle: "What this documentation is built to answer:",
       noteItems: [
         "what RocketAiFlow is: outbound-first, inbound-ready, and designed for pilot validation on real phone workflows",
         "how to move from one agent to a controlled outbound campaign, inbound route, contact import, and test call",
         "how functions, APIs, dynamic parameters, and workflow context support real business actions",
-        "how teams monitor live campaigns and review outcomes, transcripts, recordings when enabled, talk time, and ring time"
+        "how companies and integrators monitor live campaigns and review outcomes, transcripts, recordings when enabled, talk time, and ring time"
       ]
     },
     callout: {
@@ -78,9 +78,9 @@ const homeCopy: Record<Locale, HomeCopy> = {
         "for the onboarding path, then move into Build, Run Workflows, Deploy, Monitoring, and Troubleshoot as your evaluation becomes more hands-on."
     },
     why: {
-      title: "Why teams use these docs",
+      title: "Why companies and integrators use these docs",
       body:
-        "RocketAiFlow documentation is not meant to read like a static feature list. It is designed to help call centers, BPOs, sales teams, operations teams, technical leads, and solutions engineers validate whether a real phone workflow is a good fit for an early-access pilot.",
+        "RocketAiFlow documentation is not meant to read like a static feature list. It is designed to help companies, integrators, call centers, BPOs, sales and operations leaders, technical leads, and solutions engineers validate whether a real phone workflow is a good fit for an early-access pilot.",
       bullets: [
         "early-access pilot onboarding without skipping operational detail",
         "platform-agnostic architecture and provider flexibility",
@@ -125,7 +125,7 @@ const homeCopy: Record<Locale, HomeCopy> = {
       cards: [
         { href: "/deploy/deployment-overview", title: "Deployment Overview", description: "Connect the selected live path with trunk, agent, route or campaign, integrations, and monitoring." },
         { href: "/monitoring/monitoring-and-visibility", title: "Monitoring and Visibility", description: "Start from the main operational view for live campaigns, telephony state, and workflow health." },
-        { href: "/monitoring/pre-provisioned-dashboards", title: "Pre-Provisioned Dashboards", description: "Review the ready dashboard foundation that helps teams get to live visibility faster." },
+        { href: "/monitoring/pre-provisioned-dashboards", title: "Pre-Provisioned Dashboards", description: "Review the ready dashboard foundation that helps companies and integrators get to live visibility faster." },
         { href: "/troubleshoot/troubleshooting", title: "Troubleshooting", description: "Use setup checks with call records, dashboards, logs, and traces." }
       ]
     },
@@ -154,13 +154,13 @@ const homeCopy: Record<Locale, HomeCopy> = {
       eyebrow: "Documentazione RocketAiFlow",
       title: "Valida campagne Outbound AI e inbound controllato con visibilità live.",
       intro:
-        "La documentazione RocketAiFlow è pensata per team che stanno valutando o avviando un pilot in early access. Parti da controllo campagne outbound, inbound controllato, azioni API, dati chiamata, trascrizioni, registrazioni quando abilitate e monitoraggio live su workflow telefonici reali.",
+        "La documentazione RocketAiFlow è pensata per aziende e integratori che stanno valutando o avviando un pilot in early access. Parti da controllo campagne outbound, inbound controllato, azioni API, dati chiamata, trascrizioni, registrazioni quando abilitate e monitoraggio live su workflow telefonici reali.",
       noteTitle: "Questa documentazione aiuta a capire:",
       noteItems: [
         "che cos'è RocketAiFlow: outbound-first, inbound-ready e pensato per validare workflow telefonici reali in pilot",
         "come passare da un agente a campagna outbound controllata, route inbound, import contatti e chiamata di test",
         "come funzioni, API, parametri dinamici e contesto del workflow supportano azioni di business reali",
-        "come monitorare campagne live e rivedere outcome, transcript, registrazioni quando abilitate, talk time e ring time"
+        "come aziende e integratori monitorano campagne live e rivedono outcome, transcript, registrazioni quando abilitate, talk time e ring time"
       ]
     },
     callout: {
@@ -170,9 +170,9 @@ const homeCopy: Record<Locale, HomeCopy> = {
         "per il percorso di onboarding, poi passa a Build, Run Workflows, Deploy, Monitoraggio e Troubleshoot man mano che la valutazione diventa più operativa."
     },
     why: {
-      title: "Perché i team usano queste docs",
+      title: "Perché aziende e integratori usano queste docs",
       body:
-        "La documentazione RocketAiFlow non è una semplice lista statica di funzionalità. È progettata per aiutare call center, BPO, team sales, operations, technical lead e solutions engineer a validare se un workflow telefonico reale è adatto a un pilot in early access.",
+        "La documentazione RocketAiFlow non è una semplice lista statica di funzionalità. È progettata per aiutare aziende, integratori, call center, BPO, responsabili sales e operations, technical lead e solutions engineer a validare se un workflow telefonico reale è adatto a un pilot in early access.",
       bullets: [
         "onboarding pilot senza perdere i dettagli operativi",
         "architettura platform-agnostic e flessibilità sui provider",

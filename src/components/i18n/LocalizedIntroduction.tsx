@@ -59,7 +59,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
   en: {
     title: "Introduction",
     lead:
-      "Meet your AI-powered voice workflow platform. RocketAiFlow helps teams automate inbound and outbound phone conversations with voice agents, campaign control, API actions, call records, and live monitoring.",
+      "Meet your AI-powered voice workflow platform. RocketAiFlow helps companies and integrators automate inbound and outbound phone conversations with voice agents, campaign control, API actions, call records, and live monitoring.",
     websiteIntro: "If you arrived from the",
     websiteHref: "https://rocketaiflow.com/en",
     websiteLink: "RocketAiFlow website",
@@ -68,7 +68,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
     whatTitle: "What RocketAiFlow is",
     whatBody:
       "RocketAiFlow is a real-time Voice AI platform for business operations. It is outbound-first, inbound-ready, and built for real SIP and PBX workflows.",
-    usesTitle: "Teams use RocketAiFlow to:",
+    usesTitle: "Companies and integrators use RocketAiFlow to:",
     uses: [
       "create focused Voice AI agents",
       "route inbound calls to the right agent",
@@ -77,12 +77,12 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       "review outcomes, transcripts, recordings when enabled, timing, and live metrics"
     ],
     platformFitIntro:
-      "RocketAiFlow is designed for teams that want Voice AI workflows to run inside a customer-managed environment instead of relying only on a fully managed external phone-agent stack. It is most useful when control, integration, and operational visibility matter.",
+      "RocketAiFlow is designed for companies and integrators that want Voice AI workflows to run inside a customer-managed environment instead of relying only on a fully managed external phone-agent stack. It is most useful when control, integration, and operational visibility matter.",
     platformFitItems: [
       "the deployment should run on premise or in infrastructure controlled by the customer",
       "calls must connect to existing SIP trunks, PBX systems, or Asterisk-based telephony",
       "the same platform should support inbound routing and outbound campaign execution",
-      "the team needs to choose or manage STT, TTS, LLM, telephony, and provider accounts",
+      "the company or integrator needs to choose or manage STT, TTS, LLM, telephony, and provider accounts",
       "agents need custom functions that call CRM, calendar, helpdesk, database, or internal APIs",
       "operators need dashboards, call records, logs, traces, and timing metrics to investigate live workflows"
     ],
@@ -287,7 +287,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
   it: {
     title: "Introduzione",
     lead:
-      "Incontra la tua piattaforma Voice AI per workflow telefonici. RocketAiFlow aiuta i team ad automatizzare conversazioni inbound e outbound con agenti Voice AI, controllo campagne, azioni API, call record e monitoraggio live.",
+      "Incontra la tua piattaforma Voice AI per workflow telefonici. RocketAiFlow aiuta aziende e integratori ad automatizzare conversazioni inbound e outbound con agenti Voice AI, controllo campagne, azioni API, call record e monitoraggio live.",
     websiteIntro: "Se arrivi dal",
     websiteHref: "https://rocketaiflow.com/it",
     websiteLink: "sito RocketAiFlow",
@@ -296,7 +296,7 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
     whatTitle: "Che cos'è RocketAiFlow",
     whatBody:
       "RocketAiFlow è una piattaforma Voice AI in tempo reale per operations aziendali. È outbound-first, inbound-ready ed è costruita per workflow SIP e PBX reali.",
-    usesTitle: "I team usano RocketAiFlow per:",
+    usesTitle: "Aziende e integratori usano RocketAiFlow per:",
     uses: [
       "creare agenti Voice AI focalizzati",
       "instradare chiamate inbound verso l'agente corretto",
@@ -305,12 +305,12 @@ const introductionCopy: Record<Locale, IntroductionCopy> = {
       "rivedere outcome, transcript, registrazioni quando abilitate, timing e metriche live"
     ],
     platformFitIntro:
-      "RocketAiFlow è pensato per team che vogliono eseguire workflow Voice AI in un ambiente gestito dal cliente, invece di dipendere solo da uno stack esterno completamente gestito per phone agent. È più utile quando contano controllo, integrazione e visibilità operativa.",
+      "RocketAiFlow è pensato per aziende e integratori che vogliono eseguire workflow Voice AI in un ambiente gestito dal cliente, invece di dipendere solo da uno stack esterno completamente gestito per phone agent. È più utile quando contano controllo, integrazione e visibilità operativa.",
     platformFitItems: [
       "il deployment deve girare on-premise o in infrastruttura controllata dal cliente",
       "le chiamate devono collegarsi a trunk SIP, sistemi PBX o telefonia basata su Asterisk già esistenti",
       "la stessa piattaforma deve supportare routing inbound ed esecuzione campagne outbound",
-      "il team deve scegliere o gestire STT, TTS, LLM, telefonia e account provider",
+      "l'azienda o l'integratore deve scegliere o gestire STT, TTS, LLM, telefonia e account provider",
       "gli agenti devono usare functions custom che chiamano CRM, calendario, helpdesk, database o API interne",
       "gli operatori hanno bisogno di dashboard, call record, log, trace e metriche di timing per investigare workflow live"
     ],
