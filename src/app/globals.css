@@ -658,6 +658,114 @@ body {
   flex-wrap: wrap;
 }
 
+.docs-footer-actions {
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.docs-footer-cookie-button {
+  background: transparent;
+  border: 0;
+  color: var(--docs-accent);
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.docs-footer-cookie-button:hover {
+  color: var(--docs-accent-hover);
+}
+
+.docs-cookie-panel {
+  bottom: 1rem;
+  left: 1rem;
+  max-width: min(27rem, calc(100vw - 2rem));
+  position: fixed;
+  z-index: 80;
+}
+
+.docs-cookie-card {
+  background: var(--docs-surface-strong);
+  border: 1px solid var(--docs-border);
+  border-radius: 0.85rem;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+  color: var(--docs-text);
+  padding: 1.15rem;
+}
+
+.docs-cookie-title {
+  color: var(--docs-text-strong);
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.docs-cookie-body {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin: 0.55rem 0 0;
+}
+
+.docs-cookie-body-muted {
+  color: var(--docs-text-muted);
+}
+
+.docs-cookie-body a {
+  color: var(--docs-accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.docs-cookie-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.docs-cookie-button {
+  align-items: center;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.88rem;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 2.65rem;
+  padding: 0.7rem 1rem;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.docs-cookie-button:hover {
+  transform: translateY(-1px);
+}
+
+.docs-cookie-button-primary {
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  border: 1px solid rgba(125, 211, 252, 0.52);
+  color: #ffffff;
+}
+
+.docs-cookie-button-secondary {
+  background: transparent;
+  border: 1px solid var(--docs-border);
+  color: var(--docs-text-strong);
+}
+
+.docs-cookie-button-secondary:hover {
+  border-color: var(--docs-border-accent);
+  color: var(--docs-accent-hover);
+}
+
 .docs-screenshot {
   margin: 1.25rem 0 1.75rem;
 }

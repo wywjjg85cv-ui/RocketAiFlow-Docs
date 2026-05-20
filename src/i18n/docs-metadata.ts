@@ -190,7 +190,12 @@ const italianMetadata: Record<string, DocsMetadata> = {
   "/legal/privacy-and-data-protection": {
     title: "Protezione dati",
     description:
-      "Comprendi protezione dati on-premise, dati controllati dal cliente, accesso supporto, telemetry e confini di trattamento in RocketAiFlow."
+      "Comprendi protezione dati on-premise, dati controllati dal cliente, accesso supporto, cookie, analytics, telemetry e confini di trattamento in RocketAiFlow."
+  },
+  "/legal/cookie-policy": {
+    title: "Cookie Policy",
+    description:
+      "Scopri come RocketAiFlow Docs usa archiviazione necessaria e cookie Google Analytics opzionali solo dopo consenso."
   },
   "/legal/ai-transparency": {
     title: "Trasparenza AI",

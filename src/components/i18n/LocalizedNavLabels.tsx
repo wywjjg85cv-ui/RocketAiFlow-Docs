@@ -88,6 +88,7 @@ type NavLabelKey =
   | "legalOverview"
   | "termsAndCommercialModel"
   | "privacyAndDataProtection"
+  | "cookiePolicy"
   | "aiTransparency"
   | "securityAndTrust"
   | "imprint"
@@ -144,6 +145,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     legalOverview: "Legal Status",
     termsAndCommercialModel: "Pilot Terms",
     privacyAndDataProtection: "Data Protection",
+    cookiePolicy: "Cookie Policy",
     aiTransparency: "AI Transparency",
     securityAndTrust: "Security",
     imprint: "Company Notice",
@@ -199,6 +201,7 @@ const navLabels: Record<Locale, Record<NavLabelKey, string>> = {
     legalOverview: "Stato legal",
     termsAndCommercialModel: "Termini pilot",
     privacyAndDataProtection: "Data protection",
+    cookiePolicy: "Cookie Policy",
     aiTransparency: "Trasparenza AI",
     securityAndTrust: "Security",
     imprint: "Legal notice",
@@ -256,6 +259,7 @@ const navIcons: Record<NavLabelKey, LucideIcon> = {
   legalOverview: Scale,
   termsAndCommercialModel: ListChecks,
   privacyAndDataProtection: Lock,
+  cookiePolicy: Lock,
   aiTransparency: Sparkles,
   securityAndTrust: ShieldCheck,
   imprint: FileText,

@@ -135,6 +135,10 @@ export const docsRoutes = [
     paths: { en: "/legal/privacy-and-data-protection", it: "/legal/privacy-e-protezione-dati" }
   },
   {
+    canonicalPath: "/legal/cookie-policy",
+    paths: { en: "/legal/cookie-policy", it: "/legal/cookie-policy" }
+  },
+  {
     canonicalPath: "/legal/ai-transparency",
     paths: { en: "/legal/ai-transparency", it: "/legal/trasparenza-ai" }
   },

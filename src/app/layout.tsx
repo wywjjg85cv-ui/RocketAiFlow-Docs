@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Footer, Layout } from "nextra-theme-docs";
 import { getPageMap } from "nextra/page-map";
+import AnalyticsConsentGate from "../components/analytics/AnalyticsConsentGate";
+import CookieSettingsButton from "../components/analytics/CookieSettingsButton";
 import { DocsNavbar } from "../components/docs-navbar";
 import { LocalizedInternalLinks } from "../components/i18n/LocalizedInternalLinks";
 import { LocalizedSearch } from "../components/i18n/LocalizedSearch";
@@ -78,6 +80,8 @@ const websiteJsonLd = {
   description: siteDescription
 };
 
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+
 export default async function RootLayout({
   children
 }: Readonly<{
@@ -102,7 +106,10 @@ export default async function RootLayout({
                   RocketAiFlow docs for product education, integration planning, deployment
                   review, monitoring setup, and operational rollout.
                 </span>
-                <span>{new Date().getFullYear()} © RocketAiFlow</span>
+                <span className="docs-footer-actions">
+                  <CookieSettingsButton />
+                  <span>{new Date().getFullYear()} © RocketAiFlow</span>
+                </span>
               </div>
             </Footer>
           }
@@ -121,6 +128,7 @@ export default async function RootLayout({
         >
           {children}
         </Layout>
+        <AnalyticsConsentGate measurementId={gaMeasurementId} />
         <LocalizedInternalLinks />
         <script
           type="application/ld+json"

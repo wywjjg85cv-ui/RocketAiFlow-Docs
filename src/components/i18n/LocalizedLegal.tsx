@@ -8,6 +8,7 @@ type LegalPageKey =
   | "overview"
   | "terms"
   | "privacy"
+  | "cookiePolicy"
   | "aiTransparency"
   | "security"
   | "imprint";
@@ -17,6 +18,7 @@ const legalTitles: Record<Locale, Record<LegalPageKey, string>> = {
     overview: "Legal Status",
     terms: "Pilot Terms",
     privacy: "Data Protection",
+    cookiePolicy: "Cookie Policy",
     aiTransparency: "AI Transparency",
     security: "Security",
     imprint: "Company Notice"
@@ -25,6 +27,7 @@ const legalTitles: Record<Locale, Record<LegalPageKey, string>> = {
     overview: "Stato legal",
     terms: "Termini pilot",
     privacy: "Data protection",
+    cookiePolicy: "Cookie Policy",
     aiTransparency: "Trasparenza AI",
     security: "Security",
     imprint: "Legal notice"

@@ -130,6 +130,8 @@ export function DocsNavbar({ initialLocale }: DocsNavbarProps) {
         </nav>
         <a
           className="docs-contact-sales-button"
+          data-analytics-event="docs_contact_sales_click"
+          data-analytics-label={copy.contactSales}
           href="https://rocketaiflow.com/it/contatti"
           rel="noopener noreferrer"
           target="_blank"
